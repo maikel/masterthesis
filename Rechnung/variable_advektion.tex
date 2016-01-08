@@ -1,4 +1,4 @@
-\section{Ansatz für die Variable Advektion}
+\section{Oszillatorischer Ansatz für die variable Advektion}
 \label{section:varadv}
 
 Wir betrachen die Differentialgleichung der variablen Advektion
@@ -14,30 +14,41 @@ v^{n+1}_i - v^n_i + a_i \lambda \left( v^n_i - v^n_{i-1} \right) = 0.
 Ziel ist es, oszillatorische Fehler im Kurzzeitverhalten einzufangen, die von $a$ erzeugt werden.
 Daher wählen wir den Ansatz
 \begin{align}\label{eq:varadv:ansatz}
-v^n_i = \u0(t_n, x_i) + h \left( \u1(t_n, x_i) + \tu1(i) \right) + O(h^2)
+v^n_i = \u0(t_n, x_i) + h \u1(t_n, x_i) + h^2 \left( \u2(t_n, x_i) + \tu2(i) \right) + O(h^2)
 \end{align}
 für unsere Gitterfunktion $v$. 
 Dann folgt für die Differenz $v^{n+1}_i - v^n_i$
 \begin{align*}
 v^{n+1}_i - v^n_i
-&= \u0(t_{n+1}, x_i) + h \left( \u1(t_{n+1}, x_i) + \tu1(i) \right) + O(h^2)\\
-   &\qquad - \left( \u0(t_n, x_i) + h \left( \u1(t_n, x_i) + \tu 1(i)\right)  + O(h^2)\right)\\
-&= \u0(t_{n+1}, x_i) - \u0(t_n, x_i) + h \left( \u1(t_{n+1}, x_i) - \u1(t_n, x_i)\right)\\
+&= \u0(t_{n+1}, x_i) + h \u1(t_{n+1}, x_i) + h^2 \left( \u2(t_{n+1}, x_i) + \tu2(i) \right) + O(h^2)\\
+   &\qquad - \left( \u0(t_n, x_i) + h \u1(t_n, x_i) + h^2 \left( \u2(t_n, x_i) + \tu2(i)\right)  + O(h^2)\right)\\
+&= \u0(t_{n+1}, x_i) - \u0(t_n, x_i) + h \left( \u1(t_{n+1}, x_i) - \u1(t_n, x_i)\right) + \\
+   &\qquad + h^2 \left( \u2(t_{n+1}, x_i) - \u2(t_n, x_i) \right)\\
 &= \u0(t_n + \lambda h, x_i) - \u0(t_n, x_i) + h \left( \u1(t_n + \lambda h, x_i) - \u1(t_n, x_i)\right)\\
+   &\qquad + h^2 \left( \u2(t_n + \lambda h, x_i) - \u2(t_n, x_i) \right)\\
 &= \lambda h \, \u0_t (t_n, x_i) + \frac 12 \lambda^2 h^2 \u0_{tt}(t_n, x_i) + \lambda h^2 \u1_t(t_n, x_i) + O(h^3)\\
-&= \lambda h \left( \u0_t (t_n, x_i) + h \left( \frac \lambda 2 \u0_{tt}(t_n, x_i) + \u1_t(t_n, x_i) \right) \right)
+&= \lambda h \left( \u0_t (t_n, x_i) + h \left( \frac \lambda 2 \u0_{tt}(t_n, x_i) + \u1_t(t_n, x_i) \right) \right) + O(h^3)
 \end{align*}
 und für die Differenz $\lambda (v^n_{i} - v^n_{i-1})$ folgt ganz analog
-\begin{align*}
+{\small\begin{align*}
 \lambda (v^n_{i} - v^n_{i-1})
-&= \lambda \left( \u0(t_n, x_i) + h \left( \u1(t_n, x_i) + \tu1(i) \right) + O(h^2) \right.\\
-   &\qquad -  \left. \left( \u0(t_n, x_{i-1}) + h \left( \u1(t_n, x_{i-1}) + \tu 1(i-1)\right)  + O(h^2) \right) \right)\\
-&= \lambda \left( \u0(t_n, x_i) - \u0(t_n, x_{i-1}) \right. \\
-   &\qquad \left. + h \left( \u1(t_n, x_i) - \u1(t_n, x_{i-1}) + \tu1(i) - \tu1(i-1) \right) \right)\\
-&= \lambda \left( \u0(t_n, x_i) - \u0(t_n, x_i - h) \right. \\
-   &\qquad + \left. h \left( \u1(t_n, x_i) - \u1(t_n, x_i - h) + \tu1(i) - \tu1(i-1) \right) \right)\\
-&= \lambda h \left( h \u0_x(t_n, x_i) + \frac 12 h^2 \u0_{xx}(t_n, x_i) \right. \\
-   &\qquad + \left. h^2 \u1_x(t_n, x_i) + h\left( \tu1(i) - \tu1(i-1) \right) + \right) + O(h^3) \\
-&= \lambda h \left( \u0_x(t_n, x_i) + h \left(\frac 12 \u0_{xx}(t_n, x_i) + \u1_x(t_n, x_i) \right) \right. \\
-   &\qquad \left. + \tu1(i) - \tu1(i-1) \right) + O(h^3) \\
+&= \lambda \left( \u0(t_n, x_i) + h \u1(t_n, x_i) + h^2 \left(\u2(t_n, x_i) + \tu2(i) \right) + O(h^2) \right.\\
+   &\qquad -  \left. \left( \u0(t_n, x_{i-1}) + h \u1(t_n, x_{i-1}) + h^2 \left( \u2(t_n, x_{i-1}) + \tu 2(i-1)\right)  + O(h^2) \right) \right)\\
+&= \lambda \left( \u0(t_n, x_i) - \u0(t_n, x_{i-1}) + h \left( \u1(t_n, x_i) - \u1(t_n, x_{i-1}) \right) \right.\\
+   &\qquad + \left. h^2 \left( \u2(t_n, x_i) - \u2(t_n, x_{i-1}) + \bigl( \tu2(i) - \tu2(i-1) \bigr) \right) \right)\\
+&= \lambda \left( \u0(t_n, x_i) - \u0(t_n, x_i-h) + h \left( \u1(t_n, x_i) - \u1(t_n, x_i-h) \right) \right. \\
+   &\qquad \left. + h^2 \left( \u2(t_n, x_i) - \u2(t_n, x_i-h) + \tu2(i) - \tu2(i-1) \right) \right)\\
+&= \lambda \left( h \u0_x(t_n, x_i) - \frac 12 h^2 \u0_{xx}(t_n, x_i) + h^2 \u1_x(t_n, x_i) + h^2\Bigl( \tu1(i) - \tu1(i-1) \Bigr) \right) + O(h^3) \\
+&= \lambda h \left( \u0_x(t_n, x_i) + h \left( \u1_x(t_n, x_i) - \frac 12 \u0_{xx}(t_n, x_i) + \tu2(i) - \tu2(i-1) \right) \right) + O(h^3).
+\end{align*}}
+Wenn wir dies nun in das Verfahren \eqref{eq:varadv:verfahren} einsetzen, erhalten wir die Gleichung
+\begin{align*}
+&\u0_t (t_n, x_i) + h \left( \frac \lambda 2 \u0_{tt}(t_n, x_i) + \u1_t(t_n, x_i) \right)\\ 
+&\qquad +  a_i \u0_x(t_n, x_i) + h a_i \left( \u1_x(t_n, x_i) - \frac 12 \u0_{xx}(t_n, x_i) + \tu2(i) - \tu2(i-1) \right) = O(h^2).
 \end{align*}
+Nun verwenden die grundlegende Idee dieser Methodik und verfeinern mit $h \to 0$ unser Gitter $G$.
+Dies führt uns nach den Ordnungen von $h$ sortiert zu dem Gleichungssystem
+\begin{align}
+\u0_t(t_n, x_i) + a(x_i) \u0_x(t_n, x_i) &= 0, \qquad \u0(0, x_i) = u_0(x_i)\\
+\u1_t(t_n, x_i) + a(x_i) \u1_x(t_n, x_i) &= 
+\end{align}
