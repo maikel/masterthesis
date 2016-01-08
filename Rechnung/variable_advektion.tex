@@ -1,0 +1,43 @@
+\section{Ansatz für die Variable Advektion}
+\label{section:varadv}
+
+Wir betrachen die Differentialgleichung der variablen Advektion
+\[ 
+u_t(t,x) + a(x) u_x(t,x) = 0, \quad u(0,x) = u_0(x)
+\]
+mit glattem und beschränkem $a$, so dass $a$ in einem kleinem Bereich um $x_0=0$ größer als $1+\eps$ für ein $\eps > 0$ ist.
+Wir wenden für diese Differentialgleichung das Upwindverfahren mit dem Gitter $G(n,i) = (t_n, x_i) = h \cdot (\lambda n,i)$ an.
+Das Gitter ist rechteckig, falls $\lambda \neq 1$ gilt und wir erhalten die Gleichung
+\begin{align}\label{eq:varadv:verfahren}
+v^{n+1}_i - v^n_i + a_i \lambda \left( v^n_i - v^n_{i-1} \right) = 0.
+\end{align}
+Ziel ist es, oszillatorische Fehler im Kurzzeitverhalten einzufangen, die von $a$ erzeugt werden.
+Daher wählen wir den Ansatz
+\begin{align}\label{eq:varadv:ansatz}
+v^n_i = \u0(t_n, x_i) + h \left( \u1(t_n, x_i) + \tu1(i) \right) + O(h^2)
+\end{align}
+für unsere Gitterfunktion $v$. 
+Dann folgt für die Differenz $v^{n+1}_i - v^n_i$
+\begin{align*}
+v^{n+1}_i - v^n_i
+&= \u0(t_{n+1}, x_i) + h \left( \u1(t_{n+1}, x_i) + \tu1(i) \right) + O(h^2)\\
+   &\qquad - \left( \u0(t_n, x_i) + h \left( \u1(t_n, x_i) + \tu 1(i)\right)  + O(h^2)\right)\\
+&= \u0(t_{n+1}, x_i) - \u0(t_n, x_i) + h \left( \u1(t_{n+1}, x_i) - \u1(t_n, x_i)\right)\\
+&= \u0(t_n + \lambda h, x_i) - \u0(t_n, x_i) + h \left( \u1(t_n + \lambda h, x_i) - \u1(t_n, x_i)\right)\\
+&= \lambda h \, \u0_t (t_n, x_i) + \frac 12 \lambda^2 h^2 \u0_{tt}(t_n, x_i) + \lambda h^2 \u1_t(t_n, x_i) + O(h^3)\\
+&= \lambda h \left( \u0_t (t_n, x_i) + h \left( \frac \lambda 2 \u0_{tt}(t_n, x_i) + \u1_t(t_n, x_i) \right) \right)
+\end{align*}
+und für die Differenz $\lambda (v^n_{i} - v^n_{i-1})$ folgt ganz analog
+\begin{align*}
+\lambda (v^n_{i} - v^n_{i-1})
+&= \lambda \left( \u0(t_n, x_i) + h \left( \u1(t_n, x_i) + \tu1(i) \right) + O(h^2) \right.\\
+   &\qquad -  \left. \left( \u0(t_n, x_{i-1}) + h \left( \u1(t_n, x_{i-1}) + \tu 1(i-1)\right)  + O(h^2) \right) \right)\\
+&= \lambda \left( \u0(t_n, x_i) - \u0(t_n, x_{i-1}) \right. \\
+   &\qquad \left. + h \left( \u1(t_n, x_i) - \u1(t_n, x_{i-1}) + \tu1(i) - \tu1(i-1) \right) \right)\\
+&= \lambda \left( \u0(t_n, x_i) - \u0(t_n, x_i - h) \right. \\
+   &\qquad + \left. h \left( \u1(t_n, x_i) - \u1(t_n, x_i - h) + \tu1(i) - \tu1(i-1) \right) \right)\\
+&= \lambda h \left( h \u0_x(t_n, x_i) + \frac 12 h^2 \u0_{xx}(t_n, x_i) \right. \\
+   &\qquad + \left. h^2 \u1_x(t_n, x_i) + h\left( \tu1(i) - \tu1(i-1) \right) + \right) + O(h^3) \\
+&= \lambda h \left( \u0_x(t_n, x_i) + h \left(\frac 12 \u0_{xx}(t_n, x_i) + \u1_x(t_n, x_i) \right) \right. \\
+   &\qquad \left. + \tu1(i) - \tu1(i-1) \right) + O(h^3) \\
+\end{align*}
