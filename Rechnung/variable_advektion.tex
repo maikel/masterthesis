@@ -46,9 +46,9 @@ Wenn wir dies nun in das Verfahren \eqref{eq:varadv:verfahren} einsetzen, erhalt
 &\u0_t (t_n, x_i) + h \left( \frac \lambda 2 \u0_{tt}(t_n, x_i) + \u1_t(t_n, x_i) \right)\\ 
 &\qquad +  a_i \u0_x(t_n, x_i) + h a_i \left( \u1_x(t_n, x_i) - \frac 12 \u0_{xx}(t_n, x_i) + \tu2(i) - \tu2(i-1) \right) = O(h^2).
 \end{align*}
-Nun verwenden die grundlegende Idee dieser Methodik und verfeinern mit $h \to 0$ unser Gitter $G$.
-Dies führt uns nach den Ordnungen von $h$ sortiert zu dem Gleichungssystem
-\begin{align}
-\u0_t(t_n, x_i) + a(x_i) \u0_x(t_n, x_i) &= 0, \qquad \u0(0, x_i) = u_0(x_i)\\
-\u1_t(t_n, x_i) + a(x_i) \u1_x(t_n, x_i) &= 
-\end{align}
+Nachdem wir nach den Ordnungen von $h$ sortiert haben, führt uns das zu dem Gleichungssystem
+\begin{align*}
+\u0_t(t_n, x_i) + a(x_i) \u0_x(t_n, x_i) &= 0,\\
+\u1_t(t_n, x_i) + a(x_i) \u1_x(t_n, x_i) &= \frac {1 - a(x_i)\lambda}{2} \u0_{xx}(t_n, x_i) - \frac {a_x(x_i) \lambda} 2 \u0_x(t_n, x_i)\\
+                                         & \quad + \tu2(i) - \tu2(i-1)
+\end{align*}
