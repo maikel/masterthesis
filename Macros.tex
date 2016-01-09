@@ -1,0 +1,36 @@
+\newcommand{\eps}{\varepsilon}
+
+\renewcommand{\u}[1]{u^{(#1)}}
+\newcommand{\tu}[1]{\tilde u^{(#1)}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+
+\newcommand{\R}{\mathbb R}
+\DeclareMathOperator{\id}{Id}
+
+\definecolor{db}{RGB}{23,20,119}
+\definecolor{dg}{RGB}{2,101,15}
+
+\newtheoremstyle{eigbem}% name of the style to be used
+  {0pt}% measure of space to leave above the theorem. E.g.: 3pt
+  {0pt}% measure of space to leave below the theorem. E.g.: 3pt
+  {\color{db}}% name of font to use in the body of the theorem
+  {0pt}% measure of space to indent
+  {\bfseries}% name of head font
+  {.}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {}% Manually specify head
+\theoremstyle{eigbem}
+\newtheorem*{remark}{Bemerkung}
+\newtheoremstyle{frag}% name of the style to be used
+  {0pt}% measure of space to leave above the theorem. E.g.: 3pt
+  {3pt}% measure of space to leave below the theorem. E.g.: 3pt
+  {\color{dg}}% name of font to use in the body of the theorem
+  {0pt}% measure of space to indent
+  {\bfseries}% name of head font
+  {.}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {}% Manually specify head
+\theoremstyle{frag}
+\newtheorem*{frage}{Frage}
+\theoremstyle{definition}
+\newtheorem{example}{Beispiel}

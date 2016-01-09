@@ -1,10 +1,29 @@
-\documentclass[a4paper]{scrreprt}
+\documentclass[11pt%
+               ,draft%
+               %,openright%
+               ,a4paper]{scrartcl}
 
-\input{defines}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{libertine} \usepackage[libertine]{newtxmath}
+\usepackage{paralist}
+\usepackage{fancyref}
+
+\usepackage{csquotes}
+\usepackage{biblatex} 
+\bibliography{Bibliography}
+
+\input{Macros}
 
 \begin{document}
 
-\chapter{Rechnungen}
-\input{Rechnung/variable_advektion}
+\input{variable_advektion}
+
+\input{FrontBackMatter/Bibliography}
 
 \end{document}
