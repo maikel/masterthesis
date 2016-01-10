@@ -34,3 +34,5 @@ Masterarbeit.pdf: main.tex
 
 clean:
 		latexmk -CA
+		rm main.run.xml
+		rm main.bbl

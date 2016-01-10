@@ -1,4 +1,6 @@
 \section{Variable Advektion}
+% \secttoc 
+
 \label{sec:varadv}
 
 Wir betrachen die Differentialgleichung der eindimensionalen, variablen Advektion
@@ -6,7 +8,7 @@ Wir betrachen die Differentialgleichung der eindimensionalen, variablen Advektio
 u_t(t,x) + a(x) u_x(t,x) = 0, \quad u(0,x) = u_0(x)
 \end{align}
 mit glattem und beschränktem $a\colon \R \to \R$.
-Wir wenden für diese Differentialgleichung das Upwindverfahren mit dem Gitter $G(n,i) = (t_n, x_i) = h \cdot (\lambda n,i)$ an.
+Wir wenden für diese Differentialgleichung das Upwindverfahren mit dem Gitter $G_h(n,i) = (t_n, x_i) = h \cdot (\lambda n,i)$ an.
 Dieses Gitter ist rechteckig, falls $\lambda \neq 1$ gilt und wir erhalten die Gleichung
 \begin{align}\label{eq:varadv:verfahren}
 v^{n+1}_i = v^n_i - a_i \lambda \left( v^n_i - v^n_{i-1} \right).
@@ -28,9 +30,9 @@ Wegen $x_0 = \phi(0,x_0)$ und $x = \phi(t, x_0)$ folgt damit \[ x_0 = \phi(0, x_
 
 \begin{example}
 Für $a(x) = x$ folgt wegen des Anfangswertproblems $\dot x(\tau) = x, x(0) = x_0$, dass $u(t,x)$ konstant auf den Kurven der Form $x(\tau) = x_0 e^{\tau}$ ist.
-Der Fluss $\phi$ ist dann durch $\phi(t,x) = x e^t$ gegeben. Wegen \eqref{eq:varadv:analytic_solution} folgt dann \[ u(x,t) = u_0(\phi(-t,x)) = u_0(x e^{-t}) \] als Lösung für \eqref{eq:varadv:pde}.
+Der Fluss $\phi$ ist uns dann durch $\phi(t,x) = x e^t$ gegeben. Wegen \eqref{eq:varadv:analytic_solution} folgt dann \[ u(x,t) = u_0(\phi(-t,x)) = u_0(x e^{-t}) \] als Lösung für \eqref{eq:varadv:pde}.
 \end{example}
-\begin{example} \label{ex:varadv:abs}
+\begin{example} \label{ex:varadv:hat}
 Setze
 \[
 a_\eps(x) = \begin{cases} 
@@ -48,7 +50,7 @@ Folglich ist $a$ Lipschitz-stetig und $\eqref{eq:varadv:ode}$ besitzt einen eind
 
 \begin{frage}Geht das überhaupt?\end{frage}
 
-\begin{frage}Ist $\phi$ genau so regulär wie $a$? ODE basics, technisch, aber vielleicht könnte man dann das Beispiel \ref{ex:varadv:abs} überall durchrechnen und konkrete Modelle testen.\end{frage}
+\begin{frage}Ist $\phi$ genau so regulär wie $a$? ODE basics, technisch, aber vielleicht könnte man dann das Beispiel \ref{ex:varadv:hat} überall durchrechnen und konkrete Modelle testen.\end{frage}
 
 Wenn wir eine Lösung $v$ von \eqref{eq:varadv:pde} haben, so können wir die folgende partielle Differentialgleichung
 \begin{align}\label{eq:varadv:inhompde}
@@ -58,9 +60,156 @@ lösen, indem wir einfach $u(t,x) = t v(t,x)$ setzen. Denn dann gilt
 \[ u_t(t,x) = v(t,x) + t v_t(t,x) = v(t,x) - t a(x) v_x(t,x) \]
 und wegen $t a(x) v_x(t,x) = a(x) (t v(t,x))_x = a(x) u_x(t,x)$ folgt damit \eqref{eq:varadv:inhompde}.
 
+Weiterhin gilt, dass für jede Lösung $v$ von \eqref{eq:varadv:pde} die Funktion $u(t,x) = v_t(t,x)$ ebenfalls eine Lösung von \eqref{eq:varadv:pde} ist.
+Und damit auch $\partial^n_t v$ für jedes $n \in \N$.
+Denn es gilt $u_t = \partial_t (v_t) = \partial_t(- a v_x) = - a \partial_t v_x = -a \partial_x v_t = -a u_x$.
+
+\subsection{Fallbeispiel}
+
+Ich habe das Verfahren \eqref{eq:varadv:verfahren} mit GNU Octave implementiert:
+\vspace{0.4cm}
+\lstinputlisting[firstnumber=53, firstline=53, lastline=59]{../Programme/variable_advection.m}
+Im Folgenden werden wir Beispiel \ref{ex:varadv:hat} näher untersuchen.
+Dieses Beispiel interessiert uns, weil wir für die Advektionsgeschwindigkeit $a(x) = 1 + \eps (1 - \abs{x})$ die Lösung zu \eqref{eq:varadv:pde} kennen und hinschreiben können.
+$u_0(x)$ und $a(x)$ haben wir wie folgt implementiert:
+\lstinputlisting[firstnumber=12, linerange={12-19}]{../Programme/variable_advection.m}
+\lstinputlisting[firstnumber=34, linerange={39-43}]{../Programme/variable_advection.m}
+Die Daten können durch folgende Plots visualisiert werden.
+\vspace{0.4cm}
+
+\hspace{-1cm}
+\begin{tikzpicture}
+\pgfplotsset{every axis/.append style={line width=1pt}}
+\begin{axis}[
+    title = {$\lambda a_i$ und $v^{130}_i$},
+]
+\addplot[myblue] table {../Programme/output/a.dat};
+\addplot[mygreen] table [y index= 131] {../Programme/output/u.dat};
+
+\legend{$\lambda a_i$,$v^{130}_i$}
+\end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}
+\pgfplotsset{every axis/.append style={line width=1pt}}
+\begin{axis}[
+    title = {$\lambda a_i$ und $v^{163}_i$},
+]
+\addplot[myblue] table {../Programme/output/a.dat};
+\addplot[mygreen] table [y index= 164] {../Programme/output/u.dat};
+
+\legend{$\lambda a_i$,$v^{163}_i$}
+\end{axis}
+\end{tikzpicture}
+
+\hspace{-1cm}
+\begin{tikzpicture}
+\pgfplotsset{every axis/.append style={line width=1pt}}
+\begin{axis}[
+    title = {$\lambda a_i$ und $v^{260}_i$},
+]
+\addplot[myblue] table {../Programme/output/a.dat};
+\addplot[mygreen] table [y index= 261] {../Programme/output/u.dat};
+
+\legend{$\lambda a_i$,$v^{260}_i$}
+\end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}
+\pgfplotsset{every axis/.append style={line width=1pt}}
+\begin{axis}[
+    title = {$\lambda a_i$ und $v^{280}_i$},
+]
+\addplot[myblue] table {../Programme/output/a.dat};
+\addplot[mygreen] table [y index= 280] {../Programme/output/u.dat};
+
+\legend{$\lambda a_i$,$v^{280}_i$}
+\end{axis}
+\end{tikzpicture}
+
+\subsection{Regul"arer Ansatz}
+
+Wir verwenden hier Methoden, die in \cite{Junk2004} vorgestellt wurden.
+Dafür approximieren wir das Verfahren \eqref{eq:varadv:verfahren} zunächst mit dem regulärem Ansatz
+\[ v^n_i = \u0(t_n, x_i) + h \u1(t_n, x_i) + O(h^2). \]
+Dabei erkennt man dann hoffentlich auch welche Terme in der späteren Analyse eine Rolle spielen werden.
+Für die Differenzen $v^{n+1}_i - v^n_i$ und $\lambda( v^n_i - v^n_{i-1} )$ in \eqref{eq:varadv:verfahren} folgt also
+
+\begin{align} \label{eq:varadv:regular:diff1}
+v^{n+1}_i - v^n_i
+&= \u0(t_{n+1}, x_i) + h \u1(t_{n+1}, x_i) + O(h^2) - \left( \u0(t_n, x_i) + h \u1(t_n, x_i) + O(h^2)\right)\notag\\
+&= \u0(t_{n+1}, x_i) - \u0(t_n, x_i) + h \left( \u1(t_{n+1}, x_i) - \u1(t_n, x_i)\right)\notag\\
+&= \u0(t_n + \lambda h, x_i) - \u0(t_n, x_i) + h \left( \u1(t_n + \lambda h, x_i) - \u1(t_n, x_i)\right)\notag\\
+&= \lambda h \, \u0_t (t_n, x_i) + \frac 12 \lambda^2 h^2 \u0_{tt}(t_n, x_i) + \lambda h^2 \u1_t(t_n, x_i) + O(h^3)\notag\\
+&= \lambda h\, \Biggl( \u0_t (t_n, x_i) + h \left( \frac \lambda 2 \u0_{tt}(t_n, x_i) + \u1_t(t_n, x_i) \right) \Biggr) + O(h^3) 
+\end{align}
+und
+% und für $\lambda (v^n_{i} - v^n_{i-1})$ folgt ganz analog
+{\small\begin{align} \label{eq:varadv:regular:diff2}
+\lambda (v^n_{i} - v^n_{i-1})
+&= \lambda \Bigl( \u0(t_n, x_i) + h \u1(t_n, x_i) + O(h^2) - \left( \u0(t_n, x_{i-1}) + h \u1(t_n, x_{i-1}) + O(h^2) \right) \Bigr)\notag\\
+&= \lambda \Bigl( \u0(t_n, x_i) - \u0(t_n, x_{i-1}) + h \left( \u1(t_n, x_i) - \u1(t_n, x_{i-1}) \right) \Bigr) \notag\\
+&= \lambda \Bigl( \u0(t_n, x_i) - \u0(t_n, x_i-h) + h \left( \u1(t_n, x_i) - \u1(t_n, x_i-h) \right) \Bigr)\notag\\
+&= \lambda \left( h \u0_x(t_n, x_i) - \frac 12 h^2 \u0_{xx}(t_n, x_i) + h^2 \u1_x(t_n, x_i) \right) + O(h^3)\notag\\
+&= \lambda h \,\Biggl( \u0_x(t_n, x_i) + h \left( \u1_x(t_n, x_i) - \frac 12 \u0_{xx}(t_n, x_i) \right) \Biggr) + O(h^3).
+\end{align}}
+
+Setzt man nun \eqref{eq:varadv:regular:diff1} und \eqref{eq:varadv:regular:diff2} in das Verfahren \eqref{eq:varadv:verfahren} ein und teilt durch $\lambda h$, so erhält man die Gleichung
+\begin{align*}
+\begin{split}
+O(h^2) ={}& \u0_t (t_n, x_i) + h \left( \frac \lambda 2 \u0_{tt}(t_n, x_i) + \u1_t(t_n, x_i) \right)\\
+          & + a_i \u0_x(t_n, x_i) + h a_i \left( \u1_x(t_n, x_i) - \frac 12 \u0_{xx}(t_n, x_i) \right).
+\end{split}\end{align*}
+Dies gilt also f"ur alle Gitter $G_h$ und lassen wir nun $h \to 0$ zu, so erhalten wir, sortiert nach den Ordnungen von $h$, folgendes System von Differentialgleichungen für $\u i$:
+\begin{equation}\label{eq:varadv:regular:pde_u0}
+\u0_t(t, x) + a(x) \u0_x(t,x) = 0, \qquad \u0(0, x) = u_0(x)
+\end{equation}
+und
+\begin{align}\label{eq:varadv:regular:pde_u1}
+\u1_t(t, x) + a(x) \u1_x(t, x) &= a(x) \frac 12 \u0_{xx}(t, x) - \frac \lambda 2 \u0_{tt}(t, x) \qquad \quad \u1(0, x) = 0\notag\\
+&= a(x) \cdot \frac{\u0_{xx}(t,x) - \lambda \left( a(x) \u0_x(t,x) \right)_x}{2},\\
+\label{eq:varadv:regular:pde_u1_richtig}
+&=  \frac {a(x) - \lambda a^2(x)}{2} \u0_{xx}(t,x) - \lambda \frac{a(x) a'(x)}{2} \u0_x(t,x)
+\end{align}
+wobei wir \eqref{eq:varadv:regular:pde_u0} benutzt haben, um \eqref{eq:varadv:regular:pde_u1} zu erhalten, denn es gilt
+\begin{align*}
+\u0_{tt}(t,x) &= \partial_t \u0_t(t,x)\\
+              &= \partial_t \bigl( - a(x) \u0_x(t,x) \bigr)\\
+              &= - a(x) \u0_{xt}(t,x)\\
+              &= -a(x) \u0_{tx}(t,x)\\
+              &= - a(x) \partial_x \bigl( \u0_t(t,x) \bigr)\\
+              &= - a(x) \partial_x \bigl( - a(x) \u0_x(t,x) \bigr) = a(x) \left( a(x) \u0_x(t,x) \right)_x.
+\end{align*}
+\begin{bemerkung}
+Der Fehlerterm in \eqref{eq:varadv:regular:pde_u1} stimmt für den Fall $a(x) = 1$ mit dem in \cite{Junk2004} überein.
+Ein gutes Zeichen!
+\end{bemerkung}
+Da $\u0$ nun \eqref{eq:varadv:regular:pde_u0} löst kann man es auch als
+\[ \u0(t,x) = u_0(\phi(-t,x)) \]
+schreiben, wobei $\phi$ der Fluss der Differentialgleichung \eqref{eq:varadv:ode} sei.
+
+\begin{frage}
+Ist \eqref{eq:varadv:regular:pde_u1} so überhaupt lösbar?
+In \cite{Junk2004} haben die Autoren die Oszillation mithilfe der Gittervariablen eingeführt, weil die Gleichung dort eben nicht lösbar war.
+Das war dort ein Indiz dafür, dass das Verfahren mit der Gleichung inkompatibel ist, was hier ja auch der Fall ist!
+Trotzdem könnte es hier etwas komplizierter sein: Ich vermute man kann \eqref{eq:varadv:regular:pde_u1} als Summe von ``gutartiger'' Diffusion und ``bösartiger'' Oszillation schreiben.
+Ein gute Frage könnte also sein, ob man das in einen lösbaren Teil und in einen oszillierenden Teil trennen kann.
+Welche Diffusionsterme würde man rechts von \eqref{eq:varadv:regular:pde_u1} erwarten? Naja, siehe einfach normale Advektion?
+Wegen \eqref{eq:varadv:inhompde} könnte es eine gute Idee sein, es als Summe einer Lösung von \eqref{eq:varadv:pde} und einem Restterm zu schreiben.
+\end{frage}
+
+\begin{bemerkung}
+\eqref{eq:varadv:regular:pde_u1_richtig} habe ich nach der Frage aufgeschrieben.
+Vermutlich ist \eqref{eq:varadv:regular:pde_u1_richtig} die richtige Art das aufzuschreiben. Aufgabe: Pr"ufe nach, ob das schon gut plus böse ist.
+\end{bemerkung}
+
+\begin{bemerkung}
+Wahnsinn!! Der Hinweis von Herrn Klein!! $a(x) \sim 1 + o(\eps)\abs{x-x_0}$ um ein $x_0$ dann ist $a'(x) \sim o(\eps)$!
+Damit wird auch Beispiel \ref{ex:varadv:hat} attraktiver.
+\end{bemerkung}
+
+
+
 \subsection{Oszillatorischer Ansatz}
 
-Wir verwenden hier Methoden, die in ~\cite{Junk2004} vorgestellt wurden.
 Ziel ist es, oszillatorische Fehler im Kurzzeitverhalten einzufangen, die von $a$ erzeugt werden.
 Daher wählen wir den Ansatz
 \begin{align}\label{eq:varadv:ansatz}
@@ -68,28 +217,29 @@ v^n_i = \u0(t_n, x_i) + h \u1(t_n, x_i) + h^2 \tu2(i) + O(h^2)
 \end{align}
 für unsere Gitterfunktion $v$. 
 Der Term $\u2(t_n, x_i)$ taucht bei dem Ansatz nicht auf, weil er hierbei zu Null verschwindet.
-Für die Differenz $v^{n+1}_i - v^n_i$ folgt dann
+Die Differenz $v^{n+1}_i - v^n_i$ und $\lambda (v^n_{i} - v^n_{i-1})$ berechnen sich ganz analog wie beim regulären Fall.
+Da $\tu2$ nur vom Ort abhängt erhalten wir die Gleichungen
 \begin{align*}
 v^{n+1}_i - v^n_i
-&= \u0(t_{n+1}, x_i) + h \u1(t_{n+1}, x_i) + h^2 \left( \u2(t_{n+1}, x_i) + \tu2(i) \right) + O(h^2)\\
-   &\qquad - \left( \u0(t_n, x_i) + h \u1(t_n, x_i) + h^2 \left( \u2(t_n, x_i) + \tu2(i)\right)  + O(h^2)\right)\\
-&= \u0(t_{n+1}, x_i) - \u0(t_n, x_i) + h \left( \u1(t_{n+1}, x_i) - \u1(t_n, x_i)\right) + \\
-   &\qquad + h^2 \left( \u2(t_{n+1}, x_i) - \u2(t_n, x_i) \right)\\
-&= \u0(t_n + \lambda h, x_i) - \u0(t_n, x_i) + h \left( \u1(t_n + \lambda h, x_i) - \u1(t_n, x_i)\right)\\
-   &\qquad + h^2 \left( \u2(t_n + \lambda h, x_i) - \u2(t_n, x_i) \right)\\
-&= \lambda h \, \u0_t (t_n, x_i) + \frac 12 \lambda^2 h^2 \u0_{tt}(t_n, x_i) + \lambda h^2 \u1_t(t_n, x_i) + O(h^3)\\
+% &= \u0(t_{n+1}, x_i) + h \u1(t_{n+1}, x_i) + h^2 \left( \u2(t_{n+1}, x_i) + \tu2(i) \right) + O(h^2)\\
+%    &\qquad - \left( \u0(t_n, x_i) + h \u1(t_n, x_i) + h^2 \left( \u2(t_n, x_i) + \tu2(i)\right)  + O(h^2)\right)\\
+% &= \u0(t_{n+1}, x_i) - \u0(t_n, x_i) + h \left( \u1(t_{n+1}, x_i) - \u1(t_n, x_i)\right) + \\
+%    &\qquad + h^2 \left( \u2(t_{n+1}, x_i) - \u2(t_n, x_i) \right)\\
+% &= \u0(t_n + \lambda h, x_i) - \u0(t_n, x_i) + h \left( \u1(t_n + \lambda h, x_i) - \u1(t_n, x_i)\right)\\
+%    &\qquad + h^2 \left( \u2(t_n + \lambda h, x_i) - \u2(t_n, x_i) \right)\\
+% &= \lambda h \, \u0_t (t_n, x_i) + \frac 12 \lambda^2 h^2 \u0_{tt}(t_n, x_i) + \lambda h^2 \u1_t(t_n, x_i) + O(h^3)\\
 &= \lambda h \left( \u0_t (t_n, x_i) + h \left( \frac \lambda 2 \u0_{tt}(t_n, x_i) + \u1_t(t_n, x_i) \right) \right) + O(h^3)
 \end{align*}
-und für $\lambda (v^n_{i} - v^n_{i-1})$ folgt ganz analog
+und
 {\small\begin{align*}
 \lambda (v^n_{i} - v^n_{i-1})
-&= \lambda \left( \u0(t_n, x_i) + h \u1(t_n, x_i) + h^2 \left(\u2(t_n, x_i) + \tu2(i) \right) + O(h^2) \right.\\
-   &\qquad -  \left. \left( \u0(t_n, x_{i-1}) + h \u1(t_n, x_{i-1}) + h^2 \left( \u2(t_n, x_{i-1}) + \tu 2(i-1)\right)  + O(h^2) \right) \right)\\
-&= \lambda \left( \u0(t_n, x_i) - \u0(t_n, x_{i-1}) + h \left( \u1(t_n, x_i) - \u1(t_n, x_{i-1}) \right) \right.\\
-   &\qquad + \left. h^2 \left( \u2(t_n, x_i) - \u2(t_n, x_{i-1}) + \bigl( \tu2(i) - \tu2(i-1) \bigr) \right) \right)\\
-&= \lambda \left( \u0(t_n, x_i) - \u0(t_n, x_i-h) + h \left( \u1(t_n, x_i) - \u1(t_n, x_i-h) \right) \right. \\
-   &\qquad \left. + h^2 \left( \u2(t_n, x_i) - \u2(t_n, x_i-h) + \tu2(i) - \tu2(i-1) \right) \right)\\
-&= \lambda \left( h \u0_x(t_n, x_i) - \frac 12 h^2 \u0_{xx}(t_n, x_i) + h^2 \u1_x(t_n, x_i) + h^2\Bigl( \tu1(i) - \tu1(i-1) \Bigr) \right) + O(h^3) \\
+% &= \lambda \left( \u0(t_n, x_i) + h \u1(t_n, x_i) + h^2 \left(\u2(t_n, x_i) + \tu2(i) \right) + O(h^2) \right.\\
+%    &\qquad -  \left. \left( \u0(t_n, x_{i-1}) + h \u1(t_n, x_{i-1}) + h^2 \left( \u2(t_n, x_{i-1}) + \tu 2(i-1)\right)  + O(h^2) \right) \right)\\
+% &= \lambda \left( \u0(t_n, x_i) - \u0(t_n, x_{i-1}) + h \left( \u1(t_n, x_i) - \u1(t_n, x_{i-1}) \right) \right.\\
+%    &\qquad + \left. h^2 \left( \u2(t_n, x_i) - \u2(t_n, x_{i-1}) + \bigl( \tu2(i) - \tu2(i-1) \bigr) \right) \right)\\
+% &= \lambda \left( \u0(t_n, x_i) - \u0(t_n, x_i-h) + h \left( \u1(t_n, x_i) - \u1(t_n, x_i-h) \right) \right. \\
+%    &\qquad \left. + h^2 \left( \u2(t_n, x_i) - \u2(t_n, x_i-h) + \tu2(i) - \tu2(i-1) \right) \right)\\
+% &= \lambda \left( h \u0_x(t_n, x_i) - \frac 12 h^2 \u0_{xx}(t_n, x_i) + h^2 \u1_x(t_n, x_i) + h^2\Bigl( \tu1(i) - \tu1(i-1) \Bigr) \right) + O(h^3) \\
 &= \lambda h \left( \u0_x(t_n, x_i) + h \left( \u1_x(t_n, x_i) - \frac 12 \u0_{xx}(t_n, x_i) + \tu2(i) - \tu2(i-1) \right) \right) + O(h^3).
 \end{align*}}
 Wenn wir dies nun in das Verfahren \eqref{eq:varadv:verfahren} einsetzen, erhalten wir die Gleichung
@@ -99,8 +249,10 @@ Wenn wir dies nun in das Verfahren \eqref{eq:varadv:verfahren} einsetzen, erhalt
 \end{align*}
 Nachdem wir nach den Ordnungen von $h$ sortiert haben, führt uns das zu dem Gleichungssystem
 \begin{align*}
-\u0_t(t_n, x_i) + a(x_i) \u0_x(t_n, x_i) &= 0,\\
-\u1_t(t_n, x_i) + a(x_i) \u1_x(t_n, x_i) &= \frac {1 - a(x_i)\lambda}{2} \u0_{xx}(t_n, x_i) - \frac {a_x(x_i) \lambda} 2 \u0_x(t_n, x_i)\\
-                                         & \quad + \tu2(i) - \tu2(i-1)
+\u0_t(t_n, x_i) + a(x_i) \u0_x(t_n, x_i) = 0, \qquad \u0(0, x_i) = u_0(x_i)
 \end{align*}
-mit den Anfangsbedingungen $\u0(0, x_i) = u_0(x_i)$
+und 
+\begin{align*}
+\u1_t(t_n, x_i) + a(x_i) \u1_x(t_n, x_i) &= \frac {a(x_i) - \lambda a^2(x_i)}{2} \u0_{xx}(t_n,x_i) - \frac{a(x_i) a'(x_i)}{2} \u0_x(t_n,x_i)\\
+                                         & \quad + \tu2(i) - \tu2(i-1), \qquad \u1(0, x_i) = 0.
+\end{align*}

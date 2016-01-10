@@ -1,19 +1,33 @@
 \documentclass[11pt%
-               ,draft%
+               %,draft%
                %,openright%
                ,a4paper]{scrartcl}
 
 \usepackage[ngerman]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 
 \usepackage{xcolor}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{libertine} \usepackage[libertine]{newtxmath}
+\usepackage{sourcecodepro}
+\usepackage{listings}
 \usepackage{paralist}
 \usepackage{fancyref}
 
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.11}
+
+\usepackage[]{minitoc}
+\renewcommand{\stcfont}{\small\rm}
+\renewcommand{\stcSSfont}{\small\bf} 
+% \dosecttoc
+% \dosectlof
+% \dosectlot
+ 
 \usepackage{csquotes}
 \usepackage{biblatex} 
 \bibliography{Bibliography}

@@ -5,10 +5,16 @@
 \newcommand{\abs}[1]{\left| #1 \right|}
 
 \newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
 \DeclareMathOperator{\id}{Id}
 
 \definecolor{db}{RGB}{23,20,119}
 \definecolor{dg}{RGB}{2,101,15}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{myblue}{rgb}{0.0 0.37 0.67}
+\definecolor{myred}{rgb}{0.87 0.09 0.12}
 
 \newtheoremstyle{eigbem}% name of the style to be used
   {0pt}% measure of space to leave above the theorem. E.g.: 3pt
@@ -21,6 +27,7 @@
   {}% Manually specify head
 \theoremstyle{eigbem}
 \newtheorem*{remark}{Bemerkung}
+\newtheorem*{bemerkung}{Bemerkung}
 \newtheoremstyle{frag}% name of the style to be used
   {0pt}% measure of space to leave above the theorem. E.g.: 3pt
   {3pt}% measure of space to leave below the theorem. E.g.: 3pt
@@ -34,3 +41,33 @@
 \newtheorem*{frage}{Frage}
 \theoremstyle{definition}
 \newtheorem{example}{Beispiel}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize\ttfamily,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=false,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{dg},         % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=l,                         % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{db},         % keyword style
+  language=Octave,                 % the language of the code
+  otherkeywords={*,...},           % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=10pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=4,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+  ,xleftmargin=\parindent
+  ,nolol=true
+}
