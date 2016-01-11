@@ -11,7 +11,8 @@
 \definecolor{db}{RGB}{23,20,119}
 \definecolor{dg}{RGB}{2,101,15}
 \definecolor{mygreen}{rgb}{0,0.6,0}
-\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mygray}{rgb}{0.3,0.3,0.3}
+\definecolor{mygray2}{rgb}{0.3,0.3,0.3}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
 \definecolor{myblue}{rgb}{0.0 0.37 0.67}
 \definecolor{myred}{rgb}{0.87 0.09 0.12}
@@ -19,7 +20,7 @@
 \newtheoremstyle{eigbem}% name of the style to be used
   {0pt}% measure of space to leave above the theorem. E.g.: 3pt
   {0pt}% measure of space to leave below the theorem. E.g.: 3pt
-  {\color{db}}% name of font to use in the body of the theorem
+  {\color{mygray2}}%\color{db}}% name of font to use in the body of the theorem
   {0pt}% measure of space to indent
   {\bfseries}% name of head font
   {.}% punctuation between head and body
@@ -31,13 +32,13 @@
 \newtheoremstyle{frag}% name of the style to be used
   {0pt}% measure of space to leave above the theorem. E.g.: 3pt
   {3pt}% measure of space to leave below the theorem. E.g.: 3pt
-  {\color{dg}}% name of font to use in the body of the theorem
+  {}%\color{dg}}% name of font to use in the body of the theorem
   {0pt}% measure of space to indent
   {\bfseries}% name of head font
   {.}% punctuation between head and body
   { }% space after theorem head; " " = normal interword space
   {}% Manually specify head
-\theoremstyle{frag}
+% \theoremstyle{frag}
 \newtheorem*{frage}{Frage}
 \theoremstyle{definition}
 \newtheorem{example}{Beispiel}
@@ -48,13 +49,13 @@
   breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
   breaklines=false,                 % sets automatic line breaking
   captionpos=b,                    % sets the caption-position to bottom
-  commentstyle=\color{dg},         % comment style
+  commentstyle=\color{mygray},%\color{dg},         % comment style
   deletekeywords={...},            % if you want to delete keywords from the given language
   escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
   extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
   frame=l,                         % adds a frame around the code
   keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
-  keywordstyle=\color{db},         % keyword style
+  keywordstyle=\bfseries,         % keyword style
   language=Octave,                 % the language of the code
   otherkeywords={*,...},           % if you want to add more keywords to the set
   numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
@@ -65,7 +66,7 @@
   showstringspaces=false,          % underline spaces within strings only
   showtabs=false,                  % show tabs within strings adding particular underscores
   stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
-  stringstyle=\color{mymauve},     % string literal style
+  stringstyle=,%\color{mymauve},     % string literal style
   tabsize=4,                       % sets default tabsize to 2 spaces
   title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
   ,xleftmargin=\parindent

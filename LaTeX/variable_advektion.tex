@@ -68,34 +68,35 @@ Denn es gilt $u_t = \partial_t (v_t) = \partial_t(- a v_x) = - a \partial_t v_x 
 
 Ich habe das Verfahren \eqref{eq:varadv:verfahren} mit GNU Octave implementiert:
 \vspace{0.4cm}
-\lstinputlisting[firstnumber=53, firstline=53, lastline=59]{../Programme/variable_advection.m}
+\lstinputlisting[firstnumber=15, firstline=15, lastline=22]{../Programme/upwind.m}
 Im Folgenden werden wir Beispiel \ref{ex:varadv:hat} näher untersuchen.
 Dieses Beispiel interessiert uns, weil wir für die Advektionsgeschwindigkeit $a(x) = 1 + \eps (1 - \abs{x})$ die Lösung zu \eqref{eq:varadv:pde} kennen und hinschreiben können.
-$u_0(x)$ und $a(x)$ haben wir wie folgt implementiert:
-\lstinputlisting[firstnumber=12, linerange={12-19}]{../Programme/variable_advection.m}
-\lstinputlisting[firstnumber=34, linerange={39-43}]{../Programme/variable_advection.m}
+$u_0(x)$ und $a(x)$ haben wir wie folgt implementiert
+\lstinputlisting[firstnumber=5, linerange={5-12}]{../Programme/step_hat.m}
+und der Test lief unter diesen Bedingungen:
+\lstinputlisting[firstnumber=18, linerange={18-36}]{../Programme/step_hat.m}
 Die Daten können durch folgende Plots visualisiert werden.
 \vspace{0.4cm}
 
 \hspace{-1cm}
 \begin{tikzpicture}
-\pgfplotsset{every axis/.append style={line width=1pt}}
+% \pgfplotsset{every axis/.append style={line width=1pt}}
 \begin{axis}[
     title = {$\lambda a_i$ und $v^{130}_i$},
 ]
-\addplot[myblue] table {../Programme/output/a.dat};
-\addplot[mygreen] table [y index= 131] {../Programme/output/u.dat};
+\addplot[dashed] table {../Programme/output/a_step_hat.dat};
+\addplot[myblue] table [y index= 131] {../Programme/output/u_step_hat.dat};
 
 \legend{$\lambda a_i$,$v^{130}_i$}
 \end{axis}
 \end{tikzpicture}
 \begin{tikzpicture}
-\pgfplotsset{every axis/.append style={line width=1pt}}
+% \pgfplotsset{every axis/.append style={line width=1pt}}
 \begin{axis}[
     title = {$\lambda a_i$ und $v^{163}_i$},
 ]
-\addplot[myblue] table {../Programme/output/a.dat};
-\addplot[mygreen] table [y index= 164] {../Programme/output/u.dat};
+\addplot[dashed] table {../Programme/output/a_step_hat.dat};
+\addplot[myblue] table [y index= 164] {../Programme/output/u_step_hat.dat};
 
 \legend{$\lambda a_i$,$v^{163}_i$}
 \end{axis}
@@ -103,23 +104,23 @@ Die Daten können durch folgende Plots visualisiert werden.
 
 \hspace{-1cm}
 \begin{tikzpicture}
-\pgfplotsset{every axis/.append style={line width=1pt}}
+% \pgfplotsset{every axis/.append style={line width=1pt}}
 \begin{axis}[
     title = {$\lambda a_i$ und $v^{260}_i$},
 ]
-\addplot[myblue] table {../Programme/output/a.dat};
-\addplot[mygreen] table [y index= 261] {../Programme/output/u.dat};
+\addplot[dashed] table {../Programme/output/a_step_hat.dat};
+\addplot[myblue] table [y index= 261] {../Programme/output/u_step_hat.dat};
 
 \legend{$\lambda a_i$,$v^{260}_i$}
 \end{axis}
 \end{tikzpicture}
 \begin{tikzpicture}
-\pgfplotsset{every axis/.append style={line width=1pt}}
+% \pgfplotsset{every axis/.append style={line width=1pt}}
 \begin{axis}[
     title = {$\lambda a_i$ und $v^{280}_i$},
 ]
-\addplot[myblue] table {../Programme/output/a.dat};
-\addplot[mygreen] table [y index= 280] {../Programme/output/u.dat};
+\addplot[dashed] table {../Programme/output/a_step_hat.dat};
+\addplot[myblue] table [y index= 280] {../Programme/output/u_step_hat.dat};
 
 \legend{$\lambda a_i$,$v^{280}_i$}
 \end{axis}
@@ -207,13 +208,12 @@ Damit wird auch Beispiel \ref{ex:varadv:hat} attraktiver.
 \end{bemerkung}
 
 
-
 \subsection{Oszillatorischer Ansatz}
 
 Ziel ist es, oszillatorische Fehler im Kurzzeitverhalten einzufangen, die von $a$ erzeugt werden.
 Daher wählen wir den Ansatz
 \begin{align}\label{eq:varadv:ansatz}
-v^n_i = \u0(t_n, x_i) + h \u1(t_n, x_i) + h^2 \tu2(i) + O(h^2)
+v^n_i = \u0(t_n, x_i) + h \u1(t_n, x_i) + h^2 \tu2(t_n, i) + O(h^2)
 \end{align}
 für unsere Gitterfunktion $v$. 
 Der Term $\u2(t_n, x_i)$ taucht bei dem Ansatz nicht auf, weil er hierbei zu Null verschwindet.
@@ -245,7 +245,8 @@ und
 Wenn wir dies nun in das Verfahren \eqref{eq:varadv:verfahren} einsetzen, erhalten wir die Gleichung
 \begin{align*}
 &\u0_t (t_n, x_i) + h \left( \frac \lambda 2 \u0_{tt}(t_n, x_i) + \u1_t(t_n, x_i) \right)\\ 
-&\qquad +  a_i \u0_x(t_n, x_i) + h a_i \left( \u1_x(t_n, x_i) - \frac 12 \u0_{xx}(t_n, x_i) + \tu2(i) - \tu2(i-1) \right) = O(h^2).
+&\qquad +  a_i \u0_x(t_n, x_i) + h a_i \left( \u1_x(t_n, x_i) - \frac 12 \u0_{xx}(t_n, x_i)
+        + \tu2(t_n, i) - \tu2(t_ni-1) \right) = O(h^2).
 \end{align*}
 Nachdem wir nach den Ordnungen von $h$ sortiert haben, führt uns das zu dem Gleichungssystem
 \begin{align*}
@@ -254,5 +255,66 @@ Nachdem wir nach den Ordnungen von $h$ sortiert haben, führt uns das zu dem Gle
 und 
 \begin{align*}
 \u1_t(t_n, x_i) + a(x_i) \u1_x(t_n, x_i) &= \frac {a(x_i) - \lambda a^2(x_i)}{2} \u0_{xx}(t_n,x_i) - \frac{a(x_i) a'(x_i)}{2} \u0_x(t_n,x_i)\\
-                                         & \quad + \tu2(i) - \tu2(i-1), \qquad \u1(0, x_i) = 0.
+& \quad + \tu2(t_n, i) - \tu2(t_n, i-1), \qquad \u1(0, x_i) = 0.
 \end{align*}
+
+Ich würde gerne diesen Oszillatorischen Ansatz zunächst lokal für den Fall machen, dass $a(x) = a = 1+\delta$ derart ist, dass $a\lambda > 1$, also $a (1 - a\lambda) = - 2\eps$ für ein $\eps > 0$ gilt:
+\begin{align*}
+\u1_t(t_n, x_i) + a(x_i) \u1_x(t_n, x_i)
+&= - \eps \u0_{xx}(t_n,x_i) + \tu2(t_n, i) - \tu2(t_n, i-1), \qquad \u1(0, x_i) = 0.
+\end{align*}
+wobei $u^{(0)}(t_i, x_i)$ durch $u_0(x_i - a t_n)$ gegeben ist.
+Foglich wollen wir $\tu2$ so wählen, dass \[ \eps \partial^2_x u_0(x_i-at_n) = \tu2(t_n, i) - \tu2(t_n, i-1) \] für alle Gitterpunkte $i$ und Zeiten $t_n$ gilt.
+Schauen wir uns mal ein Beispiel dazu an und hoffen, dass wir etwas an Stellen mit großer Krümmung sehen:
+Ähnlich wie beim Fallbeispiel haben mir mit 
+\lstinputlisting[firstnumber=5, linerange={5-11}]{../Programme/sinus_const.m}
+und
+\lstinputlisting[firstnumber=17, linerange={17-35}]{../Programme/sinus_const.m}
+ein Beispiel gerechnet und kamen zu den folgenden Ergebnissen:
+
+\hspace{-1cm}
+\begin{tikzpicture}
+% \pgfplotsset{every axis/.append style={line width=1pt}}
+\begin{axis}[
+    title = {$\lambda a_i$ und $v^{5}_i$},
+]
+\addplot[dashed] table {../Programme/output/a_sin_const.dat};
+\addplot[myblue] table [y index= 6] {../Programme/output/u_sin_const.dat};
+
+\legend{$\lambda a_i$,$v^{5}_i$}
+\end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}
+% \pgfplotsset{every axis/.append style={line width=1pt}}
+\begin{axis}[
+    title = {$\lambda a_i$ und $v^{105}_i$},
+]
+\addplot[dashed] table {../Programme/output/a_sin_const.dat};
+\addplot[myblue] table [y index= 106] {../Programme/output/u_sin_const.dat};
+
+\legend{$\lambda a_i$,$v^{105}_i$}
+\end{axis}
+\end{tikzpicture}\\
+\hspace{-1cm}
+\begin{tikzpicture}
+% \pgfplotsset{every axis/.append style={line width=1pt}}
+\begin{axis}[
+    title = {$\lambda a_i$ und $v^{113}_i$},
+]
+\addplot[dashed] table {../Programme/output/a_sin_const.dat};
+\addplot[myblue] table [y index= 114] {../Programme/output/u_sin_const.dat};
+
+\legend{$\lambda a_i$,$v^{113}_i$}
+\end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}
+% \pgfplotsset{every axis/.append style={line width=1pt}}
+\begin{axis}[
+    title = {$\lambda a_i$ und $v^{124}_i$},
+]
+\addplot[dashed] table {../Programme/output/a_sin_const.dat};
+\addplot[myblue] table [y index= 125] {../Programme/output/u_sin_const.dat};
+
+\legend{$\lambda a_i$,$v^{124}_i$}
+\end{axis}
+\end{tikzpicture}
