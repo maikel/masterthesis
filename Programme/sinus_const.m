@@ -58,5 +58,5 @@ U = [x' U'];
 a = [x' cfl*a'];
 
 save 'output/a_sin_const.dat' a
-save 'output/u_sin_const.dat' V
+save 'output/u_sin_const.dat' 
 save 'output/ref_sin_const.dat' U

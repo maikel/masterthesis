@@ -1,0 +1,57 @@
+\documentclass[a4paper, 10pt]{scrartcl}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{paralist}
+
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}[section]
+\newtheorem*{solution}{Solution}
+
+\newcommand{\eps}{\varepsilon}
+
+\begin{document}
+\noindent Maikel Nadolski \hfill \today\\
+nadolski@math.fu-berlin.de
+
+\begin{center}
+{\Large\textbf{Solutions to some exercises}}\\
+{\small of the book\\
+``Introduction to Perturbation Methods''\\
+by Mark H. Holmes}
+\end{center}
+
+\section {Introduction to Asymptotic Approximations}
+
+%=============================================================================
+%                            Exercise 1.32
+%=============================================================================
+\setcounter{exercise}{31}
+\begin{exercise}
+Find a two-term asymptotic expansion, for small $\eps$, of the solution of the
+following problems:
+\begin{enumerate}[(a)]
+\item $y'' + \eps y'  - y = 1$, where $y(0) = 0$ and $y(1) = 1$.
+\begin{solution}
+We assume $y(\tau) \sim y_0(\tau) + \eps y_1(\tau) + o(\eps)$.
+Substituting this into the ODE yields
+\begin{align}
+y''_0(\tau) + \eps y''_1(\tau) + \eps y'_0(\tau) - y_0 - \eps y_1 + o(\eps) = 1
+\end{align}
+and from the initial values $y(0) = 0$ and $y(1) = 1$ we get
+\begin{align}
+y_0(0) + \eps y_1(0) + o(\eps) = 0 \text{ and } y_0(1) + \eps y_1(1) + o(\eps) = 1.\
+end{align}
+Now by equating like powers of $\eps$, we obtain the following problems:
+\begin{description}
+\item $O(1)$\\
+$y''_0(\tau) - y_0(\tau) = 1$,\\$y_0(0) = 0$, $y_0(1) = 1$.\\
+To solve this ODE consider the homogeneous problem first
+
+\end{description}
+\end{solution}
+\end{enumerate}
+\end{exercise}
+\end{document}

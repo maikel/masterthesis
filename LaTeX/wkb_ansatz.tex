@@ -1,0 +1,45 @@
+\section {WKB Ansätze}
+
+\subsection {Diskrete Version}
+
+Hier versuchen wir den Ansatz
+\begin{align} \label{eq:wkb:ansatz1}
+v^n_k = \u0(t_n, x_k) + h (-1)^n e^{\gamma^\alpha \Theta(t_n)} \u1(t_n, x_k) + \ldots,
+\end{align}
+wobei wir $\gamma^\alpha$ für etwas Flexibilität noch unbestimmt lassen. 
+Wir werden das später noch so setzen müssen, dass es mit dem Verfahren zusammen passt.
+Wir treffen außerdem die Annahme $\lambda a - 1 = \eps > 0$ und sammeln jetzt die Entwicklungen von $v^n_k$ auf, welche wir brauchen werden.
+Es gilt
+\begin{align}\nonumber
+v^n_{k-1} &= \u0(t_n, x_k) + h (-1)^n e^{\gamma^\alpha \Theta(t_n)} \u1(t_n, x_k) + \ldots\\ \nonumber
+&= \u0(t_n, x_k-h) + h (-1)^n e^{\gamma^\alpha \Theta(t_n)} \u1(t_n, x_k-h) + \ldots\\
+\begin{split}
+&= \u0(t_n, x_k) - h \u0_x(t_n, x_k) + \frac {h^2}2 \u0_{xx}(t_n, x_k)\\
+&\quad + h (-1)^n e^{\gamma^\alpha \Theta(t_n)} \left[ \u1(t_n, x_k) - h \u1_x(t_n, x_k) \right] + \ldots
+\end{split}
+\end{align}
+{\small
+\begin{align}\nonumber
+v^{n+1}_k &= \u0(t_{n+1}, x_k) + h (-1)^{n+1} e^{\gamma^\alpha \Theta(t_{n+1})} \u1(t_{n+1}, x_k) + \ldots\\ \nonumber
+          &= \u0(t_n + \lambda h, x_k) - h (-1)^n e^{\gamma^\alpha \Theta(t_n + \lambda h)} \u1(t_n + \lambda h, x_k) + \ldots\\ \nonumber
+          &= \u0(t_n, x_k) + (\lambda h) \u0_t(t_n, x_k) + \frac {(\lambda h)^2}2 \u0_{tt}(t_n, x_k)\\\nonumber
+          &\quad - h (-1)^n e^{\gamma^\alpha \Theta(t_n)} \cdot \left[ 1 + (\lambda h) \gamma^\alpha \Theta_t(t_n) \right] \cdot \left[ \u1(t_n, x_k) + (\lambda h) \u1_t(t_n, x_k) \right] + \ldots\\
+\begin{split}
+          &= \u0(t_n, x_k) + (\lambda h) \u0_t(t_n, x_k) + \frac {(\lambda h)^2}2 \u0_{tt}(t_n, x_k)\\
+          &\quad - h (-1)^n e^{\gamma^\alpha \Theta(t_n)} \cdot \left[ \u1(t_n, x_k) + (\lambda h) \u1_t(t_n, x_k) + (\lambda h) \gamma^\alpha \Theta_t(t_n) \u1(t_n, x_k) \right] + \ldots
+\end{split}
+\end{align}
+}
+Setzen wir diese Ergebnisse nun in \eqref{eq:varadv:verfahren} ein, so erhalten wir die Gleichung
+\begin{align}
+\begin{split}
+o(h^2) &= 
+\u0_t(t_n, x_k) + h \frac \lambda 2 \u0_{tt}(t_n, x_k) - \frac 2 \lambda (-1)^n e^{\gamma^\alpha \Theta(t_n)} \u1(t_n, x_k)\\
+&\quad - h (-1)^n e^{\gamma^\alpha \Theta(t_n)} \cdot \left[ \u1_t(t_n, x_k) + \gamma^\alpha \Theta_t(t_n) \u1(t_n, x_k) \right]\\
+&\quad + a \u0_x(t_n, x_k) + h \frac {a}2 \u0_{xx}(t_n, x_k) + h (-1)^n e^{\gamma^\alpha \Theta(t_n)} a \u1_x(t_n, x_k).
+\end{split}
+\end{align}
+Wenn wir nun nach den Ordnungen von $h$ sortieren, erhalten wir für $O(1)$ das Problem
+\begin{align}
+\u0_t(t_n, x_k) + a \u0_x(t_n, x_k) = \frac 2 \lambda (-1)^n e^{\gamma^\alpha \Theta(t_n)} \u1(t_n, x_k)
+\end{align}

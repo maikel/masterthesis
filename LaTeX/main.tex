@@ -1,22 +1,27 @@
-\documentclass[11pt%
+\documentclass[a4paper
+               %,11pt%
                %,draft%
                %,openright%
-               ,a4paper]{scrartcl}
+               ]{scrartcl}
 
 \usepackage[ngerman]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
 \usepackage{xcolor}
+
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
-\usepackage{libertine} \usepackage[libertine]{newtxmath}
+
+\numberwithin{equation}{section}
+
+% \usepackage{libertine} \usepackage[libertine]{newtxmath}
 \usepackage{sourcecodepro}
 \usepackage{listings}
 \usepackage{paralist}
 \usepackage{fancyref}
-
+\usepackage[margin=1in]{geometry}
 \usepackage{tikz}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.11}
@@ -37,6 +42,7 @@
 \begin{document}
 
 \input{variable_advektion}
+\input{wkb_ansatz}
 
 \input{FrontBackMatter/Bibliography}
 
