@@ -233,39 +233,39 @@ Wir setzen den Ansatz \eqref{eq:varadv:osz:ansatz} in \eqref{eq:varadv:verfahren
 Daher rechnen wir die Differenzen $v^{n+1}_i - v^n_i$ und $\lambda a (v^n_i - v^n_{i-1})$ aus und entwickeln bis zur zweiten Ordnung von $h$.
 Betrachte also
 {\small
-\begin{align*}
-\begin{split}
+\begin{align}
+\begin{split} \nonumber
 v^{n+1}_i - v^n_i &= \u0(t_{n+1}, x_i) - \u0(t_n, x_i)\\
 &\qquad + h \bigl( \u1(t_{n+1}, x_i) - \u1(t_n, x_i) \bigr)\\
 &\qquad + h \bigl( \tu1(n+1, i, t_{n+1}, x_i) - \tu1(n, i, t_n, x_i) \bigr)
 \end{split}\\
-\begin{split}
+\begin{split} \nonumber
 &= \lambda h \u0_t(t_n, x_i) + \frac {(\lambda h)^2} 2 \u0_{tt}(t_n, x_i)\\
 &\qquad + h \bigl( \lambda h \u1_t(t_n, x_i) \bigr)\\
 &\qquad + h \bigl( \tu1(n+1, i, t_n, x_i) - \tu1(n, i, t_n, x_i) + \lambda h \tu1_t(n+1, i, t_n, x_i) \bigr)\\
 &\qquad + O(h^3)
 \end{split}\\
-\begin{split}
+\begin{split} \label{eq:osz:diff1}
 &= \lambda h \cdot \Bigl( \u0_t(t_n, x_i) + \frac {\lambda h} 2 \u0_{tt}(t_n, x_i)\\
 &\qquad + h \u1_t(t_n, x_i) + \frac{1}{\lambda} \bigl( \tu1(n+1, i, t_n, x_i) - \tu1(n, i, t_n, x_i)  \bigr) + h \tu1_t(n+1, i, t_n, x_i)\\
 &\qquad + O(h^2) \Bigr).
 \end{split}
-\end{align*}
+\end{align}
 }
 und
 {\small
-\begin{align*}
-\begin{split}
+\begin{align}
+\begin{split}\nonumber
 \lambda a (v^n_{i} - v^n_{i-1}) &= \lambda a \cdot \Bigl( \u0(t_n, x_i) - \u0(t_n, x_{i-1})\\
 &\qquad + h \bigl( \u1(t_n, x_i) - \u1(t_n, x_{i-1}) \bigr)\\
 &\qquad +  h \bigl( \tu1(n, i, t_n, x_i) - \tu1(n, i-1, t_n, x_{i-1}) \bigr) \Bigr)
 \end{split}\\
-\begin{split}
+\begin{split} \label{eq:osz:diff2}
 &= \lambda h \cdot a  \Bigl( \u0_x(t_n, x_i) - \frac {h} 2 \u0_{xx}(t_n, x_i)\\
 &\qquad + h \u1_x(t_n, x_i) +  \tu1(n, i, t_n, x_i) - \tu1(n, i-1, t_n, x_i) + h \tu1_x(n, i-1, t_n, x_i)\\
 &\qquad + O(h^2) \Bigr)
 \end{split}
-\end{align*}
+\end{align}
 }
 Wenn wir dies nun in das Verfahren \eqref{eq:varadv:verfahren} einsetzen, erhalten wir in $O(1)$ die Gleichung
 \begin{align}\label{eq:osz:ord1}
@@ -276,12 +276,57 @@ Wenn wir dies nun in das Verfahren \eqref{eq:varadv:verfahren} einsetzen, erhalt
 \end{split}
 \end{align}
 Da wir von unserem Verfahren erwarten, dass es für sehr kleine $h$ die richtige Lösung von der PDE \eqref{eq:varadv:pde} annähert, leiten wir aus \eqref{eq:osz:ord1} ab, dass
-\begin{align}
+\begin{align}\label{eq:osz:u1bed}
 \tu1(n+1, i, t_n, x_i) - \tu1(n, i, t_n, x_i)
 &= - a \lambda \Bigl( \tu1(n, i, t_n, x_i) - \tu1(n, i-1, t_n, x_i) \Bigr)
 \end{align}
 gilt.
+Diese Gleichung zeigt, dass, wenn $\tu1$ stark im Ort oszilliert, dann auch in der Zeit.
+Die Gleichung \eqref{eq:osz:u1bed} motiviert für $\tu1$ Ansatz
+\begin{align} \label{eq:osz:u1ansatz}
+\tu1(n, i, t_n, x_i) = (1 - 2 a \lambda)^n (-1)^i \Psi(t_n, x_i),
+\end{align}
+für eine glatte und beschr"ankte Funktion $\Psi(t_n, x_i)$.
+Dieser Ansatz erfüllt die Bedingung \eqref{eq:osz:u1bed}, denn es gilt
+\begin{align*}
+\tu1(n+1, i, t_n, x_i) - \tu1(n, i, t_n, x_i)
+&= (1 - 2 a \lambda)^{n+1} (-1)^i \Psi(t_n, x_i) - (1 - 2 a \lambda)^n (-1)^i \Psi(t_n, x_i)\\
+&= (1 - 2 a \lambda)^n (-1)^i \Bigl( (1 - 2 a \lambda) \Psi(t_n, x_i) - \Psi(t_n, x_i) \Bigr)\\
+&= - 2 a \lambda (1 - 2 a \lambda)^n (-1)^i \Psi(t_n, x_i)
+\end{align*}
+und
+\begin{align*}
+- \lambda a \cdot \Bigl( \tu1(n, i, t_n, x_i) - \tu1(n, i-1, t_n, x_i) \Bigr)
+&= (1 - 2 a \lambda)^n (-1)^i \Psi(t_n, x_i) - (1 - 2 a \lambda)^n (-1)^{i-1} \Psi(t_n, x_i)\\
+&= (1 - 2 a \lambda)^n (-1)^i \Bigl( \Psi(t_n, x_i) - (-1) \cdot \Psi(t_n, x_i) \Bigr)\\
+&= - \lambda a (1 - 2 a \lambda)^n (-1)^i \Bigl( 2 \Psi(t_n, x_i) \Bigr)\\
+&= - 2 a \lambda (1 - 2 a \lambda)^n (-1)^i \Psi(t_n, x_i).
+\end{align*}
+Hier sei erw"ahnt, dass die Faktoren $(-1)^i$ und so $(1 - 2 \lambda a)^n$ gerade so bestimmt wurden, dass die Bedingung \eqref{eq:osz:u1bed} gilt.
+Dabei ist zu beobachten, dass der Term $1 - 2 \lambda a$ genau dann gr"o"ser als 1 ist, wenn $a \lambda > 1$ gilt.
+Folglich tr"agt der oszillatorische Anteil, $\tu1$, f"ur den Fall $\lambda a > 1$ exponentiell in $n$ zur Gitterfunktion bei und verschwindet ebenso schnell im Fall $\lambda a < 1$, was auch in den Fallbeispielen zu beobachten ist.
+Mit einem so bestimmtem $\tu1$ folgt für $\u0$ mit der Anfangsbedingung $\u0(0,x) = u_0(x)$ die L"osung $\u0(t,x) = u_0(x - at)$.
 
+F"ur $O(h)$ erhalten wir aus den Ergebnissen \eqref{eq:osz:diff1} und \eqref{eq:osz:diff2} die Gleichung
+\begin{align}
+\u1_t(t_n, x_i) + a \u1_x(t_n, x_i) &= \frac {a ( 1 - \lambda a )}2 \u0_{xx}(t_n, x_i)\\
+&\quad - \Bigl( \tu1_{t}(n+1, i, t_n, x_i) + \tu1_{x}(n, i-1, t_n, x_i) \Bigr).
+\end{align}
+und fordern
+\begin{align*}
+\tu1_{t}(n+1, i, t_n, x_i) + \tu1_{x}(n, i-1, t_n, x_i) = \frac {a ( 1 - \lambda a )}2 \u0_{xx}(t_n, x_i).
+\end{align*}
+Wenn wir nun den Ansatz \eqref{eq:osz:u1ansatz} einsetzen, erhalten wir f"ur $\Psi(t_n, x_i)$
+{\small
+\begin{align}
+\tu1_{t}(n+1, i, t_n, x_i) + \tu1_{x}(n, i-1, t_n, x_i)
+% &= (1 - 2 a \lambda)^{n+1} (-1)^i \Psi_t(t_n, x_i) + (1 - 2 a \lambda)^n (-1)^{i-1} \Psi_x(t_n, x_i)\\
+&= (1 - 2a \lambda)^n (-1)^i \Bigl( (1 - 2a \lambda) \Psi_t(t_n, x_i) - \Psi_x(t_n, x_i) \Bigr)
+\end{align}
+} und damit
+\begin{align}
+(1 - 2a \lambda) \Psi_t(t_n, x_i) - \Psi_x(t_n, x_i) = \frac {a (1 - \lambda a)}{2 (1 - 2a \lambda)^n (-1)^i} \u0_{xx}(t_n, x_i)
+\end{align}
 % Nachdem wir nach den Ordnungen von $h$ sortiert haben, führt uns das zu dem Gleichungssystem
 % \begin{align*}
 % \u0_t(t_n, x_i) + a(x_i) \u0_x(t_n, x_i) = 0, \qquad \u0(0, x_i) = u_0(x_i)
@@ -292,64 +337,64 @@ gilt.
 % & \quad + \tu2(t_n, i) - \tu2(t_n, i-1), \qquad \u1(0, x_i) = 0.
 % \end{align*}
 
-Ich würde gerne diesen Oszillatorischen Ansatz zunächst lokal für den Fall machen, dass $a(x) = a = 1+\delta$ derart ist, dass $a\lambda > 1$, also $a (1 - a\lambda) = - 2\eps$ für ein $\eps > 0$ gilt:
-\begin{align*}
-\u1_t(t_n, x_i) + a(x_i) \u1_x(t_n, x_i)
-&= - \eps \u0_{xx}(t_n,x_i) + \tu2(t_n, i) - \tu2(t_n, i-1), \qquad \u1(0, x_i) = 0.
-\end{align*}
-wobei $u^{(0)}(t_i, x_i)$ durch $u_0(x_i - a t_n)$ gegeben ist.
-Foglich wollen wir $\tu2$ so wählen, dass \[ \eps \partial^2_x u_0(x_i-at_n) = \tu2(t_n, i) - \tu2(t_n, i-1) \] für alle Gitterpunkte $i$ und Zeiten $t_n$ gilt.
-Schauen wir uns mal ein Beispiel dazu an und hoffen, dass wir etwas an Stellen mit großer Krümmung sehen:
-Ähnlich wie beim Fallbeispiel haben mir mit 
-\lstinputlisting[firstnumber=5, linerange={5-11}]{../Programme/sinus_const.m}
-und
-\lstinputlisting[firstnumber=17, linerange={17-35}]{../Programme/sinus_const.m}
-ein Beispiel gerechnet und kamen zu den folgenden Ergebnissen:
+% Ich würde gerne diesen Oszillatorischen Ansatz zunächst lokal für den Fall machen, dass $a(x) = a = 1+\delta$ derart ist, dass $a\lambda > 1$, also $a (1 - a\lambda) = - 2\eps$ für ein $\eps > 0$ gilt:
+% \begin{align*}
+% \u1_t(t_n, x_i) + a(x_i) \u1_x(t_n, x_i)
+% &= - \eps \u0_{xx}(t_n,x_i) + \tu2(t_n, i) - \tu2(t_n, i-1), \qquad \u1(0, x_i) = 0.
+% \end{align*}
+% wobei $u^{(0)}(t_i, x_i)$ durch $u_0(x_i - a t_n)$ gegeben ist.
+% Foglich wollen wir $\tu2$ so wählen, dass \[ \eps \partial^2_x u_0(x_i-at_n) = \tu2(t_n, i) - \tu2(t_n, i-1) \] für alle Gitterpunkte $i$ und Zeiten $t_n$ gilt.
+% Schauen wir uns mal ein Beispiel dazu an und hoffen, dass wir etwas an Stellen mit großer Krümmung sehen:
+% Ähnlich wie beim Fallbeispiel haben mir mit 
+% \lstinputlisting[firstnumber=5, linerange={5-11}]{../Programme/sinus_const.m}
+% und
+% \lstinputlisting[firstnumber=17, linerange={17-35}]{../Programme/sinus_const.m}
+% ein Beispiel gerechnet und kamen zu den folgenden Ergebnissen:
 
-\hspace{-1cm}
-\begin{tikzpicture}
-% \pgfplotsset{every axis/.append style={line width=1pt}}
-\begin{axis}[
-    title = {$\lambda a_i$ und $v^{5}_i$},
-]
-\addplot[dashed] table {../Programme/output/a_sin_const.dat};
-\addplot[myblue] table [y index= 6] {../Programme/output/u_sin_const.dat};
+% \hspace{-1cm}
+% \begin{tikzpicture}
+% % \pgfplotsset{every axis/.append style={line width=1pt}}
+% \begin{axis}[
+%     title = {$\lambda a_i$ und $v^{5}_i$},
+% ]
+% \addplot[dashed] table {../Programme/output/a_sin_const.dat};
+% \addplot[myblue] table [y index= 6] {../Programme/output/u_sin_const.dat};
 
-\legend{$\lambda a_i$,$v^{5}_i$}
-\end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}
-% \pgfplotsset{every axis/.append style={line width=1pt}}
-\begin{axis}[
-    title = {$\lambda a_i$ und $v^{105}_i$},
-]
-\addplot[dashed] table {../Programme/output/a_sin_const.dat};
-\addplot[myblue] table [y index= 106] {../Programme/output/u_sin_const.dat};
+% \legend{$\lambda a_i$,$v^{5}_i$}
+% \end{axis}
+% \end{tikzpicture}
+% \begin{tikzpicture}
+% % \pgfplotsset{every axis/.append style={line width=1pt}}
+% \begin{axis}[
+%     title = {$\lambda a_i$ und $v^{105}_i$},
+% ]
+% \addplot[dashed] table {../Programme/output/a_sin_const.dat};
+% \addplot[myblue] table [y index= 106] {../Programme/output/u_sin_const.dat};
 
-\legend{$\lambda a_i$,$v^{105}_i$}
-\end{axis}
-\end{tikzpicture}
+% \legend{$\lambda a_i$,$v^{105}_i$}
+% \end{axis}
+% \end{tikzpicture}
 
-\hspace{-1cm}
-\begin{tikzpicture}
-% \pgfplotsset{every axis/.append style={line width=1pt}}
-\begin{axis}[
-    title = {$\lambda a_i$ und $v^{113}_i$},
-]
-\addplot[dashed] table {../Programme/output/a_sin_const.dat};
-\addplot[myblue] table [y index= 114] {../Programme/output/u_sin_const.dat};
+% \hspace{-1cm}
+% \begin{tikzpicture}
+% % \pgfplotsset{every axis/.append style={line width=1pt}}
+% \begin{axis}[
+%     title = {$\lambda a_i$ und $v^{113}_i$},
+% ]
+% \addplot[dashed] table {../Programme/output/a_sin_const.dat};
+% \addplot[myblue] table [y index= 114] {../Programme/output/u_sin_const.dat};
 
-\legend{$\lambda a_i$,$v^{113}_i$}
-\end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}
-% \pgfplotsset{every axis/.append style={line width=1pt}}
-\begin{axis}[
-    title = {$\lambda a_i$ und $v^{124}_i$},
-]
-\addplot[dashed] table {../Programme/output/a_sin_const.dat};
-\addplot[myblue] table [y index= 125] {../Programme/output/u_sin_const.dat};
+% \legend{$\lambda a_i$,$v^{113}_i$}
+% \end{axis}
+% \end{tikzpicture}
+% \begin{tikzpicture}
+% % \pgfplotsset{every axis/.append style={line width=1pt}}
+% \begin{axis}[
+%     title = {$\lambda a_i$ und $v^{124}_i$},
+% ]
+% \addplot[dashed] table {../Programme/output/a_sin_const.dat};
+% \addplot[myblue] table [y index= 125] {../Programme/output/u_sin_const.dat};
 
-\legend{$\lambda a_i$,$v^{124}_i$}
-\end{axis}
-\end{tikzpicture}
+% \legend{$\lambda a_i$,$v^{124}_i$}
+% \end{axis}
+% \end{tikzpicture}
