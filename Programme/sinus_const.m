@@ -18,18 +18,18 @@ end
 x0 = [-2,2];
 
 % step sizes
-dx  = 0.01;
-cfl = 0.9;
+dx  = 0.001;
+cfl = 1.1;
 dt  = cfl*dx;
 
 % how many time steps to be done
-N   = 1000;
+N   = 300;
 
 % space vector
 x = x0(1):dx:x0(2)-dx;
 
 % advection velocity
-a = velocity_const(x, 0.3);
+a = velocity_const(x, 0);
 
 % initial values
 u0 = 0.8 * initial_value_sin_function(x, pi);
