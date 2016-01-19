@@ -20,6 +20,13 @@ all: Masterarbeit.pdf
 %.tex: %.dat
 		./dat2tex $< > $@
 
+data/V_sinus_eps_0.1_h_0.01.dat:
+		octave advektion/beispiel.m
+
+advektion.tex: data/V_sinus_eps_0.1_h_0.01.dat
+
+main.tex: advektion.tex
+
 # MAIN LATEXMK RULE
 
 # -pdf tells latexmk to generate PDF directly (instead of DVI).
@@ -30,9 +37,14 @@ all: Masterarbeit.pdf
 # missing file reference and interactively asking you for an alternative.
 
 Masterarbeit.pdf: main.tex
-		latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" -use-make main.tex
+		latexmk -pdf -pdflatex="pdflatex -shell-escape -interaction=nonstopmode" -use-make main.tex
 
 clean:
 		latexmk -CA
-		rm main.run.xml
-		rm main.bbl
+		rm -f main.run.xml
+		rm -f main.bbl
+		rm -f data/*.dat
+		rm -f figures/*
+		rm -f main.auxlock
+		rm -f main.maf 
+		rm -f main.mtc* 
