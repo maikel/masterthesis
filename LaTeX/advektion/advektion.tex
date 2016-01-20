@@ -53,153 +53,7 @@ Wir haben die Beispiele durch folgendes Skript in \emph{GNU Octave} umgesetzt
 und untersuchen, was für kleine $\eps$ und kleine $h$ passiert.\\
 
 \lstinputlisting[firstnumber=35, firstline=35]{advektion/beispiel.m}
-
-\begin{figure}
-\centering
-% \begin{tikzpicture}[scale=0.58]
-% \begin{axis}[
-%     height = 0.6\textwidth,
-%     width = 0.6\textwidth,
-%     title = {$n = 120$},
-%     xtick = {-2,-1,...,2},
-%     grid  = both,
-% ]
-% \addplot[myblue] table [y index= 1] {data/V_sinus_eps_0.1_h_0.01.dat};
-% \end{axis}
-% \end{tikzpicture}
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 185$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 2] {data/V_sinus_eps_0.1_h_0.01.dat};
-\end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 200$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 3] {data/V_sinus_eps_0.1_h_0.01.dat};
-\end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 220$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 4] {data/V_sinus_eps_0.1_h_0.01.dat};
-\end{axis}
-\end{tikzpicture}
-\caption{Beispiel für $\eps = 10^{-1}$ und $h=10^{-2}$}
-\label{fig:adv:e-1h-2}
-\end{figure}
-
-\begin{figure}
-\centering
-% \begin{tikzpicture}[scale=0.58]
-% \begin{axis}[
-%     height = 0.6\textwidth,
-%     width = 0.6\textwidth,
-%     title = {$n = 120$},
-%     xtick = {-2,-1,...,2},
-%     grid  = both,
-% ]
-% \addplot[myblue] table [y index= 1] {data/V_sinus_eps_0.1_h_0.001.dat};
-% \end{axis}
-% \end{tikzpicture}
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 185$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 2] {data/V_sinus_eps_0.1_h_0.001.dat};
-\end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 200$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 3] {data/V_sinus_eps_0.1_h_0.001.dat};
-\end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 220$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 4] {data/V_sinus_eps_0.1_h_0.001.dat};
-\end{axis}
-\end{tikzpicture}
-\caption{Beispiel für $\eps = 10^{-1}$ und $h=10^{-3}$}
-\label{fig:adv:e-1h-3}
-\end{figure}
-
-\begin{figure}
-\centering
-% \begin{tikzpicture}[scale=0.58]
-% \begin{axis}[
-%     height = 0.6\textwidth,
-%     width = 0.6\textwidth,
-%     title = {$n = 240$},
-%     xtick = {-2,-1,...,2},
-%     grid  = both,
-% ]
-% \addplot[myblue] table [y index= 1] {data/V_sinus_eps_0.05_h_0.01.dat};
-% \end{axis}
-% \end{tikzpicture}
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 370$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 2] {data/V_sinus_eps_0.05_h_0.01.dat};
-\end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 400$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 3] {data/V_sinus_eps_0.05_h_0.01.dat};
-\end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 440$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 4] {data/V_sinus_eps_0.05_h_0.01.dat};
-\end{axis}
-\end{tikzpicture}
+\input{advektion/beispiel_figures}
 
 \caption{Beispiel für $\eps = 5\cdot 10^{-2}$ und $h=10^{-2}$}
 \label{fig:adv:e5-2h-2}
@@ -295,3 +149,20 @@ Setzt man \eqref{eq:adv:osz:diff1} und \eqref{eq:adv:osz:diff2} in \eqref{eq:adv
 &\qquad - \bigl(u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)
 \end{split}
 \end{align}
+Hieraus schließen wir nun, dass die rechte Seite dieser Gleichung \eqref{eq:adv:osz:o1} verschwinden muss,
+indem wir folgendes Lemma beweisen.
+
+\begin{lemma}
+Sei $f\colon \N \times \R^+_0 \to \R$ eine Abbildung, so dass $f(n, \,\cdot\,)$ für festes $n \in \N$ differenzierbar und beschränkt ist.
+Sei weiter $G_h \subset \R^+_0$ ein äquidistantes Gitter mit $G_h(n) = t^h_n = n h$, für $n \in \N$.
+Wenn für alle $h > 0$ und somit alle Gitter $G_h$ ein $F \in C^1\left(\R^+_0 \right)$ mit
+\[ F(t^h_n) = f(n+1, t^h_n) - f(n, t^h_n) \]
+existiert, so folgt $F = 0$.
+\end{lemma}
+\begin{proof}
+Es gilt $F(t^h_{n+1}) = F(t^h_n) + h F'(t^h_n)$ und somit
+\begin{align}
+h F'(t^h_n) &= f(n+2, t^h_{n+1}) - f(n+1, t^h_{n+1}) - f(n+1, t^h_n) + f(n, t^h_n)\\
+&= f(n+2, t^h_n) - f(n+1, t^h_n)
+\end{align}
+\end{proof}
