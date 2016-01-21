@@ -21,7 +21,7 @@ function V = beispiel(epsilon, h, N)
     % grid ratios
     lambda = 1 + epsilon;
     dx  = h;
-    dt  = lambda*h;
+
     % space vector
     x = x0(1)+dx:dx:x0(2);
     % initial values
@@ -55,3 +55,11 @@ N       = 440;
 V = beispiel(epsilon, h, N);
 V = V(:,[1 240 370 400 440]);
 save 'data/V_sinus_eps_0.05_h_0.01.dat' V
+
+epsilon = 5e-2;
+h       = 1e-3;
+N       = 440;
+
+V = beispiel(epsilon, h, N);
+V = V(:,[1 240 370 400 440]);
+save 'data/V_sinus_eps_0.05_h_0.001.dat' V

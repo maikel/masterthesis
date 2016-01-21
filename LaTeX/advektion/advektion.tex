@@ -5,7 +5,8 @@ Wir betrachten die Differentialgleichung der eindimensionalen Advektion
 \partial_t u(t, x) + \partial_x u(t, x) = 0, \quad u(0, x) = U(x).
 \end{align}
 Auf diese wohlbekannte, partielle Differentialgleichung wenden wir das Upwindverfahren mit dem Gitter $G_h(n,i) = (t_n, x_i) = h \cdot (\lambda n, i)$ an.
-Dieses Gitter ist rechteckig, falls $\lambda \neq 1$ gilt und das Verfahren ist durch die Gleichung
+Wenn wir also von Punkten $(t_n, x_i)$ in der Raumzeit sprechen, so sind diese eigentlich noch von Gitterweite $h$ abhängig. 
+Dieses Gitter ist nicht quadratisch, falls $\lambda \neq 1$ gilt und das Verfahren ist durch die Gleichung
 \begin{align}\label{eq:adv:scheme_rechnung}
 \frac {v^{n+1}_i - v^n_i} {\lambda h} + \frac {v^n_i - v^n_{i-1}} h = 0
 \end{align}
@@ -15,53 +16,47 @@ v^{n+1}_i = v^n_i - \lambda (v^n_i - v^n_{i-1})
 \end{align}
 bestimmt.
 Es ist bereits bekannt, dass das Verfahren f"ur $\lambda \leq 1$ stabil und f"ur $\lambda = 1$ sogar exakt ist.
-Wir versuchen hier den instabilen Fall $\lambda > 1$ zu verstehen und nehmen in diesem Kapitel daher $\lambda = 1 + \eps$ f"ur ein $\eps > 0$ an.
+Wir versuchen hier den instabilen Fall $\lambda > 1$ besser zu verstehen und nehmen in diesem Kapitel daher $\lambda = 1 + \eps$ f"ur ein $\eps > 0$ an.
 
-\subsection {Analytische L"osung}
+% \subsection {Analytische L"osung}
 
-F"ur die kommende Asymptotik ist es sinnvoll, die echte Lösung von \eqref{eq:adv:pde} zu kennen.
-Die Lösung lässt sich analytisch mithilfe der Methode der Charakteristiken bestimmen.
-Sei $u$ eine Lösung von \eqref{eq:adv:pde}.
-Ferner sei $\phi\colon \tau \mapsto (\tau, x(\tau))$ eine Charakteristik mit $\phi(0) = (0, x_0)$.
-$\phi$ ist eine Raumzeit-Kurve auf welcher $u$ konstant ist.
-Demnach gilt nach der Kettenregel
-\[ 0 = \frac {\dd}{\dd \tau} u(\phi(\tau)) = \partial_t u(\phi(\tau))  + \frac {\dd x(\tau)} {\dd \tau} \partial_x u(\phi(\tau)) \]
-und wegen \eqref{eq:adv:pde} muss $\dot x(\tau) = 1$ gelten.
-Das impliziert mit $x(0) = x_0$ die Lösung $x(t) = x_0 + t$.
-Da $u(0, x_0) = u_0(x_0)$ und $x_0 = x(t) - t$ für alle $t > 0$ gilt, folgt insgesamt
-\begin{align}\label{eq:adv:solution}
-u(t, x) = u(0, x - t) = u_0(x - t).
-\end{align}
-Die wahre Lösung transportiert also nur die Anfangsdaten in die positive Raumrichtung.
+% F"ur die kommende Asymptotik ist es sinnvoll, die echte Lösung von \eqref{eq:adv:pde} zu kennen.
+% Die Lösung lässt sich analytisch mithilfe der Methode der Charakteristiken bestimmen.
+% Sei $u$ eine Lösung von \eqref{eq:adv:pde}.
+% Ferner sei $\phi\colon \tau \mapsto (\tau, x(\tau))$ eine Charakteristik mit $\phi(0) = (0, x_0)$.
+% $\phi$ ist eine Raumzeit-Kurve auf welcher $u$ konstant ist.
+% Demnach gilt nach der Kettenregel
+% \[ 0 = \frac {\dd}{\dd \tau} u(\phi(\tau)) = \partial_t u(\phi(\tau))  + \frac {\dd x(\tau)} {\dd \tau} \partial_x u(\phi(\tau)) \]
+% und wegen \eqref{eq:adv:pde} muss $\dot x(\tau) = 1$ gelten.
+% Das impliziert mit $x(0) = x_0$ die Lösung $x(t) = x_0 + t$.
+% Da $u(0, x_0) = u_0(x_0)$ und $x_0 = x(t) - t$ für alle $t > 0$ gilt, folgt insgesamt
+% \begin{align}\label{eq:adv:solution}
+% u(t, x) = u(0, x - t) = u_0(x - t).
+% \end{align}
+% Die wahre Lösung transportiert also nur die Anfangsdaten in die positive Raumrichtung.
 
-Wenn wir eine Lösung $v$ von \eqref{eq:adv:pde} haben, so können wir Anfangswertproblem
-\begin{align}\label{eq:adv:pdei}
-\partial u(t,x) + \partial_x u(t,x) = v(t,x), \quad u(0,x) = 0
-\end{align}
-lösen, indem wir einfach $u(t,x) = t v(t,x)$ setzen. Denn dann gilt
-{\small
-\[ \partial_t u(t,x) = v(t,x) + t \partial_t v(t,x) = v(t,x) - t \partial_x v(t,x) = v(t,x) - \partial_x \bigl( t v(t,x) \bigr) = v(t,x) - \partial_x u(t,x), \]
-}
-womit zeigt ist, dass $u$ die Gleichung \eqref{eq:adv:pdei} erfüllt.
+% Wenn wir eine Lösung $v$ von \eqref{eq:adv:pde} haben, so können wir Anfangswertproblem
+% \begin{align}\label{eq:adv:pdei}
+% \partial u(t,x) + \partial_x u(t,x) = v(t,x), \quad u(0,x) = 0
+% \end{align}
+% lösen, indem wir einfach $u(t,x) = t v(t,x)$ setzen. Denn dann gilt
+% {\small
+% \[ \partial_t u(t,x) = v(t,x) + t \partial_t v(t,x) = v(t,x) - t \partial_x v(t,x) = v(t,x) - \partial_x \bigl( t v(t,x) \bigr) = v(t,x) - \partial_x u(t,x), \]
+% }
+% womit zeigt ist, dass $u$ die Gleichung \eqref{eq:adv:pdei} erfüllt.
 
 
 \subsection{Beispiele}
 
 Wir schauen uns die Ergebnisse des Verfahrens für die Anfangswerte $u_0(x) = \sin(\pi x)$ und $\lambda = 1 + \eps$ für verschiedene $\eps$ an.
-Wir haben die Beispiele durch folgendes Skript in \emph{GNU Octave} umgesetzt
+Wir haben die Beispiele durch folgendes Skript in \emph{GNU Octave} umgesetzt und untersuchen, was für kleine $\eps$ und kleine $h$ passiert.
 \lstinputlisting[linerange={1-33}]{advektion/beispiel.m}
-und untersuchen, was für kleine $\eps$ und kleine $h$ passiert.\\
-
-\lstinputlisting[firstnumber=35, firstline=35]{advektion/beispiel.m}
+% \lstinputlisting[firstnumber=35, firstline=35]{advektion/beispiel.m}
 \input{advektion/beispiel_figures}
 
-\caption{Beispiel für $\eps = 5\cdot 10^{-2}$ und $h=10^{-2}$}
-\label{fig:adv:e5-2h-2}
-\end{figure}
-
-Vergleicht man nun die Plots auf Abbildung~\ref{fig:adv:e-1h-2} und mit den Plots auf Abbildung~\ref{fig:adv:e-1h-3}, so erkennt man, dass die Amplitude der Oszillation scheinbar unabh"angig von $h$ mit der Anzahl der Iterationen $n$ w"achst.
-Halbiert man jedoch den Wert für $\eps$, so halbiert sich auch die Rate, um die die Amplitude wächst.
-Wir hoffen dieses Verhalten in unseren Approximationen wiederzufinden.
+Vergleicht man nun die Plots in Abbildung~\ref{fig:adv:e-1h-2} und mit den Plots auf Abbildung~\ref{fig:adv:e-1h-3}, so erkennt man, dass die Amplitude der Oszillation scheinbar unabh"angig von $h$ mit der Anzahl der Iterationen $n$ w"achst.
+Halbiert man jedoch den Wert für $\eps$, so ändert sich auch die Rate, um die die Amplitude wächst.
+Wir hoffen dieses Verhalten in unseren Approximationen wiederzufinden und Abschätzungen für die Amplitude zu finden.
 
 % \subsection{Regul"arer Ansatz}
 
@@ -101,20 +96,18 @@ Wir hoffen dieses Verhalten in unseren Approximationen wiederzufinden.
 Wir führen hier Zeit-Raum-Koordinaten auf einer kurzen Skala ein.
 Genau genommen machen wir unsere Ansatzfunktionen zusätzlich von den diskreten Gitterkoordinaten $(n,i)$ abhängig.
 Es gilt zwar $n = \frac {t_n} {\lambda h}$ und $i = \frac {x_i}{h}$, jedoch soll unsere Annahme sein, dass der Ansatz unstetig in $n$ und $i$ ist.
-Möchte man jedoch einen Punkt $(t,x)$ in der Raumzeit approximieren, so gilt für $h \to 0$ jedoch immer $n,i \to \infty$ und dies liefert uns zusätzliche Bedingungen.
-Da unsere Gleichung linear ist, nehmen wir an, dass wir die Gitterfunktion als Summe einer Lösung und kleinen Oszillationen schreiben können.
-Folglich lautet unser Ansatz dieses mal
-\begin{align}
+Möchte man jedoch für $h \to 0$ einen Punkt $(t,x)$ in der Raumzeit approximieren, so gilt immer $n,i \to \infty$ und dies könnte uns zusätzliche Bedingungen liefern.
+% Da unsere Gleichung linear ist, nehmen wir an, dass wir die Gitterfunktion als Summe einer Lösung und kleinen Oszillationen schreiben können.
+Unser Ansatz lautet dieses mal
+\begin{align}\label{eq:adv:osz:ansatz}
 v^n_i = u_0(t_n, x_i) + h u_1(n, i, t_n, x_i) + h^2 u_2(n, i, t_n, x_i) + o(h^2)
 \end{align}
 und wir möchten hier betonen, dass wir, wie immer, davon ausgehen, dass die Entwicklung asymptotisch geordnet ist.
-Das heißt z.\,B., dass $h u_1 \in o(u_0)$ für $h \to 0$ gilt.
-Dies lässt sich wiederum zu
+Das heißt z.\,B., dass $h u_1 \in o(u_0)$ für $h \to 0$ gilt und das führt zur allgemein bekannten Sublinear-Growth Bedingung
 \begin{align}
-\lim_{h \to 0} \: h \frac{u_1(n, i, t_n, x_i)}{u_0(t_n, x_i)} = 0
+\lim_{h \to 0} \: h \frac{u_1(n, i, t_n, x_i)}{u_0(t_n, x_i)} = 0.
 \end{align}
-umschreiben.
-Zunächst fällt auf, dass wir hier Terme bis $h^2$ entwickeln.
+Zunächst fällt auf, dass wir im Ansatz \eqref{eq:adv:osz:ansatz} Terme bis $h^2$ entwickeln.
 Durch die kurze Zeit- und Ortskala wirken Terme in einer Ordnung niedriger.
 Daher werden Terme von $u_2$ Gleichungen in $O(h)$ beeinflussen und müssen betrachtet werden.
 Wir rechnen hier nun die einzelnen Summanden von \eqref{eq:adv:scheme_rechnung} aus:
@@ -142,27 +135,57 @@ Wir rechnen hier nun die einzelnen Summanden von \eqref{eq:adv:scheme_rechnung} 
 \end{split}
 \end{align}
 }
-Setzt man \eqref{eq:adv:osz:diff1} und \eqref{eq:adv:osz:diff2} in \eqref{eq:adv:scheme_rechnung} ein, liefert uns dies in $O(1)$ bei festem $h$ die Gleichung
+Setzt man \eqref{eq:adv:osz:diff1} und \eqref{eq:adv:osz:diff2} in \eqref{eq:adv:scheme_rechnung} ein, liefert uns dies in $O(1)$ die Gleichung
 \begin{align}\label{eq:adv:osz:o1}
 \begin{split}
 \partial_t u_0(t_n, x_i) + \partial_x u_0(t_n, x_i) &= - \frac 1 \lambda \bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i, t_n, x_i) \bigr)\\
 &\qquad - \bigl(u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)
 \end{split}
 \end{align}
-Hieraus schließen wir nun, dass die rechte Seite dieser Gleichung \eqref{eq:adv:osz:o1} verschwinden muss,
-indem wir folgendes Lemma beweisen.
+Diese Gleichung gilt nun für alle $h > 0$ und alle $n, i \in \N$.
+Hieraus schließen wir nun, dass die rechte Seite der Gleichung \eqref{eq:adv:osz:o1} verschwinden muss, doch müssen wir zunächst einige Lemmata beweisen.
 
-\begin{lemma}
-Sei $f\colon \N \times \R^+_0 \to \R$ eine Abbildung, so dass $f(n, \,\cdot\,)$ für festes $n \in \N$ differenzierbar und beschränkt ist.
+\begin{lemma}[Konstanz für eine Dimension] \label{lem:adv:konstant1}
+Sei $f\colon \N \times \R^+_0 \to \R$ eine Abbildung.
 Sei weiter $G_h \subset \R^+_0$ ein äquidistantes Gitter mit $G_h(n) = t^h_n = n h$, für $n \in \N$.
-Wenn für alle $h > 0$ und somit alle Gitter $G_h$ ein $F \in C^1\left(\R^+_0 \right)$ mit
-\[ F(t^h_n) = f(n+1, t^h_n) - f(n, t^h_n) \]
-existiert, so folgt $F = 0$.
-\end{lemma}
-\begin{proof}
-Es gilt $F(t^h_{n+1}) = F(t^h_n) + h F'(t^h_n)$ und somit
-\begin{align}
-h F'(t^h_n) &= f(n+2, t^h_{n+1}) - f(n+1, t^h_{n+1}) - f(n+1, t^h_n) + f(n, t^h_n)\\
-&= f(n+2, t^h_n) - f(n+1, t^h_n)
+Wenn ein $F\colon \Rp \to \R$ für alle $h > 0$ und somit alle Gitter $G_h$ mit
+\begin{align}\label{eq:lemma:const1d:voraussetzung}
+F(t^h_n) = f(n, t^h_n) \qquad \text{für alle $n \in \N$}
 \end{align}
+existiert, dann gilt für alle $t \in \Rp$ und alle $n \in \N$
+\[ F(t) = f(n, t). \]
+\end{lemma}
+Der Beweis dieses Lemmas ist denkbar einfach. Die Existenz eines solchen $F$ ist wie eine Gleichmäßigkeitsbedingung über alle möglichen Gitter.
+Zu gegebenen $t \in \Rp$ wähle man sich einfach die richtige Gitterweite $h > 0$.
+\begin{proof}
+Sei $F\colon \Rp \to \R$ gegeben und sei $t \in \Rp$ beliebig.
+Wähle $h = \frac{t}{n}$, dann gilt $t^h_n = nh = n \frac{t}{n} = t$.
+Da \eqref{eq:lemma:const1d:voraussetzung} für alle $h > 0$ gilt, folgt hiermit 
+\[ F(t) = F(t^h_n) = f(n, t^h_n) = f(n, t). \qedhere \]
+\end{proof}
+
+Das Lemma~\ref{lem:adv:konstant1} bedeutet, dass $f$, oder die Folge $f_n$, in solchen Fällen unabhängig von, bzw. konstant in $n \in \N$ ist.
+Wir wollen dies auf unseren Fall übertragen und beweisen nun das zweidimensionale Analogon, 
+
+\begin{lemma}[Konstanz auf der Diagonalen]
+Sei $f\colon (\N \times \Z) \times (\Rp \times \R) \to \R$ eine Abbildung.
+Sei weiter\, $G_h \subset \Rp \times \R$ ein äquidistantes Gitter mit\, $G_h(n,i) = (t^h_n, x^h_i) = h \cdot (\lambda n, i)$, für $n \in \N$.
+Wenn ein $F\colon \Rp \times \R \to \R$ für alle $h > 0$ und somit alle Gitter $G_h$ mit
+\begin{align}\label{eq:lemma:diag:voraussetzung}
+F(t^h_n, x^h_i) = f(n, i, t^h_n, x^h_i) \qquad \text{für alle $(n,i) \in \N \times \Z$}
+\end{align}
+existiert, dann gilt für alle $(t, x) \in \Rp \times \Rp$ und alle $n \in \N$
+\begin{align}\label{eq:lemma:diag:aussage}
+F(t, x) = f(n, n, t, x) + \frac K n D_x f(n, n, t, x) + o(\frac 1 n)
+\end{align}
+\end{lemma}
+Der wichtigste Unterschied zu Lemma~\ref{lem:adv:konstant1} besteht darin, dass wir nur noch auf der Diagonalen des Raumzeit-Gitters Aussagen über alle $n$ gleichzeitig treffen können.
+% Diese kommt daher, dass die Punkte $(t^h_n, x^h_i)$ in unserem Gitter immer in einem rationalem Verhältnis stehen.
+Dies kommt daher, weil wir in $h$ nur eine Variable haben, mit der wir unser äquidistantes Gitter variieren können.
+% Daher brauchen wir ein Grenzwertargument für $h \to 0$, um Aussagen über alle Punkte $(t,x)$ in der Raumzeit zu treffen.
+\begin{proof}
+Sei also $F\colon \Rp \times \R \to \R$ wie in \eqref{eq:lemma:diag:voraussetzung} gegeben.
+Wir beweisen, dass sowohl $(t,0)$ als auch $(0,x)$ Elemente eines Gitters $G_h$ sind.
+Damit folgt dann auch $(t,x) \in G_h$.
+Setze $h = \frac {x - \lambda t}{n}$. Dann gilt $x^n_h = x^1_h = n h$
 \end{proof}
