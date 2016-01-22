@@ -167,25 +167,32 @@ Da \eqref{eq:lemma:const1d:voraussetzung} für alle $h > 0$ gilt, folgt hiermit
 Das Lemma~\ref{lem:adv:konstant1} bedeutet, dass $f$, oder die Folge $f_n$, in solchen Fällen unabhängig von, bzw. konstant in $n \in \N$ ist.
 Wir wollen dies auf unseren Fall übertragen und beweisen nun das zweidimensionale Analogon, 
 
-\begin{lemma}[Konstanz auf der Diagonalen]
+\begin{lemma}[Punktweise Kovergenz in der Raumzeit]
 Sei $f\colon (\N \times \Z) \times (\Rp \times \R) \to \R$ eine Abbildung.
 Sei weiter\, $G_h \subset \Rp \times \R$ ein äquidistantes Gitter mit\, $G_h(n,i) = (t^h_n, x^h_i) = h \cdot (\lambda n, i)$, für $n \in \N$.
 Wenn ein $F\colon \Rp \times \R \to \R$ für alle $h > 0$ und somit alle Gitter $G_h$ mit
 \begin{align}\label{eq:lemma:diag:voraussetzung}
 F(t^h_n, x^h_i) = f(n, i, t^h_n, x^h_i) \qquad \text{für alle $(n,i) \in \N \times \Z$}
 \end{align}
-existiert, dann gilt für alle $(t, x) \in \Rp \times \Rp$ und alle $n \in \N$
+existiert, dann gilt für alle $(t, x) \in \Rp \times \R$, dass für alle $n \in \N$ ein $i(n) \in \Z$ existiert mit
 \begin{align}\label{eq:lemma:diag:aussage}
-F(t, x) = f(n, n, t, x) + \frac K n D_x f(n, n, t, x) + o(\frac 1 n)
+\abs{F(t, x) - f(n, i(n), t, x)} \leq \frac{t}{\lambda n}
 \end{align}
 \end{lemma}
-Der wichtigste Unterschied zu Lemma~\ref{lem:adv:konstant1} besteht darin, dass wir nur noch auf der Diagonalen des Raumzeit-Gitters Aussagen über alle $n$ gleichzeitig treffen können.
-% Diese kommt daher, dass die Punkte $(t^h_n, x^h_i)$ in unserem Gitter immer in einem rationalem Verhältnis stehen.
-Dies kommt daher, weil wir in $h$ nur eine Variable haben, mit der wir unser äquidistantes Gitter variieren können.
-% Daher brauchen wir ein Grenzwertargument für $h \to 0$, um Aussagen über alle Punkte $(t,x)$ in der Raumzeit zu treffen.
 \begin{proof}
-Sei also $F\colon \Rp \times \R \to \R$ wie in \eqref{eq:lemma:diag:voraussetzung} gegeben.
-Wir beweisen, dass sowohl $(t,0)$ als auch $(0,x)$ Elemente eines Gitters $G_h$ sind.
-Damit folgt dann auch $(t,x) \in G_h$.
-Setze $h = \frac {x - \lambda t}{n}$. Dann gilt $x^n_h = x^1_h = n h$
+Wie in Lemma~\ref{lem:adv:konstant1} setzen wir $h = \frac {t}{\lambda n}$.
+Dann gilt $t_n = \lambda n h = t$ und $x_i = i h$ für $i \in \Z$.
+O.\,B.\,d.\,A. gelte $x > 0$.
+Dann gibt es ein kleinstes $i(n) = i \in \N$, für das $x_{i-1} < x \leq x_i$ gilt.
+Dies impliziert $\abs{x - x_i} < h$ und wegen $t_n = t$ folgt sogar
+\[ \norm{(t,x) - (t_n, x_i)} = \abs{x - x_i} < h. \]
+Weil $f$ und $F$ differenzierbar in $x$ sind, folgt somit
+\[ f(n,i, t, x) - f(n, i, t_n, x_i)} \leq \frac h 2 f_x(n, i, t, x) + o(h) \]
+und
+\[ F(t, x) - F(t_n, x_i) \leq \frac h 2 F_x(t, x) + o(h). \]
+Zusammen ergibt das
+\begin{align}
+\abs{F(t,x) - f(n, i(n), t, x)} &\leq \abs{F(t, x) - F(t_n, x_i)} + \abs{f(n,i, t, x) - f(n, i, t_n, x_i)}\\
+&\leq \frac h 2 + \frac h 2 = h = \frac t {\lambda n}. \qedhere
+\end{align}
 \end{proof}
