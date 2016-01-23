@@ -176,7 +176,7 @@ F(t^h_n, x^h_i) = f(n, i, t^h_n, x^h_i) \qquad \text{für alle $(n,i) \in \N \ti
 \end{align}
 existiert, dann gilt für alle $(t, x) \in \Rp \times \R$, dass für alle $n \in \N$ ein $i(n) \in \Z$ existiert mit
 \begin{align}\label{eq:lemma:diag:aussage}
-\abs{F(t, x) - f(n, i(n), t, x)} \leq \frac{t}{\lambda n}
+\abs{F(t, x) - f(n, i(n), t, x)} \leq \frac {t}{\lambda n} \bigl(f_x(n, i, t, x) + F_x(t, x) \bigr)
 \end{align}
 \end{lemma}
 \begin{proof}
@@ -184,15 +184,18 @@ Wie in Lemma~\ref{lem:adv:konstant1} setzen wir $h = \frac {t}{\lambda n}$.
 Dann gilt $t_n = \lambda n h = t$ und $x_i = i h$ für $i \in \Z$.
 O.\,B.\,d.\,A. gelte $x > 0$.
 Dann gibt es ein kleinstes $i(n) = i \in \N$, für das $x_{i-1} < x \leq x_i$ gilt.
-Dies impliziert $\abs{x - x_i} < h$ und wegen $t_n = t$ folgt sogar
+Dies impliziert $x_i - x < h$ und wegen $t_n = t$ folgt auch
 \[ \norm{(t,x) - (t_n, x_i)} = \abs{x - x_i} < h. \]
 Weil $f$ und $F$ differenzierbar in $x$ sind, folgt somit
-\[ f(n,i, t, x) - f(n, i, t_n, x_i)} \leq \frac h 2 f_x(n, i, t, x) + o(h) \]
+\[ f(n, i, t_n, x_i) - f(n, i, t, x) = (x - x_i) f_x(n, i, t, x) + o(h) \leq h f_x(n, i, t, x) + o(h) \]
 und
-\[ F(t, x) - F(t_n, x_i) \leq \frac h 2 F_x(t, x) + o(h). \]
+\[ F(t_n, x_i) - F(t, x) = (x - x_i) F_x(t, x) + o(h) \leq h F_x(t, x) + o(h). \]
 Zusammen ergibt das
-\begin{align}
-\abs{F(t,x) - f(n, i(n), t, x)} &\leq \abs{F(t, x) - F(t_n, x_i)} + \abs{f(n,i, t, x) - f(n, i, t_n, x_i)}\\
-&\leq \frac h 2 + \frac h 2 = h = \frac t {\lambda n}. \qedhere
-\end{align}
+{\small
+\begin{align*}
+\abs{F(t,x) - f(n, i, t, x)} &\leq \abs{F(t, x) - F(t_n, x_i)} + \underbrace{\abs{F(t_n, x_i) - f(n, i, t_n, x_i)}}_{= 0} + \abs{f(n,i, t, x) - f(n, i, t_n, x_i)}\\
+&\leq h \bigl(f_x(n, i, t, x) + F_x(t, x) \bigr)\\
+&= \frac {t}{\lambda n} \bigl(f_x(n, i, t, x) + F_x(t, x) \bigr). \qedhere
+\end{align*}
+}
 \end{proof}
