@@ -91,7 +91,7 @@ Wir hoffen dieses Verhalten in unseren Approximationen wiederzufinden und Absch�
 % Zusammenfassend folgt mit diesem Ansatz
 % \[ v^n_i = U(x_i - t_n) - \frac{h \eps}{2} t_n U(x_i - t_n) + o(h). \]
 
-\subsection {Oszillatorischer Ansatz}
+\subsection {Oszillatorischer Ansatz} \label{sec:osz1}
 
 Wir führen hier Zeit-Raum-Koordinaten auf einer kurzen Skala ein.
 Genau genommen machen wir unsere Ansatzfunktionen zusätzlich von den diskreten Gitterkoordinaten $(n,i)$ abhängig.
@@ -104,7 +104,7 @@ v^n_i = u_0(t_n, x_i) + h u_1(n, i, t_n, x_i) + h^2 u_2(n, i, t_n, x_i) + o(h^2)
 \end{align}
 und wir möchten hier betonen, dass wir, wie immer, davon ausgehen, dass die Entwicklung asymptotisch geordnet ist.
 Das heißt z.\,B., dass $h u_1 \in o(u_0)$ für $h \to 0$ gilt und das führt zur allgemein bekannten Sublinear-Growth Bedingung
-\begin{align}
+\begin{align}\label{eq:osz:sublineargrowth}
 \lim_{h \to 0} \: h \frac{u_1(n, i, t_n, x_i)}{u_0(t_n, x_i)} = 0.
 \end{align}
 Zunächst fällt auf, dass wir im Ansatz \eqref{eq:adv:osz:ansatz} Terme bis $h^2$ entwickeln.
@@ -202,9 +202,59 @@ Zusammen ergibt das
 
 \subsection {Oszillatorischer Ansatz Teil 2}
 
-Die Gleichung \eqref{eq:adv:osz:o1} lautet nun
-\[
-\bigl( - \lambda \bigr) \cdot \bigl( \partial_t u_0(t_n, x_i) + \partial_x u_0(t_n, x_i) \bigr) = 
-\Bigl[ \theta(n+1,i) - \theta(n,i) +
-\lambda \bigl( \theta(n, i) - \theta(n, i-1) \bigr) \Bigr] \cdot \Psi(t_n, x_i).
+Hier präzisieren wir unseren Ansatz aus Sektion \ref{sec:osz1} auf Seite \pageref{sec:osz1}.
+Wir gehen nun davon aus, dass wir hochfrequente Oszillationen Gitterebene vorhanden sind und untersuchen, wie sich die Amplitude in der Zeit ausbreitet.
+Daher wählen wir für $u_1$ und $u_2$ aus \eqref{eq:adv:osz:ansatz} nun konkreter 
+\[ 
+u_1(n, i, t_n, x_i) + h u_2(n, i, t_n, x_i) 
+= \Omega(n) (-1)^i \Bigl[ \Psi_1(t_n, x_i) + h \Psi_2(t_n, x_i) \Bigr]
 \]
+Setzt man dies in die vorigen Rechnungen ein, so erhält man anstelle von Gleichung \eqref{eq:adv:osz:o1}
+\begin{align}\label{eq:osz2:o1} \nonumber
+\begin{split}
+\partial_t u_0(t_n, x_i) + \partial_x u_0(t_n, x_i) &=
+- \frac 1 \lambda \bigl( \Omega(n+1) (-1)^i \Psi_1(t_n, x_i) - \Omega(n) (-1)^i \Psi_1(t_n, x_i) \bigr)\\
+&\qquad - \bigl( \Omega(n) (-1)^i \Psi_1(t_n, x_i) - \Omega(n) (-1)^{i-1} \Psi_1(t_n, x_i) \bigr)\\
+&= - \frac 1 \lambda (-1)^i \Psi_1(t_n, x_i) \Bigl[ \Omega(n+1) - \Omega(n) + \lambda \bigl( \Omega(n) + \Omega(n) \bigr) \Bigr]
+\end{split}\\
+&= - \frac 1 \lambda (-1)^i \Psi_1(t_n, x_i) \Bigl[ \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \Bigr]
+\end{align}
+Sei nun $h > 0$ beliebig aber fest. Dann gilt $t_1 = \lambda h$ und $x_1 = h$, also
+\begin{align}\label{eq:osz2:n1}
+\partial_t u_0(\lambda h, h) + \partial_x u_0(\lambda h, h) &= \frac 1 \lambda \Psi_1(\lambda h, h) \Bigl[ \underbrace{\Omega(2) - ( 1 - 2 \lambda ) \Omega(1)}_{=: A} \Bigr]
+\end{align}
+Für jedes $n \in \N$ betrachte $h_n = \frac h n$. Dann gelten $t_n = t$ und $x_n = x$ und somit folgt
+\begin{align}\label{eq:osz2:n}
+\partial_t u_0(\lambda h, h) + \partial_x u_0(\lambda h, h) &= - \frac 1 \lambda (-1)^n \Psi_1(\lambda h, h) \Bigl[ \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \Bigr]
+\end{align}
+Da \eqref{eq:osz2:n1} und \eqref{eq:osz2:n} beide gleich sind, folgt unter der Annahme, dass $\Psi_1(\lambda h, h) \neq 0$ gilt
+\begin{align}\label{eq:osz:omegan}
+A (-1)^n = \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n)
+\end{align}
+Und das impliziert wiederum
+\begin{align}\nonumber
+\Omega(n+1) &= A \sum_{k=0}^n (-1)^{n-k} (1 - 2 \lambda)^k + (1 - 2 \lambda)^n\\
+&= A (- 2 \lambda)^n + (1 - 2 \lambda)^n.
+\end{align}
+Hieraus folgt für $2 \lambda > 1$, also $2\lambda = 1 + K$ für ein $K > 0$
+\begin{align*}
+\abs{\Omega(n+1)} &= \abs{A (- 2 \lambda)^n + (1 - 2 \lambda)^n}\\
+&\geq \bigl\lvert \abs{A (- 2 \lambda)^n} - \abs{(1 - 2 \lambda)^n} \bigr\rvert\\
+&\geq (2 \lambda)^n \abs{A}\\
+&\geq (1 + K)^n \abs{A}\\
+&\geq n K  \abs{A}\\
+\end{align*}
+und setzt man das in die Sublinear-Growth Bedingung \eqref{eq:osz:sublineargrowth} ein, so erhalten wir
+\begin{align*}
+0 = \lim_{h \to 0} \: h \frac{\abs{u_1(n, i, t_n, x_i)}}{\abs{u_0(t_n, x_i)}}
+&= \lim_{h \to 0} \: h \frac{\abs{\Omega(n) (-1)^i \Psi_1(t_n, x_i)}}{\abs{u_0(t_n, x_i)}}\\
+&= \lim_{h \to 0} \: h \abs{\Omega(n)} \frac{\abs{\Psi_1(t_n, x_i)}}{\abs{u_0(t_n, x_i)}}\\
+&= \frac{\abs{\Psi_1(t, x)}}{\abs{u_0(t, x)}} \cdot \lim_{h \to 0} \: h \abs{\Omega(n)}\\
+&\geq \frac{\abs{\Psi_1(t, x)}}{\abs{u_0(t, x)}} \cdot \lim_{h \to 0} \: h \cdot (n-1) K \abs{A}\\
+&= \frac{\abs{\Psi_1(t, x)}}{\abs{u_0(t, x)}} \cdot \lim_{h \to 0} \: h \cdot \frac{t_{n-1}}{\lambda h} K \abs{A}\\
+&= \frac{\abs{\Psi_1(t, x)}}{\abs{u_0(t, x)}} \cdot \frac{K}{\lambda} t \abs{A}\\
+\end{align*}
+Und hieraus folgern wir nun $A = 0$ und mit \eqref{eq:osz:omegan} gilt für alle $n \in \N$
+\[ 0 = \Omega(n+1) - (1 - 2\lambda) \Omega(n) \]
+und mit $\Omega(0) = 1$
+\[ \Omega(n) = (1 - 2\lambda)^n. \]
