@@ -100,26 +100,26 @@ Möchte man jedoch für $h \to 0$ einen Punkt $(t,x)$ in der Raumzeit approximie
 % Da unsere Gleichung linear ist, nehmen wir an, dass wir die Gitterfunktion als Summe einer Lösung und kleinen Oszillationen schreiben können.
 Unser Ansatz lautet dieses mal
 \begin{align}\label{eq:adv:osz:ansatz}
-v^n_i = u_0(t_n, x_i) + h u_1(n, i, t_n, x_i) + h^2 u_2(n, i, t_n, x_i) + o(h^2)
+v^n_i = u_0(t_n, x_i) + h u_1(t_n, x_i) + h \Bigl[ \phi_1(n, i, t_n, x_i) + h \phi_2(n, i, t_n, x_i) \Bigr] + o(h^2)
 \end{align}
 und wir möchten hier betonen, dass wir, wie immer, davon ausgehen, dass die Entwicklung asymptotisch geordnet ist.
-Das heißt z.\,B., dass $h u_1 \in o(u_0)$ für $h \to 0$ gilt und das führt zur allgemein bekannten Sublinear-Growth Bedingung
+Das heißt z.\,B., dass $h \phi_1 \in o(u_0)$ für $h \to 0$ gilt und das führt zur allgemein bekannten Sublinear-Growth Bedingung
 \begin{align}\label{eq:osz:sublineargrowth}
-\lim_{h \to 0} \: h \frac{u_1(n, i, t_n, x_i)}{u_0(t_n, x_i)} = 0.
+\lim_{h \to 0} \: h \frac{\phi_1(n, i, t_n, x_i)}{u_0(t_n, x_i)} = 0.
 \end{align}
 Zunächst fällt auf, dass wir im Ansatz \eqref{eq:adv:osz:ansatz} Terme bis $h^2$ entwickeln.
 Durch die kurze Zeit- und Ortskala wirken Terme in einer Ordnung niedriger.
-Daher werden Terme von $u_2$ Gleichungen in $O(h)$ beeinflussen und müssen betrachtet werden.
+Daher werden Terme von $\phi_2$ Gleichungen in $O(h)$ beeinflussen und müssen betrachtet werden.
 Wir rechnen hier nun die einzelnen Summanden von \eqref{eq:adv:scheme_rechnung} aus:
 {\small
 \begin{align} \label{eq:adv:osz:diff1}
 \begin{split}
 \frac {v^{n+1}_i - v^n_i} {\lambda h}
 &= \partial_t u_0(t_n, x_i) + \frac {\lambda h}{2} \partial^2_t u_0(t_n, x_i)\\
-&\qquad + \frac 1 \lambda \bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i, t_n, x_i) \bigr)\\
-&\qquad + h \partial_t u_1(n+1, i, t_n, x_i) + \frac {\lambda h^2}{2} \partial^2_t u_1(n+1, i, t_n, x_i)\\
-&\qquad + \frac h \lambda \bigl( u_2(n+1, i, t_n, x_i) - u_2(n, i, t_n, x_i) \bigr)\\
-&\qquad + h^2 \partial_t u_2(n+1, i, t_n, x_i) + o(h^2).
+&\qquad + \frac 1 \lambda \bigl( \phi_1(n+1, i, t_n, x_i) - \phi_1(n, i, t_n, x_i) \bigr)\\
+&\qquad + h \partial_t \phi_1(n+1, i, t_n, x_i) + \frac {\lambda h^2}{2} \partial^2_t \phi_1(n+1, i, t_n, x_i)\\
+&\qquad + \frac h \lambda \bigl( \phi_2(n+1, i, t_n, x_i) - \phi_2(n, i, t_n, x_i) \bigr)\\
+&\qquad + h^2 \partial_t \phi_2(n+1, i, t_n, x_i) + o(h^2).
 \end{split}
 \end{align}
 } und
@@ -128,18 +128,18 @@ Wir rechnen hier nun die einzelnen Summanden von \eqref{eq:adv:scheme_rechnung} 
 \begin{split}
 \frac {v^n_i - v^n_{i-1}} h 
 &= \partial_x u_0(t_n, x_i) - \frac {h}{2} \partial^2_x u_0(t_n, x_i)\\
-&\qquad + u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i)\\
-&\qquad + h \partial_x u_1(n, i-1, t_n, x_i) - \frac {h^2}{2} \partial^2_x u_1(n, i-1, t_n, x_i)\\
-&\qquad + h \bigl( u_2(n, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr)\\
-&\qquad + h^2 \partial_t u_2(n, i-1, t_n, x_i) + o(h^2).
+&\qquad + \phi_1(n, i, t_n, x_i) - \phi_1(n, i-1, t_n, x_i)\\
+&\qquad + h \partial_x \phi_1(n, i-1, t_n, x_i) - \frac {h^2}{2} \partial^2_x \phi_1(n, i-1, t_n, x_i)\\
+&\qquad + h \bigl( \phi_2(n, i, t_n, x_i) - \phi_2(n, i-1, t_n, x_i) \bigr)\\
+&\qquad + h^2 \partial_t \phi_2(n, i-1, t_n, x_i) + o(h^2).
 \end{split}
 \end{align}
 }
 Setzt man \eqref{eq:adv:osz:diff1} und \eqref{eq:adv:osz:diff2} in \eqref{eq:adv:scheme_rechnung} ein, liefert uns dies in $O(1)$ die Gleichung
 \begin{align}\label{eq:adv:osz:o1}
 \begin{split}
-\partial_t u_0(t_n, x_i) + \partial_x u_0(t_n, x_i) &= - \frac 1 \lambda \bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i, t_n, x_i) \bigr)\\
-&\qquad - \bigl(u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)
+\partial_t u_0(t_n, x_i) + \partial_x u_0(t_n, x_i) &= - \frac 1 \lambda \bigl( \phi_1(n+1, i, t_n, x_i) - \phi_2(n, i, t_n, x_i) \bigr)\\
+&\qquad - \bigl(\phi_1(n, i, t_n, x_i) - \phi_1(n, i-1, t_n, x_i) \bigr)
 \end{split}
 \end{align}
 Diese Gleichung gilt nun für alle $h > 0$ und alle $n, i \in \N$.
@@ -203,10 +203,10 @@ Zusammen ergibt das
 \subsection {Oszillatorischer Ansatz Teil 2}
 
 Hier präzisieren wir unseren Ansatz aus Sektion \ref{sec:osz1} auf Seite \pageref{sec:osz1}.
-Wir gehen nun davon aus, dass wir hochfrequente Oszillationen Gitterebene vorhanden sind und untersuchen, wie sich die Amplitude in der Zeit ausbreitet.
-Daher wählen wir für $u_1$ und $u_2$ aus \eqref{eq:adv:osz:ansatz} nun konkreter 
+Wir gehen nun davon aus, dass hochfrequente Oszillationen auf Gitterebene vorhanden sind und untersuchen, wie sich die Amplitude in der Zeit ausbreitet.
+Daher wählen wir für $\phi_1$ und $\phi_2$ aus \eqref{eq:adv:osz:ansatz} nun konkreter 
 \[ 
-u_1(n, i, t_n, x_i) + h u_2(n, i, t_n, x_i) 
+\phi_1(n, i, t_n, x_i) + h \phi_2(n, i, t_n, x_i) 
 = \Omega(n) (-1)^i \Bigl[ \Psi_1(t_n, x_i) + h \Psi_2(t_n, x_i) \Bigr]
 \]
 Setzt man dies in die vorigen Rechnungen ein, so erhält man anstelle von Gleichung \eqref{eq:adv:osz:o1}
@@ -227,26 +227,26 @@ Für jedes $n \in \N$ betrachte $h_n = \frac h n$. Dann gelten $t_n = t$ und $x_
 \begin{align}\label{eq:osz2:n}
 \partial_t u_0(\lambda h, h) + \partial_x u_0(\lambda h, h) &= - \frac 1 \lambda (-1)^n \Psi_1(\lambda h, h) \Bigl[ \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \Bigr]
 \end{align}
-Da \eqref{eq:osz2:n1} und \eqref{eq:osz2:n} beide gleich sind, folgt unter der Annahme, dass $\Psi_1(\lambda h, h) \neq 0$ gilt
+Da \eqref{eq:osz2:n1} und \eqref{eq:osz2:n} beide gleich sind, folgt unter der Annahme, dass {\color{red}$\Psi_1(\lambda h, h) \neq 0$} gilt
 \begin{align}\label{eq:osz:omegan}
-A (-1)^n = \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n)
+-A (-1)^n = \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n)
 \end{align}
-Und das impliziert wiederum
+Und das impliziert mit {\color{red} $\Omega(0) = 1$} wiederum
 \begin{align}\nonumber
-\Omega(n+1) &= A \sum_{k=0}^n (-1)^{n-k} (1 - 2 \lambda)^k + (1 - 2 \lambda)^n\\
-&= A (- 2 \lambda)^n + (1 - 2 \lambda)^n.
+\Omega(n+1) &= -A \sum_{k=1}^n (-1)^{n-k} (1 - 2 \lambda)^k + (1 - 2 \lambda)^n\\
+&= -A (- 2 \lambda)^n - (-A)^n + (1 - 2 \lambda)^n.
 \end{align}
 Hieraus folgt für $2 \lambda > 1$, also $2\lambda = 1 + K$ für ein $K > 0$
 \begin{align*}
-\abs{\Omega(n+1)} &= \abs{A (- 2 \lambda)^n + (1 - 2 \lambda)^n}\\
-&\geq \bigl\lvert \abs{A (- 2 \lambda)^n} - \abs{(1 - 2 \lambda)^n} \bigr\rvert\\
+\abs{\Omega(n+1)} &= \abs{-A (- 2 \lambda)^n -(-A)^n + (1 - 2 \lambda)^n}\\
+&\geq \bigl\lvert \abs{-A (- 2 \lambda)^n} - \abs{-(-A)^n + (1 - 2 \lambda)^n} \bigr\rvert\\
 &\geq (2 \lambda)^n \abs{A}\\
 &\geq (1 + K)^n \abs{A}\\
 &\geq n K  \abs{A}\\
 \end{align*}
 und setzt man das in die Sublinear-Growth Bedingung \eqref{eq:osz:sublineargrowth} ein, so erhalten wir
 \begin{align*}
-0 = \lim_{h \to 0} \: h \frac{\abs{u_1(n, i, t_n, x_i)}}{\abs{u_0(t_n, x_i)}}
+0 = \lim_{h \to 0} \: h \frac{\abs{\phi_1(n, i, t_n, x_i)}}{\abs{u_0(t_n, x_i)}}
 &= \lim_{h \to 0} \: h \frac{\abs{\Omega(n) (-1)^i \Psi_1(t_n, x_i)}}{\abs{u_0(t_n, x_i)}}\\
 &= \lim_{h \to 0} \: h \abs{\Omega(n)} \frac{\abs{\Psi_1(t_n, x_i)}}{\abs{u_0(t_n, x_i)}}\\
 &= \frac{\abs{\Psi_1(t, x)}}{\abs{u_0(t, x)}} \cdot \lim_{h \to 0} \: h \abs{\Omega(n)}\\
@@ -254,7 +254,7 @@ und setzt man das in die Sublinear-Growth Bedingung \eqref{eq:osz:sublineargrowt
 &= \frac{\abs{\Psi_1(t, x)}}{\abs{u_0(t, x)}} \cdot \lim_{h \to 0} \: h \cdot \frac{t_{n-1}}{\lambda h} K \abs{A}\\
 &= \frac{\abs{\Psi_1(t, x)}}{\abs{u_0(t, x)}} \cdot \frac{K}{\lambda} t \abs{A}\\
 \end{align*}
-Und hieraus folgern wir nun $A = 0$ und mit \eqref{eq:osz:omegan} gilt für alle $n \in \N$
+Das impliziert $A = 0$ und mit \eqref{eq:osz:omegan} gilt für alle $n \in \N$
 \[ 0 = \Omega(n+1) - (1 - 2\lambda) \Omega(n) \]
 und mit $\Omega(0) = 1$
 \[ \Omega(n) = (1 - 2\lambda)^n. \]
