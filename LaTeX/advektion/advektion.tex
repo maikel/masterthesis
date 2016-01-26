@@ -100,7 +100,7 @@ Möchte man jedoch für $h \to 0$ einen Punkt $(t,x)$ in der Raumzeit approximie
 % Da unsere Gleichung linear ist, nehmen wir an, dass wir die Gitterfunktion als Summe einer Lösung und kleinen Oszillationen schreiben können.
 Unser Ansatz lautet dieses mal
 \begin{align}\label{eq:adv:osz:ansatz}
-v^n_i = u_0(t_n, x_i) + h u_1(t_n, x_i) + h \Bigl[ \phi_1(n, i, t_n, x_i) + h \phi_2(n, i, t_n, x_i) \Bigr] + o(h^2)
+v^n_i = u_0(t_n, x_i) + h u_1(t_n, x_i) +  h \phi_1(n, i, t_n, x_i) + h^2 u_2(t_n, x_i) + h^2 \phi_2(n, i, t_n, x_i) + o(h^2)
 \end{align}
 und wir möchten hier betonen, dass wir, wie immer, davon ausgehen, dass die Entwicklung asymptotisch geordnet ist.
 Das heißt z.\,B., dass $h \phi_1 \in o(u_0)$ für $h \to 0$ gilt und das führt zur allgemein bekannten Sublinear-Growth Bedingung
@@ -115,7 +115,8 @@ Wir rechnen hier nun die einzelnen Summanden von \eqref{eq:adv:scheme_rechnung} 
 \begin{align} \label{eq:adv:osz:diff1}
 \begin{split}
 \frac {v^{n+1}_i - v^n_i} {\lambda h}
-&= \partial_t u_0(t_n, x_i) + \frac {\lambda h}{2} \partial^2_t u_0(t_n, x_i)\\
+&= \partial_t u_0(t_n, x_i) + \frac {\lambda h}{2} \partial^2_t u_0(t_n, x_i) + \frac {(\lambda h)^2}{6} \partial^3_t u_0(t_n, x_i)\\
+&\qquad + h \bigl( \partial_t u_1(t_n, x_i) + \frac {\lambda h}{2} \partial^2_t u_1(t_n, x_i) \bigr) + h^2 \partial_t u_2(t_n, x_i)\\
 &\qquad + \frac 1 \lambda \bigl( \phi_1(n+1, i, t_n, x_i) - \phi_1(n, i, t_n, x_i) \bigr)\\
 &\qquad + h \partial_t \phi_1(n+1, i, t_n, x_i) + \frac {\lambda h^2}{2} \partial^2_t \phi_1(n+1, i, t_n, x_i)\\
 &\qquad + \frac h \lambda \bigl( \phi_2(n+1, i, t_n, x_i) - \phi_2(n, i, t_n, x_i) \bigr)\\
@@ -127,7 +128,8 @@ Wir rechnen hier nun die einzelnen Summanden von \eqref{eq:adv:scheme_rechnung} 
 \begin{align} \label{eq:adv:osz:diff2}
 \begin{split}
 \frac {v^n_i - v^n_{i-1}} h 
-&= \partial_x u_0(t_n, x_i) - \frac {h}{2} \partial^2_x u_0(t_n, x_i)\\
+&= \partial_x u_0(t_n, x_i) - \frac {h}{2} \partial^2_x u_0(t_n, x_i) + \frac {h^2}{6} \partial^3_x u_0(t_n, x_i)\\
+&\qquad + h \bigl( \partial_x u_1(t_n, x_i) - \frac {h}{2} \partial^2_x u_1(t_n, x_i) \bigr) + h^2 \partial_x u_2(t_n, x_i)\\
 &\qquad + \phi_1(n, i, t_n, x_i) - \phi_1(n, i-1, t_n, x_i)\\
 &\qquad + h \partial_x \phi_1(n, i-1, t_n, x_i) - \frac {h^2}{2} \partial^2_x \phi_1(n, i-1, t_n, x_i)\\
 &\qquad + h \bigl( \phi_2(n, i, t_n, x_i) - \phi_2(n, i-1, t_n, x_i) \bigr)\\
@@ -135,15 +137,46 @@ Wir rechnen hier nun die einzelnen Summanden von \eqref{eq:adv:scheme_rechnung} 
 \end{split}
 \end{align}
 }
-Setzt man \eqref{eq:adv:osz:diff1} und \eqref{eq:adv:osz:diff2} in \eqref{eq:adv:scheme_rechnung} ein, liefert uns dies in $O(1)$ die Gleichung
+
+Setzt man \eqref{eq:adv:osz:diff1} und \eqref{eq:adv:osz:diff2} in \eqref{eq:adv:scheme_rechnung} ein, liefert uns dies die Gleichung
+
+\vspace{0.4cm}
+\noindent \textbf{In der Ordnung $O(1)$:}
 \begin{align}\label{eq:adv:osz:o1}
 \begin{split}
-\partial_t u_0(t_n, x_i) + \partial_x u_0(t_n, x_i) &= - \frac 1 \lambda \bigl( \phi_1(n+1, i, t_n, x_i) - \phi_2(n, i, t_n, x_i) \bigr)\\
+\partial_t u_0(t_n, x_i) + \partial_x u_0(t_n, x_i) &= - \frac 1 \lambda \bigl( \phi_1(n+1, i, t_n, x_i) - \phi_1(n, i, t_n, x_i) \bigr)\\
 &\qquad - \bigl(\phi_1(n, i, t_n, x_i) - \phi_1(n, i-1, t_n, x_i) \bigr)
 \end{split}
 \end{align}
-Diese Gleichung gilt nun für alle $h > 0$ und alle $n, i \in \N$.
-Hieraus schließen wir nun, dass die rechte Seite der Gleichung \eqref{eq:adv:osz:o1} verschwinden muss, doch müssen wir zunächst einige Lemmata beweisen.
+\vspace{0.4cm}
+\noindent \textbf{In der Ordnung $O(h)$:}
+% {\small
+\begin{align}\label{eq:adv:osz:oh}
+\begin{split}
+\partial_t u_1(t_n, x_i) + \partial_x u_1(t_n, x_i) &= \frac {1-\lambda}{2} \partial^2_x u_0(t_n, x_i)\\
+&\quad - \bigl( \partial_t \phi_1(n+1, i, t_n, x_i) + \partial_x \phi_1(n, i-1, t_n, x_i) \bigr)\\
+&\qquad - \frac 1 \lambda \bigl( \phi_2(n+1, i, t_n, x_i) - \phi_2(n, i, t_n, x_i) \bigr)\\
+&\qquad \quad - \bigl(\phi_2(n, i, t_n, x_i) - \phi_2(n, i-1, t_n, x_i) \bigr)
+\end{split}
+\end{align}
+% }
+\vspace{0.4cm}
+\noindent \textbf{In der Ordnung $O(h^2)$:}
+\begin{align}\label{eq:adv:osz:oh2}
+\begin{split}
+\partial_t u_2(t_n, x_i) + \partial_x u_2(t_n, x_i) &= \frac{\lambda - 1}{6} \partial^3_x u_0(t_n, x_i) + \frac {1-\lambda}{2} \partial^2_x u_1(t_n, x_i)\\
+&\quad + \frac 12 \partial^2_x \phi_1(n+1, i, t_n, x_i) - \frac{\lambda} 2 \partial^2_t \phi_1(n, i-1, t_n, x_i)\\
+&\qquad - \bigl( \partial_t \phi_2(n+1, i, t_n, x_i) + \partial_x \phi_2(n, i-1, t_n, x_i) \bigr)
+\end{split}
+\end{align}
+
+\vspace{0.4cm}
+Diese Gleichungen gelten nun für alle $h > 0$ und alle $n, i \in \N$.
+Aus \eqref{eq:adv:osz:o1} würden wir gern mithilfe der Sublinear-Growth Bedingung \eqref{eq:osz:sublineargrowth} schließen, dass die rechte Seite der Gleichung verschwinden muss.
+Dies gelang uns jedoch nur mit einem konkreterem Produktansatz für $\phi_i$, welcher im Unterkapitel \ref{sec:osz2} vorgemacht wird.
+Außerdem kann man $\lambda = 1 + \eps$ einsetzen, nach $\eps$ entwickeln und zusätzlich nach Ordnungen von $h$ und $\eps$ sortieren.
+Auch dies heben wir uns jedoch für das nächste Unterkapitel auf, wenn es konkreter wird.
+Trotzdem beweisen wir hier noch zwei Lemmata, um besser zu verstehen wie man von Bedingungen auf dem Gitter auf Bedingungen im Raum schließen kann.
 
 \begin{lemma}[Konstanz für eine Dimension] \label{lem:adv:konstant1}
 Sei $f\colon \N \times \R^+_0 \to \R$ eine Abbildung.
@@ -167,16 +200,16 @@ Da \eqref{eq:lemma:const1d:voraussetzung} für alle $h > 0$ gilt, folgt hiermit
 Das Lemma~\ref{lem:adv:konstant1} bedeutet, dass $f$, oder die Folge $f_n$, in solchen Fällen unabhängig von, bzw. konstant in $n \in \N$ ist.
 Wir wollen dies auf unseren Fall übertragen und beweisen nun das zweidimensionale Analogon, 
 
-\begin{lemma}[Punktweise Kovergenz in der Raumzeit]
-Sei $f\colon (\N \times \Z) \times (\Rp \times \R) \to \R$ eine Abbildung.
+\begin{lemma}[Punktweise Kovergenz in der Raumzeit]\label{lem:adv:konvergenz_gitter}
+Sei $f\colon (\N \times \Z) \times (\Rp \times \R) \to \R$ eine Abbildung, so dass $f(n,i,\pkt,\pkt)$ für alle $n \in \N$ und $i \in \Z$ differenzierbar ist.
 Sei weiter\, $G_h \subset \Rp \times \R$ ein äquidistantes Gitter mit\, $G_h(n,i) = (t^h_n, x^h_i) = h \cdot (\lambda n, i)$, für $n \in \N$.
-Wenn ein $F\colon \Rp \times \R \to \R$ für alle $h > 0$ und somit alle Gitter $G_h$ mit
+Wenn ein differenzierbares $F\colon \Rp \times \R \to \R$ für alle $h > 0$ und somit alle Gitter $G_h$ mit
 \begin{align}\label{eq:lemma:diag:voraussetzung}
 F(t^h_n, x^h_i) = f(n, i, t^h_n, x^h_i) \qquad \text{für alle $(n,i) \in \N \times \Z$}
 \end{align}
 existiert, dann gilt für alle $(t, x) \in \Rp \times \R$, dass für alle $n \in \N$ ein $i(n) \in \Z$ existiert mit
 \begin{align}\label{eq:lemma:diag:aussage}
-\abs{F(t, x) - f(n, i(n), t, x)} \leq \frac {t}{\lambda n} \bigl(f_x(n, i, t, x) + F_x(t, x) \bigr)
+\abs{F(t, x) - f(n, i(n), t, x)} \leq \frac {t}{\lambda n} \Bigl(\bigl\lvert f_x(n, i(n), t, x) \bigr\rvert + \bigl\lvert F_x(t, x) \bigr\rvert \Bigr)
 \end{align}
 \end{lemma}
 \begin{proof}
@@ -187,43 +220,63 @@ Dann gibt es ein kleinstes $i(n) = i \in \N$, für das $x_{i-1} < x \leq x_i$ gi
 Dies impliziert $x_i - x < h$ und wegen $t_n = t$ folgt auch
 \[ \norm{(t,x) - (t_n, x_i)} = \abs{x - x_i} < h. \]
 Weil $f$ und $F$ differenzierbar in $x$ sind, folgt somit
-\[ f(n, i, t_n, x_i) - f(n, i, t, x) = (x - x_i) f_x(n, i, t, x) + o(h) \leq h f_x(n, i, t, x) + o(h) \]
+\[ \abs{f(n, i, t_n, x_i) - f(n, i, t, x)} = \abs{(x_i - x) f_x(n, i, t, x) + o(h)} \leq h \abs{f_x(n, i, t, x)} + o(h) \]
 und
-\[ F(t_n, x_i) - F(t, x) = (x - x_i) F_x(t, x) + o(h) \leq h F_x(t, x) + o(h). \]
+\[ \abs{F(t_n, x_i) - F(t, x)} = \abs{(x_i - x) F_x(t, x) + o(h)} \leq h \abs{F_x(t, x)} + o(h). \]
 Zusammen ergibt das
 {\small
 \begin{align*}
 \abs{F(t,x) - f(n, i, t, x)} &\leq \abs{F(t, x) - F(t_n, x_i)} + \underbrace{\abs{F(t_n, x_i) - f(n, i, t_n, x_i)}}_{= 0} + \abs{f(n,i, t, x) - f(n, i, t_n, x_i)}\\
-&\leq h \bigl(f_x(n, i, t, x) + F_x(t, x) \bigr)\\
-&= \frac {t}{\lambda n} \bigl(f_x(n, i, t, x) + F_x(t, x) \bigr). \qedhere
+&\leq h \Bigl(\bigl\lvert f_x(n, i, t, x) \bigr\rvert + \bigl\lvert F_x(t, x) \bigr\rvert \Bigr)\\
+&= \frac {t}{\lambda n} \Bigl(\bigl\lvert f_x(n, i, t, x) \bigr\rvert + \bigl\lvert F_x(t, x) \bigr\rvert \Bigr). \qedhere
 \end{align*}
 }
 \end{proof}
+Sollte das Lemma \ref{lem:adv:konvergenz_gitter} exakt sein, so zeigt uns das, dass wir gleichmäßige Schranken von $f(n, i, \pkt, \pkt)$ benötigen, um von Aussagen auf Gitterebene auf Aussagen über alle Raumzeitpunkte zu schließen.
+Selbst dann, wenn man das Lemma dahingehend abschwächt, dass man nur die gleichmäßige Stetigkeit in $n$ und $i$ braucht.
+Und diese Bedingung tretet schon ein, ohne dass wir die Sublinear-Growth Bedingung überhaupt benutzt haben.
 
-\subsection {Oszillatorischer Ansatz Teil 2}
+\subsection {Oszillatorischer Ansatz Teil 2}\label{sec:osz2}
 
-Hier präzisieren wir unseren Ansatz aus Sektion \ref{sec:osz1} auf Seite \pageref{sec:osz1}.
-Wir gehen nun davon aus, dass hochfrequente Oszillationen auf Gitterebene vorhanden sind und untersuchen, wie sich die Amplitude in der Zeit ausbreitet.
+Hier präzisieren wir unseren Ansatz \eqref{eq:adv:osz:ansatz} aus dem letztem Unterkapitel. % \ref{sec:osz1}.
+Wir gehen nun davon aus, dass Oszillationen auf Gitterebene vorhanden sind und untersuchen, wie sich die Amplitude in der Zeit ausbreitet.
 Daher wählen wir für $\phi_1$ und $\phi_2$ aus \eqref{eq:adv:osz:ansatz} nun konkreter 
 \[ 
 \phi_1(n, i, t_n, x_i) + h \phi_2(n, i, t_n, x_i) 
 = \Omega(n) (-1)^i \Bigl[ \Psi_1(t_n, x_i) + h \Psi_2(t_n, x_i) \Bigr]
 \]
 Setzt man dies in die vorigen Rechnungen ein, so erhält man anstelle von Gleichung \eqref{eq:adv:osz:o1}
-\begin{align}\label{eq:osz2:o1} \nonumber
-\begin{split}
-\partial_t u_0(t_n, x_i) + \partial_x u_0(t_n, x_i) &=
-- \frac 1 \lambda \bigl( \Omega(n+1) (-1)^i \Psi_1(t_n, x_i) - \Omega(n) (-1)^i \Psi_1(t_n, x_i) \bigr)\\
-&\qquad - \bigl( \Omega(n) (-1)^i \Psi_1(t_n, x_i) - \Omega(n) (-1)^{i-1} \Psi_1(t_n, x_i) \bigr)\\
-&= - \frac 1 \lambda (-1)^i \Psi_1(t_n, x_i) \Bigl[ \Omega(n+1) - \Omega(n) + \lambda \bigl( \Omega(n) + \Omega(n) \bigr) \Bigr]
-\end{split}\\
-&= - \frac 1 \lambda (-1)^i \Psi_1(t_n, x_i) \Bigl[ \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \Bigr]
+
+\vspace{0.4cm}
+\noindent \textbf{In der Ordnung $O(1)$:}
+\begin{align}\label{eq:osz2:o1} % \nonumber
+% \begin{split}
+\partial_t u_0(t_n, x_i) + \partial_x u_0(t_n, x_i) % &=
+% - \frac 1 \lambda \bigl( \Omega(n+1) (-1)^i \Psi_1(t_n, x_i) - \Omega(n) (-1)^i \Psi_1(t_n, x_i) \bigr)\\
+% &\qquad - \bigl( \Omega(n) (-1)^i \Psi_1(t_n, x_i) - \Omega(n) (-1)^{i-1} \Psi_1(t_n, x_i) \bigr)\\
+% &= - \frac 1 \lambda (-1)^i \Psi_1(t_n, x_i) \Bigl[ \Omega(n+1) - \Omega(n) + \lambda \bigl( \Omega(n) + \Omega(n) \bigr) \Bigr]
+% \end{split}\\
+&= - \frac 1 \lambda (-1)^i \Psi_1(t_n, x_i) \Bigl[ \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \Bigr].
 \end{align}
-Sei nun $h > 0$ beliebig aber fest. Dann gilt $t_1 = \lambda h$ und $x_1 = h$, also
+Gleichung \eqref{eq:osz2:o1} und die Sublinear-Growth Bedingung reichen schon aus, um $\Omega(n)$ zu bestimmen.
+
+\begin{lemma}\label{lem:osz2:omega_n}
+Es gelte $\lambda > \frac 12$, für alle $h > 0$, $n \in \N$ und $i \in \Z$ gelte die Gleichung \eqref{eq:osz2:o1} und es gelte die Sublinear-Grwoth Bedingung \eqref{eq:osz:sublineargrowth}.
+Wenn außerdem $\Omega(0) = 1$ gilt und ein $h > 0$ mit $\Psi_1(\lambda h, h) \neq 0$ existiert, dann folgt
+\begin{align*}
+\Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) = 0
+\end{align*}
+und
+\begin{align*}
+\Omega(n) = (1 - 2 \lambda)^n.
+\end{align*}
+\end{lemma}
+\begin{proof}
+Sei $h > 0$ derart, dass $\Psi(\lambda h, h) \neq 0$ gilt. Dann gilt $t_1 = \lambda h$ und $x_1 = h$, also
 \begin{align}\label{eq:osz2:n1}
 \partial_t u_0(\lambda h, h) + \partial_x u_0(\lambda h, h) &= \frac 1 \lambda \Psi_1(\lambda h, h) \Bigl[ \underbrace{\Omega(2) - ( 1 - 2 \lambda ) \Omega(1)}_{=: A} \Bigr]
 \end{align}
-Für jedes $n \in \N$ betrachte $h_n = \frac h n$. Dann gelten $t_n = t$ und $x_n = x$ und somit folgt
+Für jedes $n \in \N$ betrachte $h_n = \frac h n$. Dann gelten $t^{h_n}_n = \lambda h$ und $x^{h_n}_n = h$ und somit folgt f"ur jedes $n \in \N$
 \begin{align}\label{eq:osz2:n}
 \partial_t u_0(\lambda h, h) + \partial_x u_0(\lambda h, h) &= - \frac 1 \lambda (-1)^n \Psi_1(\lambda h, h) \Bigl[ \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \Bigr]
 \end{align}
@@ -241,7 +294,7 @@ Hieraus folgt für $2 \lambda > 1$, also $2\lambda = 1 + K$ für ein $K > 0$
 \abs{\Omega(n+1)} &= \abs{-A (- 2 \lambda)^n -(-A)^n + (1 - 2 \lambda)^n}\\
 &\geq \bigl\lvert \abs{-A (- 2 \lambda)^n} - \abs{-(-A)^n + (1 - 2 \lambda)^n} \bigr\rvert\\
 &\geq (2 \lambda)^n \abs{A}\\
-&\geq (1 + K)^n \abs{A}\\
+&= (1 + K)^n \abs{A}\\
 &\geq n K  \abs{A}\\
 \end{align*}
 und setzt man das in die Sublinear-Growth Bedingung \eqref{eq:osz:sublineargrowth} ein, so erhalten wir
@@ -257,4 +310,5 @@ und setzt man das in die Sublinear-Growth Bedingung \eqref{eq:osz:sublineargrowt
 Das impliziert $A = 0$ und mit \eqref{eq:osz:omegan} gilt für alle $n \in \N$
 \[ 0 = \Omega(n+1) - (1 - 2\lambda) \Omega(n) \]
 und mit $\Omega(0) = 1$
-\[ \Omega(n) = (1 - 2\lambda)^n. \]
+\[ \Omega(n) = (1 - 2\lambda)^n. \qedhere \]
+\end{proof}
