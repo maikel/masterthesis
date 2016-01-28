@@ -3,7 +3,7 @@
                %,draft%
                %,5BCOM%
                %,openright%
-               ]{scrartcl}
+               ]{scrreprt}
 
 \usepackage[ngerman]{babel}
 \usepackage[utf8]{inputenc}
@@ -32,23 +32,42 @@
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usepackage{pgfplotstable}
-\pgfplotsset{compat=1.11}
+% \pgfplotsset{compat=1.11}
 \usetikzlibrary{external}
-\pgfkeys{/pgf/images/include external/.code=\includegraphics{#1}}
+% \pgfkeys{/pgf/images/include external/.code=\includegraphics{#1}}
 \tikzexternalize[prefix=figures/]
 
 \usepackage{csquotes}
 \usepackage{biblatex} 
 \bibliography{Bibliography}
 
+    
+% \usepackage[german]{minitoc}
+% \dominitoc
+
 \input{Macros}
+
+\title{\includegraphics[width=0.6\textwidth]{pictures/logo}\\
+{\normalsize Masterarbeit am Institut für Mathematik der Freien Universität Berlin, Arbeitsgruppe Geophysical Fluid Dynamics}\\[6ex]
+Beschreibung hochfrequenter numerischer Instabilitäten mit Hilfe asymptotischer WKB Ansätze}
+
+\author{Maikel Nadolski\\
+{\normalsize Matrikelnummer: 4207314}\\
+{\normalsize \href{mailto:nadolski@math.fu-berlin.de}{nadolski@math.fu-berlin.de}}\\\\
+{\normalsize Betreuer: Prof. Dr. Rupert Klein}}
+
 
 \begin{document}
 
-% \chapter{Lineare Verfahren}
+\maketitle
+
+\tableofcontents
+
+\chapter{Vorwort}
+\chapter{Multiskalen Asymptotik für finite Differenzen}
+\chapter{Lineare Verfahren}
 \input{advektion/advektion}
-% \input{variable_advektion}
-%\input{wkb_ansatz}
+\chapter{Nichtlineare Verfahren}
 
 \input{FrontBackMatter/Bibliography}
 

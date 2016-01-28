@@ -1,7 +1,0 @@
-\section{Advektion}
-
-\input{advektion/vorwort}
-% \input{advektion/echte_loesung}
-\input{advektion/beispiel}
-% \input{advektion/regulaer}
-\input{advektion/oszillatorisch}
