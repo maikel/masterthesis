@@ -14,12 +14,12 @@ function V = upwind(u0, lambda, N)
     end
 end
 
-function V = beispiel(epsilon, h, N)
+function V = beispiel(eta, h, N)
     % Setup Properties and Initial Conditions        
     % space dimensions [x0, xN]
     x0 = [-2,2];
     % grid ratios
-    lambda = 1 + epsilon;
+    lambda = 1 + eta;
     dx  = h;
 
     % space vector
@@ -32,34 +32,34 @@ function V = beispiel(epsilon, h, N)
     V = [x' V'];
 end
 
-epsilon = 1e-1;
-h       = 1e-2;
-N       = 220;
+eta = 1e-1;
+h   = 1e-3;
+N   = 220;
 
-V = beispiel(epsilon, h, N);
+V = beispiel(eta, h, N);
 V = V(:,[1 120 185 200 220]);
 save 'data/V_sinus_eps_0.1_h_0.01.dat' V
 
-epsilon = 1e-1;
-h       = 1e-3;
-N       = 220;
+eta = 1e-1;
+h   = 1e-3;
+N   = 220;
 
-V = beispiel(epsilon, h, N);
+V = beispiel(eta, h, N);
 V = V(:,[1 120 185 200 220]);
 save 'data/V_sinus_eps_0.1_h_0.001.dat' V
 
-epsilon = 5e-2;
-h       = 1e-2;
-N       = 440;
+eta = 5e-2;
+h   = 1e-2;
+N   = 440;
 
-V = beispiel(epsilon, h, N);
+V = beispiel(eta, h, N);
 V = V(:,[1 240 370 400 440]);
 save 'data/V_sinus_eps_0.05_h_0.01.dat' V
 
-epsilon = 5e-2;
-h       = 1e-3;
-N       = 440;
+eta = 5e-2;
+h   = 1e-3;
+N   = 440;
 
-V = beispiel(epsilon, h, N);
+V = beispiel(eta, h, N);
 V = V(:,[1 240 370 400 440]);
 save 'data/V_sinus_eps_0.05_h_0.001.dat' V

@@ -28,13 +28,13 @@ Wir haben die Beispiele durch folgendes Skript in \emph{GNU Octave} umgesetzt un
 
 \input{advektion/beispiel_figures}
 
-Vergleicht man nun die Plots in Abbildung~\ref{fig:adv:e-1h-2} und mit den Plots auf Abbildung~\ref{fig:adv:e-1h-3}, so erkennt man, dass die Amplitude der Oszillation scheinbar unabh"angig von $h$ mit der Anzahl der Iterationen $n$ w"achst.
-Halbiert man jedoch den Wert für $\eps$, so ändert sich auch die Rate, um die die Amplitude wächst.
+Vergleicht man nun die Plots in Abbildung~\ref{fig:adv:e-1h-2} und mit den Plots auf Abbildung~\ref{fig:adv:e-1h-3}, so erkennt man, dass die maximale Amplitude der Oszillation scheinbar unabh"angig von $h$ mit der Anzahl der Iterationen $n$ w"achst.
+Halbiert man jedoch den Wert für $\eta$, so ändert sich auch die Rate, um die die Amplitude wächst.
 Wir hoffen, dieses Verhalten in unseren Approximationen wiederzufinden und dass wir Abschätzungen für das Wachstum der Amplitude angeben können.
 
 
 
-\subsection {Diskreter Ansatz auf Gitterniveau} \label{sec:diskret}
+\subsection {Diskreter Ansatz auf Gitterniveau} \label{sec:transport:diskret}
 
 Wir führen hier Raumzeit-Koordinaten auf einer kurzen Skala ein.
 Genau genommen machen wir unsere Ansatzfunktionen zusätzlich von den diskreten Gitterkoordinaten $(n,i)$ abhängig.
@@ -42,24 +42,25 @@ Es gilt zwar $n = \frac {t_n} {\lambda h}$ und $i = \frac {x_i}{h}$, jedoch soll
 Möchte man jedoch für $h \to 0$ einen Punkt $(t,x)$ in der Raumzeit approximieren, so gilt immer $n,i \to \infty$ und dies könnte uns zusätzliche Bedingungen liefern.
 % Da unsere Gleichung linear ist, nehmen wir an, dass wir die Gitterfunktion als Summe einer Lösung und kleinen Oszillationen schreiben können.
 Unser Ansatz lautet dieses mal
-\begin{align}\label{eq:diskret:ansatz}
+\begin{align}\label{eq:transport:diskret:ansatz}
 v^n_i = u_0(n, i, t_n, x_i) + h u_1(n, i, t_n, x_i) + h^2 u_2(n, i, t_n, x_i) + o(h^2)
 \end{align}
 und wir möchten hier betonen, dass wir, wie immer, davon ausgehen, dass die Entwicklung asymptotisch geordnet ist.
 Das heißt z.\,B., dass $h u_1 \in o(u_0)$ für $h \to 0$ gilt und das führt zur allgemein bekannten Sublinear-Growth Bedingung
-\begin{align}\label{eq:diskret:sublineargrowth}
+\begin{align}\label{eq:transport:diskret:sublineargrowth}
 \lim_{h \to 0} \: h \frac{u_1(n, i, t_n, x_i)}{u_0(n, i, t_n, x_i)} = 0.
 \end{align}
-Zunächst fällt auf, dass wir im Ansatz \eqref{eq:diskret:ansatz} Terme bis $h^2$ entwickeln.
+Zunächst fällt auf, dass wir im Ansatz \eqref{eq:transport:diskret:ansatz} Terme bis $h^2$ entwickeln.
 Durch die kurze Zeit- und Ortskala wirken Terme in einer Ordnung niedriger.
 Daher werden Terme von $u_2$ Gleichungen in $O(h)$ beeinflussen und müssen betrachtet werden.
 Wir rechnen hier nun die einzelnen Summanden von \eqref{eq:adv:scheme_rechnung} aus:
 {
-\begin{align} \label{eq:diskret:diff1}
+\begin{align} \label{eq:transport:diskret:diff1}
 v^{n+1}_i - v^n_i =
 \begin{split}
 & u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)\\
-&\lambda h \partial_t u_0(n+1, i, t_n, x_i) + \frac {(\lambda h)^2}{2} \partial^2_t u_0(n+1, i, t_n, x_i) + \frac {(\lambda h)^3}{6} \partial^3_t u_0(n+1, i, t_n, x_i)\\
+&\lambda h \partial_t u_0(n+1, i, t_n, x_i) + \frac {(\lambda h)^2}{2} \partial^2_t u_0(n+1, i, t_n, x_i)\\
+&+ \frac {(\lambda h)^3}{6} \partial^3_t u_0(n+1, i, t_n, x_i)\\
 &+ h \bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i, t_n, x_i) \bigr)\\
 &+ \lambda h^2 \partial_t u_1(n+1, i, t_n, x_i) + \frac {\lambda^2 h^3}{2} \partial^2_t u_1(n+1, i, t_n, x_i)\\
 &+ h^2 \bigl( u_2(n+1, i, t_n, x_i) - u_2(n, i, t_n, x_i) \bigr)\\
@@ -68,11 +69,12 @@ v^{n+1}_i - v^n_i =
 \end{align}
 } und
 { 
-\begin{align} \label{eq:diskret:diff2}
+\begin{align} \label{eq:transport:diskret:diff2}
 \lambda (v^n_i - v^n_{i-1}) =
 \begin{split}
 & \lambda( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) )\\
-&\lambda h \partial_x u_0(n, i-1, t_n, x_i) - \frac {\lambda h^2}{2} \partial^2_x u_0(n, i-1, t_n, x_i) + \frac {\lambda h^3}{6} \partial^3_x u_0(n, i-1, t_n, x_i)\\
+&\lambda h \partial_x u_0(n, i-1, t_n, x_i) - \frac {\lambda h^2}{2} \partial^2_x u_0(n, i-1, t_n, x_i)\\
+& + \frac {\lambda h^3}{6} \partial^3_x u_0(n, i-1, t_n, x_i)\\
 &+ \lambda h \bigl( u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)\\
 &+ \lambda h^2 \partial_x u_1(n, i-1, t_n, x_i) - \frac {\lambda h^3}{2} \partial^2_x u_1(n, i-1, t_n, x_i)\\
 &+ \lambda h^2 \bigl( u_2(n, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr)\\
@@ -81,17 +83,17 @@ v^{n+1}_i - v^n_i =
 \end{align}
 }
 \noindent
-Setzt man \eqref{eq:diskret:diff1} und \eqref{eq:diskret:diff2} in \eqref{eq:adv:scheme} ein, liefert uns dies die Gleichungen
+Setzt man \eqref{eq:transport:diskret:diff1} und \eqref{eq:transport:diskret:diff2} in \eqref{eq:adv:scheme} ein, liefert uns dies die Gleichungen
 
 \vspace{0.4cm}
 \noindent \textbf{In der Ordnung $O(1)$:}
-\begin{align}\label{eq:diskret:o1}
+\begin{align}\label{eq:transport:diskret:o1}
 u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)
 + \lambda \bigl(u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr) = 0
 \end{align}
 \vspace{0.4cm}
 \noindent \textbf{In der Ordnung $O(h)$:}
-\begin{align}\label{eq:diskret:oh}
+\begin{align}\label{eq:transport:diskret:oh}
 \lambda \bigl( \partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i) \bigr) =
 \begin{split}
 &- \bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i, t_n, x_i) \bigr)\\
@@ -101,7 +103,7 @@ u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)
 \vspace{0.4cm}
 \noindent \textbf{In der Ordnung $O(h^2)$:}
 % {\small
-\begin{align}\label{eq:diskret:oh2}
+\begin{align}\label{eq:transport:diskret:oh2}
 \lambda \bigl( \partial_t u_1(n+1, i, t_n, x_i) + \partial_x u_1(n, i-1, t_n, x_i) \bigr) =
 \begin{split}
 &\frac {\lambda}{2} \partial^2_x u_0(t_n, x_i) - \frac{\lambda^2}{2} \partial^2_t u_0(t_n, x_i)\\
@@ -112,7 +114,7 @@ u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)
 % }
 \vspace{0.4cm}
 \noindent \textbf{In der Ordnung $O(h^3)$:}
-\begin{align}\label{eq:diskret:oh3}
+\begin{align}\label{eq:transport:diskret:oh3}
 \begin{split}
 \lambda \bigl(\partial_t u_2(n+1, i, t_n, x_i)\qquad\\
 \quad + \partial_x u_2(n, i-1, t_n, x_i) \bigr)
@@ -125,16 +127,19 @@ u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)
 
 \vspace{0.4cm}
 \noindent \textbf{Mit den Anfangsbedingungen:}
-\[ u_0(0, i, 0, x_i) = U(x_i), \quad u_1(0, i, 0, x_i) = 0 \quad \text{und} \quad u_2(0, i, 0, x_i) = 0 \qquad \forall i \in \Z. \]
+\begin{align}\label{eq:transport:diskret:anfangsbedinungen}
+u_0(0, i, 0, x_i) = \rd(U(x_i)), \quad u_1(0, i, 0, x_i) = 0 \quad \text{und} \quad u_2(0, i, 0, x_i) = 0 \qquad \forall i \in \Z.
+\end{align}
 
 Diese Gleichungen gelten nun für alle $h > 0$ und alle $n, i \in \N$.
-Noch gelingt es uns nicht, aus diesen Bedinungen eine eindeutige Lösung für unsere Ansatzfunktionen $u_i, i=1,2,3$ zu bestimmen.
+Noch gelingt es uns nicht, aus diesen Bedinungen eine eindeutige Lösung für unsere Ansatzfunktionen $u_0, u_1$ und $u_2$ zu bestimmen.
 Daher folgt im nächstem Kapitel ein konkreterer Produktansatz.
-Außerdem kann man $\lambda = 1 + \eps$ einsetzen, nach $\eps$ entwickeln und zusätzlich nach Ordnungen von $h$ und $\eps$ sortieren.
-Auch dies heben wir uns (vielleicht) jedoch für spätere Unterkapitel auf.
+Außerdem kann man $\lambda = 1 + \eta$ einsetzen und die Gleichungen zusätzlich nach den Ordnungen von $\eta$ sortieren.
+Wenn man dann $\eta$ mit $h$ beispielsweise durch $\eta = h^\alpha$ für ein $\alpha > 0$ koppelt, was würde man erwarten?
+Auch dies heben wir uns (vielleicht) für ein späteres Unterkapitel auf.
 Trotzdem beweisen wir hier noch zwei Lemmata, um besser zu verstehen wie man von Bedingungen auf dem Gitter auf Bedingungen im Raum schließen kann.
 
-\begin{lemma}[Konstanz für eine Dimension] \label{lemma:diskret:konstant1}
+\begin{lemma}[Konstanz für eine Dimension] \label{lemma:transport:diskret:konstant1}
 Sei $f\colon \N \times \R^+_0 \to \R$ eine Abbildung.
 Sei weiter $G_h \subset \R^+_0$ ein äquidistantes Gitter mit $G_h(n) = t^h_n = n h$, für $n \in \N$.
 Wenn ein $F\colon \Rp \to \R$ für alle $h > 0$ und somit alle Gitter $G_h$ mit
@@ -153,10 +158,10 @@ Da \eqref{eq:lemma:const1d:voraussetzung} für alle $h > 0$ gilt, folgt hiermit
 \[ F(t) = F(t^h_n) = f(n, t^h_n) = f(n, t). \qedhere \]
 \end{proof}
 
-Das Lemma~\ref{lemma:diskret:konstant1} bedeutet, dass $f$, oder die Folge $f_n$, in solchen Fällen unabhängig von, bzw. konstant in $n \in \N$ ist.
+Das Lemma~\ref{lemma:transport:diskret:konstant1} bedeutet, dass $f$, oder die Folge $f_n$, in solchen Fällen unabhängig von, bzw. konstant in $n \in \N$ ist.
 Wir wollen dies auf unseren Fall übertragen und beweisen nun das zweidimensionale Analogon, 
 
-\begin{lemma}[Punktweise Kovergenz in der Raumzeit]\label{lemma:diskret:konvergenz_gitter}
+\begin{lemma}[Punktweise Kovergenz in der Raumzeit]\label{lemma:transport:diskret:konvergenz_gitter}
 Sei $f\colon (\N \times \Z) \times (\Rp \times \R) \to \R$ eine Abbildung, so dass $f(n,i,\pkt,\pkt)$ für alle $n \in \N$ und $i \in \Z$ differenzierbar ist.
 Sei weiter\, $G_h \subset \Rp \times \R$ ein äquidistantes Gitter mit\, $G_h(n,i) = (t^h_n, x^h_i) = h \cdot (\lambda n, i)$, für $n \in \N$.
 Wenn ein differenzierbares $F\colon \Rp \times \R \to \R$ für alle $h > 0$ und somit alle Gitter $G_h$ mit
@@ -169,7 +174,7 @@ existiert, dann gilt für alle $(t, x) \in \Rp \times \R$, dass für alle $n \in
 \end{align}
 \end{lemma}
 \begin{proof}
-Wie in Lemma~\ref{lemma:diskret:konstant1} setzen wir $h = \frac {t}{\lambda n}$.
+Wie in Lemma~\ref{lemma:transport:diskret:konstant1} setzen wir $h = \frac {t}{\lambda n}$.
 Dann gilt $t_n = \lambda n h = t$ und $x_i = i h$ für $i \in \Z$.
 O.\,B.\,d.\,A. gelte $x > 0$.
 Dann gibt es ein kleinstes $i(n) = i \in \N$, für das $x_{i-1} < x \leq x_i$ gilt.
@@ -188,39 +193,57 @@ Zusammen ergibt das
 \end{align*}
 }
 \end{proof}
-Sollte das Lemma \ref{lemma:diskret:konvergenz_gitter} exakt sein, so zeigt uns das, dass wir gleichmäßige Schranken von $f(n, i, \pkt, \pkt)$ benötigen, um von Aussagen auf Gitterebene auf Aussagen über alle Raumzeitpunkte zu schließen.
+Sollte das Lemma \ref{lemma:transport:diskret:konvergenz_gitter} exakt sein, so zeigt uns das, dass wir gleichmäßige Schranken von $f(n, i, \pkt, \pkt)$ benötigen, um von Aussagen auf Gitterebene auf Aussagen über alle Raumzeitpunkte zu schließen.
 Selbst dann, wenn man das Lemma dahingehend abschwächt, dass man nur die gleichmäßige Stetigkeit in $n$ und $i$ braucht.
 Und diese Bedingung tretet schon ein, ohne dass wir die Sublinear-Growth Bedingung überhaupt benutzt haben.
 
 
-\subsection {Oszillatorischer Produktansatz}\label{sec:osz}
+\subsection {Oszillatorischer Produktansatz}\label{sec:transport:osz}
 
-Hier präzisieren wir unseren Ansatz \eqref{eq:diskret:ansatz} aus dem letztem Unterkapitel. % \ref{sec:diskret}.
-Wir machen hier den Ansatz, dass Oszillationen im Raum und auf Gitterniveau vorhanden sind und untersuchen, wie sich die Amplitude in der Zeit ausbreitet.
-Weil wir eine lineare Differentialgleichung untersuchen, vermuten wir, dass man $u_k$ als Summe einer glatten und einer unstetigen, hochfrequenten Funktion schreiben kann.
-Daher wählen wir für $u_1$ und $u_2$ aus \eqref{eq:diskret:ansatz} nun konkreter 
-\[ 
-u_k(n, i, t_n, x_i) = w_k(t_n, x_i) + (-1)^i \Omega(n) z_k(t_n, x_i), \qquad \text{für $k = 1,2$}
-\]
-für glatte Funktionen $w_k, z_k \neq 0$.
-Setzt man dies in die vorherigen Rechnungen ein, so erhält man anstelle von Gleichung \eqref{eq:diskret:oh}
+Hier präzisieren wir unseren Ansatz \eqref{eq:transport:diskret:ansatz} aus dem letztem Unterkapitel. % \ref{sec:transport:diskret}.
+Die Anfangsbedingung für $u_0$ in \eqref{eq:transport:diskret:anfangsbedinungen} lautet
+\begin{align*}
+u_0(0, i, 0, x_i) &= v^0_i = \rd\bigl(U(x_i)\bigr) = U(x_i) - \bigl[ \underbrace{U(x_i) - \rd\bigl(U(x_i)\bigr)}_{=: \Delta_\eps U(x_i)} \bigr]\\
+&= U(x_i) - \Delta_\eps U(x_i),
+\end{align*}
+wobei $\abs{\Delta_\eps U(x_i)} = \Delta_\eps U(x_i) \leq \eps$ gilt.
+Das Vorzeichen der Rundungsfehler kann nach der ersten Iteration jedoch von Gitterpunkt zu Gitterpunkt schon anders sein!
+Deshalb motiviert das hier den Ansatz, dass Oszillationen im Raum und auf Gitterniveau vorhanden sind und wir untersuchen, wie sich die Amplitude in der Zeit ausbreitet.
+Weil wir in \eqref{eq:adv:pde} eine lineare Differentialgleichung betrachten, vermuten wir, dass man $u_k$ für $k = 0,1,2$ und alle Iterationen $n \in \N$ als Summe einer glatten und einer unstetigen, hochfrequenten Funktion schreiben kann.
+Daher wählen wir für $u_0, u_1$ und $u_2$ aus \eqref{eq:transport:diskret:ansatz} nun konkreter 
+\begin{align*}
+u_k(n, i, t_n, x_i) &= w_k(t_n, x_i) + (-1)^i \Omega(n) z_k(t_n, x_i), \qquad \text{für $k = 0,1,2$}
+\end{align*}
+für glatte Funktionen $w_k, z_k$, $\Omega(0) = 1$ und
+\begin{align}\label{eq:transport:osz:anfangsbedinungen}
+\begin{split}
+w_0(0, x_i) &= U(x_i),\\
+w_1(0, x_i) &= 0,\\
+w_2(0, x_i) &= 0,
+\end{split}&
+\begin{split}
+z_0(0, x_i) &= \Delta_\eps U(x_i),\\
+z_1(0, x_i) &= 0,\\
+z_2(0, x_i) &= 0.
+\end{split}
+\end{align}
+Setzt man dies in die vorherigen Rechnungen ein, so erhält man anstelle von Gleichung \eqref{eq:transport:diskret:o1}
 
 \vspace{0.4cm}
-\noindent \textbf{In der Ordnung $O(h)$:}
-\begin{align}\label{eq:osz:o1} % \nonumber
+\noindent \textbf{In der Ordnung $O(1)$:}
+\begin{align}\label{eq:transport:osz:o1} % \nonumber
 % \begin{split}
-\lambda \bigl( \partial_t u_0(t_n, x_i) + \partial_x u_0(t_n, x_i) \bigr) = - (-1)^i z_1(t_n, x_i) \Bigl[ \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \Bigr].
+- (-1)^i z_0(t_n, x_i) \Bigl[ \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \Bigr] = 0.
 \end{align}
 
-Da diese Gleichung für alle $h > 0$ gilt und die linke Seite eine glatte Funktion ist, kann diese Gleichnung nur dann für alle $n \in \N$ und $i \in \Z$ gelten, wenn beide Seiten verschwinden.
-Hieraus folgern wir
+Da diese Gleichung für alle Gitterpunkte $(n,i)$ gilt und die Funktion $F(t,x) = 0$ glatt ist, können wir unter der Annahme, dass $z_0 \neq 0$ gilt, Lemma \ref{lemma:transport:diskret:konvergenz_gitter} benutzen.
 \begin{satz}\label{satz:omega_n}
 Es gilt
-\[ \Omega(n) = (1 - 2 \lambda)^n \]
+\[ \Omega(n) = (1 - 2 \lambda)^n. \]
 \end{satz}
 \begin{proof}
 Weil $z_1 \neq 0$ gilt, existiert ein Punkt $(t,x) \in \Rp \times \R$ mit $z_1(t,x) \neq 0$.
-Nach Lemma \ref{lemma:diskret:konvergenz_gitter} existiert für jedes $n \in \N$ ein $i \in \Z$ mit
+Nach Lemma \ref{lemma:transport:diskret:konvergenz_gitter} existiert für jedes $n \in \N$ ein $i \in \Z$ mit
 \[  \abs{(-1)^i z_1(t, x) \bigl( \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \bigr)} \leq \abs{(-1)^i \frac {t}{\lambda n} \partial_x z_1(t, x) \bigl( \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \bigr)}. \]
 Angenommen es gelte $\Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \neq 0$.
 Hieraus folgt wiederum für alle $n \in \N$
@@ -229,26 +252,27 @@ was zu $z_1(t,x) = 0$ führt, ein Widerspruch zur Voraussetzung $z_1(t,x) \neq 0
 Das impliziert $\Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) = 0$ für alle $n \in \N$ und mit $\Omega(0) = 1$ folgt die Behauptung.
 \end{proof}
 
-Setzt man Satz \ref{satz:omega_n} nun in den Ansatz ein, so fallen die Anteile von $u_2$ in der Gleichung \eqref{eq:diskret:oh2} für diskrete Ansätze weg.
-Daher reduziert sich der diskrete Ansatz \eqref{eq:diskret:ansatz} zu
-\begin{align}\label{eq:osz:ansatz}
-v^n_i = u_0(t_n, x_i) + h \bigl( w_1(t_n, x_i) + (-1)^i (1 - 2 \lambda)^n z_1(t_n, x_i) \bigr) + o(h^2)
+Setzt man Satz \ref{satz:omega_n} nun in den Ansatz ein, so fallen die Anteile von $u_2$ in der Gleichung \eqref{eq:transport:diskret:oh2} für diskrete Ansätze weg.
+Daher reduziert sich dieser Ansatz hier zu
+\begin{align}\label{eq:transport:osz:ansatz}
+v^n_i = w_0(t_n, x_i) + h  w_1(t_n, x_i) + (-1)^i (1 - 2 \lambda)^n \bigl( z_0(t_n, x_i) + h z_1(t_n, x_i) \bigr) + o(h)
 \end{align}
-und sortiert man die Gleichungen \eqref{eq:diskret:oh} und \eqref{eq:diskret:oh2} nach stetigen und unstetigen Anteilen, so erhalten wir die Gleichungen
+und sortiert man die Gleichungen \eqref{eq:transport:diskret:oh} und \eqref{eq:transport:diskret:oh2} nach stetigen und unstetigen Anteilen, so erhalten wir die Gleichungen
 
 \vspace{0.4cm}
 \noindent \textbf{In der Ordnung $O(h)$:}
-\begin{align}\label{eq:osz:oh}
-\partial_t u_0(t_n, x_i) + \partial_x u_0(t_n, x_i) = 0
+\begin{align}\label{eq:transport:osz:oh}
+\partial_t w_0(t_n, x_i) + \partial_x w_0(t_n, x_i) = 0\\
+\partial_t z_0(t_n, x_i) + \frac {1} {2\lambda - 1} \partial_x z_0(t_n, x_i) = 0
 \end{align}
 \vspace{0.4cm}
 \noindent \textbf{In der Ordnung $O(h^2)$:}
 % {\small
-\begin{align}\label{eq:osz:oh2}
-\partial_t w_1(t_n, x_i) + \partial_x w_1(t_n, x_i) &= \frac {1 - \lambda}{2} \partial^2_x u_0(t_n, x_i)\\
-\partial_t z_1(t_n, x_i) + \partial_x z_1(t_n, x_i) &= 0
+\begin{align}\label{eq:transport:osz:oh2}
+\partial_t w_1(t_n, x_i) + \partial_x w_1(t_n, x_i) &= \frac {1 - \lambda}{2} \partial^2_x w_0(t_n, x_i)\\
+\partial_t z_1(t_n, x_i) + \partial_x z_1(t_n, x_i) &= \frac {\lambda - 1} {2 (2\lambda - 1)}   \partial^2_x z_0(t_n, x_i)
 \end{align}
 
 \vspace{0.4cm}
-\noindent \textbf{Mit den Anfangsbedingungen:}
-\[ u_0(0, x_i) = U(x_i), \quad w_1(0, x_i) = 0 \quad \text{und} \quad z_1(0, x_i) = 0 \qquad \forall i \in \Z. \]
+\noindent \textbf{Mit den Anfangsbedingungen in \eqref{eq:transport:osz:anfangsbedinungen}}
+
