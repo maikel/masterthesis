@@ -16,14 +16,14 @@ v^{n+1}_i = v^n_i - \lambda (v^n_i - v^n_{i-1})
 \end{align}
 bestimmt.
 Es ist bereits bekannt, dass das Verfahren f"ur $\lambda \leq 1$ stabil und f"ur $\lambda = 1$ sogar exakt ist.
-Wir versuchen hier den instabilen Fall $\lambda > 1$ besser zu verstehen und nehmen in diesem Kapitel daher $\lambda = 1 + \eps$ f"ur ein $\eps > 0$ an.
+Wir versuchen hier den instabilen Fall $\lambda > 1$ besser zu verstehen und nehmen in diesem Kapitel daher $\lambda = 1 + \eta$ f"ur ein $\eta > 0$ an.
 
 
 
 \subsection{Beispiel}
 
-Wir schauen uns die Ergebnisse des Verfahrens für die Anfangswerte $U(x) = \sin(\pi x)$ und $\lambda = 1 + \eps$ für verschiedene $\eps$ an.
-Wir haben die Beispiele durch folgendes Skript in \emph{GNU Octave} umgesetzt und untersuchen, was für kleine $\eps$ und kleine $h$ passiert.
+Wir schauen uns die Ergebnisse des Verfahrens für die Anfangswerte $U(x) = \sin(\pi x)$ und $\lambda = 1 + \eta$ für verschiedene $\eta$ an.
+Wir haben die Beispiele durch folgendes Skript in \emph{GNU Octave} umgesetzt und untersuchen, was für kleine $\eta$ und kleine $h$ passiert.
 \lstinputlisting[linerange={1-33}]{advektion/beispiel.m}
 
 \input{advektion/beispiel_figures}
@@ -43,12 +43,12 @@ Möchte man jedoch für $h \to 0$ einen Punkt $(t,x)$ in der Raumzeit approximie
 % Da unsere Gleichung linear ist, nehmen wir an, dass wir die Gitterfunktion als Summe einer Lösung und kleinen Oszillationen schreiben können.
 Unser Ansatz lautet dieses mal
 \begin{align}\label{eq:diskret:ansatz}
-v^n_i = u_0(t_n, x_i) + h u_1(n, i, t_n, x_i) + h^2 u_2(n, i, t_n, x_i) + o(h^2)
+v^n_i = u_0(n, i, t_n, x_i) + h u_1(n, i, t_n, x_i) + h^2 u_2(n, i, t_n, x_i) + o(h^2)
 \end{align}
 und wir möchten hier betonen, dass wir, wie immer, davon ausgehen, dass die Entwicklung asymptotisch geordnet ist.
 Das heißt z.\,B., dass $h u_1 \in o(u_0)$ für $h \to 0$ gilt und das führt zur allgemein bekannten Sublinear-Growth Bedingung
 \begin{align}\label{eq:diskret:sublineargrowth}
-\lim_{h \to 0} \: h \frac{u_1(n, i, t_n, x_i)}{u_0(t_n, x_i)} = 0.
+\lim_{h \to 0} \: h \frac{u_1(n, i, t_n, x_i)}{u_0(n, i, t_n, x_i)} = 0.
 \end{align}
 Zunächst fällt auf, dass wir im Ansatz \eqref{eq:diskret:ansatz} Terme bis $h^2$ entwickeln.
 Durch die kurze Zeit- und Ortskala wirken Terme in einer Ordnung niedriger.
@@ -58,7 +58,8 @@ Wir rechnen hier nun die einzelnen Summanden von \eqref{eq:adv:scheme_rechnung} 
 \begin{align} \label{eq:diskret:diff1}
 v^{n+1}_i - v^n_i =
 \begin{split}
-&\lambda h \partial_t u_0(t_n, x_i) + \frac {(\lambda h)^2}{2} \partial^2_t u_0(t_n, x_i) + \frac {(\lambda h)^3}{6} \partial^3_t u_0(t_n, x_i)\\
+& u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)\\
+&\lambda h \partial_t u_0(n+1, i, t_n, x_i) + \frac {(\lambda h)^2}{2} \partial^2_t u_0(n+1, i, t_n, x_i) + \frac {(\lambda h)^3}{6} \partial^3_t u_0(n+1, i, t_n, x_i)\\
 &+ h \bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i, t_n, x_i) \bigr)\\
 &+ \lambda h^2 \partial_t u_1(n+1, i, t_n, x_i) + \frac {\lambda^2 h^3}{2} \partial^2_t u_1(n+1, i, t_n, x_i)\\
 &+ h^2 \bigl( u_2(n+1, i, t_n, x_i) - u_2(n, i, t_n, x_i) \bigr)\\
@@ -70,7 +71,8 @@ v^{n+1}_i - v^n_i =
 \begin{align} \label{eq:diskret:diff2}
 \lambda (v^n_i - v^n_{i-1}) =
 \begin{split}
-&\lambda h \partial_x u_0(t_n, x_i) - \frac {\lambda h^2}{2} \partial^2_x u_0(t_n, x_i) + \frac {\lambda h^3}{6} \partial^3_x u_0(t_n, x_i)\\
+& \lambda( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) )\\
+&\lambda h \partial_x u_0(n, i-1, t_n, x_i) - \frac {\lambda h^2}{2} \partial^2_x u_0(n, i-1, t_n, x_i) + \frac {\lambda h^3}{6} \partial^3_x u_0(n, i-1, t_n, x_i)\\
 &+ \lambda h \bigl( u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)\\
 &+ \lambda h^2 \partial_x u_1(n, i-1, t_n, x_i) - \frac {\lambda h^3}{2} \partial^2_x u_1(n, i-1, t_n, x_i)\\
 &+ \lambda h^2 \bigl( u_2(n, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr)\\
@@ -82,9 +84,15 @@ v^{n+1}_i - v^n_i =
 Setzt man \eqref{eq:diskret:diff1} und \eqref{eq:diskret:diff2} in \eqref{eq:adv:scheme} ein, liefert uns dies die Gleichungen
 
 \vspace{0.4cm}
+\noindent \textbf{In der Ordnung $O(1)$:}
+\begin{align}\label{eq:diskret:o1}
+u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)
++ \lambda \bigl(u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr) = 0
+\end{align}
+\vspace{0.4cm}
 \noindent \textbf{In der Ordnung $O(h)$:}
 \begin{align}\label{eq:diskret:oh}
-\lambda \bigl( \partial_t u_0(t_n, x_i) + \partial_x u_0(t_n, x_i) \bigr) =
+\lambda \bigl( \partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i) \bigr) =
 \begin{split}
 &- \bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i, t_n, x_i) \bigr)\\
 &- \lambda \bigl(u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)
@@ -117,13 +125,13 @@ Setzt man \eqref{eq:diskret:diff1} und \eqref{eq:diskret:diff2} in \eqref{eq:adv
 
 \vspace{0.4cm}
 \noindent \textbf{Mit den Anfangsbedingungen:}
-\[ u_0(0, x_i) = U(x_i), \quad u_1(0, i, 0, x_i) = 0 \quad \text{und} \quad u_2(0, i, 0, x_i) = 0 \qquad \forall i \in \Z. \]
+\[ u_0(0, i, 0, x_i) = U(x_i), \quad u_1(0, i, 0, x_i) = 0 \quad \text{und} \quad u_2(0, i, 0, x_i) = 0 \qquad \forall i \in \Z. \]
 
 Diese Gleichungen gelten nun für alle $h > 0$ und alle $n, i \in \N$.
-Aus \eqref{eq:diskret:oh} würden wir gern mithilfe der Sublinear-Growth Bedingung \eqref{eq:diskret:sublineargrowth} schließen, dass die rechte Seite der Gleichung verschwinden muss.
-Dies gelang uns jedoch nur mit einem konkreterem Produktansatz, welcher im nächstem Unterkapitel gezeigt wird.
+Noch gelingt es uns nicht, aus diesen Bedinungen eine eindeutige Lösung für unsere Ansatzfunktionen $u_i, i=1,2,3$ zu bestimmen.
+Daher folgt im nächstem Kapitel ein konkreterer Produktansatz.
 Außerdem kann man $\lambda = 1 + \eps$ einsetzen, nach $\eps$ entwickeln und zusätzlich nach Ordnungen von $h$ und $\eps$ sortieren.
-Auch dies heben wir uns jedoch für spätere Unterkapitel auf.
+Auch dies heben wir uns (vielleicht) jedoch für spätere Unterkapitel auf.
 Trotzdem beweisen wir hier noch zwei Lemmata, um besser zu verstehen wie man von Bedingungen auf dem Gitter auf Bedingungen im Raum schließen kann.
 
 \begin{lemma}[Konstanz für eine Dimension] \label{lemma:diskret:konstant1}
@@ -244,89 +252,3 @@ und sortiert man die Gleichungen \eqref{eq:diskret:oh} und \eqref{eq:diskret:oh2
 \vspace{0.4cm}
 \noindent \textbf{Mit den Anfangsbedingungen:}
 \[ u_0(0, x_i) = U(x_i), \quad w_1(0, x_i) = 0 \quad \text{und} \quad z_1(0, x_i) = 0 \qquad \forall i \in \Z. \]
-% }
-% Gleichung \eqref{eq:osz:o1} und die Sublinear-Growth Bedingung reichen schon aus, um $\Omega(n)$ zu bestimmen.
-
-% \begin{satz}[Bestimmtung von $\Omega(n)$]\label{lemma:osz:omega_n}
-% Es gelte $\lambda > \frac 12$, für alle $h > 0$, $n \in \N$ und $i \in \Z$ gelte die Gleichung \eqref{eq:diskret:oh} und es gelte die Sublinear-Grwoth Bedingung \eqref{eq:diskret:sublineargrowth}.
-% Wenn außerdem $\Omega(0) = 1$ gilt und ein $h > 0$ mit $\Psi_1(\lambda h, h) \neq 0$ existiert, dann folgt
-% \begin{align*}
-% \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) = 0
-% \end{align*}
-% und
-% \begin{align*}
-% \Omega(n) = (1 - 2 \lambda)^n.
-% \end{align*}
-% \end{satz}
-% \begin{proof}
-% Sei $h > 0$ derart, dass $\Psi(\lambda h, h) \neq 0$ gilt. Dann gilt $t_1 = \lambda h$ und $x_1 = h$, also
-% \begin{align}\label{eq:osz:n1}
-% \partial_t u_0(\lambda h, h) + \partial_x u_0(\lambda h, h) &= \frac 1 \lambda \Psi_1(\lambda h, h) \Bigl[ \underbrace{\Omega(2) - ( 1 - 2 \lambda ) \Omega(1)}_{=: A} \Bigr]
-% \end{align}
-% Für jedes $n \in \N$ betrachte $h_n = \frac h n$. Dann gelten $t^{h_n}_n = \lambda h$ und $x^{h_n}_n = h$ und somit folgt f"ur jedes $n \in \N$
-% \begin{align}\label{eq:osz:n}
-% \partial_t u_0(\lambda h, h) + \partial_x u_0(\lambda h, h) &= - \frac 1 \lambda (-1)^n \Psi_1(\lambda h, h) \Bigl[ \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \Bigr]
-% \end{align}
-% Da \eqref{eq:osz:n1} und \eqref{eq:osz:n} beide gleich sind, folgt unter der Annahme, dass $\Psi_1(\lambda h, h) \neq 0$ gilt
-% \begin{align}\label{eq:osz:omegan}
-% -A (-1)^n = \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n)
-% \end{align}
-% Und das impliziert mit $\Omega(0) = 1$ wiederum
-% \begin{align}\nonumber
-% \Omega(n+1) &= -A \sum_{k=1}^n (-1)^{n-k} (1 - 2 \lambda)^k + (1 - 2 \lambda)^{n+1}\\
-% &= -A (- 2 \lambda)^n - (-A)^n + (1 - 2 \lambda)^{n+1}.
-% \end{align}
-% Hieraus folgt für $2 \lambda > 1$, also $2\lambda = 1 + K$ für ein $K > 0$
-% \begin{align*}
-% \abs{\Omega(n+1)} &= \abs{-A (- 2 \lambda)^n -(-A)^n + (1 - 2 \lambda)^n}\\
-% &\geq \bigl\lvert \abs{-A (- 2 \lambda)^n} - \abs{-(-A)^n + (1 - 2 \lambda)^n} \bigr\rvert\\
-% &\geq (2 \lambda)^n \abs{A}\\
-% &= (1 + K)^n \abs{A}\\
-% &\geq n K  \abs{A}\\
-% \end{align*}
-% und setzt man das in die Sublinear-Growth Bedingung \eqref{eq:diskret:sublineargrowth} ein, so erhalten wir
-% \begin{align*}
-% 0 = \lim_{h \to 0} \: h \frac{\abs{\phi_1(n, i, t_n, x_i)}}{\abs{u_0(t_n, x_i)}}
-% &= \lim_{h \to 0} \: h \frac{\abs{\Omega(n) (-1)^i \Psi_1(t_n, x_i)}}{\abs{u_0(t_n, x_i)}}\\
-% &= \lim_{h \to 0} \: h \abs{\Omega(n)} \frac{\abs{\Psi_1(t_n, x_i)}}{\abs{u_0(t_n, x_i)}}\\
-% &= \frac{\abs{\Psi_1(t, x)}}{\abs{u_0(t, x)}} \cdot \lim_{h \to 0} \: h \abs{\Omega(n)}\\
-% &\geq \frac{\abs{\Psi_1(t, x)}}{\abs{u_0(t, x)}} \cdot \lim_{h \to 0} \: h \cdot (n-1) K \abs{A}\\
-% &= \frac{\abs{\Psi_1(t, x)}}{\abs{u_0(t, x)}} \cdot \lim_{h \to 0} \: h \cdot \frac{t_{n-1}}{\lambda h} K \abs{A}\\
-% &= \frac{\abs{\Psi_1(t, x)}}{\abs{u_0(t, x)}} \cdot \frac{K}{\lambda} t \abs{A}\\
-% \end{align*}
-% Das impliziert $A = 0$ und mit \eqref{eq:osz:omegan} gilt für alle $n \in \N$
-% \[ 0 = \Omega(n+1) - (1 - 2\lambda) \Omega(n) \]
-% und mit $\Omega(0) = 1$
-% \[ \Omega(n) = (1 - 2\lambda)^n. \qedhere \]
-% \end{proof}
-% \noindent Mit dieser neuen Erkenntnis fassen wir den Ansatz nun zu
-% {\footnotesize
-% \begin{align*}
-% v^n_i &= u_0(t_n, x_i) + h \bigl(u_1(t_n, x_i) + (1 - 2\lambda)^n (-1)^i \Psi_1(t_n, x_i)\bigr) + h^2 \bigl( u_2(t_n, x_i) + (1 - 2\lambda)^n (-1)^i \Psi_2(t_n, x_i) \bigr) + o(h^2)
-% \end{align*}
-% }
-% zusammen. Anstelle der Gleichungen \eqref{eq:diskret:o1}, \eqref{eq:diskret:oh2} und \eqref{eq:diskret:oh3} erhalten wir
-
-% \vspace{0.4cm}
-% \noindent \textbf{In der Ordnung $O(1)$:}
-% \begin{align}\label{eq:osz:o1n}
-% \begin{split}
-% \partial_t u_0(t_n, x_i) + \partial_x u_0(t_n, x_i) &= 0,\\
-% u_0(0, x) &= U(x)
-% \end{split}
-% \end{align}
-
-% \vspace{0.4cm}
-% \noindent \textbf{In der Ordnung $O(h)$:}
-% % {\small
-% \begin{align}\label{eq:osz:oh}
-% \partial_t u_1(t_n, x_i) + \partial_x u_1(t_n, x_i) =
-% \begin{split}
-% &\frac {1-\lambda}{2} \partial^2_x u_0(t_n, x_i)\\
-% &+ (1 - 2\lambda)^{n+1} (-1)^{i+1} \left( \partial_t \Psi_1(t_n, x_i) + \frac 1 {2\lambda -1} \partial_x \Psi_1(t_n, x_i) \right)\\
-% \end{split}\\
-% u_1(0, x_i) + (-1)^i \Psi(0, x_i) = 0
-% \end{align}
-% % }
-
-    
