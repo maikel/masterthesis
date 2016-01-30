@@ -44,3 +44,13 @@ Es gilt
 &= \frac{1 - \lambda}{2}  \partial^2_x w_0(t_n, x_i)\\
 &\qquad + (-1)^i (1 - 2\lambda)^{n} \left( \frac{1 - \lambda}{2 (2 \lambda - 1)} \partial^2_x z_0(t_n, x_i) \right)
 \end{align*}
+und ganz analog wie bei $O(h)$ gilt ferner
+\begin{align*}
+\partial_t u_1(n+1, i, t_n, x_i) + \partial_x u_1(n, i-1, t_n, x_i) &= \partial_t w_1(t_n, x_i) + \partial_x w_1(t_n, x_i)\\
+&\qquad + (-1)^i (1 - 2\lambda)^n \bigl( (1 - 2\lambda) \partial_t z_1(t_n, x_i) - \partial_x z_1(t_n, x_i) \bigr) \\
+\end{align*}
+und hieraus folgt für alle $(t_n, x_i)$
+\begin{align*}
+\partial_t w_1(t_n, x_i) + \partial_x w_1(t_n, x_i) &= \frac{1 - \lambda}{2}  \partial^2_x w_0(t_n, x_i)\\
+\partial_t z_1(t_n, x_i) + \frac{1}{2 \lambda - 1} \partial_x z_1(t_n, x_i) &= \frac{\lambda - 1}{2 (2 \lambda - 1)^2} \partial^2_x z_0(t_n, x_i)
+\end{align*}
