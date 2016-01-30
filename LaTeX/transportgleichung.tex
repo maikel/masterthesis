@@ -24,9 +24,196 @@ Wir versuchen hier den instabilen Fall $\lambda > 1$ besser zu verstehen und neh
 
 Wir schauen uns die Ergebnisse des Verfahrens für die Anfangswerte $U(x) = \sin(\pi x)$ und $\lambda = 1 + \eta$ für verschiedene $\eta$ an.
 Wir haben die Beispiele durch folgendes Skript in \emph{GNU Octave} umgesetzt und untersuchen, was für kleine $\eta$ und kleine $h$ passiert.
-\lstinputlisting[linerange={1-33}]{advektion/beispiel.m}
+\lstinputlisting[linerange={1-33}]{octave/transport_beispiel.m}
 
-\input{advektion/beispiel_figures}
+\begin{figure}
+\centering
+% \begin{tikzpicture}[scale=0.58]
+% \begin{axis}[
+%     height = 0.6\textwidth,
+%     width = 0.6\textwidth,
+%     title = {$n = 120$},
+%     xtick = {-2,-1,...,2},
+%     grid  = both,
+% ]
+% \addplot[myblue] table [y index= 1] {data/V_sinus_eps_0.1_h_0.01.dat};
+% \end{axis}
+% \end{tikzpicture}
+\begin{tikzpicture}[scale=0.58]
+\begin{axis}[
+    height = 0.6\textwidth,
+    width = 0.6\textwidth,
+    title = {$n = 185$},
+    xtick = {-2,-1,...,2},
+    grid  = both,
+]
+\addplot[myblue] table [y index= 2] {data/V_sinus_eps_0.1_h_0.01.dat};
+\end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.58]
+\begin{axis}[
+    height = 0.6\textwidth,
+    width = 0.6\textwidth,
+    title = {$n = 200$},
+    xtick = {-2,-1,...,2},
+    grid  = both,
+]
+\addplot[myblue] table [y index= 3] {data/V_sinus_eps_0.1_h_0.01.dat};
+\end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.58]
+\begin{axis}[
+    height = 0.6\textwidth,
+    width = 0.6\textwidth,
+    title = {$n = 220$},
+    xtick = {-2,-1,...,2},
+    grid  = both,
+]
+\addplot[myblue] table [y index= 4] {data/V_sinus_eps_0.1_h_0.01.dat};
+\end{axis}
+\end{tikzpicture}
+\caption{Beispiel für $\eta = 10^{-1}$ und $h=10^{-2}$}
+\label{fig:adv:e-1h-2}
+\end{figure}
+
+\begin{figure}
+\centering
+% \begin{tikzpicture}[scale=0.58]
+% \begin{axis}[
+%     height = 0.6\textwidth,
+%     width = 0.6\textwidth,
+%     title = {$n = 120$},
+%     xtick = {-2,-1,...,2},
+%     grid  = both,
+% ]
+% \addplot[myblue] table [y index= 1] {data/V_sinus_eps_0.1_h_0.001.dat};
+% \end{axis}
+% \end{tikzpicture}
+\begin{tikzpicture}[scale=0.58]
+\begin{axis}[
+    height = 0.6\textwidth,
+    width = 0.6\textwidth,
+    title = {$n = 185$},
+    xtick = {-2,-1,...,2},
+    grid  = both,
+]
+\addplot[myblue] table [y index= 2] {data/V_sinus_eps_0.1_h_0.001.dat};
+\end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.58]
+\begin{axis}[
+    height = 0.6\textwidth,
+    width = 0.6\textwidth,
+    title = {$n = 200$},
+    xtick = {-2,-1,...,2},
+    grid  = both,
+]
+\addplot[myblue] table [y index= 3] {data/V_sinus_eps_0.1_h_0.001.dat};
+\end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.58]
+\begin{axis}[
+    height = 0.6\textwidth,
+    width = 0.6\textwidth,
+    title = {$n = 220$},
+    xtick = {-2,-1,...,2},
+    grid  = both,
+]
+\addplot[myblue] table [y index= 4] {data/V_sinus_eps_0.1_h_0.001.dat};
+\end{axis}
+\end{tikzpicture}
+\caption{Beispiel für $\eta = 10^{-1}$ und $h=10^{-3}$}
+\label{fig:adv:e-1h-3}
+\end{figure}
+
+\begin{figure}
+\centering
+% \begin{tikzpicture}[scale=0.58]
+% \begin{axis}[
+%     height = 0.6\textwidth,
+%     width = 0.6\textwidth,
+%     title = {$n = 240$},
+%     xtick = {-2,-1,...,2},
+%     grid  = both,
+% ]
+% \addplot[myblue] table [y index= 1] {data/V_sinus_eps_0.05_h_0.01.dat};
+% \end{axis}
+% \end{tikzpicture}
+\begin{tikzpicture}[scale=0.58]
+\begin{axis}[
+    height = 0.6\textwidth,
+    width = 0.6\textwidth,
+    title = {$n = 370$},
+    xtick = {-2,-1,...,2},
+    grid  = both,
+]
+\addplot[myblue] table [y index= 2] {data/V_sinus_eps_0.05_h_0.01.dat};
+\end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.58]
+\begin{axis}[
+    height = 0.6\textwidth,
+    width = 0.6\textwidth,
+    title = {$n = 400$},
+    xtick = {-2,-1,...,2},
+    grid  = both,
+]
+\addplot[myblue] table [y index= 3] {data/V_sinus_eps_0.05_h_0.01.dat};
+\end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.58]
+\begin{axis}[
+    height = 0.6\textwidth,
+    width = 0.6\textwidth,
+    title = {$n = 440$},
+    xtick = {-2,-1,...,2},
+    grid  = both,
+]
+\addplot[myblue] table [y index= 4] {data/V_sinus_eps_0.05_h_0.01.dat};
+\end{axis}
+\end{tikzpicture}
+\caption{Beispiel für $\eta = 5\cdot 10^{-2}$ und $h=10^{-2}$}
+\label{fig:adv:e5-2h-2}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.58]
+\begin{axis}[
+    height = 0.6\textwidth,
+    width = 0.6\textwidth,
+    title = {$n = 370$},
+    xtick = {-2,-1,...,2},
+    grid  = both,
+]
+\addplot[myblue] table [y index= 2] {data/V_sinus_eps_0.05_h_0.001.dat};
+\end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.58]
+\begin{axis}[
+    height = 0.6\textwidth,
+    width = 0.6\textwidth,
+    title = {$n = 400$},
+    xtick = {-2,-1,...,2},
+    grid  = both,
+]
+\addplot[myblue] table [y index= 3] {data/V_sinus_eps_0.05_h_0.001.dat};
+\end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.58]
+\begin{axis}[
+    height = 0.6\textwidth,
+    width = 0.6\textwidth,
+    title = {$n = 440$},
+    xtick = {-2,-1,...,2},
+    grid  = both,
+]
+\addplot[myblue] table [y index= 4] {data/V_sinus_eps_0.05_h_0.001.dat};
+\end{axis}
+\end{tikzpicture}
+\caption{Beispiel für $\eta = 5\cdot 10^{-2}$ und $h=10^{-3}$}
+\label{fig:adv:e5-2h-3}
+\end{figure}
 
 Vergleicht man nun die Plots in Abbildung~\ref{fig:adv:e-1h-2} und mit den Plots auf Abbildung~\ref{fig:adv:e-1h-3}, so erkennt man, dass die maximale Amplitude der Oszillation scheinbar unabh"angig von $h$ mit der Anzahl der Iterationen $n$ w"achst.
 Halbiert man jedoch den Wert für $\eta$, so ändert sich auch die Rate, um die die Amplitude wächst.
@@ -106,7 +293,7 @@ u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)
 \begin{align}\label{eq:transport:diskret:oh2}
 \lambda \bigl( \partial_t u_1(n+1, i, t_n, x_i) + \partial_x u_1(n, i-1, t_n, x_i) \bigr) =
 \begin{split}
-&\frac {\lambda}{2} \partial^2_x u_0(t_n, x_i) - \frac{\lambda^2}{2} \partial^2_t u_0(t_n, x_i)\\
+&\frac {\lambda}{2} \partial^2_x u_0(n, i-1, t_n, x_i) - \frac{\lambda^2}{2} \partial^2_t u_0(n+1, i, t_n, x_i)\\
 &- \bigl( u_2(n+1, i, t_n, x_i) - u_2(n, i, t_n, x_i) \bigr)\\
 &- \lambda \bigl(u_2(n, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr)
 \end{split}
@@ -174,7 +361,7 @@ existiert, dann gilt für alle $(t, x) \in \Rp \times \R$, dass für alle $n \in
 \end{align}
 \end{lemma}
 \begin{proof}
-Wie in Lemma~\ref{lemma:transport:diskret:konstant1} setzen wir $h = \frac {t}{\lambda n}$.
+Ähnlich wie in Lemma~\ref{lemma:transport:diskret:konstant1} setzen wir $h = \frac {t}{\lambda n}$.
 Dann gilt $t_n = \lambda n h = t$ und $x_i = i h$ für $i \in \Z$.
 O.\,B.\,d.\,A. gelte $x > 0$.
 Dann gibt es ein kleinstes $i(n) = i \in \N$, für das $x_{i-1} < x \leq x_i$ gilt.
@@ -203,7 +390,7 @@ Und diese Bedingung tretet schon ein, ohne dass wir die Sublinear-Growth Bedingu
 Hier präzisieren wir unseren Ansatz \eqref{eq:transport:diskret:ansatz} aus dem letztem Unterkapitel. % \ref{sec:transport:diskret}.
 Die Anfangsbedingung für $u_0$ in \eqref{eq:transport:diskret:anfangsbedinungen} lautet
 \begin{align*}
-u_0(0, i, 0, x_i) &= v^0_i = \rd\bigl(U(x_i)\bigr) = U(x_i) - \bigl[ \underbrace{U(x_i) - \rd\bigl(U(x_i)\bigr)}_{=: \Delta_\eps U(x_i)} \bigr]\\
+u_0(0, i, 0, x_i) &= \rd\bigl(U(x_i)\bigr) = U(x_i) - \bigl[ \underbrace{U(x_i) - \rd\bigl(U(x_i)\bigr)}_{=: \Delta_\eps U(x_i)} \bigr]\\
 &= U(x_i) - \Delta_\eps U(x_i),
 \end{align*}
 wobei $\abs{\Delta_\eps U(x_i)} = \Delta_\eps U(x_i) \leq \eps$ gilt.
@@ -257,22 +444,28 @@ Daher reduziert sich dieser Ansatz hier zu
 \begin{align}\label{eq:transport:osz:ansatz}
 v^n_i = w_0(t_n, x_i) + h  w_1(t_n, x_i) + (-1)^i (1 - 2 \lambda)^n \bigl( z_0(t_n, x_i) + h z_1(t_n, x_i) \bigr) + o(h)
 \end{align}
-und sortiert man die Gleichungen \eqref{eq:transport:diskret:oh} und \eqref{eq:transport:diskret:oh2} nach stetigen und unstetigen Anteilen, so erhalten wir die Gleichungen
+und sortiert man wie in \ldots die Gleichungen \eqref{eq:transport:diskret:oh} und \eqref{eq:transport:diskret:oh2} nach stetigen und hochfrequentiellen Anteilen, so erhalten wir aufgrund der Glattheit der Abbildungen $w_k$ und $z_k$ die Gleichungen
 
 \vspace{0.4cm}
 \noindent \textbf{In der Ordnung $O(h)$:}
-\begin{align}\label{eq:transport:osz:oh}
-\partial_t w_0(t_n, x_i) + \partial_x w_0(t_n, x_i) = 0\\
-\partial_t z_0(t_n, x_i) + \frac {1} {2\lambda - 1} \partial_x z_0(t_n, x_i) = 0
+\begin{align}
+\partial_t w_0(t, x) + \partial_x w_0(t, x) = 0 \label{eq:transport:osz:oh_A}\\
+\partial_t z_0(t, x) + \frac {1} {2\lambda - 1} \partial_x z_0(t, x) = 0 \label{eq:transport:osz:oh_B}
 \end{align}
 \vspace{0.4cm}
 \noindent \textbf{In der Ordnung $O(h^2)$:}
 % {\small
 \begin{align}\label{eq:transport:osz:oh2}
-\partial_t w_1(t_n, x_i) + \partial_x w_1(t_n, x_i) &= \frac {1 - \lambda}{2} \partial^2_x w_0(t_n, x_i)\\
-\partial_t z_1(t_n, x_i) + \partial_x z_1(t_n, x_i) &= \frac {\lambda - 1} {2 (2\lambda - 1)}   \partial^2_x z_0(t_n, x_i)
+\partial_t w_1(t, x) + \partial_x w_1(t, x) &= \frac {1 - \lambda}{2} \partial^2_x w_0(t, x)\\
+\partial_t z_1(t, x) + \partial_x z_1(t, x) &= \frac {1 + \lambda} {2 (2\lambda - 1)} \partial^2_x z_0(t, x)
 \end{align}
 
-\vspace{0.4cm}
 \noindent \textbf{Mit den Anfangsbedingungen in \eqref{eq:transport:osz:anfangsbedinungen}}
+
+\vspace{0.4cm}
+Betrachtet man den Ansatz \eqref{eq:transport:osz:ansatz} nun genauer, so erkennt man, dass der Faktor $(1 - 2\lambda)^n$ für $\lambda > 1$ und $n \to \infty$ unbeschränkt ist.
+Das heißt, der Ansatz kann bestenfalls nur für feste $h > 0$ gelten und hilft höchstens zu verstehen, was das Verfahren unter solchen Bedingungen und in endlich vielen Iterationen tut.
+In diesem Fall gäbe es für jede Zeit $t > 0$ und zu jeder Schranke $X > 0$ ein $h > 0$, so dass $\abs{v^n_i} > X$ und $n \lambda h = t_n < t$ gilt.
+
+Aus der Gleichung \eqref{eq:transport:osz:oh_A} folgt $w_0(t, x) = U(x - t)$ und aus \eqref{eq:transport:osz:oh_B} folgt $z_0(t, x) = \Delta_\eps U(x - t)$.
 

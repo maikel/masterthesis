@@ -1,0 +1,46 @@
+\section{Transportgleichung}
+\subsection{Oszillatorischer Produktansatz: Sortiere nach Frequenz}
+
+Es gilt
+\[ u_k(n, i, t_n, x_i) = w_k(t_n, x_i) + (-1)^i (1 - 2\lambda)^n z_k(t_n, x_i) \quad \text{für $k = 0,1,2$} \]
+und aus \eqref{eq:transport:diskret:oh} folgt 
+
+\vspace{0.4cm}
+\noindent \textbf{In der Ordnung $O(h)$:}
+\begin{align*}
+0 &= \partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i)\\
+&= \partial_t w_0(t_n, x_i) + (-1)^i (1 - 2\lambda)^{n+1} \partial_t z_0(t_n, x_i)\\
+&\qquad + \partial_x w_0(t_n, x_i) + (-1)^{i-1} (1 - 2\lambda)^n \partial_x z_0(t_n, x_i)\\
+&= \partial_t w_0(t_n, x_i) + \partial_x w_0(t_n, x_i)\\
+&\qquad + (-1)^i (1 - 2\lambda)^n \bigl( (1 - 2\lambda) \partial_t z_0(t_n, x_i) - \partial_x z_0(t_n, x_i) \bigr) \\
+\end{align*}
+
+also
+\begin{align*}
+\partial_t w_0(t_n, x_i) + \partial_x w_0(t_n, x_i) &= 0 \qquad \text{und}\\
+\partial_t z_0(t_n, x_i) + \frac {1}{2\lambda - 1} \partial_x z_0(t_n, x_i) &= 0.
+\end{align*}
+
+Hieraus folgt insbesondere auch $\partial^2_t w_0 = \partial^2_x w_0$ und $\partial^2_t z_0 = \frac {1}{(2\lambda - 1)^2} \partial^2_x z_0$.
+
+\vspace{0.4cm}
+\noindent \textbf{In der Ordnung $O(h^2)$:}
+\begin{align*}
+\partial_t u_1(n+1, i, t_n, x_i) + \partial_x u_1(n, i-1, t_n, x_i) &=
+&\frac {1}{2} \partial^2_x u_0(n, i-1, t_n, x_i) - \frac{\lambda}{2} \partial^2_t u_0(n+1, i, t_n, x_i)
+\end{align*}
+Es gilt 
+\begin{align*}
+\frac {1}{2} \partial^2_x u_0(n, i-1, t_n, x_i) \qquad\\
+- \frac{\lambda}{2} \partial^2_t u_0(n+1, i, t_n, x_i)
+&= \frac{1}{2} \bigl( \partial^2_x w_0(t_n, x_i) + (-1)^{i-1} (1 - 2\lambda)^n \partial^2_x z_0(t_n, x_i) \bigr) \\
+&\qquad - \frac{\lambda}{2} \bigl( \partial^2_t w_0(t_n, x_i) + (-1)^i (1 - 2\lambda)^{n+1} \partial^2_t z_0(t_n, x_i) \bigr)\\
+&= \frac{1 - \lambda}{2}  \partial^2_x w_0(t_n, x_i)\\
+&\qquad + (-1)^i (1 - 2\lambda)^{n} \left( - \frac{1}{2} \partial^2_x z_0(t_n, x_i) - \frac{\lambda (1 - 2\lambda)}{2} \partial^2_t z_0(t_n, x_i) \right)\\
+&= \frac{1 - \lambda}{2}  \partial^2_x w_0(t_n, x_i)\\
+&\qquad + (-1)^i (1 - 2\lambda)^{n} \left( - \frac{1}{2} \partial^2_x z_0(t_n, x_i) - \frac{\lambda (1 - 2\lambda)}{2 (2 \lambda - 1)^2} \partial^2_x z_0(t_n, x_i) \right)\\
+&= \frac{1 - \lambda}{2}  \partial^2_x w_0(t_n, x_i)\\
+&\qquad + (-1)^i (1 - 2\lambda)^{n} \left( - \frac{1}{2} \partial^2_x z_0(t_n, x_i) + \frac{\lambda}{2 (2 \lambda - 1)} \partial^2_x z_0(t_n, x_i) \right)\\
+&= \frac{1 - \lambda}{2}  \partial^2_x w_0(t_n, x_i)\\
+&\qquad + (-1)^i (1 - 2\lambda)^{n} \left( \frac{1 - \lambda}{2 (2 \lambda - 1)} \partial^2_x z_0(t_n, x_i) \right)
+\end{align*}

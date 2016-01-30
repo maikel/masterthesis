@@ -41,6 +41,7 @@
 \usepackage{biblatex} 
 \bibliography{Bibliography}
 
+\usepackage[toc,page]{appendix}
     
 % \usepackage[german]{minitoc}
 % \dominitoc
@@ -66,9 +67,14 @@ Beschreibung hochfrequenter numerischer Instabilitäten mit Hilfe asymptotischer
 \chapter{Vorwort}
 \chapter{Multiskalen Asymptotik für finite Differenzen}
 \chapter{Lineare Verfahren}
-\input{advektion/advektion}
+\input{transportgleichung}
 \chapter{Nichtlineare Verfahren}
 
 \input{FrontBackMatter/Bibliography}
+
+\appendix
+
+\chapter{Appendix}
+\input{transportgleichung_appendix}
 
 \end{document}

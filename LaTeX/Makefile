@@ -21,7 +21,7 @@ all: Masterarbeit.pdf
 		./dat2tex $< > $@
 
 data/V_sinus_eps_0.1_h_0.01.dat:
-		octave advektion/beispiel.m
+		octave octave/transport_beispiel.m
 
 advektion.tex: data/V_sinus_eps_0.1_h_0.01.dat
 
