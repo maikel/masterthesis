@@ -20,7 +20,7 @@ Wir versuchen hier den instabilen Fall $\lambda > 1$ besser zu verstehen und neh
 
 
 
-\subsection{Beispiel}
+\subsection{Beispiel}\label{sec:transport:beispiel}
 
 Wir schauen uns die Ergebnisse des Verfahrens für die Anfangswerte $U(x) = \sin(\pi x)$ und $\lambda = 1 + \eta$ für verschiedene $\eta$ an.
 Wir haben die Beispiele durch das Skript \ref{appendix:transport:beispiel} in \emph{GNU Octave} umgesetzt und untersuchen, was für kleine $\eta$ und kleine $h$ passiert.
@@ -456,27 +456,6 @@ Wenn nämlich $z_0(t_n, x_i) \geq C > 0$ für $n \to \infty$ gilt, so folgt
 &= 0.
 \end{align*}
 
-\begin{figure}
-\centering
-\begin{tikzpicture}
-\begin{semilogyaxis}[
-    title=Vergleich zu den Beispielen,
-    xlabel={Iterationen $n$},
-    ylabel={maximaler Fehler},
-    legend entries={$\eta=0.01$,$\eta=0.05$,$\eta=0.1$,$sin(\pi(x - t)) - v^n_i$},
-]
-\addplot[myblue, line width={0.8}, mark=*] table {data/max_errors_eps_0.01_h_0.001.dat};
-\addplot[dg, line width={0.8}, mark=*] table {data/max_errors_eps_0.05_h_0.001.dat};
-\addplot[red, line width={0.8}, mark=*] table {data/max_errors_eps_0.1_h_0.001.dat};
-\addplot[black, line width={0.3}, mark=x] table [y index={2}] {data/max_errors_eps_0.05_h_0.001.dat};
-\addplot[black, line width={0.3}, mark=x] table [y index={2}] {data/max_errors_eps_0.01_h_0.001.dat};
-\addplot[black, line width={0.3}, mark=x] table [y index={2}] {data/max_errors_eps_0.1_h_0.001.dat};
-\end{semilogyaxis}
-\end{tikzpicture}
-\caption{Hier vergleichen wir die maximalen Fehler der numerischen Lösungen für die Startwerte $U(x) = sin(\pi x)$ und $\Delta_\eps U(x) = \eps$ für $\eta = 0.1, 0.05$ und $0.001$ zur echten Lösung $u(t,x) = sin(\pi(x - t))$ mit dem geschätztem Fehler $u(t_n, x_i) - v^n_i$ aus der asymptotische Entwicklung in \eqref{eq:transport:osz:loesung}.}
-\end{figure}
-
-
 Der Faktor $\frac{\eta}{2 (1 + 2 \eta)^2}$ in Gleichung \eqref{eq:transport:osz:oh2_B} ist für $\eta > 0$ positiv!
 Das heißt, dass sich $z_0$ diffusiv in der Zeit ausbreitet.
 Wie die Autoren in \cite{Junk2004} kann man für diesen Fall eine langsame Zeitskala $\tau_n = h t_n$ für $z_0$ in den Ansatz einbauen.
@@ -498,10 +477,40 @@ Insgesamt erhalten wir z.\,B. unter der Annahnme von Rundungsfehlern konstanter 
 \begin{align}\label{eq:transport:osz:loesung}
 v^n_i = U(x_i - t_n) + (-1)^{i+n} (1 + 2 \eta)^n \eps - \frac{h\eta} 2 t_n \partial^2_x U(x_i - t_n) + o(h).
 \end{align}
+ 
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{semilogyaxis}[
+    title=Vergleich zu den Beispielen,
+    xlabel={Iterationen $n$},
+    ylabel={maximaler Fehler},
+    legend entries={$\eta=0.01$,$\eta=0.05$,$\eta=0.1$,$sin(\pi(x - t)) - v^n_i$},
+    legend style={at={(1.6,1)}}
+]
+\addplot[myblue, line width={0.8}, mark=*] table {data/max_errors_eps_0.01_h_0.001.dat};
+\addplot[dg, line width={0.8}, mark=*] table {data/max_errors_eps_0.05_h_0.001.dat};
+\addplot[red, line width={0.8}, mark=*] table {data/max_errors_eps_0.1_h_0.001.dat};
+\addplot[black, line width={0.3}, mark=x] table [y index={2}] {data/max_errors_eps_0.05_h_0.001.dat};
+\addplot[black, line width={0.3}, mark=x] table [y index={2}] {data/max_errors_eps_0.01_h_0.001.dat};
+\addplot[black, line width={0.3}, mark=x] table [y index={2}] {data/max_errors_eps_0.1_h_0.001.dat};
+\end{semilogyaxis}
+\end{tikzpicture}
+\caption{Hier vergleichen wir die maximalen Fehler der numerischen Lösungen für die Startwerte $U(x) = sin(\pi x)$ und $\Delta_\eps U(x) = \eps$ für $\eta = 0.1, 0.05$ und $0.001$ zur echten Lösung $u(t,x) = sin(\pi(x - t))$ mit dem geschätztem Fehler $u(t_n, x_i) - v^n_i$ aus der asymptotische Entwicklung in \eqref{eq:transport:osz:loesung}.}
+\label{fig:transport:osz:max_error}
+\end{figure}
 
+In Abbildung \ref{fig:transport:osz:max_error} vergleichen wir den maximalen Fehler der Beispiele im Unterkapitel \ref{sec:transport:beispiel} mit dem Fehler des Ansatzes $v^n_i$ in \eqref{eq:transport:osz:loesung}.
+Dabei erkennt man, dass dieses Modell schon eine ganz gute Approximation für das Wachstum der Rundungsfehler für verschiedene $\eta > 0$ liefert.
+Es bleibt trotzdem unbefriedigend, dass man über keine Konvergenz für $h \to 0$ im klassischen Sinne sprechen kann.
+Für $h \to 0$ gilt stets $h \ll \eta$
+Dieses Problem gehen wir mit dem nächtem Unterkapitel an.
 
 \subsection{Kleine Störungen der Courant-Friedrich-Lewy Bedingung}
 
+Für $h \to 0$ gilt stets $h \ll \eta$ und das führt fundamental zu dem Problem, dass kleine Rundungsfehler zu jeder noch so kleinen Zeit $t > 0$ beliebig groß werden und die richtige Lösung komplett überdecken.
+In der Realität jedoch, rechnen wir immer mit einem $h > 0$ und das Verhalten von Verfahren für asyptotisch ``kleine'' Störungen der CFL Zahl zu kennen.
+Das wurde bisher komplett ignoriert und obwohl \eqref{eq:transport:osz:loesung} bereits gute Approximationen liefert, wird es spätestens für nichtlineare Verfahren nötig sein
 \section{Advektion mit variabler Geschwindigkeit}
 
 \section{Mehrdimensional}
