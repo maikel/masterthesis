@@ -503,14 +503,16 @@ v^n_i = U(x_i - t_n) + (-1)^{i+n} (1 + 2 \eta)^n \eps - \frac{h\eta} 2 t_n \part
 In Abbildung \ref{fig:transport:osz:max_error} vergleichen wir den maximalen Fehler der Beispiele im Unterkapitel \ref{sec:transport:beispiel} mit dem Fehler des Ansatzes $v^n_i$ in \eqref{eq:transport:osz:loesung}.
 Dabei erkennt man, dass dieses Modell schon eine ganz gute Approximation für das Wachstum der Rundungsfehler für verschiedene $\eta > 0$ liefert.
 Es bleibt trotzdem unbefriedigend, dass man über keine Konvergenz für $h \to 0$ im klassischen Sinne sprechen kann.
-Für $h \to 0$ gilt stets $h \ll \eta$
+Für $h \to 0$ gilt stets $h \ll \eta$, was bedeutet, dass dieser Ansatz hier Aussagen für beliebig große $\eta$ trifft.
+Darin liegen auch die Grenzen von \eqref{eq:transport:osz:loesung} begründet.
 Dieses Problem gehen wir mit dem nächtem Unterkapitel an.
 
 \subsection{Kleine Störungen der Courant-Friedrich-Lewy Bedingung}
 
-Für $h \to 0$ gilt stets $h \ll \eta$ und das führt fundamental zu dem Problem, dass kleine Rundungsfehler zu jeder noch so kleinen Zeit $t > 0$ beliebig groß werden und die richtige Lösung komplett überdecken.
-In der Realität jedoch, rechnen wir immer mit einem $h > 0$ und das Verhalten von Verfahren für asyptotisch ``kleine'' Störungen der CFL Zahl zu kennen.
-Das wurde bisher komplett ignoriert und obwohl \eqref{eq:transport:osz:loesung} bereits gute Approximationen liefert, wird es spätestens für nichtlineare Verfahren nötig sein
+$h \ll \eta$ führt fundamental zu dem Problem, dass kleine Rundungsfehler zu jeder noch so kleinen Zeit $t > 0$ beliebig groß werden und die richtige Lösung komplett überdecken.
+In der Realität jedoch, rechnen wir immer mit einem $h > 0$ und es könnte interessant sein, das Verhalten eines Verfahren für asyptotisch ``kleine'' Störungen der CFL Zahl zu kennen.
+Das wurde bisher komplett ignoriert und obwohl Abbildung \ref{fig:transport:osz:max_error} zeigt, dass \eqref{eq:transport:osz:loesung} bereits gute Approximationen liefert, wird es spätestens für nichtlineare Verfahren nötig sein.
+Daher untersuchen wir nun, was für ``kleine'' $\eta$ passiert, d.\,h. für $\eta \sim h$.
 \section{Advektion mit variabler Geschwindigkeit}
 
 \section{Mehrdimensional}
