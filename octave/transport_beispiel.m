@@ -32,38 +32,58 @@ function V = beispiel(eta, h, N)
     V = [x' V'];
 end
 
-step_fn = @(err,eta) floor((log(err) .- log(eps)) ./ log(1 + 2*eta));
+step_fn = @(err,eta) floor((log(err) .- log(eps) - log(2)) ./ log(1 + 2*eta));
+max_err_fn = @(V, N, h) max(abs(sin(pi*(V(:,1) - N*h)) - V(:, N+1)));
+exptected_err_fn = @(n, h, eta) (1+2*eta).^n*eps + 2*h*eta.*n;
 
-errors = [0.1 1 6 100];
+exptected_errors = [0.1 0.5 6 100];
 
 eta = 1e-1;
 h   = 1e-2;
 
-steps = step_fn(errors, eta);
-N = steps(4);
+steps = step_fn(exptected_errors, eta);
 
+N = steps(length(steps));
 V = beispiel(eta, h, N);
+
+indizes = 50:floor((steps(4)-50)/10):steps(4);
+max_errors = [indizes; max_err_fn(V, indizes, h); exptected_err_fn(indizes, h, eta)]';
+
 V = V(:, [1 steps]);
-save 'data/V_sinus_eps_0.1_h_0.01.dat' V
+save 'data/V_sinus_eps_0.1_h_0.01.dat' V;
+save 'data/max_errors_eps_0.1_h_0.01.dat' max_errors;
 
 h   = 1e-3;
 
 V = beispiel(eta, h, N);
+max_errors = [indizes; max_err_fn(V, indizes, h); exptected_err_fn(indizes, h, eta)]';
+
 V = V(:, [1 steps]);
-save 'data/V_sinus_eps_0.1_h_0.001.dat' V
+save 'data/V_sinus_eps_0.1_h_0.001.dat' V;
+save 'data/max_errors_eps_0.1_h_0.001.dat' max_errors;
 
 eta   = 5e-2;
-steps = step_fn(errors, eta);
-N = steps(4);
+steps = step_fn(exptected_errors, eta);
 
+N = steps(length(steps));
 V = beispiel(eta, h, N);
+
+indizes = 50:floor((steps(4)-50)/10):steps(4);
+max_errors = [indizes; max_err_fn(V, indizes, h); exptected_err_fn(indizes, h, eta)]';
+
 V = V(:, [1 steps]);
-save 'data/V_sinus_eps_0.05_h_0.001.dat' V
+save 'data/V_sinus_eps_0.05_h_0.001.dat' V;
+save 'data/max_errors_eps_0.05_h_0.001.dat' max_errors;
 
 eta   = 1e-2;
-steps = step_fn(errors, eta);
-N = steps(4);
+steps = step_fn(exptected_errors, eta);
 
+N = steps(length(steps));
 V = beispiel(eta, h, N);
+
+indizes = 50:floor((steps(4)-50)/10):steps(4);
+max_errors = [indizes; max_err_fn(V, indizes, h); exptected_err_fn(indizes, h, eta)]';
+
 V = V(:, [1 steps]);
-save 'data/V_sinus_eps_0.01_h_0.001.dat' V
+save 'data/V_sinus_eps_0.01_h_0.001.dat' V;
+save 'data/max_errors_eps_0.01_h_0.001.dat' max_errors;

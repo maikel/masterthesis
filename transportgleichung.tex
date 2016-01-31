@@ -398,7 +398,7 @@ Setzt man dies in die vorherigen Rechnungen ein, so erhält man anstelle von Gle
 Da diese Gleichung für alle Gitterpunkte $(n,i)$ gilt und die Funktion $F(t,x) = 0$ glatt ist, können wir unter der Annahme, dass $z_0 \neq 0$ gilt, Lemma \ref{lemma:transport:diskret:konvergenz_gitter} benutzen.
 \begin{satz}\label{satz:omega_n}
 Es gilt
-\[ \Omega(n) = (1 - 2 \lambda)^n. \]
+\[ \Omega(n) = (1 - 2 \lambda)^n = (-1)^n (1 + 2 \eta)^n. \]
 \end{satz}
 \begin{proof}
 Weil $z_0 \neq 0$ gilt, existiert ein Punkt $(t,x) \in \Rp \times \R$ mit $z_0(t,x) \neq 0$.
@@ -412,9 +412,9 @@ Das impliziert $\Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) = 0$ für alle $n \in 
 \end{proof}
 
 Setzt man Satz \ref{satz:omega_n} nun in den Ansatz ein, so fallen die Anteile von $u_2$ in der Gleichung \eqref{eq:transport:diskret:oh2} für diskrete Ansätze weg.
-Daher reduziert sich dieser Ansatz hier zu
+Daher reduziert sich mit $\lambda = 1 + \eta$ dieser Ansatz hier zu
 \begin{align}\label{eq:transport:osz:ansatz}
-v^n_i = w_0(t_n, x_i) + h  w_1(t_n, x_i) + (-1)^i (1 - 2 \lambda)^n \bigl( z_0(t_n, x_i) + h z_1(t_n, x_i) \bigr) + o(h)
+v^n_i = w_0(t_n, x_i) + h  w_1(t_n, x_i) + (-1)^{i+n} (1 + 2 \eta)^n \bigl( z_0(t_n, x_i) + h z_1(t_n, x_i) \bigr) + o(h)
 \end{align}
 und sortiert man, wie im Anhang \ref{appendix:osz:sortiere_nach_frequenz} gezeigt, die Gleichungen \eqref{eq:transport:diskret:oh} und \eqref{eq:transport:diskret:oh2} nach stetigen und hochfrequentiellen Anteilen, so erhalten wir aufgrund der Glattheit der Abbildungen $w_k$ und $z_k$ die Gleichungen
 
@@ -422,60 +422,83 @@ und sortiert man, wie im Anhang \ref{appendix:osz:sortiere_nach_frequenz} gezeig
 \noindent \textbf{In der Ordnung $O(h)$:}
 \begin{align}
 \partial_t w_0(t, x) + \partial_x w_0(t, x) = 0 \label{eq:transport:osz:oh_A}\\
-\partial_t z_0(t, x) + \frac {1} {2\lambda - 1} \partial_x z_0(t, x) = 0 \label{eq:transport:osz:oh_B}
+\partial_t z_0(t, x) + \frac {1} {1 + 2\eta} \partial_x z_0(t, x) = 0 \label{eq:transport:osz:oh_B}
 \end{align}
 \vspace{0.4cm}
 \noindent \textbf{In der Ordnung $O(h^2)$:}
 % {\small
 \begin{align}\label{eq:transport:osz:oh2_A}
-\partial_t w_1(t, x) + \partial_x w_1(t, x) &= \frac {1 - \lambda}{2} \partial^2_x w_0(t, x)\\
-\partial_t z_1(t, x) + \frac{1}{2 \lambda - 1} \partial_x z_1(t, x) &= \frac{\lambda - 1}{2 (2 \lambda - 1)^2} \partial^2_x z_0(t, x) \label{eq:transport:osz:oh2_B}
+\partial_t w_1(t, x) + \partial_x w_1(t, x) &= - \frac {\eta}{2} \partial^2_x w_0(t, x)\\
+\partial_t z_1(t, x) + \frac{1}{1 + 2 \eta} \partial_x z_1(t, x) &= \frac{\eta}{2 (1 + 2 \eta)^2} \partial^2_x z_0(t, x) \label{eq:transport:osz:oh2_B}
 \end{align}
 
 \noindent \textbf{Mit den Anfangsbedingungen in \eqref{eq:transport:osz:anfangsbedinungen}}
 
+
 \vspace{0.4cm}
-Betrachtet man den Ansatz \eqref{eq:transport:osz:ansatz} nun genauer, so erkennt man, dass der Faktor $(1 - 2\lambda)^n$ für $\lambda = 1 + \eta$ und $n \to \infty$ unbeschränkt ist.
+Betrachtet man den Ansatz \eqref{eq:transport:osz:ansatz} nun genauer, so erkennt man, dass der Faktor $(1 + 2 \eta)^n$ für $\eta > 0$ und $n \to \infty$ unbeschränkt ist.
 Das heißt, der Ansatz kann bestenfalls nur für feste $h > 0$ gelten und hilft, wenn überhaupt, zu verstehen, wie sich das Verfahren unter solchen Bedingungen und in endlich vielen Iterationen verhält.
 In diesem Fall gibt es für jede Zeit $t > 0$ und zu jeder Schranke $X > 0$ ein $h > 0$, so dass $\abs{v^n_i} > X$ und $n \lambda h = t_n < t$ gilt.
 Das heißt, dass es für $h \to 0$ gar kein Zeitinterval geben kann, in dem der Ansatz \eqref{eq:transport:osz:ansatz} konvergiert. 
 Allerdings bedeutet das auch, dass wir im Gegensatz zum regulären Fall die Lösungen $w_k$
 \begin{align}\label{eq:transport:osz:wk_loesungen}
 w_0(t, x) &= U(x - t) \qquad \text{und}\\
-w_1(t, x) &= t \frac{1 - \lambda} 2 \partial^2_x U(x - t)
+w_1(t, x) &= - t \frac{\eta} 2 \partial^2_x U(x - t)
 \end{align}
 akzeptieren.
 Im Gegensatz zum regulären Fall bleibt der Ansatz nämlich auch für festes $h > 0$ asymptotisch geordnet.
 Wenn nämlich $z_0(t_n, x_i) \geq C > 0$ für $n \to \infty$ gilt, so folgt
 \begin{align*}
-0 &\leq \lim_{n \to \infty} \abs{\frac{w_1(t_n,x_i)}{(1 - 2 \lambda)^n z_0(t_n, x_i)}}\\
-&= \lim_{n \to \infty} \abs{\frac{t_n \frac{1 - \lambda} 2 \partial^2_x U(x_i - t_n)}{(1 - 2 \lambda)^n z_0(t_n, x_i)}}\\
-&= \lim_{n \to \infty} \abs{\frac{n \lambda h (1 - \lambda) \partial^2_x U(x_i - t_n)}{2 (1 - 2 \lambda)^{n} z_0(t_n, x_i)}}\\
-&\leq \frac{h (1 - \lambda)}{C} \norm{\partial^2_x U}_\infty \cdot \lim_{n \to \infty} \abs{\frac{n}{(1 + 2 \eta)^{n}}}\\
+0 &\leq \lim_{n \to \infty} \abs{\frac{w_1(t_n,x_i)}{(1 + 2 \eta)^n z_0(t_n, x_i)}}\\
+&= \lim_{n \to \infty} \abs{\frac{t_n \frac{\eta} 2 \partial^2_x U(x_i - t_n)}{(1 + 2 \eta)^n z_0(t_n, x_i)}}\\
+&= \lim_{n \to \infty} \abs{\frac{n \lambda h \eta \partial^2_x U(x_i - t_n)}{2 (1 + 2 \eta)^{n} z_0(t_n, x_i)}}\\
+&\leq \frac{h \eta}{C} \norm{\partial^2_x U}_\infty \cdot \lim_{n \to \infty} \abs{\frac{n}{(1 + 2 \eta)^{n}}}\\
 &= 0.
 \end{align*}
 
-Der Faktor $\frac{\lambda - 1}{2 (2 \lambda - 1)^2}$ in Gleichung \eqref{eq:transport:osz:oh2_B} ist für $\eta > 0$ positiv!
-Das heißt, dass sich $z_0$ stabil und diffusiv in der Zeit ausbreitet.
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{semilogyaxis}[
+    title=Vergleich zu den Beispielen,
+    xlabel={Iterationen $n$},
+    ylabel={maximaler Fehler},
+    legend entries={$\eta=0.01$,$\eta=0.05$,$\eta=0.1$,$sin(\pi(x - t)) - v^n_i$},
+]
+\addplot[myblue, line width={0.8}, mark=*] table {data/max_errors_eps_0.01_h_0.001.dat};
+\addplot[dg, line width={0.8}, mark=*] table {data/max_errors_eps_0.05_h_0.001.dat};
+\addplot[red, line width={0.8}, mark=*] table {data/max_errors_eps_0.1_h_0.001.dat};
+\addplot[black, line width={0.3}, mark=x] table [y index={2}] {data/max_errors_eps_0.05_h_0.001.dat};
+\addplot[black, line width={0.3}, mark=x] table [y index={2}] {data/max_errors_eps_0.01_h_0.001.dat};
+\addplot[black, line width={0.3}, mark=x] table [y index={2}] {data/max_errors_eps_0.1_h_0.001.dat};
+\end{semilogyaxis}
+\end{tikzpicture}
+\caption{Hier vergleichen wir die maximalen Fehler der numerischen Lösungen für die Startwerte $U(x) = sin(\pi x)$ und $\Delta_\eps U(x) = \eps$ für $\eta = 0.1, 0.05$ und $0.001$ zur echten Lösung $u(t,x) = sin(\pi(x - t))$ mit dem geschätztem Fehler $u(t_n, x_i) - v^n_i$ aus der asymptotische Entwicklung in \eqref{eq:transport:osz:loesung}.}
+\end{figure}
+
+
+Der Faktor $\frac{\eta}{2 (1 + 2 \eta)^2}$ in Gleichung \eqref{eq:transport:osz:oh2_B} ist für $\eta > 0$ positiv!
+Das heißt, dass sich $z_0$ diffusiv in der Zeit ausbreitet.
 Wie die Autoren in \cite{Junk2004} kann man für diesen Fall eine langsame Zeitskala $\tau_n = h t_n$ für $z_0$ in den Ansatz einbauen.
 Dann gilt
 \begin{align*}
-\partial_t z_0(t, \tau, x) + \frac {1} {2\lambda - 1} \partial_x z_0(t, \tau, x) &= 0\\
-\partial_t z_1(t, \tau, x) + \frac {1} {2\lambda - 1} \partial_x z_1(t, \tau, x) &= \frac{\lambda - 1}{2 (2 \lambda - 1)^2} \partial^2_x z_0(t, \tau, x) - \partial_\tau z_0(t, \tau, x)\\
+\partial_t z_0(t, \tau, x) + \frac {1} {1 + 2 \eta} \partial_x z_0(t, \tau, x) &= 0\\
+\partial_t z_1(t, \tau, x) + \frac {1} {1 + 2 \eta} \partial_x z_1(t, \tau, x) &= \frac{\eta}{2 (1 + 2 \eta)^2} \partial^2_x z_0(t, \tau, x) - \partial_\tau z_0(t, \tau, x)\\
 \end{align*}
 und fordert, dass
 \[ 
-\partial_\tau z_0(t, \tau, x) = \frac{\lambda - 1}{2 (2 \lambda - 1)^2} \partial^2_x z_0(t, \tau, x) 
+\partial_\tau z_0(t, \tau, x) = \frac{\eta}{2 (1 + 2 \eta)^2} \partial^2_x z_0(t, \tau, x) 
 \]
 gilt. Mit $z_1(0,0,x) = 0$ folgt also $z_1 = 0$ und
 \begin{align*}
-z_0(t, \tau, x) &= (\Delta_\eps U * G_\tau)\left(x - \frac{t}{2 \lambda - 1} \right) \\
-G_\tau(y) &= \sqrt {\frac{1}{2 \pi \tau} \frac {(2 \lambda - 1)^2}{(\lambda - 1)}} \exp\left( - \frac{y^2}{2 \pi \tau} \frac {(2 \lambda - 1)^2}{(\lambda - 1)} \right)
+z_0(t, \tau, x) &= (\Delta_\eps U * G_\tau)\left(x - \frac{t}{1 + 2 \eta} \right) \\
+G_\tau(y) &= \sqrt {\frac{1}{\tau} \frac {(1 + 2 \eta)^2}{2 \pi \eta}} \exp\left( - \frac{y^2}{\tau} \frac {(1 + 2 \eta)^2}{2 \pi \eta} \right)
 \end{align*}
-Insgesamt erhalten wir für den Spezialfall $\Delta_\eps U(x) = \eps$
+Insgesamt erhalten wir z.\,B. unter der Annahnme von Rundungsfehlern konstanter Größer $\Delta_\eps U(x) = \eps$ die Lösung
 \begin{align}\label{eq:transport:osz:loesung}
 v^n_i = U(x_i - t_n) + (-1)^{i+n} (1 + 2 \eta)^n \eps - \frac{h\eta} 2 t_n \partial^2_x U(x_i - t_n) + o(h).
 \end{align}
+
 
 \subsection{Kleine Störungen der Courant-Friedrich-Lewy Bedingung}
 
