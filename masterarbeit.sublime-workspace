@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"expected_",
+				"exptected_err_fn"
+			],
+			[
 				"DEM",
 				"DEM16216"
 			],
@@ -208,18 +212,10 @@
 	"buffers":
 	[
 		{
-			"file": "octave/transport_beispiel.m",
-			"settings":
-			{
-				"buffer_size": 1401,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "transportgleichung.tex",
 			"settings":
 			{
-				"buffer_size": 22922,
+				"buffer_size": 28079,
 				"line_ending": "Unix"
 			}
 		},
@@ -227,33 +223,7 @@
 			"file": "main.tex",
 			"settings":
 			{
-				"buffer_size": 1981,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "nichtlinear.tex",
-			"settings":
-			{
-				"buffer_size": 397,
-				"line_ending": "Unix",
-				"name": "Ich weiß noch gar nicht, ob nichtlineare Verfahren"
-			}
-		},
-		{
-			"file": "vorwort.tex",
-			"settings":
-			{
-				"buffer_size": 39,
-				"line_ending": "Unix",
-				"name": "Das Vorwort ist immer am schwierigsten..."
-			}
-		},
-		{
-			"file": "asymptotik_finite_differenzen.tex",
-			"settings":
-			{
-				"buffer_size": 158,
+				"buffer_size": 2021,
 				"line_ending": "Unix"
 			}
 		},
@@ -261,7 +231,7 @@
 			"file": "transportgleichung_appendix.tex",
 			"settings":
 			{
-				"buffer_size": 4893,
+				"buffer_size": 4911,
 				"line_ending": "Unix"
 			}
 		},
@@ -365,6 +335,21 @@
 	],
 	"file_history":
 	[
+		"/home/maikel/.local/share/android-studio/bin/studio.sh",
+		"/home/maikel/Documents/Masterarbeit/nichtlinear.tex",
+		"/home/maikel/Documents/Masterarbeit/data/max_errors.dat",
+		"/home/maikel/Documents/Masterarbeit/data/max_errors_eps_0.01_h_0.001.dat",
+		"/home/maikel/Documents/Masterarbeit/data/max_errors_eps_0.1_h_0.01.dat",
+		"/home/maikel/Documents/Masterarbeit/data/max_errors_eps_0.1_h_0.001.dat",
+		"/home/maikel/Documents/Masterarbeit/octave/transport_beispiel.m",
+		"/home/maikel/Documents/Masterarbeit/data/max_errors_eps_0.05_h_0.001.dat",
+		"/home/maikel/Documents/Masterarbeit/Macros.tex",
+		"/home/maikel/Documents/Masterarbeit/main.fls",
+		"/home/maikel/Documents/Masterarbeit/asymptotik_finite_differenzen.tex",
+		"/home/maikel/Documents/Masterarbeit/vorwort.tex",
+		"/home/maikel/Documents/Masterarbeit/octave/data/max_errors_eps_0.05_h_0.001.dat",
+		"/home/maikel/Documents/Masterarbeit/data/V_sinus_eps_0.1_h_0.01.dat",
+		"/home/maikel/Documents/Masterarbeit/octave/data/max_errors_eps_0.1_h_0.01.dat",
 		"/home/maikel/Documents/Masterarbeit/masterarbeit.sublime-workspace",
 		"/home/maikel/Documents/Masterarbeit/LaTeX/octave/transport_beispiel.m",
 		"/home/maikel/Documents/Masterarbeit/LaTeX/Makefile",
@@ -401,7 +386,6 @@
 		"/home/maikel/Documents/Masterarbeit/Programme/sinus_const.m",
 		"/home/maikel/Documents/Masterarbeit/Programme/sin_const.gnu",
 		"/home/maikel/Documents/Masterarbeit/main.tex",
-		"/home/maikel/Documents/Masterarbeit/Macros.tex",
 		"/home/maikel/Documents/Masterarbeit/variable_advektion.tex",
 		"/home/maikel/Documents/Masterarbeit/defines.tex",
 		"/home/maikel/Documents/Masterarbeit/Programme/Variable Advektion/play.m",
@@ -461,6 +445,19 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"diskret:",
+			"max_err(",
+			"max_err",
+			"10",
+			"1 - 2 \\lambda",
+			"(\\eta)",
+			"\\lambda - 1",
+			"2\\lambda - 1",
+			"2 \\lambda - 1",
+			"\\lambda - 1",
+			"(\\eta)",
+			"1 - \\lambda",
+			"errors",
 			"z_1",
 			"0.1_h_0.1",
 			"0.01_h_0.01",
@@ -519,52 +516,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "octave/transport_beispiel.m",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1401,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								797,
-								797
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Matlab/Matlab.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "transportgleichung.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 22922,
+						"buffer_size": 28079,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								22731,
-								22731
+								27948,
+								27948
 							]
 						],
 						"settings":
@@ -572,60 +541,31 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 6536.0,
+						"translation.y": 7869.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 1,
 					"file": "main.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1981,
+						"buffer_size": 2021,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1669,
-								1669
+								908,
+								908
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 503.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "nichtlinear.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 397,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								396,
-								396
-							]
-						],
-						"settings":
-						{
-							"auto_name": "Ich weiß noch gar nicht, ob nichtlineare Verfahren",
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
@@ -636,77 +576,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "vorwort.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 39,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								39,
-								39
-							]
-						],
-						"settings":
-						{
-							"auto_name": "Das Vorwort ist immer am schwierigsten...",
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "asymptotik_finite_differenzen.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 158,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								90,
-								90
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
+					"buffer": 2,
 					"file": "transportgleichung_appendix.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4893,
+						"buffer_size": 4911,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4351,
-								4351
+								131,
+								131
 							]
 						],
 						"settings":
@@ -714,14 +597,14 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 45.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 3,
 					"file": "Makefile",
 					"semi_transient": false,
 					"settings":
@@ -745,7 +628,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]

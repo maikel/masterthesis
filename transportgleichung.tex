@@ -175,47 +175,47 @@ Wir haben die Beispiele durch das Skript \ref{appendix:transport:beispiel} in \e
 \label{fig:adv:e5-2h-2}
 \end{figure}
 
-\begin{figure}
-\centering
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 1820$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 2] {data/V_sinus_eps_0.01_h_0.001.dat};
-\end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 1911$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 3] {data/V_sinus_eps_0.01_h_0.001.dat};
-\end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 2053$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 4] {data/V_sinus_eps_0.01_h_0.001.dat};
-\end{axis}
-\end{tikzpicture}
-\caption{Beispiel für $\eta = 10^{-2}$ und $h=10^{-3}$}
-\label{fig:adv:e5-2h-3}
-\end{figure}
+% \begin{figure}
+% \centering
+% \begin{tikzpicture}[scale=0.58]
+% \begin{axis}[
+%     height = 0.6\textwidth,
+%     width = 0.6\textwidth,
+%     title = {$n = 1820$},
+%     xtick = {-2,-1,...,2},
+%     grid  = both,
+% ]
+% \addplot[myblue] table [y index= 2] {data/V_sinus_eps_0.01_h_0.001.dat};
+% \end{axis}
+% \end{tikzpicture}
+% \begin{tikzpicture}[scale=0.58]
+% \begin{axis}[
+%     height = 0.6\textwidth,
+%     width = 0.6\textwidth,
+%     title = {$n = 1911$},
+%     xtick = {-2,-1,...,2},
+%     grid  = both,
+% ]
+% \addplot[myblue] table [y index= 3] {data/V_sinus_eps_0.01_h_0.001.dat};
+% \end{axis}
+% % \end{tikzpicture}
+% % \begin{tikzpicture}[scale=0.58]
+% % \begin{axis}[
+% %     height = 0.6\textwidth,
+% %     width = 0.6\textwidth,
+% %     title = {$n = 2053$},
+% %     xtick = {-2,-1,...,2},
+% %     grid  = both,
+% % ]
+% % \addplot[myblue] table [y index= 4] {data/V_sinus_eps_0.01_h_0.001.dat};
+% % \end{axis}
+% % \end{tikzpicture}
+% % \caption{Beispiel für $\eta = 10^{-2}$ und $h=10^{-3}$}
+% % \label{fig:adv:e5-2h-3}
+% \end{figure}
 
 Vergleicht man nun die Plots in Abbildung~\ref{fig:adv:e-1h-2} und mit den Plots auf Abbildung~\ref{fig:adv:e-1h-3}, so erkennt man, dass die maximale Amplitude der Oszillation scheinbar unabh"angig von $h$ mit der Anzahl der Iterationen $n$ w"achst.
-Verringert man jedoch den Wert für $\eta$ wie in den Abbildungen \ref{fig:adv:e5-2h-2} und \ref{fig:adv:e5-2h-3}, so ändert sich auch die Rate, um die die Amplitude wächst.
+Verringert man jedoch den Wert für $\eta$ wie in der Abbildung \ref{fig:adv:e5-2h-2}, so ändert sich auch die Rate, um die die Amplitude wächst.
 Wir hoffen, dieses Verhalten in unseren Approximationen wiederzufinden und dass wir Abschätzungen für das Wachstum der Amplitude angeben können.
 Die konkreten Iterationen $n$ für die Plots in den Abbildungen wurden mit Hilfe der Abschätzung $(1 + 2 \eta)^n$ aus dem Unterkapitel \ref{sec:transport:osz} ausgewählt.
 
@@ -244,13 +244,13 @@ Im Anhang \ref{appendix:diskret:summanden} haben wir die einzelnen Summanden von
 Setzt man diese, \eqref{eq:transport:diskret:diff1} und \eqref{eq:transport:diskret:diff2}, nun in \eqref{eq:adv:scheme} ein, liefert uns das die Gleichungen
 
 \vspace{0.4cm}
-\noindent \textbf{In der Ordnung $O(1)$:}
+\noindent \emph{in der Ordnung $O(1)$:}
 \begin{align}\label{eq:transport:diskret:o1}
 u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)
 + \lambda \bigl(u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr) = 0
 \end{align}
 \vspace{0.4cm}
-\noindent \textbf{In der Ordnung $O(h)$:}
+\noindent \emph{in der Ordnung $O(h)$:}
 \begin{align}\label{eq:transport:diskret:oh}
 \lambda \bigl( \partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i) \bigr) =
 \begin{split}
@@ -259,7 +259,7 @@ u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)
 \end{split}
 \end{align}
 \vspace{0.4cm}
-\noindent \textbf{In der Ordnung $O(h^2)$:}
+\noindent \emph{in der Ordnung $O(h^2)$:}
 % {\small
 \begin{align}\label{eq:transport:diskret:oh2}
 \lambda \bigl( \partial_t u_1(n+1, i, t_n, x_i) + \partial_x u_1(n, i-1, t_n, x_i) \bigr) =
@@ -271,7 +271,7 @@ u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)
 \end{align}
 % }
 \vspace{0.4cm}
-\noindent \textbf{In der Ordnung $O(h^3)$:}
+\noindent \emph{in der Ordnung $O(h^3)$:}
 \begin{align}\label{eq:transport:diskret:oh3}
 \begin{split}
 \lambda \bigl(\partial_t u_2(n+1, i, t_n, x_i)\qquad\\
@@ -284,7 +284,7 @@ u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)
 \end{align}
 
 \vspace{0.4cm}
-\noindent \textbf{Mit den Anfangsbedingungen:}
+\noindent \emph{Mit den Anfangsbedingungen:}
 \begin{align}\label{eq:transport:diskret:anfangsbedinungen}
 u_0(0, i, 0, x_i) = \rd(U(x_i)), \quad u_1(0, i, 0, x_i) = 0 \quad \text{und} \quad u_2(0, i, 0, x_i) = 0 \qquad \forall i \in \Z.
 \end{align}
@@ -292,9 +292,6 @@ u_0(0, i, 0, x_i) = \rd(U(x_i)), \quad u_1(0, i, 0, x_i) = 0 \quad \text{und} \q
 Diese Gleichungen gelten nun für alle $h > 0$ und alle $n, i \in \N$.
 Noch gelingt es uns nicht, aus diesen Bedinungen eine eindeutige Lösung für unsere Ansatzfunktionen $u_0, u_1$ und $u_2$ zu bestimmen.
 Daher folgt im nächstem Kapitel ein konkreterer Produktansatz.
-Außerdem kann man $\lambda = 1 + \eta$ einsetzen und die Gleichungen zusätzlich nach den Ordnungen von $\eta$ sortieren.
-Wenn man dann $\eta$ mit $h$ beispielsweise durch $\eta = h^\alpha$ für ein $\alpha > 0$ koppelt, was würde man erwarten?
-Auch dies heben wir uns (vielleicht) für ein späteres Unterkapitel auf.
 Trotzdem beweisen wir hier noch zwei Lemmata, um besser zu verstehen wie man von Bedingungen auf dem Gitter auf Bedingungen im Raum schließen kann.
 
 \begin{lemma}[Konstanz für eine Dimension] \label{lemma:transport:diskret:konstant1}
@@ -389,7 +386,7 @@ z_2(0, x_i) &= 0.
 Setzt man dies in die vorherigen Rechnungen ein, so erhält man anstelle von Gleichung \eqref{eq:transport:diskret:o1}
 
 \vspace{0.4cm}
-\noindent \textbf{In der Ordnung $O(1)$:}
+\noindent \emph{in der Ordnung $O(1)$:}
 \begin{align}\label{eq:transport:osz:o1} % \nonumber
 % \begin{split}
 - (-1)^i z_0(t_n, x_i) \Bigl[ \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \Bigr] = 0.
@@ -419,20 +416,20 @@ v^n_i = w_0(t_n, x_i) + h  w_1(t_n, x_i) + (-1)^{i+n} (1 + 2 \eta)^n \bigl( z_0(
 und sortiert man, wie im Anhang \ref{appendix:osz:sortiere_nach_frequenz} gezeigt, die Gleichungen \eqref{eq:transport:diskret:oh} und \eqref{eq:transport:diskret:oh2} nach stetigen und hochfrequentiellen Anteilen, so erhalten wir aufgrund der Glattheit der Abbildungen $w_k$ und $z_k$ die Gleichungen
 
 \vspace{0.4cm}
-\noindent \textbf{In der Ordnung $O(h)$:}
+\noindent \emph{in der Ordnung $O(h)$:}
 \begin{align}
 \partial_t w_0(t, x) + \partial_x w_0(t, x) = 0 \label{eq:transport:osz:oh_A}\\
 \partial_t z_0(t, x) + \frac {1} {1 + 2\eta} \partial_x z_0(t, x) = 0 \label{eq:transport:osz:oh_B}
 \end{align}
 \vspace{0.4cm}
-\noindent \textbf{In der Ordnung $O(h^2)$:}
+\noindent \emph{in der Ordnung $O(h^2)$:}
 % {\small
 \begin{align}\label{eq:transport:osz:oh2_A}
 \partial_t w_1(t, x) + \partial_x w_1(t, x) &= - \frac {\eta}{2} \partial^2_x w_0(t, x)\\
 \partial_t z_1(t, x) + \frac{1}{1 + 2 \eta} \partial_x z_1(t, x) &= \frac{\eta}{2 (1 + 2 \eta)^2} \partial^2_x z_0(t, x) \label{eq:transport:osz:oh2_B}
 \end{align}
 
-\noindent \textbf{Mit den Anfangsbedingungen in \eqref{eq:transport:osz:anfangsbedinungen}}
+\noindent \emph{Mit den Anfangsbedingungen in \eqref{eq:transport:osz:anfangsbedinungen}}
 
 
 \vspace{0.4cm}
@@ -482,7 +479,7 @@ v^n_i = U(x_i - t_n) + (-1)^{i+n} (1 + 2 \eta)^n \eps - \frac{h\eta} 2 t_n \part
 \centering
 \begin{tikzpicture}
 \begin{semilogyaxis}[
-    title=Vergleich zu den Beispielen,
+    title={Vergleich von numerischer Lösung und Ansatz für $h = 10^{-3}$},
     xlabel={Iterationen $n$},
     ylabel={maximaler Fehler},
     legend entries={$\eta=0.01$,$\eta=0.05$,$\eta=0.1$,$sin(\pi(x - t)) - v^n_i$},
@@ -496,7 +493,7 @@ v^n_i = U(x_i - t_n) + (-1)^{i+n} (1 + 2 \eta)^n \eps - \frac{h\eta} 2 t_n \part
 \addplot[black, line width={0.3}, mark=x] table [y index={2}] {data/max_errors_eps_0.1_h_0.001.dat};
 \end{semilogyaxis}
 \end{tikzpicture}
-\caption{Hier vergleichen wir die maximalen Fehler der numerischen Lösungen für die Startwerte $U(x) = sin(\pi x)$ und $\Delta_\eps U(x) = \eps$ für $\eta = 0.1, 0.05$ und $0.001$ zur echten Lösung $u(t,x) = sin(\pi(x - t))$ mit dem geschätztem Fehler $u(t_n, x_i) - v^n_i$ aus der asymptotische Entwicklung in \eqref{eq:transport:osz:loesung}.}
+\caption{Hier vergleichen wir die maximalen Fehler der numerischen Lösungen für die Startwerte $U(x) = sin(\pi x)$, $\Delta_\eps U(x) = \eps$ und $h = 10^{-3}$ für $\eta = 0.1, 0.05$ und $0.001$ zur echten Lösung $u(t,x) = sin(\pi(x - t))$ mit dem geschätztem Fehler $u(t_n, x_i) - v^n_i$ aus der asymptotischen Entwicklung in \eqref{eq:transport:osz:loesung}.}
 \label{fig:transport:osz:max_error}
 \end{figure}
 
@@ -507,12 +504,104 @@ Für $h \to 0$ gilt stets $h \ll \eta$, was bedeutet, dass dieser Ansatz hier Au
 Darin liegen auch die Grenzen von \eqref{eq:transport:osz:loesung} begründet.
 Dieses Problem gehen wir mit dem nächtem Unterkapitel an.
 
-\subsection{Kleine Störungen der Courant-Friedrich-Lewy Bedingung}
+\subsection{Kleine Störungen der Courant-Friedrich-Lewy Bedingung}\label{sec:transport:kleineta}
 
 $h \ll \eta$ führt fundamental zu dem Problem, dass kleine Rundungsfehler zu jeder noch so kleinen Zeit $t > 0$ beliebig groß werden und die richtige Lösung komplett überdecken.
-In der Realität jedoch, rechnen wir immer mit einem $h > 0$ und es könnte interessant sein, das Verhalten eines Verfahren für asyptotisch ``kleine'' Störungen der CFL Zahl zu kennen.
-Das wurde bisher komplett ignoriert und obwohl Abbildung \ref{fig:transport:osz:max_error} zeigt, dass \eqref{eq:transport:osz:loesung} bereits gute Approximationen liefert, wird es spätestens für nichtlineare Verfahren nötig sein.
-Daher untersuchen wir nun, was für ``kleine'' $\eta$ passiert, d.\,h. für $\eta \sim h$.
-\section{Advektion mit variabler Geschwindigkeit}
+In der Realität jedoch, rechnen wir immer mit einem $h > 0$, für das eventuell auch $h \sim \eta$ gelten kann.
+Konkrete numerische Lösungen existieren und entwickeln Oszillationen für feste $h$ zu positiven Zeiten $t > 0$.
+Gerade für Probleme, bei denen numerische Daten nur in einem ``kurzem'' Zeitinterval unter instabilen Bedingungen gerechnet werden, könnte es also interessante Einblicke geben, das asymptotische Verhalten eines Verfahren für ``kleine'' Störungen der CFL Zahl zu kennen.
+Der bisherige Ansatz hat dies ignoriert und obwohl Abbildung \ref{fig:transport:osz:max_error} zeigt, dass \eqref{eq:transport:osz:loesung} bereits gute Approximationen liefert, werden solche Überlegungen spätestens für die Advektion mit variabler Geschwindigkeit oder auch nichtlineare Probleme von Nöten sein.
+Daher betrachten wir nun die Koppelung $\eta = h$ und setzen $\lambda = 1 + h$ in die Gleichungen ein \eqref{eq:transport:diskret:o1} bis \eqref{eq:transport:diskret:oh3} ein:
+
+\vspace{0.4cm}
+\noindent \emph{in der Ordnung $O(1)$:}
+\begin{align}\label{eq:transport:kleineta:o1}
+u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i) + u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) = 0
+\end{align}
+\vspace{0.4cm}
+\noindent \emph{in der Ordnung $O(h)$:}
+\begin{align}\label{eq:transport:kleineta:oh}
+\partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i) =
+\begin{split}
+&- \bigl( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr)\\
+&- \bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i, t_n, x_i) \bigr)\\
+&- \bigl( u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)
+\end{split}
+\end{align}
+\vspace{0.4cm}
+\noindent \emph{in der Ordnung $O(h^2)$:}
+% {\small
+\begin{align}\label{eq:transport:kleineta:oh2}
+\begin{split}
+\partial_t u_1(n+1, i, t_n, x_i) + \partial_x u_1(n, i-1, t_n, x_i) +\\
+\partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i)
+\end{split}
+&=
+\begin{split}
+&- \bigl( u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)\\
+&- \bigl( u_2(n+1, i, t_n, x_i) - u_2(n, i, t_n, x_i) \bigr)\\
+&- \bigl( u_2(n, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr)
+\end{split}
+\end{align}
+% }
+\vspace{0.4cm}
+\noindent \emph{in der Ordnung $O(h^3)$:}
+\begin{align}\label{eq:transport:kleineta:oh3}
+\begin{split}
+\partial_t u_2(n+1, i, t_n, x_i) + \partial_x u_2(n, i-1, t_n, x_i) +\\
+\partial_t u_1(n+1, i, t_n, x_i) + \partial_x u_1(n, i-1, t_n, x_i)
+\end{split}
+&=
+\begin{split}
+&\left( \frac{1}{2} \partial^2_x  - \partial^2_t \right) u_0(n, i-1, t_n, x_i) \\
+&- \bigl( u_2(n, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr)
+\end{split}
+\end{align}
+\emph{mit den Anfangsbedingungen}
+\begin{align}\label{eq:transport:kleineta:anfangsbedinungen}
+\begin{split}
+w_0(0, x_i) &= U(x_i),\\
+w_1(0, x_i) &= 0,\\
+w_2(0, x_i) &= 0,
+\end{split}&
+\begin{split}
+z_0(0, x_i) &= \Delta_\eps U(x_i),\\
+z_1(0, x_i) &= 0,\\
+z_2(0, x_i) &= 0
+\end{split}
+\end{align}
+
+Setzt man wieder den oszillatorischen Produktansatz
+\[ u_k(n, i, t_n, x_i) = w_k(t_n, x_i) + (-1)^i \Omega(n) z_k(t_n, x_i), \qquad k = 0,1,2 \]
+ein, so folgt aus \eqref{eq:transport:kleineta:o1}
+\[ (-1)^i z_0(t_n, x_i) \bigl( \Omega(n+1) + \Omega(n) \bigr) = 0, \]
+und das impliziert ganz analog wie in Satz \ref{satz:omega_n}, dass $\Omega(n) = (-1)^n$ gilt.
+Folglich ist unser Ansatz durch
+\begin{align}
+v^n_i = \begin{split}
+&w_0(t_n, x_i) + h w_1(t_n, x_i) + h^2 w_2(t_n, x_i)\\
+&\qquad + (-1)^{i+n} \bigl( z_0(t_n, x_i) + h z_1(t_n, x_i) + h^2 z_2(t_n, x_i) \bigr)
+\end{split}
+\end{align}
+gegeben. Hieraus folgen dieses mal die Gleichungen:
+
+\vspace{0.4cm}
+\noindent \emph{In der Ordnung $O(h)$}
+\begin{align*}
+\partial_t w_0(t, x) + \partial_x w_0(t, x) &= 0 \qquad \text{und}\\
+\partial_t z_0(t, x) + \partial_x z_0(t, x) &= 2 z_0(t, x)
+\end{align*}
+woraus Wegen der Anfangsbedingungen \eqref{eq:transport:kleineta:anfangsbedinungen} $w_0(t,x) = U(x -t)$ und $z_0(t,x) = \Delta_\eps U(x - t) e^{2 t}$ folgt.
+
+\vspace{0.4cm}
+\noindent \emph{In der Ordnung $O(h^2)$}
+\begin{align*}
+\partial_t w_1(t, x) + \partial_x w_1(t, x) &= 0 \qquad \text{und}\\
+\partial_t z_1(t, x) + \partial_x z_1(t, x) &= 2 z_1(t, x).
+\end{align*}
+Dieses mal folgt aus $w_1(0,x) = z_1(0,x) = 0$ sogar $z_1 = w_1 = 0$.
+Damit folgt
+\[ v^n_i = U(x_i - t_n) + \Delta_\eps U(x_i - t_n) e^{2t_n} + O(h^2). \]
+\section{Advektion mit ortsabhängiger Geschwindigkeit}
 
 \section{Mehrdimensional}

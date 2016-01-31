@@ -47,7 +47,8 @@ N = steps(length(steps));
 V = beispiel(eta, h, N);
 
 indizes = 50:floor((steps(4)-50)/10):steps(4);
-max_errors = [indizes; max_err_fn(V, indizes, h); exptected_err_fn(indizes, h, eta)]';
+max_errors = [indizes;  max_err_fn(V, indizes, h);
+              exptected_err_fn(indizes, h, eta)]';
 
 V = V(:, [1 steps]);
 save 'data/V_sinus_eps_0.1_h_0.01.dat' V;
@@ -56,7 +57,9 @@ save 'data/max_errors_eps_0.1_h_0.01.dat' max_errors;
 h   = 1e-3;
 
 V = beispiel(eta, h, N);
-max_errors = [indizes; max_err_fn(V, indizes, h); exptected_err_fn(indizes, h, eta)]';
+max_errors = [indizes; 
+              max_err_fn(V, indizes, h);
+              exptected_err_fn(indizes, h, eta)]';
 
 V = V(:, [1 steps]);
 save 'data/V_sinus_eps_0.1_h_0.001.dat' V;
@@ -69,7 +72,8 @@ N = steps(length(steps));
 V = beispiel(eta, h, N);
 
 indizes = 50:floor((steps(4)-50)/10):steps(4);
-max_errors = [indizes; max_err_fn(V, indizes, h); exptected_err_fn(indizes, h, eta)]';
+max_errors = [indizes; max_err_fn(V, indizes, h);
+              exptected_err_fn(indizes, h, eta)]';
 
 V = V(:, [1 steps]);
 save 'data/V_sinus_eps_0.05_h_0.001.dat' V;
@@ -82,7 +86,8 @@ N = steps(length(steps));
 V = beispiel(eta, h, N);
 
 indizes = 50:floor((steps(4)-50)/10):steps(4);
-max_errors = [indizes; max_err_fn(V, indizes, h); exptected_err_fn(indizes, h, eta)]';
+max_errors = [indizes; max_err_fn(V, indizes, h);
+              exptected_err_fn(indizes, h, eta)]';
 
 V = V(:, [1 steps]);
 save 'data/V_sinus_eps_0.01_h_0.001.dat' V;
