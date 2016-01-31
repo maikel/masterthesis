@@ -1,5 +1,43 @@
-\section{Transportgleichung}
+\section{Die Transportgleichung}
+\subsection{Beispielskript}
+\label{appendix:transport:beispiel}
+\lstinputlisting{octave/transport_beispiel.m}
+
+\subsection{Diskreter Ansatz: Summanden vom Upwind-Schema entwickeln}
+\label{appendix:diskret:summanden}
+
+Wir rechnen hier nun die einzelnen Summanden von \eqref{eq:adv:scheme_rechnung} aus:
+{
+\begin{align} \label{eq:transport:diskret:diff1}
+v^{n+1}_i - v^n_i =
+\begin{split}
+& u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)\\
+&\lambda h \partial_t u_0(n+1, i, t_n, x_i) + \frac {(\lambda h)^2}{2} \partial^2_t u_0(n+1, i, t_n, x_i)\\
+&+ \frac {(\lambda h)^3}{6} \partial^3_t u_0(n+1, i, t_n, x_i)\\
+&+ h \bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i, t_n, x_i) \bigr)\\
+&+ \lambda h^2 \partial_t u_1(n+1, i, t_n, x_i) + \frac {\lambda^2 h^3}{2} \partial^2_t u_1(n+1, i, t_n, x_i)\\
+&+ h^2 \bigl( u_2(n+1, i, t_n, x_i) - u_2(n, i, t_n, x_i) \bigr)\\
+&+ \lambda h^3 \partial_t u_2(n+1, i, t_n, x_i) + o(h^3).
+\end{split}
+\end{align}
+} und
+{ 
+\begin{align} \label{eq:transport:diskret:diff2}
+\lambda (v^n_i - v^n_{i-1}) =
+\begin{split}
+& \lambda( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) )\\
+&\lambda h \partial_x u_0(n, i-1, t_n, x_i) - \frac {\lambda h^2}{2} \partial^2_x u_0(n, i-1, t_n, x_i)\\
+& + \frac {\lambda h^3}{6} \partial^3_x u_0(n, i-1, t_n, x_i)\\
+&+ \lambda h \bigl( u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)\\
+&+ \lambda h^2 \partial_x u_1(n, i-1, t_n, x_i) - \frac {\lambda h^3}{2} \partial^2_x u_1(n, i-1, t_n, x_i)\\
+&+ \lambda h^2 \bigl( u_2(n, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr)\\
+&+ \lambda h^3 \partial_t u_2(n, i-1, t_n, x_i) + o(h^2).
+\end{split}
+\end{align}
+}
+
 \subsection{Oszillatorischer Produktansatz: Sortiere nach Frequenz}
+\label{appendix:osz:sortiere_nach_frequenz}
 
 Es gilt
 \[ u_k(n, i, t_n, x_i) = w_k(t_n, x_i) + (-1)^i (1 - 2\lambda)^n z_k(t_n, x_i) \quad \text{für $k = 0,1,2$} \]
@@ -46,7 +84,8 @@ Es gilt
 \end{align*}
 und ganz analog wie bei $O(h)$ gilt ferner
 \begin{align*}
-\partial_t u_1(n+1, i, t_n, x_i) + \partial_x u_1(n, i-1, t_n, x_i) &= \partial_t w_1(t_n, x_i) + \partial_x w_1(t_n, x_i)\\
+\partial_t u_1(n+1, i, t_n, x_i) \qquad\\
++ \: \partial_x u_1(n, i-1, t_n, x_i) &= \partial_t w_1(t_n, x_i) + \partial_x w_1(t_n, x_i)\\
 &\qquad + (-1)^i (1 - 2\lambda)^n \bigl( (1 - 2\lambda) \partial_t z_1(t_n, x_i) - \partial_x z_1(t_n, x_i) \bigr) \\
 \end{align*}
 und hieraus folgt für alle $(t_n, x_i)$

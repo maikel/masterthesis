@@ -14,16 +14,15 @@ all: Masterarbeit.pdf
 # "raw2tex" and "dat2tex" are just placeholders for whatever custom steps
 # you might have.
 
-%.tex: %.raw
-		./raw2tex $< > $@
+data/%.dat:
+		octave --silent octave/transport_beispiel.m
 
-%.tex: %.dat
-		./dat2tex $< > $@
+transport_beispiel.m: data/V_sinus_eps_0.1_h_0.01.dat    \
+	                  data/V_sinus_eps_0.1_h_0.001.dat  \
+	                  data/V_sinus_eps_0.05_h_0.001.dat \
+	                  data/V_sinus_eps_0.01_h_0.001.dat
 
-data/V_sinus_eps_0.1_h_0.01.dat:
-		octave octave/transport_beispiel.m
-
-advektion.tex: data/V_sinus_eps_0.1_h_0.01.dat
+advektion.tex: transport_beispiel.m
 
 main.tex: advektion.tex
 

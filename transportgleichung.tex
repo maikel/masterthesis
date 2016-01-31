@@ -23,8 +23,7 @@ Wir versuchen hier den instabilen Fall $\lambda > 1$ besser zu verstehen und neh
 \subsection{Beispiel}
 
 Wir schauen uns die Ergebnisse des Verfahrens für die Anfangswerte $U(x) = \sin(\pi x)$ und $\lambda = 1 + \eta$ für verschiedene $\eta$ an.
-Wir haben die Beispiele durch folgendes Skript in \emph{GNU Octave} umgesetzt und untersuchen, was für kleine $\eta$ und kleine $h$ passiert.
-\lstinputlisting[linerange={1-33}]{octave/transport_beispiel.m}
+Wir haben die Beispiele durch das Skript \ref{appendix:transport:beispiel} in \emph{GNU Octave} umgesetzt und untersuchen, was für kleine $\eta$ und kleine $h$ passiert.
 
 \begin{figure}
 \centering
@@ -43,7 +42,7 @@ Wir haben die Beispiele durch folgendes Skript in \emph{GNU Octave} umgesetzt un
 \begin{axis}[
     height = 0.6\textwidth,
     width = 0.6\textwidth,
-    title = {$n = 185$},
+    title = {$n = 198$},
     xtick = {-2,-1,...,2},
     grid  = both,
 ]
@@ -54,7 +53,7 @@ Wir haben die Beispiele durch folgendes Skript in \emph{GNU Octave} umgesetzt un
 \begin{axis}[
     height = 0.6\textwidth,
     width = 0.6\textwidth,
-    title = {$n = 200$},
+    title = {$n = 208$},
     xtick = {-2,-1,...,2},
     grid  = both,
 ]
@@ -65,7 +64,7 @@ Wir haben die Beispiele durch folgendes Skript in \emph{GNU Octave} umgesetzt un
 \begin{axis}[
     height = 0.6\textwidth,
     width = 0.6\textwidth,
-    title = {$n = 220$},
+    title = {$n = 223$},
     xtick = {-2,-1,...,2},
     grid  = both,
 ]
@@ -93,7 +92,7 @@ Wir haben die Beispiele durch folgendes Skript in \emph{GNU Octave} umgesetzt un
 \begin{axis}[
     height = 0.6\textwidth,
     width = 0.6\textwidth,
-    title = {$n = 185$},
+    title = {$n = 198$},
     xtick = {-2,-1,...,2},
     grid  = both,
 ]
@@ -104,7 +103,7 @@ Wir haben die Beispiele durch folgendes Skript in \emph{GNU Octave} umgesetzt un
 \begin{axis}[
     height = 0.6\textwidth,
     width = 0.6\textwidth,
-    title = {$n = 200$},
+    title = {$n = 208$},
     xtick = {-2,-1,...,2},
     grid  = both,
 ]
@@ -115,7 +114,7 @@ Wir haben die Beispiele durch folgendes Skript in \emph{GNU Octave} umgesetzt un
 \begin{axis}[
     height = 0.6\textwidth,
     width = 0.6\textwidth,
-    title = {$n = 220$},
+    title = {$n = 223$},
     xtick = {-2,-1,...,2},
     grid  = both,
 ]
@@ -143,46 +142,7 @@ Wir haben die Beispiele durch folgendes Skript in \emph{GNU Octave} umgesetzt un
 \begin{axis}[
     height = 0.6\textwidth,
     width = 0.6\textwidth,
-    title = {$n = 370$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 2] {data/V_sinus_eps_0.05_h_0.01.dat};
-\end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 400$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 3] {data/V_sinus_eps_0.05_h_0.01.dat};
-\end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 440$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 4] {data/V_sinus_eps_0.05_h_0.01.dat};
-\end{axis}
-\end{tikzpicture}
-\caption{Beispiel für $\eta = 5\cdot 10^{-2}$ und $h=10^{-2}$}
-\label{fig:adv:e5-2h-2}
-\end{figure}
-
-\begin{figure}
-\centering
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 370$},
+    title = {$n = 378$},
     xtick = {-2,-1,...,2},
     grid  = both,
 ]
@@ -193,7 +153,7 @@ Wir haben die Beispiele durch folgendes Skript in \emph{GNU Octave} umgesetzt un
 \begin{axis}[
     height = 0.6\textwidth,
     width = 0.6\textwidth,
-    title = {$n = 400$},
+    title = {$n = 397$},
     xtick = {-2,-1,...,2},
     grid  = both,
 ]
@@ -204,7 +164,7 @@ Wir haben die Beispiele durch folgendes Skript in \emph{GNU Octave} umgesetzt un
 \begin{axis}[
     height = 0.6\textwidth,
     width = 0.6\textwidth,
-    title = {$n = 440$},
+    title = {$n = 426$},
     xtick = {-2,-1,...,2},
     grid  = both,
 ]
@@ -212,12 +172,52 @@ Wir haben die Beispiele durch folgendes Skript in \emph{GNU Octave} umgesetzt un
 \end{axis}
 \end{tikzpicture}
 \caption{Beispiel für $\eta = 5\cdot 10^{-2}$ und $h=10^{-3}$}
+\label{fig:adv:e5-2h-2}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.58]
+\begin{axis}[
+    height = 0.6\textwidth,
+    width = 0.6\textwidth,
+    title = {$n = 1820$},
+    xtick = {-2,-1,...,2},
+    grid  = both,
+]
+\addplot[myblue] table [y index= 2] {data/V_sinus_eps_0.01_h_0.001.dat};
+\end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.58]
+\begin{axis}[
+    height = 0.6\textwidth,
+    width = 0.6\textwidth,
+    title = {$n = 1911$},
+    xtick = {-2,-1,...,2},
+    grid  = both,
+]
+\addplot[myblue] table [y index= 3] {data/V_sinus_eps_0.01_h_0.001.dat};
+\end{axis}
+\end{tikzpicture}
+\begin{tikzpicture}[scale=0.58]
+\begin{axis}[
+    height = 0.6\textwidth,
+    width = 0.6\textwidth,
+    title = {$n = 2053$},
+    xtick = {-2,-1,...,2},
+    grid  = both,
+]
+\addplot[myblue] table [y index= 4] {data/V_sinus_eps_0.01_h_0.001.dat};
+\end{axis}
+\end{tikzpicture}
+\caption{Beispiel für $\eta = 10^{-2}$ und $h=10^{-3}$}
 \label{fig:adv:e5-2h-3}
 \end{figure}
 
 Vergleicht man nun die Plots in Abbildung~\ref{fig:adv:e-1h-2} und mit den Plots auf Abbildung~\ref{fig:adv:e-1h-3}, so erkennt man, dass die maximale Amplitude der Oszillation scheinbar unabh"angig von $h$ mit der Anzahl der Iterationen $n$ w"achst.
-Halbiert man jedoch den Wert für $\eta$, so ändert sich auch die Rate, um die die Amplitude wächst.
+Verringert man jedoch den Wert für $\eta$ wie in den Abbildungen \ref{fig:adv:e5-2h-2} und \ref{fig:adv:e5-2h-3}, so ändert sich auch die Rate, um die die Amplitude wächst.
 Wir hoffen, dieses Verhalten in unseren Approximationen wiederzufinden und dass wir Abschätzungen für das Wachstum der Amplitude angeben können.
+Die konkreten Iterationen $n$ für die Plots in den Abbildungen wurden mit Hilfe der Abschätzung $(1 + 2 \eta)^n$ aus dem Unterkapitel \ref{sec:transport:osz} ausgewählt.
 
 
 
@@ -240,37 +240,8 @@ Das heißt z.\,B., dass $h u_1 \in o(u_0)$ für $h \to 0$ gilt und das führt zu
 Zunächst fällt auf, dass wir im Ansatz \eqref{eq:transport:diskret:ansatz} Terme bis $h^2$ entwickeln.
 Durch die kurze Zeit- und Ortskala wirken Terme in einer Ordnung niedriger.
 Daher werden Terme von $u_2$ Gleichungen in $O(h)$ beeinflussen und müssen betrachtet werden.
-Wir rechnen hier nun die einzelnen Summanden von \eqref{eq:adv:scheme_rechnung} aus:
-{
-\begin{align} \label{eq:transport:diskret:diff1}
-v^{n+1}_i - v^n_i =
-\begin{split}
-& u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)\\
-&\lambda h \partial_t u_0(n+1, i, t_n, x_i) + \frac {(\lambda h)^2}{2} \partial^2_t u_0(n+1, i, t_n, x_i)\\
-&+ \frac {(\lambda h)^3}{6} \partial^3_t u_0(n+1, i, t_n, x_i)\\
-&+ h \bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i, t_n, x_i) \bigr)\\
-&+ \lambda h^2 \partial_t u_1(n+1, i, t_n, x_i) + \frac {\lambda^2 h^3}{2} \partial^2_t u_1(n+1, i, t_n, x_i)\\
-&+ h^2 \bigl( u_2(n+1, i, t_n, x_i) - u_2(n, i, t_n, x_i) \bigr)\\
-&+ \lambda h^3 \partial_t u_2(n+1, i, t_n, x_i) + o(h^3).
-\end{split}
-\end{align}
-} und
-{ 
-\begin{align} \label{eq:transport:diskret:diff2}
-\lambda (v^n_i - v^n_{i-1}) =
-\begin{split}
-& \lambda( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) )\\
-&\lambda h \partial_x u_0(n, i-1, t_n, x_i) - \frac {\lambda h^2}{2} \partial^2_x u_0(n, i-1, t_n, x_i)\\
-& + \frac {\lambda h^3}{6} \partial^3_x u_0(n, i-1, t_n, x_i)\\
-&+ \lambda h \bigl( u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)\\
-&+ \lambda h^2 \partial_x u_1(n, i-1, t_n, x_i) - \frac {\lambda h^3}{2} \partial^2_x u_1(n, i-1, t_n, x_i)\\
-&+ \lambda h^2 \bigl( u_2(n, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr)\\
-&+ \lambda h^3 \partial_t u_2(n, i-1, t_n, x_i) + o(h^2).
-\end{split}
-\end{align}
-}
-\noindent
-Setzt man \eqref{eq:transport:diskret:diff1} und \eqref{eq:transport:diskret:diff2} in \eqref{eq:adv:scheme} ein, liefert uns dies die Gleichungen
+Im Anhang \ref{appendix:diskret:summanden} haben wir die einzelnen Summanden von \eqref{eq:adv:scheme} ausgerechnet.
+Setzt man diese, \eqref{eq:transport:diskret:diff1} und \eqref{eq:transport:diskret:diff2}, nun in \eqref{eq:adv:scheme} ein, liefert uns das die Gleichungen
 
 \vspace{0.4cm}
 \noindent \textbf{In der Ordnung $O(1)$:}
@@ -388,6 +359,7 @@ Und diese Bedingung tretet schon ein, ohne dass wir die Sublinear-Growth Bedingu
 \subsection {Oszillatorischer Produktansatz}\label{sec:transport:osz}
 
 Hier präzisieren wir unseren Ansatz \eqref{eq:transport:diskret:ansatz} aus dem letztem Unterkapitel. % \ref{sec:transport:diskret}.
+Sei $\eps > 0$ die Maschinengenauigkeit.
 Die Anfangsbedingung für $u_0$ in \eqref{eq:transport:diskret:anfangsbedinungen} lautet
 \begin{align*}
 u_0(0, i, 0, x_i) &= \rd\bigl(U(x_i)\bigr) = U(x_i) - \bigl[ \underbrace{U(x_i) - \rd\bigl(U(x_i)\bigr)}_{=: \Delta_\eps U(x_i)} \bigr]\\
@@ -429,13 +401,13 @@ Es gilt
 \[ \Omega(n) = (1 - 2 \lambda)^n. \]
 \end{satz}
 \begin{proof}
-Weil $z_1 \neq 0$ gilt, existiert ein Punkt $(t,x) \in \Rp \times \R$ mit $z_1(t,x) \neq 0$.
+Weil $z_0 \neq 0$ gilt, existiert ein Punkt $(t,x) \in \Rp \times \R$ mit $z_0(t,x) \neq 0$.
 Nach Lemma \ref{lemma:transport:diskret:konvergenz_gitter} existiert für jedes $n \in \N$ ein $i \in \Z$ mit
-\[  \abs{(-1)^i z_1(t, x) \bigl( \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \bigr)} \leq \abs{(-1)^i \frac {t}{\lambda n} \partial_x z_1(t, x) \bigl( \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \bigr)}. \]
+\[  \abs{(-1)^i z_0(t, x) \bigl( \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \bigr)} \leq \abs{(-1)^i \frac {t}{\lambda n} \partial_x z_0(t, x) \bigl( \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \bigr)}. \]
 Angenommen es gelte $\Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \neq 0$.
 Hieraus folgt wiederum für alle $n \in \N$
-\[ \abs{z_1(t, x)} \leq \frac {t}{\lambda n} \abs{\partial_x z_1(t,x)}, \]
-was zu $z_1(t,x) = 0$ führt, ein Widerspruch zur Voraussetzung $z_1(t,x) \neq 0$.
+\[ \abs{z_0(t, x)} \leq \frac {t}{\lambda n} \abs{\partial_x z_0(t,x)}, \]
+was zu $z_0(t,x) = 0$ führt, ein Widerspruch zur Voraussetzung $z_0(t,x) \neq 0$.
 Das impliziert $\Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) = 0$ für alle $n \in \N$ und mit $\Omega(0) = 1$ folgt die Behauptung.
 \end{proof}
 
@@ -444,7 +416,7 @@ Daher reduziert sich dieser Ansatz hier zu
 \begin{align}\label{eq:transport:osz:ansatz}
 v^n_i = w_0(t_n, x_i) + h  w_1(t_n, x_i) + (-1)^i (1 - 2 \lambda)^n \bigl( z_0(t_n, x_i) + h z_1(t_n, x_i) \bigr) + o(h)
 \end{align}
-und sortiert man wie in \ldots die Gleichungen \eqref{eq:transport:diskret:oh} und \eqref{eq:transport:diskret:oh2} nach stetigen und hochfrequentiellen Anteilen, so erhalten wir aufgrund der Glattheit der Abbildungen $w_k$ und $z_k$ die Gleichungen
+und sortiert man, wie im Anhang \ref{appendix:osz:sortiere_nach_frequenz} gezeigt, die Gleichungen \eqref{eq:transport:diskret:oh} und \eqref{eq:transport:diskret:oh2} nach stetigen und hochfrequentiellen Anteilen, so erhalten wir aufgrund der Glattheit der Abbildungen $w_k$ und $z_k$ die Gleichungen
 
 \vspace{0.4cm}
 \noindent \textbf{In der Ordnung $O(h)$:}
@@ -455,17 +427,58 @@ und sortiert man wie in \ldots die Gleichungen \eqref{eq:transport:diskret:oh} u
 \vspace{0.4cm}
 \noindent \textbf{In der Ordnung $O(h^2)$:}
 % {\small
-\begin{align}\label{eq:transport:osz:oh2}
+\begin{align}\label{eq:transport:osz:oh2_A}
 \partial_t w_1(t, x) + \partial_x w_1(t, x) &= \frac {1 - \lambda}{2} \partial^2_x w_0(t, x)\\
-\partial_t z_1(t_n, x_i) + \frac{1}{2 \lambda - 1} \partial_x z_1(t_n, x_i) &= \frac{\lambda - 1}{2 (2 \lambda - 1)^2} \partial^2_x z_0(t_n, x_i)
+\partial_t z_1(t, x) + \frac{1}{2 \lambda - 1} \partial_x z_1(t, x) &= \frac{\lambda - 1}{2 (2 \lambda - 1)^2} \partial^2_x z_0(t, x) \label{eq:transport:osz:oh2_B}
 \end{align}
 
 \noindent \textbf{Mit den Anfangsbedingungen in \eqref{eq:transport:osz:anfangsbedinungen}}
 
 \vspace{0.4cm}
-Betrachtet man den Ansatz \eqref{eq:transport:osz:ansatz} nun genauer, so erkennt man, dass der Faktor $(1 - 2\lambda)^n$ für $\lambda > 1$ und $n \to \infty$ unbeschränkt ist.
-Das heißt, der Ansatz kann bestenfalls nur für feste $h > 0$ gelten und hilft höchstens zu verstehen, was das Verfahren unter solchen Bedingungen und in endlich vielen Iterationen tut.
-In diesem Fall gäbe es für jede Zeit $t > 0$ und zu jeder Schranke $X > 0$ ein $h > 0$, so dass $\abs{v^n_i} > X$ und $n \lambda h = t_n < t$ gilt.
+Betrachtet man den Ansatz \eqref{eq:transport:osz:ansatz} nun genauer, so erkennt man, dass der Faktor $(1 - 2\lambda)^n$ für $\lambda = 1 + \eta$ und $n \to \infty$ unbeschränkt ist.
+Das heißt, der Ansatz kann bestenfalls nur für feste $h > 0$ gelten und hilft, wenn überhaupt, zu verstehen, wie sich das Verfahren unter solchen Bedingungen und in endlich vielen Iterationen verhält.
+In diesem Fall gibt es für jede Zeit $t > 0$ und zu jeder Schranke $X > 0$ ein $h > 0$, so dass $\abs{v^n_i} > X$ und $n \lambda h = t_n < t$ gilt.
+Das heißt, dass es für $h \to 0$ gar kein Zeitinterval geben kann, in dem der Ansatz \eqref{eq:transport:osz:ansatz} konvergiert. 
+Allerdings bedeutet das auch, dass wir im Gegensatz zum regulären Fall die Lösungen $w_k$
+\begin{align}\label{eq:transport:osz:wk_loesungen}
+w_0(t, x) &= U(x - t) \qquad \text{und}\\
+w_1(t, x) &= t \frac{1 - \lambda} 2 \partial^2_x U(x - t)
+\end{align}
+akzeptieren.
+Im Gegensatz zum regulären Fall bleibt der Ansatz nämlich auch für festes $h > 0$ asymptotisch geordnet.
+Wenn nämlich $z_0(t_n, x_i) \geq C > 0$ für $n \to \infty$ gilt, so folgt
+\begin{align*}
+0 &\leq \lim_{n \to \infty} \abs{\frac{w_1(t_n,x_i)}{(1 - 2 \lambda)^n z_0(t_n, x_i)}}\\
+&= \lim_{n \to \infty} \abs{\frac{t_n \frac{1 - \lambda} 2 \partial^2_x U(x_i - t_n)}{(1 - 2 \lambda)^n z_0(t_n, x_i)}}\\
+&= \lim_{n \to \infty} \abs{\frac{n \lambda h (1 - \lambda) \partial^2_x U(x_i - t_n)}{2 (1 - 2 \lambda)^{n} z_0(t_n, x_i)}}\\
+&\leq \frac{h (1 - \lambda)}{C} \norm{\partial^2_x U}_\infty \cdot \lim_{n \to \infty} \abs{\frac{n}{(1 + 2 \eta)^{n}}}\\
+&= 0.
+\end{align*}
 
-Aus der Gleichung \eqref{eq:transport:osz:oh_A} folgt $w_0(t, x) = U(x - t)$ und aus \eqref{eq:transport:osz:oh_B} folgt $z_0(t, x) = \Delta_\eps U(x - t)$.
+Der Faktor $\frac{\lambda - 1}{2 (2 \lambda - 1)^2}$ in Gleichung \eqref{eq:transport:osz:oh2_B} ist für $\eta > 0$ positiv!
+Das heißt, dass sich $z_0$ stabil und diffusiv in der Zeit ausbreitet.
+Wie die Autoren in \cite{Junk2004} kann man für diesen Fall eine langsame Zeitskala $\tau_n = h t_n$ für $z_0$ in den Ansatz einbauen.
+Dann gilt
+\begin{align*}
+\partial_t z_0(t, \tau, x) + \frac {1} {2\lambda - 1} \partial_x z_0(t, \tau, x) &= 0\\
+\partial_t z_1(t, \tau, x) + \frac {1} {2\lambda - 1} \partial_x z_1(t, \tau, x) &= \frac{\lambda - 1}{2 (2 \lambda - 1)^2} \partial^2_x z_0(t, \tau, x) - \partial_\tau z_0(t, \tau, x)\\
+\end{align*}
+und fordert, dass
+\[ 
+\partial_\tau z_0(t, \tau, x) = \frac{\lambda - 1}{2 (2 \lambda - 1)^2} \partial^2_x z_0(t, \tau, x) 
+\]
+gilt. Mit $z_1(0,0,x) = 0$ folgt also $z_1 = 0$ und
+\begin{align*}
+z_0(t, \tau, x) &= (\Delta_\eps U * G_\tau)\left(x - \frac{t}{2 \lambda - 1} \right) \\
+G_\tau(y) &= \sqrt {\frac{1}{2 \pi \tau} \frac {(2 \lambda - 1)^2}{(\lambda - 1)}} \exp\left( - \frac{y^2}{2 \pi \tau} \frac {(2 \lambda - 1)^2}{(\lambda - 1)} \right)
+\end{align*}
+Insgesamt erhalten wir für den Spezialfall $\Delta_\eps U(x) = \eps$
+\begin{align}\label{eq:transport:osz:loesung}
+v^n_i = U(x_i - t_n) + (-1)^{i+n} (1 + 2 \eta)^n \eps - \frac{h\eta} 2 t_n \partial^2_x U(x_i - t_n) + o(h).
+\end{align}
 
+\subsection{Kleine Störungen der Courant-Friedrich-Lewy Bedingung}
+
+\section{Advektion mit variabler Geschwindigkeit}
+
+\section{Mehrdimensional}

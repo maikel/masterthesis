@@ -2,7 +2,7 @@
                ,11pt%
                %,draft%
                %,5BCOM%
-               %,openright%
+               ,openright%
                ]{scrreprt}
 
 \usepackage[ngerman]{babel}
@@ -38,7 +38,7 @@
 \tikzexternalize[prefix=figures/]
 
 \usepackage{csquotes}
-\usepackage{biblatex} 
+\usepackage[citestyle=alphabetic-verb]{biblatex} 
 \bibliography{Bibliography}
 
 \usepackage[toc,page]{appendix}
@@ -65,10 +65,13 @@ Beschreibung hochfrequenter numerischer Instabilitäten mit Hilfe asymptotischer
 \tableofcontents
 
 \chapter{Vorwort}
-\chapter{Multiskalen Asymptotik für finite Differenzen}
+\input{vorwort}
+% \chapter{Multiskalen Asymptotik für finite Differenzen}
+% \input{asymptotik_finite_differenzen}
 \chapter{Lineare Verfahren}
 \input{transportgleichung}
 \chapter{Nichtlineare Verfahren}
+\input{nichtlinear}
 
 \input{FrontBackMatter/Bibliography}
 
