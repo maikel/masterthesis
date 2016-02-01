@@ -479,10 +479,10 @@ v^n_i = U(x_i - t_n) + (-1)^{i+n} (1 + 2 \eta)^n \eps - \frac{h\eta} 2 t_n \part
 \centering
 \begin{tikzpicture}
 \begin{semilogyaxis}[
-    title={$\norm{\sin\bigl(\pi (x_i - n h (1 + \eta) )\bigr) - v^n_i}_\infty, h = 10^{-3}$},
+    title={$\err^n = \max_{i \in \Z} \abs{\sin\bigl(\pi (x_i - n h (1 + \eta) )\bigr) - v^n_i}$},
     xlabel={Iterationen $n$},
     ylabel={maximaler Fehler},
-    legend entries={$\eta=0.01$,$\eta=0.05$,$\eta=0.1$,$(1+2 \eta)^n\eps + \frac{\pi^2}{2} n h^2 (1 + \eta) \eta$, $(1+2 \eta)^n\eps$},
+    legend entries={$\err^n \, \eta=0.01$,$\err^n \, \eta=0.05$,$\err^n \, \eta=0.1$,$(1+2 \eta)^n\eps + \frac{\pi^2}{2} n h^2 (1 + \eta) \eta$, $(1+2 \eta)^n\eps$},
     legend style={at={(1.8,1)}}
 ]
 \addplot[myblue, line width={0.8}, mark=*] table {data/max_errors_eta_0.010_h_0.001.dat};
@@ -626,7 +626,10 @@ Dieses mal folgt aus $w_1(0,x) = z_1(0,x) = 0$ sogar $z_1 = w_1 = 0$.
 \noindent \emph{In der Ordnung $O(h^2)$}
 \begin{align*}
 \partial_t w_2(t, x) + \partial_x w_2(t, x) &= - \frac{1}{2} \partial^2_x w_0(t, x) \qquad \text{und}\\
-\partial_t z_2(t, x) + \partial_x z_1(t, x) &= \frac{1}{2} \partial^2_x z_0(t, x) - \partial^2_t z_0(t, x) + 2 z_1(t, x).
+\partial_t z_2(t, x) + \partial_x z_2(t, x) &= \frac{1}{2} \partial^2_x z_0(t, x) - \partial^2_t z_0(t, x) + 2 z_2(t, x)\\
+&= \frac{1}{2} \partial^2_x z_0(t, x) - \partial_t \bigl( z_0(t, x) - \partial_x z_0 \bigr) + 2 z_2(t, x)\\
+&= \frac{1}{2} \partial^2_x z_0(t, x) + \partial_x z_0(t, x) - z_0(t, x) + \partial_x \bigl( z_0 - \partial_x z_0 \bigr) + 2 z_2(t, x)\\
+&= - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t, x) + 2 z_2(t, x)\\
 \end{align*}
 
 Damit folgt
