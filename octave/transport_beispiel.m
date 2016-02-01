@@ -29,66 +29,71 @@ function V = beispiel(eta, h, N)
 
     % Call Numerical Method
     V = upwind(u0, lambda, N);
-    V = [x' V'];
+    V = V';
 end
 
-step_fn = @(err,eta) floor((log(err) .- log(eps) - log(2)) ./ log(1 + 2*eta));
-max_err_fn = @(V, N, h) max(abs(sin(pi*(V(:,1) - N*h)) - V(:, N+1)));
-exptected_err_fn = @(n, h, eta) (1+2*eta).^n*eps + 2*h*eta.*n;
+x0 = [-2, 2];
 
-exptected_errors = [0.1 0.5 6 100];
+sinus_max_err_fn = @(N,X,V,h,eta) ...
+    max(abs( sin(pi*(X-(N-1)*(h+h*eta))) - V(:,N) ));
 
-eta = 1e-1;
-h   = 1e-2;
+exptected_err_fn_1 = @(n,h,eta) ...
+    (1+2*eta).^n*eps;
+exptected_err_fn = @(n,h,eta) ...
+    (1+2*eta).^n*eps+(pi^2/2)*h*eta*(h+h*eta).*n;
 
-steps = step_fn(exptected_errors, eta);
+step_fn = @(err,eta) ...
+    floor((log(err).-log(eps))./log(1+2*eta));
 
-N = steps(length(steps));
-V = beispiel(eta, h, N);
+% beispiele = [ (eta, h) ]
+beispiele = { [1e-1, 1e-2],
+              [1e-1, 1e-3],
+              [5e-2, 1e-3],
+              [1e-2, 1e-3] };
 
-indizes = 50:floor((steps(4)-50)/10):steps(4);
-max_errors = [indizes;  max_err_fn(V, indizes, h);
-              exptected_err_fn(indizes, h, eta)]';
+for i = 1:length(beispiele)
+    eta = beispiele{i}(1);
+    h   = beispiele{i}(2);
+    X = [x0(1)+h:h:x0(2)]';
 
-V = V(:, [1 steps]);
-save 'data/V_sinus_eps_0.1_h_0.01.dat' V;
-save 'data/max_errors_eps_0.1_h_0.01.dat' max_errors;
+    wanted_errors  = [0.1 0.5 6 100];
+    steps_to_error = step_fn(wanted_errors, eta);
+    len_steps = length(steps_to_error);
 
-h   = 1e-3;
+    max_N = steps_to_error(len_steps);
+    V = beispiel(eta, h, max_N);
 
-V = beispiel(eta, h, N);
-max_errors = [indizes; 
-              max_err_fn(V, indizes, h);
-              exptected_err_fn(indizes, h, eta)]';
+    indizes = 1:floor((max_N-50)/10):max_N;
+    max_errors = [
+      indizes;
+      sinus_max_err_fn(indizes, X, V, h, eta);
+      exptected_err_fn(indizes-1, h, eta);
+      exptected_err_fn_1(indizes-1, h, eta)
+    ]';
+    file_name = sprintf('data/max_errors_eta_%.3f_h_%.3f.dat', eta, h)
+    fid = fopen(file_name, "w");
+    fdisp(fid, max_errors);
+    fclose(fid);
+    V = [X, V(:, steps_to_error)];
+    file_name = sprintf('data/V_sinus_eta_%.3f_h_%.3f.dat', eta, h)
+    fid = fopen(file_name, "w");
+    fdisp(fid, V);
+    fclose(fid);
+end
 
-V = V(:, [1 steps]);
-save 'data/V_sinus_eps_0.1_h_0.001.dat' V;
-save 'data/max_errors_eps_0.1_h_0.001.dat' max_errors;
+eta   = 1e-3;
+h     = 1e-3;
+T     = 0:h*(1+eta):25;
+X     = [-2+h:h:2]';
+max_N = length(T);
+V     = beispiel(eta, h, max_N);
 
-eta   = 5e-2;
-steps = step_fn(exptected_errors, eta);
+N = 1:100:max_N;
 
-N = steps(length(steps));
-V = beispiel(eta, h, N);
+max_errors = [
+    T(N);
+    sinus_max_err_fn(N, X, V, h, eta);
+    eps*exp(2*T(N))
+]';
 
-indizes = 50:floor((steps(4)-50)/10):steps(4);
-max_errors = [indizes; max_err_fn(V, indizes, h);
-              exptected_err_fn(indizes, h, eta)]';
-
-V = V(:, [1 steps]);
-save 'data/V_sinus_eps_0.05_h_0.001.dat' V;
-save 'data/max_errors_eps_0.05_h_0.001.dat' max_errors;
-
-eta   = 1e-2;
-steps = step_fn(exptected_errors, eta);
-
-N = steps(length(steps));
-V = beispiel(eta, h, N);
-
-indizes = 50:floor((steps(4)-50)/10):steps(4);
-max_errors = [indizes; max_err_fn(V, indizes, h);
-              exptected_err_fn(indizes, h, eta)]';
-
-V = V(:, [1 steps]);
-save 'data/V_sinus_eps_0.01_h_0.001.dat' V;
-save 'data/max_errors_eps_0.01_h_0.001.dat' max_errors;
+save 'data/max_errors_eta_0.001_h_0.001.dat' max_errors

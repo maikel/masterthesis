@@ -17,10 +17,10 @@ all: Masterarbeit.pdf
 data/%.dat:
 		octave --silent octave/transport_beispiel.m
 
-transport_beispiel.m: data/V_sinus_eps_0.1_h_0.01.dat    \
-	                  data/V_sinus_eps_0.1_h_0.001.dat  \
-	                  data/V_sinus_eps_0.05_h_0.001.dat \
-	                  data/V_sinus_eps_0.01_h_0.001.dat
+transport_beispiel.m: data/V_sinus_eta_0.100_h_0.001.dat    \
+	                  data/V_sinus_eta_0.100_h_0.001.dat  \
+	                  data/V_sinus_eta_0.050_h_0.001.dat \
+	                  data/V_sinus_eta_0.010_h_0.001.dat
 
 advektion.tex: transport_beispiel.m
 
