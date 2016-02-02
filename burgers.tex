@@ -1,0 +1,21 @@
+Ich weiß noch gar nicht, ob nichtlineare Verfahren überhaupt so anzugehen sind.
+Wenn ich hier was schaffen, dann vermutlich nicht viel und kann nur einen Ausblick geben.
+Vielleicht komme ich ja noch das Gudonov Verfahren für die Burgersgleichung auseinander zu nehmen.
+Jedenfalls stelle ich mir vor, dass man da noch andere, schwächere Ergebnisse als im linearen Fall erwarten kann.
+
+
+\[ \partial_t u(t, x) + u(t,x) \partial_x u(t,x) = 0 \]
+
+\[ \partial_t u(t, x) + \partial_x \left(u^2(t,x) \right) = 0 \]
+
+\[ v^{n+1}_i = v^n_i - \lambda \bigl( g(v^n_i, v^n_{i+1}) - g(v^n_{i-1}, v^n_i) \bigr) \]
+
+\[
+g(v,w) = \frac{\bigl(u(v,w)\bigr)^2}{2}, \qquad u(v,w) = \begin{cases}
+v, & \text{wenn } v \geq w \text{ und } \frac{v+w}{2} > 0\\
+w, & \text{wenn } v \geq w \text{ und } \frac{v+w}{2} \leq 0\\
+v, & \text{wenn } v < w \text{ und } v > 0\\
+w, & \text{wenn } v < w \text{ und } w < 0\\
+0, & \text{wenn } v \leq 0 \leq w.
+\end{cases}
+\]
