@@ -1,5 +1,3 @@
-\section{Die Transportgleichung}
-
 Wir betrachten die Differentialgleichung der eindimensionalen Advektion
 \begin{align}\label{eq:adv:pde}
 \partial_t u(t, x) + \partial_x u(t, x) = 0, \quad u(0, x) = U(x).
@@ -18,31 +16,22 @@ bestimmt.
 Es ist bereits bekannt, dass das Verfahren f"ur $\lambda \leq 1$ stabil und f"ur $\lambda = 1$ sogar exakt ist.
 Wir versuchen hier den instabilen Fall $\lambda > 1$ besser zu verstehen und nehmen in diesem Kapitel daher $\lambda = 1 + \eta$ f"ur ein $\eta > 0$ an.
 
+\section{Analytische Lösung}
 
+\section{Erster Regulärer Ansatz}
 
-\subsection{Beispiel}\label{sec:transport:beispiel}
+\section{Beispiel für Instabiles Verhalten}\label{sec:transport:beispiel}
 
 Wir schauen uns die Ergebnisse des Verfahrens für die Anfangswerte $U(x) = \sin(\pi x)$ und $\lambda = 1 + \eta$ für verschiedene $\eta$ an.
 Wir haben die Beispiele durch das Skript \ref{appendix:transport:beispiel} in \emph{GNU Octave} umgesetzt und untersuchen, was für kleine $\eta$ und kleine $h$ passiert.
 
 \begin{figure}
 \centering
-% \begin{tikzpicture}[scale=0.58]
-% \begin{axis}[
-%     height = 0.6\textwidth,
-%     width = 0.6\textwidth,
-%     title = {$n = 120$},
-%     xtick = {-2,-1,...,2},
-%     grid  = both,
-% ]
-% \addplot[myblue] table [y index= 1] {data/V_sinus_eps_0.1_h_0.01.dat};
-% \end{axis}
-% \end{tikzpicture}
 \begin{tikzpicture}[scale=0.58]
 \begin{axis}[
     height = 0.6\textwidth,
     width = 0.6\textwidth,
-    title = {$n = 198$},
+    title = {$\eta = 0.1, h = 0.01, n = 198$},
     xtick = {-2,-1,...,2},
     grid  = both,
 ]
@@ -53,46 +42,7 @@ Wir haben die Beispiele durch das Skript \ref{appendix:transport:beispiel} in \e
 \begin{axis}[
     height = 0.6\textwidth,
     width = 0.6\textwidth,
-    title = {$n = 208$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 3] {data/V_sinus_eta_0.100_h_0.001.dat};
-\end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 223$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 4] {data/V_sinus_eta_0.100_h_0.001.dat};
-\end{axis}
-\end{tikzpicture}
-\caption{Beispiel für $\eta = 10^{-1}$ und $h=10^{-2}$}
-\label{fig:adv:e-1h-2}
-\end{figure}
-
-\begin{figure}
-\centering
-% \begin{tikzpicture}[scale=0.58]
-% \begin{axis}[
-%     height = 0.6\textwidth,
-%     width = 0.6\textwidth,
-%     title = {$n = 120$},
-%     xtick = {-2,-1,...,2},
-%     grid  = both,
-% ]
-% \addplot[myblue] table [y index= 1] {data/V_sinus_eta_0.1_h_0.001.dat};
-% \end{axis}
-% \end{tikzpicture}
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 198$},
+    title = {$\eta = 0.1, h = 0.001, n = 198$},
     xtick = {-2,-1,...,2},
     grid  = both,
 ]
@@ -103,125 +53,25 @@ Wir haben die Beispiele durch das Skript \ref{appendix:transport:beispiel} in \e
 \begin{axis}[
     height = 0.6\textwidth,
     width = 0.6\textwidth,
-    title = {$n = 208$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 3] {data/V_sinus_eta_0.100_h_0.001.dat};
-\end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 223$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 4] {data/V_sinus_eta_0.100_h_0.001.dat};
-\end{axis}
-\end{tikzpicture}
-\caption{Beispiel für $\eta = 10^{-1}$ und $h=10^{-3}$}
-\label{fig:adv:e-1h-3}
-\end{figure}
-
-\begin{figure}
-\centering
-% \begin{tikzpicture}[scale=0.58]
-% \begin{axis}[
-%     height = 0.6\textwidth,
-%     width = 0.6\textwidth,
-%     title = {$n = 240$},
-%     xtick = {-2,-1,...,2},
-%     grid  = both,
-% ]
-% \addplot[myblue] table [y index= 1] {data/V_sinus_eta_0.05_h_0.01.dat};
-% \end{axis}
-% \end{tikzpicture}
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 378$},
+    title = {$\eta = 0.05, h = 0.001, n = 378$},
     xtick = {-2,-1,...,2},
     grid  = both,
 ]
 \addplot[myblue] table [y index= 2] {data/V_sinus_eta_0.050_h_0.001.dat};
 \end{axis}
 \end{tikzpicture}
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 397$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 3] {data/V_sinus_eta_0.050_h_0.001.dat};
-\end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}[scale=0.58]
-\begin{axis}[
-    height = 0.6\textwidth,
-    width = 0.6\textwidth,
-    title = {$n = 426$},
-    xtick = {-2,-1,...,2},
-    grid  = both,
-]
-\addplot[myblue] table [y index= 4] {data/V_sinus_eta_0.050_h_0.001.dat};
-\end{axis}
-\end{tikzpicture}
-\caption{Beispiel für $\eta = 5\cdot 10^{-2}$ und $h=10^{-3}$}
-\label{fig:adv:e5-2h-2}
+\caption{Vergleich des instabilen Verhaltens für verschiedene $\eta$ und $h$}
+\label{fig:transport:beispiel}
 \end{figure}
 
-% \begin{figure}
-% \centering
-% \begin{tikzpicture}[scale=0.58]
-% \begin{axis}[
-%     height = 0.6\textwidth,
-%     width = 0.6\textwidth,
-%     title = {$n = 1820$},
-%     xtick = {-2,-1,...,2},
-%     grid  = both,
-% ]
-% \addplot[myblue] table [y index= 2] {data/V_sinus_eta_0.01_h_0.001.dat};
-% \end{axis}
-% \end{tikzpicture}
-% \begin{tikzpicture}[scale=0.58]
-% \begin{axis}[
-%     height = 0.6\textwidth,
-%     width = 0.6\textwidth,
-%     title = {$n = 1911$},
-%     xtick = {-2,-1,...,2},
-%     grid  = both,
-% ]
-% \addplot[myblue] table [y index= 3] {data/V_sinus_eta_0.01_h_0.001.dat};
-% \end{axis}
-% % \end{tikzpicture}
-% % \begin{tikzpicture}[scale=0.58]
-% % \begin{axis}[
-% %     height = 0.6\textwidth,
-% %     width = 0.6\textwidth,
-% %     title = {$n = 2053$},
-% %     xtick = {-2,-1,...,2},
-% %     grid  = both,
-% % ]
-% % \addplot[myblue] table [y index= 4] {data/V_sinus_eta_0.01_h_0.001.dat};
-% % \end{axis}
-% % \end{tikzpicture}
-% % \caption{Beispiel für $\eta = 10^{-2}$ und $h=10^{-3}$}
-% % \label{fig:adv:e5-2h-3}
-% \end{figure}
 
-Vergleicht man nun die Plots in Abbildung~\ref{fig:adv:e-1h-2} und mit den Plots auf Abbildung~\ref{fig:adv:e-1h-3}, so erkennt man, dass die maximale Amplitude der Oszillation scheinbar unabh"angig von $h$ mit der Anzahl der Iterationen $n$ w"achst.
-Verringert man jedoch den Wert für $\eta$ wie in der Abbildung \ref{fig:adv:e5-2h-2}, so ändert sich auch die Rate, um die die Amplitude wächst.
-Wir hoffen, dieses Verhalten in unseren Approximationen wiederzufinden und dass wir Abschätzungen für das Wachstum der Amplitude angeben können.
+Vergleicht man nun die Plots in Abbildung~\ref{fig:transport:beispiel} untereinander, so erkennt man, dass die maximale Amplitude der Oszillation scheinbar unabh"angig von $h$ mit der Anzahl der Iterationen $n$ w"achst.
+Verringert man jedoch den Wert für $\eta$, so ändert sich auch die Rate, um die die Amplitude wächst.
+Wir werden dieses Verhalten in unseren Approximationen wiederfinden und geben ferner Abschätzungen für das Wachstum der Amplitude an.
 Die konkreten Iterationen $n$ für die Plots in den Abbildungen wurden mit Hilfe der Abschätzung $(1 + 2 \eta)^n$ aus dem Unterkapitel \ref{sec:transport:osz} ausgewählt.
 
 
-
-\subsection {Diskreter Ansatz auf Gitterniveau} \label{sec:transport:diskret}
+\section {Diskrete Ansätze auf Gitterniveau} \label{sec:transport:diskret}
 
 Wir führen hier Raumzeit-Koordinaten auf einer kurzen Skala ein.
 Genau genommen machen wir unsere Ansatzfunktionen zusätzlich von den diskreten Gitterkoordinaten $(n,i)$ abhängig.
@@ -353,7 +203,7 @@ Selbst dann, wenn man das Lemma dahingehend abschwächt, dass man nur die gleich
 Und diese Bedingung tretet schon ein, ohne dass wir die Sublinear-Growth Bedingung überhaupt benutzt haben.
 
 
-\subsection {Oszillatorischer Produktansatz}\label{sec:transport:osz}
+\section {Ansatz für alternierende Vorzeichen}\label{sec:transport:osz}
 
 Hier präzisieren wir unseren Ansatz \eqref{eq:transport:diskret:ansatz} aus dem letztem Unterkapitel. % \ref{sec:transport:diskret}.
 Sei $\eps > 0$ die Maschinengenauigkeit.
@@ -489,9 +339,9 @@ v^n_i = U(x_i - t_n) + (-1)^{i+n} (1 + 2 \eta)^n \eps - \frac{h\eta} 2 t_n \part
 \addplot[dg, line width={0.8}, mark=*] table {data/max_errors_eta_0.050_h_0.001.dat};
 \addplot[red, line width={0.8}, mark=*] table {data/max_errors_eta_0.100_h_0.001.dat};
 \addplot[black, line width={0.3}, mark=x] table [y index={2}] {data/max_errors_eta_0.050_h_0.001.dat};
-\addplot[mygray, line width={0}, dashed] table [y index={3}] {data/max_errors_eta_0.010_h_0.001.dat};
-\addplot[mygray, line width={0}, dashed] table [y index={3}] {data/max_errors_eta_0.050_h_0.001.dat};
-\addplot[mygray, line width={0}, dashed] table [y index={3}] {data/max_errors_eta_0.100_h_0.001.dat};
+\addplot[mygray, line width={0.5}, dotted] table [y index={3}] {data/max_errors_eta_0.010_h_0.001.dat};
+\addplot[mygray, line width={0.5}, dotted] table [y index={3}] {data/max_errors_eta_0.050_h_0.001.dat};
+\addplot[mygray, line width={0.5}, dotted] table [y index={3}] {data/max_errors_eta_0.100_h_0.001.dat};
 \addplot[black, line width={0.3}, mark=x] table [y index={2}] {data/max_errors_eta_0.010_h_0.001.dat};
 \addplot[black, line width={0.3}, mark=x] table [y index={2}] {data/max_errors_eta_0.100_h_0.001.dat};
 \end{semilogyaxis}
@@ -507,7 +357,7 @@ Für $h \to 0$ gilt stets $h \ll \eta$, was bedeutet, dass dieser Ansatz hier Au
 Darin liegen auch die Grenzen von \eqref{eq:transport:osz:loesung} begründet.
 Dieses Problem gehen wir mit dem nächtem Unterkapitel an.
 
-\subsection{Kleine Störungen der Courant-Friedrich-Lewy Bedingung}\label{sec:transport:kleineta}
+\section{Kleine Störungen der Courant-Friedrich-Lewy Bedingung}\label{sec:transport:kleineta}
 
 $h \ll \eta$ führt fundamental zu dem Problem, dass kleine Rundungsfehler zu jeder noch so kleinen Zeit $t > 0$ beliebig groß werden und die richtige Lösung komplett überdecken.
 In der Realität jedoch, rechnen wir immer mit einem $h > 0$, für das eventuell auch $h \sim \eta$ gelten kann.
@@ -600,14 +450,15 @@ woraus Wegen der Anfangsbedingungen \eqref{eq:transport:kleineta:anfangsbedinung
 \centering
 \begin{tikzpicture}
 \begin{semilogyaxis}[
-    title={$\err^n = \norm{\sin\bigl(\pi (x_i - t_n )\bigr) - v^n_i}_\infty$},
+    title={$\err^n = \max_{i \in \Z} \abs{\sin\bigl(\pi (x_i - t_n )\bigr) - v^n_i}$},
     xlabel={Zeit $t$},
     ylabel={maximaler Fehler},
-    legend entries={$\err^n\: h = 0.001$,$\eps e^{2t}$},
-    legend style={at={(1.6,1)}}
+    legend entries={$\err^n$,$\eps e^{2t}$, $ \eps e^{2t} + t h^2 \frac{\pi^2}{2}$},
+    legend style={at={(1.5,1)}}
 ]
-\addplot[myblue, line width={1.8}] table {data/max_errors_eta_0.001_h_0.001.dat};
-\addplot[black, line width={0.5}, dashed] table [y index={2}] {data/max_errors_eta_0.001_h_0.001.dat};
+\addplot[myblue, line width={2}] table {data/max_errors_eta_0.001_h_0.001.dat};
+\addplot[black, line width={0.5}, dotted] table [y index={2}] {data/max_errors_eta_0.001_h_0.001.dat};
+\addplot[black, line width={0.5}, mark=o, mark repeat={10}] table [y index={3}] {data/max_errors_eta_0.001_h_0.001.dat};
 \end{semilogyaxis}
 \end{tikzpicture}
 \caption{Hier vergleichen wir die maximalen Fehler der numerischen Lösungen für die Startwerte $U(x) = sin(\pi x)$, $\Delta_\eps U(x) = \eps$ und $\eta = h = 10^{-3}$ zur echten Lösung $u(t,x) = sin(\pi(x - t))$ mit dem geschätztem Fehler $\eps e^{2t}$ aus der asymptotischen Entwicklung in \eqref{eq:transport:kleineta:loesung}.}
@@ -632,13 +483,24 @@ Dieses mal folgt aus $w_1(0,x) = z_1(0,x) = 0$ sogar $z_1 = w_1 = 0$.
 &= - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t, x) + 2 z_2(t, x)\\
 \end{align*}
 
+Diese PDE hat die Lösung
+
+\begin{align*}
+w_2(t,x) &= - t \frac{1}{2} \partial^2_x w_0(t, x) \qquad \text{und}\\
+z_2(t,x) &= e^{2t} \int_0^t e^{-2s} \left[ - \frac{1}{2} \partial^2_x z_0(s, x) + 2 \partial_x z_0(s, x) - z_0(s,x) \right] \dd s\\
+\end{align*}
+
+Denn es gilt 
+
+\begin{align}
+\partial_t z_2(t,x) &= \partial_t \left( e^{2t} \int_0^t e^{-2s} \left[ - \frac{1}{2} \partial^2_x z_0(s, x) + 2 \partial_x z_0(s, x) - z_0(s,x) \right] \dd s \right)\\
+&= 2 z_2(t,x) + e^{2t} e^{-2t} \left[ - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t,x) \right]\\
+&= 2 z_2(t,x) - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t,x)
+\end{align}
+
 Damit folgt
 \begin{align}\label{eq:transport:kleineta:loesung}
 v^n_i = U(x_i - t_n) + \Delta_\eps U(x_i - t_n) e^{2t_n} + O(h^2).
 \end{align}
 
-
-
-\section{Advektion mit ortsabhängiger Geschwindigkeit}
-
-\section{Mehrdimensional}
+\section{WKB Ansatz}

@@ -1,4 +1,31 @@
 {
+	"build_systems":
+	[
+		{
+			"cmd":
+			[
+				"make"
+			],
+			"name": "LaTeX",
+			"working_dir": "Masterarbeit/LaTeX"
+		},
+		{
+			"cmd":
+			[
+				"make clean"
+			],
+			"name": "LaTeX clean",
+			"working_dir": "Masterarbeit/LaTeX"
+		},
+		{
+			"cmd":
+			[
+				"octave",
+				"--silent"
+			],
+			"name": "Octave"
+		}
+	],
 	"folders":
 	[
 		{
