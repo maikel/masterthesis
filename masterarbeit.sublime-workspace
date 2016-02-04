@@ -212,26 +212,21 @@
 	"buffers":
 	[
 		{
-			"file": "transportgleichung.tex",
-			"settings":
-			{
-				"buffer_size": 28810,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "main.tex",
-			"settings":
-			{
-				"buffer_size": 2089,
-				"line_ending": "Unix"
-			}
-		},
-		{
+			"contents": "\\section{Die Transportgleichung}\n\\subsection{Beispielskript}\n\\label{appendix:transport:beispiel}\n\\lstinputlisting{octave/transport_beispiel.m}\n\n\\subsection{Diskreter Ansatz: Summanden vom Upwind-Schema entwickeln}\n\\label{appendix:diskret:summanden}\n\nWir rechnen hier nun die einzelnen Summanden von \\eqref{eq:adv:scheme_rechnung} aus:\n{\n\\begin{align} \\label{eq:transport:diskret:diff1}\nv^{n+1}_i - v^n_i =\n\\begin{split}\n& u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)\\\\\n&\\lambda h \\partial_t u_0(n+1, i, t_n, x_i) + \\frac {(\\lambda h)^2}{2} \\partial^2_t u_0(n+1, i, t_n, x_i)\\\\\n&+ \\frac {(\\lambda h)^3}{6} \\partial^3_t u_0(n+1, i, t_n, x_i)\\\\\n&+ h \\bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i, t_n, x_i) \\bigr)\\\\\n&+ \\lambda h^2 \\partial_t u_1(n+1, i, t_n, x_i) + \\frac {\\lambda^2 h^3}{2} \\partial^2_t u_1(n+1, i, t_n, x_i)\\\\\n&+ h^2 \\bigl( u_2(n+1, i, t_n, x_i) - u_2(n, i, t_n, x_i) \\bigr)\\\\\n&+ \\lambda h^3 \\partial_t u_2(n+1, i, t_n, x_i) + o(h^3).\n\\end{split}\n\\end{align}\n} und\n{ \n\\begin{align} \\label{eq:transport:diskret:diff2}\n\\lambda (v^n_i - v^n_{i-1}) =\n\\begin{split}\n& \\lambda( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) )\\\\\n&\\lambda h \\partial_x u_0(n, i-1, t_n, x_i) - \\frac {\\lambda h^2}{2} \\partial^2_x u_0(n, i-1, t_n, x_i)\\\\\n& + \\frac {\\lambda h^3}{6} \\partial^3_x u_0(n, i-1, t_n, x_i)\\\\\n&+ \\lambda h \\bigl( u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \\bigr)\\\\\n&+ \\lambda h^2 \\partial_x u_1(n, i-1, t_n, x_i) - \\frac {\\lambda h^3}{2} \\partial^2_x u_1(n, i-1, t_n, x_i)\\\\\n&+ \\lambda h^2 \\bigl( u_2(n, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \\bigr)\\\\\n&+ \\lambda h^3 \\partial_t u_2(n, i-1, t_n, x_i) + o(h^2).\n\\end{split}\n\\end{align}\n}\n\n\\subsection{Oszillatorischer Produktansatz: Sortiere nach Frequenz}\n\\label{appendix:osz:sortiere_nach_frequenz}\n\nEs gilt\n\\[ u_k(n, i, t_n, x_i) = w_k(t_n, x_i) + (-1)^i (1 - 2\\lambda)^n z_k(t_n, x_i) \\quad \\text{für $k = 0,1,2$} \\]\nund aus \\eqref{eq:transport:diskret:oh} folgt \n\n\\vspace{0.4cm}\n\\noindent \\textbf{In der Ordnung $O(h)$:}\n\\begin{align*}\n0 &= \\partial_t u_0(n+1, i, t_n, x_i) + \\partial_x u_0(n, i-1, t_n, x_i)\\\\\n&= \\partial_t w_0(t_n, x_i) + (-1)^i (1 - 2\\lambda)^{n+1} \\partial_t z_0(t_n, x_i)\\\\\n&\\qquad + \\partial_x w_0(t_n, x_i) + (-1)^{i-1} (1 - 2\\lambda)^n \\partial_x z_0(t_n, x_i)\\\\\n&= \\partial_t w_0(t_n, x_i) + \\partial_x w_0(t_n, x_i)\\\\\n&\\qquad + (-1)^i (1 - 2\\lambda)^n \\bigl( (1 - 2\\lambda) \\partial_t z_0(t_n, x_i) - \\partial_x z_0(t_n, x_i) \\bigr) \\\\\n\\end{align*}\n\nalso\n\\begin{align*}\n\\partial_t w_0(t_n, x_i) + \\partial_x w_0(t_n, x_i) &= 0 \\qquad \\text{und}\\\\\n\\partial_t z_0(t_n, x_i) + \\frac {1}{2\\lambda - 1} \\partial_x z_0(t_n, x_i) &= 0.\n\\end{align*}\n\nHieraus folgt insbesondere auch $\\partial^2_t w_0 = \\partial^2_x w_0$ und $\\partial^2_t z_0 = \\frac {1}{(2\\lambda - 1)^2} \\partial^2_x z_0$.\n\n\\vspace{0.4cm}\n\\noindent \\textbf{In der Ordnung $O(h^2)$:}\n\\begin{align*}\n\\partial_t u_1(n+1, i, t_n, x_i) + \\partial_x u_1(n, i-1, t_n, x_i) &=\n&\\frac {1}{2} \\partial^2_x u_0(n, i-1, t_n, x_i) - \\frac{\\lambda}{2} \\partial^2_t u_0(n+1, i, t_n, x_i)\n\\end{align*}\nEs gilt \n\\begin{align*}\n\\frac {1}{2} \\partial^2_x u_0(n, i-1, t_n, x_i) \\qquad\\\\\n- \\frac{\\lambda}{2} \\partial^2_t u_0(n+1, i, t_n, x_i)\n&= \\frac{1}{2} \\bigl( \\partial^2_x w_0(t_n, x_i) + (-1)^{i-1} (1 - 2\\lambda)^n \\partial^2_x z_0(t_n, x_i) \\bigr) \\\\\n&\\qquad - \\frac{\\lambda}{2} \\bigl( \\partial^2_t w_0(t_n, x_i) + (-1)^i (1 - 2\\lambda)^{n+1} \\partial^2_t z_0(t_n, x_i) \\bigr)\\\\\n&= \\frac{1 - \\lambda}{2}  \\partial^2_x w_0(t_n, x_i)\\\\\n&\\qquad + (-1)^i (1 - 2\\lambda)^{n} \\left( - \\frac{1}{2} \\partial^2_x z_0(t_n, x_i) - \\frac{\\lambda (1 - 2\\lambda)}{2} \\partial^2_t z_0(t_n, x_i) \\right)\\\\\n&= \\frac{1 - \\lambda}{2}  \\partial^2_x w_0(t_n, x_i)\\\\\n&\\qquad + (-1)^i (1 - 2\\lambda)^{n} \\left( - \\frac{1}{2} \\partial^2_x z_0(t_n, x_i) - \\frac{\\lambda (1 - 2\\lambda)}{2 (2 \\lambda - 1)^2} \\partial^2_x z_0(t_n, x_i) \\right)\\\\\n&= \\frac{1 - \\lambda}{2}  \\partial^2_x w_0(t_n, x_i)\\\\\n&\\qquad + (-1)^i (1 - 2\\lambda)^{n} \\left( - \\frac{1}{2} \\partial^2_x z_0(t_n, x_i) + \\frac{\\lambda}{2 (2 \\lambda - 1)} \\partial^2_x z_0(t_n, x_i) \\right)\\\\\n&= \\frac{1 - \\lambda}{2}  \\partial^2_x w_0(t_n, x_i)\\\\\n&\\qquad + (-1)^i (1 - 2\\lambda)^{n} \\left( \\frac{1 - \\lambda}{2 (2 \\lambda - 1)} \\partial^2_x z_0(t_n, x_i) \\right)\n\\end{align*}\nund ganz analog wie bei $O(h)$ gilt ferner\n\\begin{align*}\n\\partial_t u_1(n+1, i, t_n, x_i) \\qquad\\\\\n+ \\: \\partial_x u_1(n, i-1, t_n, x_i) &= \\partial_t w_1(t_n, x_i) + \\partial_x w_1(t_n, x_i)\\\\\n&\\qquad + (-1)^i (1 - 2\\lambda)^n \\bigl( (1 - 2\\lambda) \\partial_t z_1(t_n, x_i) - \\partial_x z_1(t_n, x_i) \\bigr) \\\\\n\\end{align*}\nund hieraus folgt für alle $(t_n, x_i)$\n\\begin{align*}\n\\partial_t w_1(t_n, x_i) + \\partial_x w_1(t_n, x_i) &= \\frac{1 - \\lambda}{2}  \\partial^2_x w_0(t_n, x_i)\\\\\n\\partial_t z_1(t_n, x_i) + \\frac{1}{2 \\lambda - 1} \\partial_x z_1(t_n, x_i) &= \\frac{\\lambda - 1}{2 (2 \\lambda - 1)^2} \\partial^2_x z_0(t_n, x_i)\n\\end{align*}\n\n\\subsection{Rechnung des Ansatzes für kleine Störungen der CFL Zahl}\n\\label{appendix:kleineta:rechnung}\nUnsere Ansatzfunktionen sind dieses mal durch\n\\begin{align} u_k(n, i, t, x) = w_k(t,x) + (-1)^{i+n} z_k(t, x) \\qquad k = 0,1,2 \\end{align}\ngegeben. Hieraus folgt zunächst für alle $k = 0,1,2$\n\\begin{align}\\label{eq:appendix:kleineta:bedingung}\nu_k(n+1, i, t, x) - u_k(n, i-1, t, x) = 0.\n\\end{align}\nund somit gilt in Ordnung $O(h)$ auf der linken Seite von \\eqref{eq:transport:kleineta:oh}\n\\begin{align}\\label{eq:appendix:kleineta:oh:linkeseite}\n\\partial_t u_0(n+1, i, t_n, x_i) \\qquad&\\nonumber \\\\\n+ \\partial_x u_0(n, i-1, t_n, x_i) &= \\partial_t w_0(t_n,x_i) + (-1)^{i+n+1} \\partial_t z_0(t_n,x_i)\\nonumber\\\\\n&\\qquad + \\partial_x w_0(t_n,x_i) + (-1)^{i+n-1} \\partial_x z_0(t_n,x_i)\\nonumber\\\\\n\\begin{split}\n&= \\partial_t w_0(t_n,x_i) + \\partial_x w_0(t_n,x_i) \\\\\n&\\qquad - (-1)^{i+n} \\bigl( \\partial_t z_0(t_n,x_i) + \\partial_x z_0(t_n,x_i) \\bigr).\n\\end{split}\n\\end{align}\nAuf der rechten Seite von \\eqref{eq:transport:kleineta:oh} finden wir wegen \\eqref{eq:appendix:kleineta:bedingung}\n\\begin{align}\\label{eq:appendix:kleineta:oh:rechteseite}\n- \\bigl( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \\bigr) &= -\\Bigl( w_0(t_n, x_i) + (-1)^{i+n} z_0(t_n, x_i)\\nonumber\\\\\n&\\qquad - \\bigl( w_0(t_n, x_i) + (-1)^{i+n-1} z_0(t_n, x_i) \\bigr) \\Bigr) \\nonumber\\\\\n&= - (-1)^{i+n} 2 z_0(t_n,x_i) \n\\end{align}\nSetzt man \\eqref{eq:appendix:kleineta:oh:linkeseite} und \\eqref{eq:appendix:kleineta:oh:rechteseite} nun gleich, so leitet man hieraus in $O(h)$ die beiden Gleichungen\n\\begin{align}\\label{eq:appendix:kleineta:oh}\n\\partial_t w_0(t,x) + \\partial_x w_0(t,x) &= 0 \\qquad \\text{und}\\\\\n\\partial_t z_0(t,x) + \\partial_x z_0(t,x) &= 2 z_0(t,x)\n\\end{align}\nab. Insbesondere gelten dann\n\\begin{align}\\label{eq:appendix:kleineta:korollar:h2}\n\\begin{split}\n\\partial^2_t w_0(t,x) &= \\partial^2_x w_0(t,x)\\qquad\\\\&\\text{und}\\\\\n\\partial^2_t z_0(t,x) &= \\partial_t \\bigl( 2z_0(t,x)  - \\partial_x z_0(t,x) \\bigr)\\\\\n&= 2 \\partial_t z_0(t,x) - \\partial_x \\bigl( \\partial_t z_0(t,x) \\bigr)\\\\\n&= 2 \\bigl( 2z_0(t,x) - \\partial_x z_0(t,x) \\bigr) - \\partial_x \\bigl( 2 z_0(t,x) - \\partial_x z_0(t,x) \\bigr)\\\\\n&= 4 z_0(t,x) + \\partial^2_x z_0(t,x).\n\\end{split}\n\\end{align}\n\nIn der Ordnung $O(h^2)$ steht auf der linken Seite wegen \\eqref{eq:appendix:kleineta:oh:rechteseite} in der Gleichung \\eqref{eq:transport:kleineta:oh2} die Summe\n\\begin{align}\\label{eq:appendix:kleineta:oh2:linkeseite}\n&\\partial_t u_1(n+1, i, t_n, x_i) + \\partial_x u_1(n, i-1, t_n, x_i)\\nonumber\\\\\n&\\quad + \\partial_t u_0(n+1, i, t_n, x_i) + \\partial_x u_0(n, i-1, t_n, x_i)\\nonumber\\\\\n&= \\partial_t u_1(n+1, i, t_n, x_i) + \\partial_x u_1(n, i-1, t_n, x_i)\\nonumber\\\\\n&\\quad \\underbrace{- \\bigl( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \\bigr)}_{= (-1)^{i+n} 2 z_0(t_n, x_i)}\\nonumber\\\\\n&= \\partial_t w_1(t_n,x_i) + (-1)^{i+n+1} \\partial_t z_1(t_n,x_i) + \\partial_x w_1(t_n,x_i) + (-1)^{i+n-1} \\partial_x z_1(t_n,x_i)\\nonumber\\\\\n&\\quad - (-1)^{i+n} 2 z_0(t_n,x_i)\\nonumber\\\\\n\\begin{split}\n&= \\partial_t w_1(t_n, x_i) + \\partial_x w_1(t_n, x_i)\\\\\n&\\quad - (-1)^{i+n} \\bigl( \\partial_t z_1(t_n,x_i) + \\partial_x z_1(t_n,x_i) + 2z_0(t_n, x_i) \\bigr)\n\\end{split}\n\\end{align}\nund wegen der Gleichungen in \\eqref{eq:appendix:kleineta:korollar:h2} erhält man auf der rechten Seite\n\\begin{align}\n&\\frac{1}{2} \\underbrace{\\bigl( \\partial^2_x u_0(n, i-1, t_n, x_i) - \\partial^2_t u_0(n+1,i, t_n, x_i)\\bigr)}_{= - (-1)^{i+n} 4 z_0(t_n, x_i)}\\nonumber\\\\\n&\\quad \\underbrace{- \\bigl( u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \\bigr)}_{= - (-1)^{i+n} 2 z_1(t_n, x_i) }\\nonumber\\\\\n&\\quad - \\underbrace{\\bigl( u_2(n+1, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \\bigr)}_{= 0}\\nonumber\\\\\n&= - (-1)^{i+n} \\bigl( 2 z_0(t_n, x_i)+ 2 z_1(t_n, x_i) \\bigr).\n\\end{align}\nInsgesamt erhalten wir also die beiden Gleichungen in der Ordnung $O(h^2)$:\n\\begin{align}\\label{eq:appendix:kleineta:oh2}\n\\partial_t w_1(t,x) + \\partial_x w_1(t,x) &= 0 \\qquad \\text{und}\\\\\n\\partial_t z_1(t,x) + \\partial_x z_1(t,x) &= 2 z_1(t,x)\n\\end{align}\nAus den Anfangsbedingungen in \\eqref{",
 			"file": "transportgleichung_appendix.tex",
+			"file_size": 8958,
+			"file_write_time": 130990622449534063,
 			"settings":
 			{
-				"buffer_size": 4893,
+				"buffer_size": 8988,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "octave/transport_beispiel.m",
+			"settings":
+			{
+				"buffer_size": 2426,
 				"line_ending": "Unix"
 			}
 		},
@@ -240,6 +235,14 @@
 			"settings":
 			{
 				"buffer_size": 1672,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "transportgleichung.tex",
+			"settings":
+			{
+				"buffer_size": 29871,
 				"line_ending": "Unix"
 			}
 		}
@@ -251,7 +254,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 292.0,
 		"last_filter": "package",
 		"selected_items":
 		[
@@ -308,7 +311,7 @@
 				"Set Syntax: MATLAB"
 			]
 		],
-		"width": 400.0
+		"width": 449.0
 	},
 	"console":
 	{
@@ -330,11 +333,12 @@
 	},
 	"expanded_folders":
 	[
-		"/home/maikel/Documents/Masterarbeit",
-		"/home/maikel/Documents/Masterarbeit/data"
+		"/home/mi/guttula/Documents/Masterarbeit",
+		"/home/mi/guttula/Documents/Masterarbeit/octave"
 	],
 	"file_history":
 	[
+		"/home/mi/guttula/Documents/Masterarbeit/main.tex",
 		"/home/maikel/.local/share/android-studio/bin/studio.sh",
 		"/home/maikel/Documents/Masterarbeit/nichtlinear.tex",
 		"/home/maikel/Documents/Masterarbeit/data/max_errors.dat",
@@ -445,6 +449,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"_0",
+			"\\vspace{0.4cm}",
+			"qqua",
+			"(t,x)",
 			"section",
 			"\\Delta_\\eps U(",
 			"\\Delta_\\eps U",
@@ -530,19 +538,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "transportgleichung.tex",
+					"file": "transportgleichung_appendix.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 28810,
+						"buffer_size": 8988,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1636,
-								1636
+								8988,
+								8988
 							]
 						],
 						"settings":
@@ -550,7 +558,7 @@
 							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 210.0,
+						"translation.y": 1765.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -558,27 +566,29 @@
 				},
 				{
 					"buffer": 1,
-					"file": "main.tex",
+					"file": "octave/transport_beispiel.m",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2089,
+						"buffer_size": 2426,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2046,
+								2046
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+							"syntax": "Packages/Matlab/Matlab.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": -0.0,
+						"translation.y": 720.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -586,34 +596,6 @@
 				},
 				{
 					"buffer": 2,
-					"file": "transportgleichung_appendix.tex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4893,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								131,
-								131
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "Makefile",
 					"semi_transient": false,
 					"settings":
@@ -641,6 +623,42 @@
 					"type": "text"
 				}
 			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 3,
+					"file": "transportgleichung.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 29871,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								24862,
+								24862
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 6260.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
 		}
 	],
 	"incremental_find":
@@ -660,11 +678,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":
@@ -716,15 +741,30 @@
 		],
 		"width": 392.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
+		"last_automatic_layout":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		]
 	},
 	"show_minimap": false,
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 143.0,
+	"side_bar_width": 289.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

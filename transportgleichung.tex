@@ -88,14 +88,14 @@ Durch die kurze Zeit- und Ortskala wirken Terme in einer Ordnung niedriger als z
 Daher werden Terme von $u_2$ Gleichungen in $O(h)$ beeinflussen und müssen betrachtet werden.
 Im Anhang \ref{appendix:diskret:summanden} haben wir die einzelnen Summanden von \eqref{eq:adv:scheme} ausgerechnet.
 Setzt man diese, \eqref{eq:transport:diskret:diff1} und \eqref{eq:transport:diskret:diff2}, nun in \eqref{eq:adv:scheme} ein, liefert uns das die Gleichungen
+\\
 
-\vspace{0.4cm}
 \noindent \emph{in der Ordnung $O(1)$:}
 \begin{align}\label{eq:transport:diskret:o1}
 u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)
 + \lambda \bigl(u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr) = 0
-\end{align}
-\vspace{0.4cm}
+\end{align}\\
+
 \noindent \emph{in der Ordnung $O(h)$:}
 \begin{align}\label{eq:transport:diskret:oh}
 \lambda \bigl( \partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i) \bigr) =
@@ -103,8 +103,8 @@ u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)
 &- \bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i, t_n, x_i) \bigr)\\
 &- \lambda \bigl(u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)
 \end{split}
-\end{align}
-\vspace{0.4cm}
+\end{align}\\
+
 \noindent \emph{in der Ordnung $O(h^2)$:}
 % {\small
 \begin{align}\label{eq:transport:diskret:oh2}
@@ -114,9 +114,9 @@ u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)
 &- \bigl( u_2(n+1, i, t_n, x_i) - u_2(n, i, t_n, x_i) \bigr)\\
 &- \lambda \bigl(u_2(n, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr)
 \end{split}
-\end{align}
+\end{align}\\
+
 % }
-\vspace{0.4cm}
 \noindent \emph{in der Ordnung $O(h^3)$:}
 \begin{align}\label{eq:transport:diskret:oh3}
 \begin{split}
@@ -312,16 +312,16 @@ Wenn wir alle Ergebnisse zusammensetzen gelangen wir zu dem folgendem Ausdruck
 v^n_i = U(x_i - t_n) + (-1)^{i+n} (1+ 2 \eta)^n (V * G_{\tau_n})\left(x - \frac{t_n}{1 + 2 \eta} \right) - \frac{h\eta} 2 t_n \partial^2_x U(x_i - t_n) + o(h).
 \end{align}
 Wir nehmen für ein konkretes Beispiel die Startwerte $U(x) = \sin(\pi x)$ und $V(x) = \eps_M$.
-Wenn wir das in \eqref{eq:transport:osz:loesung} einsetzen, so gilt zunächst für alle $x, \tau \in \R:$ $(V * G_\tau)(x) = \eps_M$ und es gilt $\partial^2_x U(x_i - t_n) = \pi^2 \sin\bigl(\pi (x_i - t_n)\bigr)$ für alle $(t_n, x_i) \in G_h$.
+Wenn wir das in \eqref{eq:transport:osz:loesung} einsetzen, so gilt zunächst für alle $x, \tau \in \R:$ $(V * G_\tau)(x) = \eps_M$ und es gilt $\partial^2_x U(x_i - t_n) = -\pi^2 \sin\bigl(\pi (x_i - t_n)\bigr)$ für alle $(t_n, x_i) \in G_h$.
 Ersetzt man ferner $t_n = n (1+\eta) h$ so erhält man insgesamt
 \begin{align}
-v^n_i = \sin\bigl(\pi (x_i - t_n) \bigr)\left( 1 + n \frac {\pi^2} 2 h^2 \eta (1 + \eta) \right)  + (-1)^{i+n} (1 + 2 \eta)^n \eps_M + o(h).
+v^n_i \sim \sin\bigl(\pi (x_i - t_n) \bigr)\left( 1 + n \frac {\pi^2} 2 h^2 \eta (1 + \eta) \right)  + (-1)^{i+n} (1 + 2 \eta)^n \eps_M .
 \end{align}
 Damit ist dann die Fehlerabschätzung verbunden 
 \begin{align}\label{eq:transport:osz:sinus_fehler}
 \err^n &= \max_{i \in \Z} \abs{\sin\bigl(\pi (x_i - t_n) \bigr) - v^n_i} \nonumber \\
-&= \max_{i \in \Z} \abs{\sin\bigl(\pi (x_i - t_n) \bigr) n \frac {\pi^2} 2 h^2 \eta (1 + \eta)  + (-1)^{i+n} (1 + 2 \eta)^n \eps_M + o(h)} \nonumber\\
-&\leq \max_{i \in \Z} \abs{\sin\bigl(\pi (x_i - t_n) \bigr) n \frac {\pi^2} 2 h^2 \eta (1 + \eta)}  + \abs{(-1)^{i+n} (1 + 2 \eta)^n \eps_M} + o(h) \nonumber\\
+&= \max_{i \in \Z} \abs{\sin\bigl(\pi (x_i - t_n) \bigr) n \frac {\pi^2} 2 h^2 \eta (1 + \eta)  + (-1)^{i+n} (1 + 2 \eta)^n \eps_M} \nonumber\\
+&\leq \max_{i \in \Z} \left( \abs{\sin\bigl(\pi (x_i - t_n) \bigr) n \frac {\pi^2} 2 h^2 \eta (1 + \eta)}  + \abs{(-1)^{i+n} (1 + 2 \eta)^n \eps_M} \right) \nonumber\\
 &= (1 + 2 \eta)^n \eps_M + n \frac {\pi^2} 2 h^2 \eta (1 + \eta) + o(h)
 \end{align}
 \begin{figure}
@@ -331,7 +331,7 @@ Damit ist dann die Fehlerabschätzung verbunden
     title={$\err^n = \max_{i \in \Z} \abs{\sin\bigl(\pi (x_i -t_n)\bigr) - v^n_i}$},
     xlabel={Iterationen $n$},
     ylabel={maximaler Fehler},
-    legend entries={$\err^n \, \eta=0.01$,$\err^n \, \eta=0.05$,$\err^n \, \eta=0.1$,$(1+2 \eta)^n\eps_M + \frac{\pi^2}{2} n h^2 (1 + \eta) \eta$, $(1+2 \eta)^n\eps_M$},
+    legend entries={$\err^n \, \eta=0.01$,$\err^n \, \eta=0.05$,$\err^n \, \eta=0.1$,$(1+2 \eta)^n\eps_M + n \frac{\pi^2}{2} h^2 (1 + \eta) \eta$, $(1+2 \eta)^n\eps_M$},
     legend style={at={(1.8,1)}}
 ]
 \addplot[myblue, line width={0.8}, mark=*] table {data/max_errors_eta_0.010_h_0.001.dat};
@@ -345,7 +345,7 @@ Damit ist dann die Fehlerabschätzung verbunden
 \addplot[black, line width={0.3}, mark=x] table [y index={2}] {data/max_errors_eta_0.100_h_0.001.dat};
 \end{semilogyaxis}
 \end{tikzpicture}
-\caption{Hier vergleichen wir die maximalen Fehler der numerischen Lösungen für die Startwerte $U(x) = sin(\pi x)$, $V(x) = \eps_M$ und $h = 10^{-3}$ für $\eta = 0.1, 0.05$ und $0.001$ zur echten Lösung $u(t,x) = sin(\pi(x - t))$ mit dem geschätztem Fehler $u(t_n, x_i) - v^n_i$ aus der asymptotischen Entwicklung in \eqref{eq:transport:osz:loesung}.}
+\caption{Hier vergleichen wir die maximalen Fehler der numerischen Lösungen für die Startwerte $U(x) = sin(\pi x)$, $V(x) = \eps_M$ und $h = 10^{-3}$ für $\eta = 0.1, 0.05$ und $0.001$ zur echten Lösung $u(t,x) = sin(\pi(x - t))$ mit dem geschätztem Fehler $u(t_n, x_i) - v^n_i$ in \eqref{eq:transport:osz:sinus_fehler}.}
 \label{fig:transport:osz:max_error}
 \end{figure}
 
@@ -368,21 +368,20 @@ Daher betrachten wir nun die Koppelung $\eta = h$ und setzen $\lambda = 1 + h$ i
 \vspace{0.4cm}
 \noindent \emph{in der Ordnung $O(1)$:}
 \begin{align}\label{eq:transport:kleineta:o1}
-u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i) + u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) = 0
-\end{align}
-\vspace{0.4cm}
+u_0(n+1, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) = 0
+\end{align}\\
+
 \noindent \emph{in der Ordnung $O(h)$:}
 \begin{align}\label{eq:transport:kleineta:oh}
 \partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i) =
 \begin{split}
 &- \bigl( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr)\\
-&- \bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i, t_n, x_i) \bigr)\\
-&- \bigl( u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)
+&- \bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)
 \end{split}
-\end{align}
-\vspace{0.4cm}
+\end{align}\\
+
 \noindent \emph{in der Ordnung $O(h^2)$:}
-% {\small
+{\small
 \begin{align}\label{eq:transport:kleineta:oh2}
 \begin{split}
 \partial_t u_1(n+1, i, t_n, x_i) + \partial_x u_1(n, i-1, t_n, x_i) +\\
@@ -390,14 +389,15 @@ u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i) + u_0(n, i, t_n, x_i) - u_0(n, i-1, 
 \end{split}
 &=
 \begin{split}
+&\frac{1}{2} \bigl( \partial^2_x u_0(n, i-1, t_n, x_i) - \partial^2_t u_0(n+1,i, t_n, x_i)\bigr)\\
 &- \bigl( u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)\\
-&- \bigl( u_2(n+1, i, t_n, x_i) - u_2(n, i, t_n, x_i) \bigr)\\
-&- \bigl( u_2(n, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr)
+&- \bigl( u_2(n+1, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr)
 \end{split}
 \end{align}
-% }
-\vspace{0.4cm}
+}\\
+
 \noindent \emph{in der Ordnung $O(h^3)$:}
+{\small
 \begin{align}\label{eq:transport:kleineta:oh3}
 \begin{split}
 \partial_t u_2(n+1, i, t_n, x_i) + \partial_x u_2(n, i-1, t_n, x_i) +\\
@@ -405,10 +405,14 @@ u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i) + u_0(n, i, t_n, x_i) - u_0(n, i-1, 
 \end{split}
 &=
 \begin{split}
-&\left( \frac{1}{2} \partial^2_x  - \partial^2_t \right) u_0(n, i-1, t_n, x_i) \\
+&\frac{1}{2} \partial^2_x u_0(n, i-1, t_n, x_i) - \partial^2_t u_0(n+1,i, t_n, x_i)\\
+&- \frac{1}{6}\bigl(\partial^3_x u_0(n, i-1, t_n, x_i) + \partial^3_t u_0(n+1,i, t_n, x_i) \bigr)\\
+&\frac{1}{2} \bigl( \partial^2_x u_1(n, i-1, t_n, x_i) - \partial^2_t u_1(n+1,i, t_n, x_i) \bigr)\\
 &- \bigl( u_2(n, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr)
 \end{split}
-\end{align}
+\end{align}\\
+}
+
 \emph{mit den Anfangsbedingungen}
 \begin{align}\label{eq:transport:kleineta:anfangsbedinungen}
 \begin{split}
@@ -424,7 +428,7 @@ z_2(0, x_i) &= 0
 \end{align}
 
 Setzt man wieder den oszillatorischen Produktansatz
-\[ u_k(n, i, t_n, x_i) = w_k(t_n, x_i) + (-1)^i \Omega(n) z_k(t_n, x_i), \qquad k = 0,1,2 \]
+\[ u_k(n, i, t, x) = w_k(t, x) + (-1)^i \Omega(n) z_k(t, x), \qquad k = 0,1,2 \]
 ein, so folgt aus \eqref{eq:transport:kleineta:o1}
 \[ (-1)^i z_0(t_n, x_i) \bigl( \Omega(n+1) + \Omega(n) \bigr) = 0, \]
 und das impliziert ganz analog wie in Satz \ref{satz:omega_n}, dass $\Omega(n) = (-1)^n$ gilt.
