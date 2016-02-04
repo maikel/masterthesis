@@ -95,6 +95,7 @@ max_errors = [
     sinus_max_err_fn(N, X, V, h, eta);
     eps*exp(2*T(N));
     eps*exp(2*T(N)) + T(N).*(pi*pi/2)*h^2;
+    T(N).*(pi*pi/2)*h^2;
 ]';
 
 save 'data/max_errors_eta_0.001_h_0.001.dat' max_errors

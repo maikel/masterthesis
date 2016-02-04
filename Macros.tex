@@ -8,12 +8,14 @@
 \newcommand{\N}{\mathbb N}
 \newcommand{\Z}{\mathbb Z}
 \DeclareMathOperator{\id}{Id}
-\DeclareMathOperator{\rd}{round_\eps}
 \DeclareMathOperator{\err}{err}
 \newcommand{\dd}{\,\mathrm d}
 \newcommand{\pkt}{\, \cdot \,}
 \newcommand{\abs}[1]{\left| #1 \right|}
 \newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand{\rd}[1]{\eps_M \floor*{\frac{#1}{\eps_M}}}
 
 \definecolor{db}{RGB}{23,20,119}
 \definecolor{dg}{RGB}{2,101,15}

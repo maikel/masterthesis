@@ -16,14 +16,15 @@ bestimmt.
 Es ist bereits bekannt, dass das Verfahren f"ur $\lambda \leq 1$ stabil und f"ur $\lambda = 1$ sogar exakt ist.
 Wir versuchen hier den instabilen Fall $\lambda > 1$ besser zu verstehen und nehmen in diesem Kapitel daher $\lambda = 1 + \eta$ f"ur ein $\eta > 0$ an.
 
-\section{Analytische Lösung}
+\section{Die analytische Lösung}
 
-\section{Erster Regulärer Ansatz}
+\section{Ein erster regulärer Ansatz}
 
-\section{Beispiel für Instabiles Verhalten}\label{sec:transport:beispiel}
+\section{Ein Beispiel für instabiles Verhalten}\label{sec:transport:beispiel}
 
 Wir schauen uns die Ergebnisse des Verfahrens für die Anfangswerte $U(x) = \sin(\pi x)$ und $\lambda = 1 + \eta$ für verschiedene $\eta$ an.
-Wir haben die Beispiele durch das Skript \ref{appendix:transport:beispiel} in \emph{GNU Octave} umgesetzt und untersuchen, was für kleine $\eta$ und kleine $h$ passiert.
+Wir haben die Beispiele durch das Skript \ref{appendix:transport:beispiel} in \emph{GNU Octave} umgesetzt und untersuchen, was für verschiede $\eta$ und kleine $h$ passiert.
+Das gibt uns erste Hinweise darauf, was wir in unseren Untersuchungen zu erwarten haben.
 
 \begin{figure}
 \centering
@@ -71,7 +72,7 @@ Wir werden dieses Verhalten in unseren Approximationen wiederfinden und geben fe
 Die konkreten Iterationen $n$ für die Plots in den Abbildungen wurden mit Hilfe der Abschätzung $(1 + 2 \eta)^n$ aus dem Unterkapitel \ref{sec:transport:osz} ausgewählt.
 
 
-\section {Diskrete Ansätze auf Gitterniveau} \label{sec:transport:diskret}
+\section {Allgemeine diskrete Ansätze auf Gitterniveau} \label{sec:transport:diskret}
 
 Wir führen hier Raumzeit-Koordinaten auf einer kurzen Skala ein.
 Genau genommen machen wir unsere Ansatzfunktionen zusätzlich von den diskreten Gitterkoordinaten $(n,i)$ abhängig.
@@ -80,15 +81,10 @@ Möchte man jedoch für $h \to 0$ einen Punkt $(t,x)$ in der Raumzeit approximie
 % Da unsere Gleichung linear ist, nehmen wir an, dass wir die Gitterfunktion als Summe einer Lösung und kleinen Oszillationen schreiben können.
 Unser Ansatz lautet dieses mal
 \begin{align}\label{eq:transport:diskret:ansatz}
-v^n_i = u_0(n, i, t_n, x_i) + h u_1(n, i, t_n, x_i) + h^2 u_2(n, i, t_n, x_i) + o(h^2)
+v^n_i = u_0(n, i, t_n, x_i) + h u_1(n, i, t_n, x_i) + h^2 u_2(n, i, t_n, x_i) + o(h^2).
 \end{align}
-und wir möchten hier betonen, dass wir, wie immer, davon ausgehen, dass die Entwicklung asymptotisch geordnet ist.
-Das heißt z.\,B., dass $h u_1 \in o(u_0)$ für $h \to 0$ gilt und das führt zur allgemein bekannten Sublinear-Growth Bedingung
-\begin{align}\label{eq:transport:diskret:sublineargrowth}
-\lim_{h \to 0} \: h \frac{u_1(n, i, t_n, x_i)}{u_0(n, i, t_n, x_i)} = 0.
-\end{align}
-Zunächst fällt auf, dass wir im Ansatz \eqref{eq:transport:diskret:ansatz} Terme bis $h^2$ entwickeln.
-Durch die kurze Zeit- und Ortskala wirken Terme in einer Ordnung niedriger.
+Zunächst fällt auf, dass wir im Gegensatz zum regulärem Ansatz hier Terme bis zur Ordnung $O(h^2)$ entwickeln.
+Durch die kurze Zeit- und Ortskala wirken Terme in einer Ordnung niedriger als zuvor.
 Daher werden Terme von $u_2$ Gleichungen in $O(h)$ beeinflussen und müssen betrachtet werden.
 Im Anhang \ref{appendix:diskret:summanden} haben wir die einzelnen Summanden von \eqref{eq:adv:scheme} ausgerechnet.
 Setzt man diese, \eqref{eq:transport:diskret:diff1} und \eqref{eq:transport:diskret:diff2}, nun in \eqref{eq:adv:scheme} ein, liefert uns das die Gleichungen
@@ -136,7 +132,7 @@ u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)
 \vspace{0.4cm}
 \noindent \emph{Mit den Anfangsbedingungen:}
 \begin{align}\label{eq:transport:diskret:anfangsbedinungen}
-u_0(0, i, 0, x_i) = \rd(U(x_i)), \quad u_1(0, i, 0, x_i) = 0 \quad \text{und} \quad u_2(0, i, 0, x_i) = 0 \qquad \forall i \in \Z.
+u_0(0, i, 0, x_i) = \rd{U(x_i)}, \quad u_1(0, i, 0, x_i) = 0 \quad \text{und} \quad u_2(0, i, 0, x_i) = 0 \qquad \forall i \in \Z.
 \end{align}
 
 Diese Gleichungen gelten nun für alle $h > 0$ und alle $n, i \in \N$.
@@ -203,22 +199,22 @@ Selbst dann, wenn man das Lemma dahingehend abschwächt, dass man nur die gleich
 Und diese Bedingung tretet schon ein, ohne dass wir die Sublinear-Growth Bedingung überhaupt benutzt haben.
 
 
-\section {Ansatz für alternierende Vorzeichen}\label{sec:transport:osz}
+\section {Ein Ansatz mit alternierenden Gittervorzeichen}\label{sec:transport:osz}
 
 Hier präzisieren wir unseren Ansatz \eqref{eq:transport:diskret:ansatz} aus dem letztem Unterkapitel. % \ref{sec:transport:diskret}.
-Sei $\eps > 0$ die Maschinengenauigkeit.
+Sei $\eps_M > 0$ die Maschinengenauigkeit.
+Diese Größe ist von System zu System unterschiedlich und ist in der Regel in der Größenordnung von etwa $10^{-16}$ groß.
 Die Anfangsbedingung für $u_0$ in \eqref{eq:transport:diskret:anfangsbedinungen} lautet
 \begin{align*}
-u_0(0, i, 0, x_i) &= \rd\bigl(U(x_i)\bigr) = U(x_i) - \bigl[ \underbrace{U(x_i) - \rd\bigl(U(x_i)\bigr)}_{=: \Delta_\eps U(x_i)} \bigr]\\
-&= U(x_i) - \Delta_\eps U(x_i),
+u_0(0, i, 0, x_i) &= \rd{U(x_i)} = U(x_i) - \underbrace{\left( U(x_i) - \rd{U(x_i)} \right)}_{=: \Delta_{\eps_M} U(x_i)}\\
+&= U(x_i) - \Delta_{\eps_M} U(x_i),
 \end{align*}
-wobei $\abs{\Delta_\eps U(x_i)} = \Delta_\eps U(x_i) \leq \eps$ gilt.
-Das Vorzeichen der Rundungsfehler kann nach der ersten Iteration jedoch von Gitterpunkt zu Gitterpunkt schon anders sein!
+Das Vorzeichen der Rundungsfehler kann nach der ersten Iteration jedoch von Gitterzelle zur Gitterzelle schon anders sein!
 Deshalb motiviert das hier den Ansatz, dass Oszillationen im Raum und auf Gitterniveau vorhanden sind und wir untersuchen, wie sich die Amplitude in der Zeit ausbreitet.
 Weil wir in \eqref{eq:adv:pde} eine lineare Differentialgleichung betrachten, vermuten wir, dass man $u_k$ für $k = 0,1,2$ und alle Iterationen $n \in \N$ als Summe einer glatten und einer unstetigen, hochfrequenten Funktion schreiben kann.
 Daher wählen wir für $u_0, u_1$ und $u_2$ aus \eqref{eq:transport:diskret:ansatz} nun konkreter 
 \begin{align*}
-u_k(n, i, t_n, x_i) &= w_k(t_n, x_i) + (-1)^i \Omega(n) z_k(t_n, x_i), \qquad \text{für $k = 0,1,2$}
+u_k(n, i, t, x) &= w_k(t, x) + (-1)^i \Omega(n) z_k(t, x), \qquad \text{für $k = 0,1,2$}
 \end{align*}
 für glatte Funktionen $w_k, z_k$, $\Omega(0) = 1$ und
 \begin{align}\label{eq:transport:osz:anfangsbedinungen}
@@ -228,11 +224,12 @@ w_1(0, x_i) &= 0,\\
 w_2(0, x_i) &= 0,
 \end{split}&
 \begin{split}
-z_0(0, x_i) &= \Delta_\eps U(x_i),\\
+z_0(0, x_i) &= V(x_i),\\
 z_1(0, x_i) &= 0,\\
 z_2(0, x_i) &= 0.
 \end{split}
 \end{align}
+Wobei $U$ und $V$ derart sind, dass alle nötigen Regularitätsbedingungen für die kommenden Betachtungen erfüllt seien sollen.
 Setzt man dies in die vorherigen Rechnungen ein, so erhält man anstelle von Gleichung \eqref{eq:transport:diskret:o1}
 
 \vspace{0.4cm}
@@ -281,7 +278,6 @@ und sortiert man, wie im Anhang \ref{appendix:osz:sortiere_nach_frequenz} gezeig
 
 \noindent \emph{Mit den Anfangsbedingungen in \eqref{eq:transport:osz:anfangsbedinungen}}
 
-
 \vspace{0.4cm}
 Betrachtet man den Ansatz \eqref{eq:transport:osz:ansatz} nun genauer, so erkennt man, dass der Faktor $(1 + 2 \eta)^n$ für $\eta > 0$ und $n \to \infty$ unbeschränkt ist.
 Das heißt, der Ansatz kann bestenfalls nur für feste $h > 0$ gelten und hilft, wenn überhaupt, zu verstehen, wie sich das Verfahren unter solchen Bedingungen und in endlich vielen Iterationen verhält.
@@ -292,16 +288,7 @@ Allerdings bedeutet das auch, dass wir im Gegensatz zum regulären Fall die Lös
 w_0(t, x) &= U(x - t) \qquad \text{und}\\
 w_1(t, x) &= - t \frac{\eta} 2 \partial^2_x U(x - t)
 \end{align}
-akzeptieren.
-Im Gegensatz zum regulären Fall bleibt der Ansatz nämlich auch für festes $h > 0$ asymptotisch geordnet.
-Wenn nämlich $z_0(t_n, x_i) \geq C > 0$ für $n \to \infty$ gilt, so folgt
-\begin{align*}
-0 &\leq \lim_{n \to \infty} \abs{\frac{w_1(t_n,x_i)}{(1 + 2 \eta)^n z_0(t_n, x_i)}}\\
-&= \lim_{n \to \infty} \abs{\frac{t_n \frac{\eta} 2 \partial^2_x U(x_i - t_n)}{(1 + 2 \eta)^n z_0(t_n, x_i)}}\\
-&= \lim_{n \to \infty} \abs{\frac{n \lambda h \eta \partial^2_x U(x_i - t_n)}{2 (1 + 2 \eta)^{n} z_0(t_n, x_i)}}\\
-&\leq \frac{h \eta}{C} \norm{\partial^2_x U}_\infty \cdot \lim_{n \to \infty} \abs{\frac{n}{(1 + 2 \eta)^{n}}}\\
-&= 0.
-\end{align*}
+hinnehmen, da wir uns sowieso nicht wie z.\,B. für den Fall $\lambda < 1$ für das Langzeitverhalten der Lösung interessieren.
 
 Der Faktor $\frac{\eta}{2 (1 + 2 \eta)^2}$ in Gleichung \eqref{eq:transport:osz:oh2_B} ist für $\eta > 0$ positiv!
 Das heißt, dass sich $z_0$ diffusiv in der Zeit ausbreitet.
@@ -317,22 +304,34 @@ und fordert, dass
 \]
 gilt. Mit $z_1(0,0,x) = 0$ folgt also $z_1 = 0$ und
 \begin{align*}
-z_0(t, \tau, x) &= (\Delta_\eps U * G_\tau)\left(x - \frac{t}{1 + 2 \eta} \right) \\
+z_0(t, \tau, x) &= (V * G_\tau)\left(x - \frac{t}{1 + 2 \eta} \right) \\
 G_\tau(y) &= \sqrt {\frac{1}{\tau} \frac {(1 + 2 \eta)^2}{2 \pi \eta}} \exp\left( - \frac{y^2}{\tau} \frac {(1 + 2 \eta)^2}{2 \pi \eta} \right)
 \end{align*}
-Insgesamt erhalten wir z.\,B. unter der Annahnme von Rundungsfehlern konstanter Größer $\Delta_\eps U(x) = \eps$ die Lösung
+Wenn wir alle Ergebnisse zusammensetzen gelangen wir zu dem folgendem Ausdruck
 \begin{align}\label{eq:transport:osz:loesung}
-v^n_i = U(x_i - t_n) + (-1)^{i+n} (1 + 2 \eta)^n \eps - \frac{h\eta} 2 t_n \partial^2_x U(x_i - t_n) + o(h).
+v^n_i = U(x_i - t_n) + (-1)^{i+n} (1+ 2 \eta)^n (V * G_{\tau_n})\left(x - \frac{t_n}{1 + 2 \eta} \right) - \frac{h\eta} 2 t_n \partial^2_x U(x_i - t_n) + o(h).
 \end{align}
- 
+Wir nehmen für ein konkretes Beispiel die Startwerte $U(x) = \sin(\pi x)$ und $V(x) = \eps_M$.
+Wenn wir das in \eqref{eq:transport:osz:loesung} einsetzen, so gilt zunächst für alle $x, \tau \in \R:$ $(V * G_\tau)(x) = \eps_M$ und es gilt $\partial^2_x U(x_i - t_n) = \pi^2 \sin\bigl(\pi (x_i - t_n)\bigr)$ für alle $(t_n, x_i) \in G_h$.
+Ersetzt man ferner $t_n = n (1+\eta) h$ so erhält man insgesamt
+\begin{align}
+v^n_i = \sin\bigl(\pi (x_i - t_n) \bigr)\left( 1 + n \frac {\pi^2} 2 h^2 \eta (1 + \eta) \right)  + (-1)^{i+n} (1 + 2 \eta)^n \eps_M + o(h).
+\end{align}
+Damit ist dann die Fehlerabschätzung verbunden 
+\begin{align}\label{eq:transport:osz:sinus_fehler}
+\err^n &= \max_{i \in \Z} \abs{\sin\bigl(\pi (x_i - t_n) \bigr) - v^n_i} \nonumber \\
+&= \max_{i \in \Z} \abs{\sin\bigl(\pi (x_i - t_n) \bigr) n \frac {\pi^2} 2 h^2 \eta (1 + \eta)  + (-1)^{i+n} (1 + 2 \eta)^n \eps_M + o(h)} \nonumber\\
+&\leq \max_{i \in \Z} \abs{\sin\bigl(\pi (x_i - t_n) \bigr) n \frac {\pi^2} 2 h^2 \eta (1 + \eta)}  + \abs{(-1)^{i+n} (1 + 2 \eta)^n \eps_M} + o(h) \nonumber\\
+&= (1 + 2 \eta)^n \eps_M + n \frac {\pi^2} 2 h^2 \eta (1 + \eta) + o(h)
+\end{align}
 \begin{figure}
 \centering
 \begin{tikzpicture}
 \begin{semilogyaxis}[
-    title={$\err^n = \max_{i \in \Z} \abs{\sin\bigl(\pi (x_i - n h (1 + \eta) )\bigr) - v^n_i}$},
+    title={$\err^n = \max_{i \in \Z} \abs{\sin\bigl(\pi (x_i -t_n)\bigr) - v^n_i}$},
     xlabel={Iterationen $n$},
     ylabel={maximaler Fehler},
-    legend entries={$\err^n \, \eta=0.01$,$\err^n \, \eta=0.05$,$\err^n \, \eta=0.1$,$(1+2 \eta)^n\eps + \frac{\pi^2}{2} n h^2 (1 + \eta) \eta$, $(1+2 \eta)^n\eps$},
+    legend entries={$\err^n \, \eta=0.01$,$\err^n \, \eta=0.05$,$\err^n \, \eta=0.1$,$(1+2 \eta)^n\eps_M + \frac{\pi^2}{2} n h^2 (1 + \eta) \eta$, $(1+2 \eta)^n\eps_M$},
     legend style={at={(1.8,1)}}
 ]
 \addplot[myblue, line width={0.8}, mark=*] table {data/max_errors_eta_0.010_h_0.001.dat};
@@ -346,22 +345,22 @@ v^n_i = U(x_i - t_n) + (-1)^{i+n} (1 + 2 \eta)^n \eps - \frac{h\eta} 2 t_n \part
 \addplot[black, line width={0.3}, mark=x] table [y index={2}] {data/max_errors_eta_0.100_h_0.001.dat};
 \end{semilogyaxis}
 \end{tikzpicture}
-\caption{Hier vergleichen wir die maximalen Fehler der numerischen Lösungen für die Startwerte $U(x) = sin(\pi x)$, $\Delta_\eps U(x) = \eps$ und $h = 10^{-3}$ für $\eta = 0.1, 0.05$ und $0.001$ zur echten Lösung $u(t,x) = sin(\pi(x - t))$ mit dem geschätztem Fehler $u(t_n, x_i) - v^n_i$ aus der asymptotischen Entwicklung in \eqref{eq:transport:osz:loesung}.}
+\caption{Hier vergleichen wir die maximalen Fehler der numerischen Lösungen für die Startwerte $U(x) = sin(\pi x)$, $V(x) = \eps_M$ und $h = 10^{-3}$ für $\eta = 0.1, 0.05$ und $0.001$ zur echten Lösung $u(t,x) = sin(\pi(x - t))$ mit dem geschätztem Fehler $u(t_n, x_i) - v^n_i$ aus der asymptotischen Entwicklung in \eqref{eq:transport:osz:loesung}.}
 \label{fig:transport:osz:max_error}
 \end{figure}
 
-In Abbildung \ref{fig:transport:osz:max_error} vergleichen wir den maximalen Fehler der Beispiele im Unterkapitel \ref{sec:transport:beispiel} mit dem Fehler des Ansatzes $v^n_i$ in \eqref{eq:transport:osz:loesung}.
+In Abbildung \ref{fig:transport:osz:max_error} vergleichen wir den maximalen Fehler der Beispiele im Unterkapitel \ref{sec:transport:beispiel} mit dem Fehler des Ansatzes $v^n_i$ aus \eqref{eq:transport:osz:sinus_fehler}.
 Dabei erkennt man, dass dieses Modell schon eine ganz gute Approximation für das Wachstum der Rundungsfehler für verschiedene $\eta > 0$ liefert.
 Es bleibt trotzdem unbefriedigend, dass man über keine Konvergenz für $h \to 0$ im klassischen Sinne sprechen kann.
 Für $h \to 0$ gilt stets $h \ll \eta$, was bedeutet, dass dieser Ansatz hier Aussagen für beliebig große $\eta$ trifft.
 Darin liegen auch die Grenzen von \eqref{eq:transport:osz:loesung} begründet.
-Dieses Problem gehen wir mit dem nächtem Unterkapitel an.
+Dieses Problem gehen wir mit dem nächstem Unterkapitel an.
 
 \section{Kleine Störungen der Courant-Friedrich-Lewy Bedingung}\label{sec:transport:kleineta}
 
 $h \ll \eta$ führt fundamental zu dem Problem, dass kleine Rundungsfehler zu jeder noch so kleinen Zeit $t > 0$ beliebig groß werden und die richtige Lösung komplett überdecken.
-In der Realität jedoch, rechnen wir immer mit einem $h > 0$, für das eventuell auch $h \sim \eta$ gelten kann.
-Konkrete numerische Lösungen existieren und entwickeln Oszillationen für feste $h$ zu positiven Zeiten $t > 0$.
+Wir rechnen in der Praxis jedoch mit einem positvem $h > 0$, für das eventuell auch $h \sim \eta$ gelten kann.
+Konkrete numerische Realisierungen existieren und entwickeln Oszillationen für feste $h$ zu positiven Zeiten $t > 0$.
 Gerade für Probleme, bei denen numerische Daten nur in einem ``kurzem'' Zeitinterval unter instabilen Bedingungen gerechnet werden, könnte es also interessante Einblicke geben, das asymptotische Verhalten eines Verfahren für ``kleine'' Störungen der CFL Zahl zu kennen.
 Der bisherige Ansatz hat dies ignoriert und obwohl Abbildung \ref{fig:transport:osz:max_error} zeigt, dass \eqref{eq:transport:osz:loesung} bereits gute Approximationen liefert, werden solche Überlegungen spätestens für die Advektion mit variabler Geschwindigkeit oder auch nichtlineare Probleme von Nöten sein.
 Daher betrachten wir nun die Koppelung $\eta = h$ und setzen $\lambda = 1 + h$ in die Gleichungen ein \eqref{eq:transport:diskret:o1} bis \eqref{eq:transport:diskret:oh3} ein:
@@ -418,7 +417,7 @@ w_1(0, x_i) &= 0,\\
 w_2(0, x_i) &= 0,
 \end{split}&
 \begin{split}
-z_0(0, x_i) &= \Delta_\eps U(x_i),\\
+z_0(0, x_i) &= V(x_i),\\
 z_1(0, x_i) &= 0,\\
 z_2(0, x_i) &= 0
 \end{split}
@@ -444,7 +443,7 @@ gegeben. Hieraus folgen dieses mal die Gleichungen:
 \partial_t w_0(t, x) + \partial_x w_0(t, x) &= 0 \qquad \text{und}\\
 \partial_t z_0(t, x) + \partial_x z_0(t, x) &= 2 z_0(t, x)
 \end{align*}
-woraus Wegen der Anfangsbedingungen \eqref{eq:transport:kleineta:anfangsbedinungen} $w_0(t,x) = U(x -t)$ und $z_0(t,x) = \Delta_\eps U(x - t) e^{2 t}$ folgt.
+woraus Wegen der Anfangsbedingungen \eqref{eq:transport:kleineta:anfangsbedinungen} $w_0(t,x) = U(x -t)$ und $z_0(t,x) = V(x - t) e^{2 t}$ folgt.
 
 \begin{figure}
 \centering
@@ -453,15 +452,16 @@ woraus Wegen der Anfangsbedingungen \eqref{eq:transport:kleineta:anfangsbedinung
     title={$\err^n = \max_{i \in \Z} \abs{\sin\bigl(\pi (x_i - t_n )\bigr) - v^n_i}$},
     xlabel={Zeit $t$},
     ylabel={maximaler Fehler},
-    legend entries={$\err^n$,$\eps e^{2t}$, $ \eps e^{2t} + t h^2 \frac{\pi^2}{2}$},
+    legend entries={$\err^n$,$\eps_M e^{2t}$, $t h^2 \frac{\pi^2}{2}$, $\eps_M e^{2t} + t h^2 \frac{\pi^2}{2}$},
     legend style={at={(1.5,1)}}
 ]
 \addplot[myblue, line width={2}] table {data/max_errors_eta_0.001_h_0.001.dat};
 \addplot[black, line width={0.5}, dotted] table [y index={2}] {data/max_errors_eta_0.001_h_0.001.dat};
+\addplot[mygray, line width={1}, dashdotted] table [y index={4}] {data/max_errors_eta_0.001_h_0.001.dat};
 \addplot[black, line width={0.5}, mark=o, mark repeat={10}] table [y index={3}] {data/max_errors_eta_0.001_h_0.001.dat};
 \end{semilogyaxis}
 \end{tikzpicture}
-\caption{Hier vergleichen wir die maximalen Fehler der numerischen Lösungen für die Startwerte $U(x) = sin(\pi x)$, $\Delta_\eps U(x) = \eps$ und $\eta = h = 10^{-3}$ zur echten Lösung $u(t,x) = sin(\pi(x - t))$ mit dem geschätztem Fehler $\eps e^{2t}$ aus der asymptotischen Entwicklung in \eqref{eq:transport:kleineta:loesung}.}
+\caption{Hier vergleichen wir die maximalen Fehler der numerischen Lösungen für die Startwerte $U(x) = sin(\pi x)$, $V(x) = \eps_M$ und $\eta = h = 10^{-3}$ zur echten Lösung $u(t,x) = sin(\pi(x - t))$ mit dem geschätztem Fehler $\eps_M e^{2t}$ aus der asymptotischen Entwicklung in \eqref{eq:transport:kleineta:loesung}.}
 \label{fig:transport:kleineta:max_error}
 \end{figure}
 
@@ -474,7 +474,7 @@ woraus Wegen der Anfangsbedingungen \eqref{eq:transport:kleineta:anfangsbedinung
 Dieses mal folgt aus $w_1(0,x) = z_1(0,x) = 0$ sogar $z_1 = w_1 = 0$.
 
 \vspace{0.4cm}
-\noindent \emph{In der Ordnung $O(h^2)$}
+\noindent \emph{In der Ordnung $O(h^3)$}
 \begin{align*}
 \partial_t w_2(t, x) + \partial_x w_2(t, x) &= - \frac{1}{2} \partial^2_x w_0(t, x) \qquad \text{und}\\
 \partial_t z_2(t, x) + \partial_x z_2(t, x) &= \frac{1}{2} \partial^2_x z_0(t, x) - \partial^2_t z_0(t, x) + 2 z_2(t, x)\\
@@ -483,24 +483,40 @@ Dieses mal folgt aus $w_1(0,x) = z_1(0,x) = 0$ sogar $z_1 = w_1 = 0$.
 &= - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t, x) + 2 z_2(t, x)\\
 \end{align*}
 
-Diese PDE hat die Lösung
+Um die Differentialgleichung für $z_2$ zu lösen, machen wir den Ansatz
+
+\[ z(t,x) = e^{2t} A(t,x). \]
+
+Dann gilt
 
 \begin{align*}
-w_2(t,x) &= - t \frac{1}{2} \partial^2_x w_0(t, x) \qquad \text{und}\\
-z_2(t,x) &= e^{2t} \int_0^t e^{-2s} \left[ - \frac{1}{2} \partial^2_x z_0(s, x) + 2 \partial_x z_0(s, x) - z_0(s,x) \right] \dd s\\
+\partial_x z(t,x) &= e^{2t} \partial_x A(t,x)\\
+\partial_t z(t,x) &= 2 e^{2t} A(t,x) + e^{2t} \partial_t A(t, x)\\
+                  &= 2 z(t, x) + e^{2t} \partial_t A(t, x).
+\end{align*}
+
+Wenn also
+\[ \partial_t z(t, x) + \partial_x z(t, x) = - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t, x) + 2 z(t, x) \]
+gelten soll, so müssen wir $A$ derart bestimmen, so dass
+\[ \partial_t A(t, x) + \partial_x A(t,x) = e^{-2t} \bigl( - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t, x) \bigr) \]
+gilt. Da nun $z_0(t,x) = e^{2t} V(x - t)$ gilt, folgt
+\[ \partial_t A(t, x) + \partial_x A(t,x) = - \frac{1}{2} \partial^2_x V(x - t) + 2 \partial_x V(x - t) - V(x - t) \]
+und das ist die inhomogene Transportgleichung für $A$. Somit ist die Lösung durch
+\[ A(t,x) = t \left( - \frac{1}{2} \partial^2_x V(x - t) + 2 \partial_x V(x - t) - V(x - t) \right) \]
+gegeben und es gilt insgesamt
+\[ z(t,x) = t e^{2t} \left( - \frac{1}{2} \partial^2_x V(x - t) + 2 \partial_x V(x - t) - V(x - t) \right) \]
+
+\begin{align*}
+w_2(t,x) &= - t \frac{1}{2} \partial^2_x U(x - t) \qquad \text{und}\\
+z_2(t,x) &= t e^{2t} \left( - \frac{1}{2} \partial^2_x V(x - t) + 2 \partial_x V(x - t) - V(x - t) \right)\\
 \end{align*}
 
 Denn es gilt 
 
-\begin{align}
+\begin{align*}
 \partial_t z_2(t,x) &= \partial_t \left( e^{2t} \int_0^t e^{-2s} \left[ - \frac{1}{2} \partial^2_x z_0(s, x) + 2 \partial_x z_0(s, x) - z_0(s,x) \right] \dd s \right)\\
 &= 2 z_2(t,x) + e^{2t} e^{-2t} \left[ - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t,x) \right]\\
 &= 2 z_2(t,x) - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t,x)
-\end{align}
+\end{align*}
 
-Damit folgt
-\begin{align}\label{eq:transport:kleineta:loesung}
-v^n_i = U(x_i - t_n) + \Delta_\eps U(x_i - t_n) e^{2t_n} + O(h^2).
-\end{align}
-
-\section{WKB Ansatz}
+\section{Andere Frequenzen auf Gitterniveau -- ein Exponentialansatz}
