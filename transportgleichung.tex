@@ -18,6 +18,53 @@ Wir versuchen hier den instabilen Fall $\lambda > 1$ besser zu verstehen und neh
 
 \section{Die analytische Lösung}
 
+Im Laufe der asymptotischen Entwicklung von \eqref{eq:adv:scheme} stellt sich heraus, dass die Ansatzfunktionen häufig selbst Lösungen der Transportgleichung \eqref{eq:adv:pde} oder Variationen von dieser sind.
+Deshalb ist es nützlich und sinnvoll, die richtige Lösung der Gleichung zu bestimmen.
+Bei der Lösungskonstruktion hilft uns jedes mal die Methode der Charakteristiken weiter.
+Zunächst behandeln wir
+
+\subsection{Die homogene Transportgleichung}
+\begin{align}\label{eq:transport:analytisch:homogen}
+\partial_t u(t,x) + \partial_x u(t,x) = 0, \quad u(0, x) = U(x).
+\end{align}
+Wenn $u$ eine Lösung von \eqref{eq:transport:analytisch:homogen} ist, dann ist $u$ konstant auf Geraden der Steigung 1.
+Betrachte nämlich
+\begin{align}\label{eq:transport:analytisch:phi}
+\varphi_t(\tau) = (\tau, x+\tau -t).
+\end{align}
+Dann gilt für alle $t,\tau \in \Rp:$ $D \varphi_t(\tau) = (1, 1)$ und folglich auch
+\begin{align}
+\left. D u\bigl(\varphi_t(s)\bigr) \right|_{s = \tau} = \partial_t u(\tau, x + \tau - t) + \partial_x u(\tau, x + \tau - t) = 0.
+\end{align}
+Insbesondere impliziert das für alle $t \in \Rp$
+\begin{align}
+u(t,x) - u(0, x-t) = \int_0^t D u(\tau, x + \tau - t) \dd \tau = \int_0^t D u\bigl( \varphi_t(\tau) \bigr) \dd \tau = 0,
+\end{align}
+also $u(t,x) = u(x-t).$
+Dies zeigt die Eindeutigkeit von Lösungen von \eqref{eq:transport:analytisch:homogen}.
+Andererseits ist jedes so definierte $u(t,x) = U(t - x)$ auch eine Lösung von \eqref{eq:transport:analytisch:homogen}, solange das für $U$, im womöglich schwachem Sinne, möglich ist.
+
+\subsection{Die inhomogene Transportgleichung}
+Wir betrachten nun die lineare Transportgleichung mit nichtverschwindender rechter Seite
+\begin{align}\label{eq:transport:analytisch:inhomogen}
+\partial_t u(t,x) + \partial_x u(t,x) = F(t,x), \quad u(0, x) = U(x).
+\end{align}
+Dann gilt für Lösungen $u$ von \eqref{eq:transport:analytisch:inhomogen} ganz analog wie im homogenen Fall mit $\varphi$ wie in \eqref{eq:transport:analytisch:phi}
+\begin{align}
+\left. D u\bigl(\varphi(s)\bigr) \right|_{s = \tau} = F(\tau,x + \tau - t).
+\end{align}
+Demnach folgt wegen des Hauptsatzes für die Integral und Differentialrechnung
+\begin{align}
+\begin{split}
+u( t, x ) - u( 0, x -t ) = \int_0^t F(\tau, x + \tau - t) \dd \tau.
+\end{split}
+\end{align}
+Wir werden oft den Spezialfall sehen, dass $F$ selbst Lösung von \eqref{eq:transport:analytisch:homogen} ist.
+Dann folgt hieraus $F(\tau, x + \tau - t) = F(0, x-t)$ für alle $\tau \in \Rp$ und somit gilt für alle $t \in \Rp$
+\begin{align}
+u( t, x ) - u( 0, x -t ) = \int_0^t F(0, x - t) \dd \tau = t F(0,x-t).
+\end{align}
+
 \section{Ein erster regulärer Ansatz}
 
 \section{Ein Beispiel für instabiles Verhalten}\label{sec:transport:beispiel}
