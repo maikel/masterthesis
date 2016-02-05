@@ -14,63 +14,24 @@ v^{n+1}_i = v^n_i - \lambda (v^n_i - v^n_{i-1})
 \end{align}
 bestimmt.
 Es ist bereits bekannt, dass das Verfahren f"ur $\lambda \leq 1$ stabil und f"ur $\lambda = 1$ sogar exakt ist.
-Wir versuchen hier den instabilen Fall $\lambda > 1$ besser zu verstehen und nehmen in diesem Kapitel daher $\lambda = 1 + \eta$ f"ur ein $\eta > 0$ an.
-
-\section{Die analytische Lösung}
-
-Im Laufe der asymptotischen Entwicklung von \eqref{eq:adv:scheme} stellt sich heraus, dass die Ansatzfunktionen häufig selbst Lösungen der Transportgleichung \eqref{eq:adv:pde} oder Variationen von dieser sind.
-Deshalb ist es nützlich und sinnvoll, die richtige Lösung der Gleichung zu bestimmen.
-Bei der Lösungskonstruktion hilft uns jedes mal die Methode der Charakteristiken weiter.
-Zunächst behandeln wir
-
-\subsection{Die homogene Transportgleichung}
-\begin{align}\label{eq:transport:analytisch:homogen}
-\partial_t u(t,x) + \partial_x u(t,x) = 0, \quad u(0, x) = U(x).
-\end{align}
-Wenn $u$ eine Lösung von \eqref{eq:transport:analytisch:homogen} ist, dann ist $u$ konstant auf Geraden der Steigung 1.
-Betrachte nämlich
-\begin{align}\label{eq:transport:analytisch:phi}
-\varphi_t(\tau) = (\tau, x+\tau -t).
-\end{align}
-Dann gilt für alle $t,\tau \in \Rp:$ $D \varphi_t(\tau) = (1, 1)$ und folglich auch
-\begin{align}
-\left. D u\bigl(\varphi_t(s)\bigr) \right|_{s = \tau} = \partial_t u(\tau, x + \tau - t) + \partial_x u(\tau, x + \tau - t) = 0.
-\end{align}
-Insbesondere impliziert das für alle $t \in \Rp$
-\begin{align}
-u(t,x) - u(0, x-t) = \int_0^t D u(\tau, x + \tau - t) \dd \tau = \int_0^t D u\bigl( \varphi_t(\tau) \bigr) \dd \tau = 0,
-\end{align}
-also $u(t,x) = u(x-t).$
-Dies zeigt die Eindeutigkeit von Lösungen von \eqref{eq:transport:analytisch:homogen}.
-Andererseits ist jedes so definierte $u(t,x) = U(t - x)$ auch eine Lösung von \eqref{eq:transport:analytisch:homogen}, solange das für $U$, im womöglich schwachem Sinne, möglich ist.
-
-\subsection{Die inhomogene Transportgleichung}
-Wir betrachten nun die lineare Transportgleichung mit nichtverschwindender rechter Seite
-\begin{align}\label{eq:transport:analytisch:inhomogen}
-\partial_t u(t,x) + \partial_x u(t,x) = F(t,x), \quad u(0, x) = U(x).
-\end{align}
-Dann gilt für Lösungen $u$ von \eqref{eq:transport:analytisch:inhomogen} ganz analog wie im homogenen Fall mit $\varphi$ wie in \eqref{eq:transport:analytisch:phi}
-\begin{align}
-\left. D u\bigl(\varphi(s)\bigr) \right|_{s = \tau} = F(\tau,x + \tau - t).
-\end{align}
-Demnach folgt wegen des Hauptsatzes für die Integral und Differentialrechnung
-\begin{align}
-\begin{split}
-u( t, x ) - u( 0, x -t ) = \int_0^t F(\tau, x + \tau - t) \dd \tau.
-\end{split}
-\end{align}
-Wir werden oft den Spezialfall sehen, dass $F$ selbst Lösung von \eqref{eq:transport:analytisch:homogen} ist.
-Dann folgt hieraus $F(\tau, x + \tau - t) = F(0, x-t)$ für alle $\tau \in \Rp$ und somit gilt für alle $t \in \Rp$
-\begin{align}
-u( t, x ) - u( 0, x -t ) = \int_0^t F(0, x - t) \dd \tau = t F(0,x-t).
-\end{align}
+Wir versuchen hier den instabilen Fall $\lambda > 1$ besser zu verstehen.
 
 \section{Ein erster regulärer Ansatz}
+
+Zunächst präsentieren wir die Ergebnisse, welche die Autoren Junk und Yang aus \cite{Junk2004} für das Upwind-Schema entwickeln.
+Angenommen es gäbe Abbildungen $u_0, u_1 \in C^\infty\left( \Rp \times \R \right)$, so dass für alle $h > 0$, $n \in \N$ und $i \in \Z$
+\begin{align}\label{eq:regulaer:ansatz}
+v^n_i = u_0(t_n,x_i) + h u_1(t_n,x_i) + o(h).
+\end{align}
+gilt.
+Im Anhang \eqref{appendix:regulaer:rechnungen} werden die Differenzen $v^{n+1}_i - v^n_i$ und $\lambda ( v^n_i - v^n_{i-1} )$ aus \eqref{eq:adv:scheme} ausgerechnet.
+In diese Rechnungen geht wesentlich ein, dass $u_0$ und $u_1$ differenzierbar sind.
+Sortiert man die Ergebnisse nun nach den Ordnungen von $h$, so erhält man das Gleichungssystem
 
 \section{Ein Beispiel für instabiles Verhalten}\label{sec:transport:beispiel}
 
 Wir schauen uns die Ergebnisse des Verfahrens für die Anfangswerte $U(x) = \sin(\pi x)$ und $\lambda = 1 + \eta$ für verschiedene $\eta$ an.
-Wir haben die Beispiele durch das Skript \ref{appendix:transport:beispiel} in \emph{GNU Octave} umgesetzt und untersuchen, was für verschiede $\eta$ und kleine $h$ passiert.
+Wir haben die Beispiele durch die Skripte im Anhang \ref{appendix:transport:beispiel} mit dem Programm \emph{GNU Octave} umgesetzt und untersuchen, was für verschiede $\eta$ und kleine $h$ passiert.
 Das gibt uns erste Hinweise darauf, was wir in unseren Untersuchungen zu erwarten haben.
 
 \begin{figure}
@@ -141,7 +102,7 @@ Setzt man diese, \eqref{eq:transport:diskret:diff1} und \eqref{eq:transport:disk
 \begin{align}\label{eq:transport:diskret:o1}
 u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)
 + \lambda \bigl(u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr) = 0
-\end{align}\\
+\end{align}
 
 \noindent \emph{in der Ordnung $O(h)$:}
 \begin{align}\label{eq:transport:diskret:oh}
@@ -150,7 +111,7 @@ u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)
 &- \bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i, t_n, x_i) \bigr)\\
 &- \lambda \bigl(u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)
 \end{split}
-\end{align}\\
+\end{align}
 
 \noindent \emph{in der Ordnung $O(h^2)$:}
 % {\small
@@ -161,7 +122,7 @@ u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)
 &- \bigl( u_2(n+1, i, t_n, x_i) - u_2(n, i, t_n, x_i) \bigr)\\
 &- \lambda \bigl(u_2(n, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr)
 \end{split}
-\end{align}\\
+\end{align}
 
 % }
 \noindent \emph{in der Ordnung $O(h^3)$:}
@@ -315,7 +276,7 @@ und sortiert man, wie im Anhang \ref{appendix:osz:sortiere_nach_frequenz} gezeig
 \partial_t w_0(t, x) + \partial_x w_0(t, x) = 0 \label{eq:transport:osz:oh_A}\\
 \partial_t z_0(t, x) + \frac {1} {1 + 2\eta} \partial_x z_0(t, x) = 0 \label{eq:transport:osz:oh_B}
 \end{align}
-\vspace{0.4cm}
+
 \noindent \emph{in der Ordnung $O(h^2)$:}
 % {\small
 \begin{align}\label{eq:transport:osz:oh2_A}

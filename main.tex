@@ -1,9 +1,10 @@
 \documentclass[a4paper
                ,11pt%
                %,draft%
-               %,5BCOM%
+               ,5BCOM%
                ,openright%
                ,titlepage%
+               ,twoside%
                ]{scrreprt}
 
 \usepackage[ngerman]{babel}
@@ -28,7 +29,7 @@
             linkcolor=blue,
             urlcolor=blue,
             citecolor=gray]{hyperref}
-% \usepackage[margin=1in]{geometry}
+\usepackage{geometry}
 
 
 \usepackage{tikz}
@@ -63,7 +64,9 @@ Beschreibung hochfrequenter numerischer Instabilitäten mit Hilfe asymptotischer
 
 \begin{document}
 
+\newgeometry{margin=1in}
 \maketitle
+\restoregeometry
 
 \tableofcontents
 
@@ -82,7 +85,8 @@ Beschreibung hochfrequenter numerischer Instabilitäten mit Hilfe asymptotischer
 
 \appendix
 
-\chapter{Appendix}
+\chapter{Anhang}
 \input{transportgleichung_appendix}
+\input{programme_appendix}
 
 \end{document}

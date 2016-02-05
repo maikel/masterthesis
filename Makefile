@@ -14,17 +14,24 @@ all: Masterarbeit.pdf
 # "raw2tex" and "dat2tex" are just placeholders for whatever custom steps
 # you might have.
 
-data/%.dat:
-		octave --silent octave/transport_beispiel.m
+data/%.dat: octave/upwind.m \
+	        octave/transport_example.m \
+            octave/create_example_plots.m \
+	        octave/create_error_plots.m
+		octave --silent --path octave octave/create_example_plots.m
+		octave --silent --path octave octave/create_error_plots.m
 
-transport_beispiel.m: data/V_sinus_eta_0.100_h_0.001.dat    \
-	                  data/V_sinus_eta_0.100_h_0.001.dat  \
-	                  data/V_sinus_eta_0.050_h_0.001.dat \
-	                  data/V_sinus_eta_0.010_h_0.001.dat
+transportgleichung.tex: data/V_sinus_eta_0.100_h_0.010.dat \
+	                    data/V_sinus_eta_0.100_h_0.001.dat \
+	                    data/V_sinus_eta_0.050_h_0.001.dat \
+	                    data/V_sinus_eta_0.010_h_0.001.dat
 
-advektion.tex: transport_beispiel.m
-
-main.tex: advektion.tex
+main.tex: transportgleichung.tex \
+	      transportgleichung_appendix.tex \
+	      vorwort.tex \
+	      variable_advektion.tex \
+	      burgers.tex \
+	      Macros.tex
 
 # MAIN LATEXMK RULE
 

@@ -1,7 +1,139 @@
-\section{Die Transportgleichung}
-\subsection{Beispielskript}
-\label{appendix:transport:beispiel}
-\lstinputlisting{octave/transport_beispiel.m}
+\section{Die lineare Transportgleichung}
+\subsection{Analytische Lösungen}
+Im Laufe der asymptotischen Entwicklung von \eqref{eq:adv:scheme} stellt sich heraus, dass die Ansatzfunktionen häufig selbst Lösungen der Transportgleichung \eqref{eq:adv:pde} oder Variationen von dieser sind.
+Deshalb ist es nützlich und sinnvoll, die richtige Lösung solcher Gleichungen auch analytisch zu untersuchen.
+Wir betrachten hier bekannte Gleichungen, deren Lösungen $u$ sogar exakt zu bestimmen sind.
+Bei der Lösungskonstruktion nutzen wir die Methode der Charakteristiken.
+Dabei bestimmen wir Kurven $\varphi\colon \Rp \to \Rp \times \R$ durch die Zeit-Raum Ebene, welche uns Gleichungen liefern, mit denen zunächst $u \circ \varphi$ bestimmt werden kann und schließen dann auf Lösungen von $u$.
+Im Fall unserer linearen partiellen Differentialgleichungen werden diese Kurven $\varphi$ immer Geraden sein.
+Zunächst betrachten wir
+
+\subsection*{Die homogene Transportgleichung}
+\begin{align}\label{eq:transport:analytisch:homogen}
+\partial_t u(t,x) + \partial_x u(t,x) = 0, \quad u(0, x) = U(x).
+\end{align}
+Wenn $u$ eine Lösung von \eqref{eq:transport:analytisch:homogen} ist, dann ist $u$ konstant auf Geraden der Steigung 1.
+Betrachte nämlich die Zeit-Raum Kurve 
+\begin{align}\label{eq:transport:analytisch:phi}
+\varphi_t(\tau) = (\tau, x+\tau -t).
+\end{align}
+Dann gilt für alle $t,\tau \in \Rp:$ $D \varphi_t(\tau) = (1, 1)$ und folglich auch
+\begin{align}
+D u\bigl(\varphi_t(\tau)\bigr) = \partial_t u(\tau, x + \tau - t) + \partial_x u(\tau, x + \tau - t) = 0.
+\end{align}
+Insbesondere impliziert das wegen des Hauptsatzes für die Integral und Differentialrechnung für alle $t \in \Rp$
+\begin{align} \label{eq:transport:analytisch:homogen:loesung}
+u(t,x) - u(0, x-t) = \int_0^t D u(\tau, x + \tau - t) \dd \tau = \int_0^t D u\bigl( \varphi_t(\tau) \bigr) \dd \tau = 0
+\end{align}
+und wegen der Anfangsbedingung $u(0,x) = U(x-t)$ gilt also auch für alle $(t, x) \in \Rp \times \R$
+\begin{align}\label{eq:transport:analytisch:homogen:loesung}u(t,x) = U(x-t).\end{align}
+Dies zeigt die Eindeutigkeit von Lösungen von \eqref{eq:transport:analytisch:homogen}.
+Andererseits ist jedes so definierte $u(t,x) = U(x-t)$ auch eine Lösung von \eqref{eq:transport:analytisch:homogen}, solange das für $U$, im womöglich schwachem Sinne, möglich ist.
+Denn es gilt
+\begin{align}
+\partial_t U(x-t) + \partial_x U(x-t) = DU(x-t) \cdot (-1) + DU(x-t) \cdot 1 = 0.
+\end{align}
+
+\subsection*{Die inhomogene Transportgleichung}
+Sei $F \in L^1\left( \Rp \times \R \right)$. Wir betrachten nun die lineare Transportgleichung mit nichtverschwindender rechten Seite
+\begin{align}\label{eq:transport:analytisch:inhomogen}
+\partial_t u(t,x) + \partial_x u(t,x) = F(t,x), \quad u(0, x) = U(x).
+\end{align}
+Dann gilt für Lösungen $u$ von \eqref{eq:transport:analytisch:inhomogen} ganz analog wie im homogenen Fall mit $\varphi$ wie in \eqref{eq:transport:analytisch:phi}
+\begin{align}
+D u\bigl(\varphi_t(\tau)\bigr) = F(\tau,x + \tau - t).
+\end{align}
+Demnach folgt wieder mit dem Hauptsatz
+\begin{align} \label{eq:transport:analytisch:inhomogen:loesung:allgemein}
+\begin{split}
+u( t, x ) - u( 0, x -t ) = \int_0^t F(\tau, x + \tau - t) \dd \tau.
+\end{split}
+\end{align}
+Wir werden oft den Spezialfall sehen, dass $F$ selbst Lösung von \eqref{eq:transport:analytisch:homogen} ist.
+Es gilt dann nämlich $F(\tau, x + \tau - t) = F(0, x-t)$ für alle $\tau,t \in \Rp$ und somit folgt für alle $t \in \Rp$
+\begin{align} 
+u( t, x ) - u( 0, x -t ) = \int_0^t F(0, x - t) \dd \tau = t F(0,x-t),
+\end{align}
+also auch für alle $(t, x) \in \Rp \times \R$
+\begin{align}\label{eq:transport:analytisch:inhomogen:loesung:spezial}u(t,x) = U(x - t) + t F(0, x-t).\end{align}
+
+\subsection*{Eine homogene Exponentialgleichung}
+
+Sei $a \in \R$ eine reelle Zahl. Wir betrachten nun die Differentialgleichung
+\begin{align}\label{eq:transport:analytisch:exp:homogen}
+\partial_t u(t,x) + \partial_x u(t,x) = a u(t,x), \quad u(0, x) = U(x).
+\end{align}
+Sei wieder $\varphi$ aus \eqref{eq:transport:analytisch:phi} gegeben. Dann gilt dieses mal
+\begin{align}\label{eq:transport:analytisch:exp:charode}
+D u\bigl(\varphi_t(\tau)\bigr) = a u(\varphi_t(\tau)), \qquad \text{mit $u\bigl(\varphi_t(0) \bigr) = U(x-t)$.}
+\end{align}
+D.\,h. $u$ erfüllt entlang der Kurve $\varphi_t$ die Differentialgleichung \eqref{eq:transport:analytisch:exp:charode}.
+Die Lösung dieser Differentialgleichung lautet bekanntlich $u\bigl(\varphi_t(\tau) \bigr) = U(x-t) e^{a \tau}$ und es folgt weiterhin
+\begin{align}
+\begin{split}
+u(t,x) - u(0,x-t) &= \int_0^t D u(\tau, x + \tau - t) \dd \tau\\
+&= \int_0^t D u\bigl(\varphi_t(\tau) \bigr) \dd \tau\\
+&= \int_0^t a u(\varphi_t(\tau)) \dd \tau\\
+&= \int_0^t a U(x-t) e^{a \tau} \dd \tau\\
+&= U(x-t) e^{a t} - U(x-t).
+\end{split}
+\end{align}
+Wegen $u(0,x-t) = U(x-t)$ impliziert das hiermit für alle $(t, x) \in \Rp \times \R$
+\begin{align}\label{eq:transport:analytisch:exp:loesung}u(t,x) = U(x-t) e^{at}.\end{align}
+
+\subsection*{Eine inhomogene Exponentialgleichung}
+
+Sei $a \in \R$ eine reelle Zahl und $F \in L^1\left( \Rp \times \R \right)$.
+Betrachte nun das Anfangswertproblem
+\begin{align}\label{eq:transport:analytisch:exp:inhomogen}
+\partial_t u(t,x) + \partial_x u(t,x) = a u(t,x) + F(t,x), \quad \text{für $u(0,x) = U(x)$.}
+\end{align}
+Diesesmal kriegen wir für $u \circ \varphi_t$ die Differentialgleichung
+\begin{align}\label{eq:transport:analztisch:exp:inhomogen:charode}
+Du\bigl( \varphi_t(\tau) \bigr) = a u\bigl( \varphi_t(\tau) \bigr) + F\bigl( \varphi_t(\tau) \bigr).
+\end{align}
+Dies ist eine gewöhnliche lineare Differentialgleichung, deren homogene Lösung wir schon in \eqref{eq:transport:analytisch:exp:charode} bestimmt haben.
+Nun wenden wir die Methode der Variation der Konstanten an, um eine Lösung von \eqref{eq:transport:analztisch:exp:inhomogen:charode} zu bestimmen.
+Wir machen den Ansatz 
+\begin{align}
+u\bigl(\phi_t(\tau)\bigr) = A(\tau) e^{a \tau}
+\end{align}
+und gesucht ist eine Koeffizientenabbildung $A$, so dass für alle $\tau \in \Rp$
+\begin{align}
+D \left[ A(\tau) e^{a\tau} \right] = a u\bigl( \varphi_t(\tau) \bigr) + F\bigl( \varphi_t(\tau) \bigr) \quad \text{mit $A(0) = U(x-t)$}
+\end{align}
+gilt. Mit der Produktregel folgt
+\begin{align}
+\begin{split}
+D \left[ A(\tau) e^{a\tau} \right] &= A(\tau) \cdot a e^{a \tau} + e^{a \tau} DA(\tau)\\
+&= a u\bigl( \varphi_t(\tau) \bigr) + e^{a \tau} DA(\tau)
+\end{split}
+\end{align}
+und somit muss für alle $\tau \in \Rp$
+\begin{align}
+e^{a \tau} DA(\tau) = F\bigl( \varphi_t(\tau) \bigr)
+\end{align}
+bzw. nach dem Anwenden des Hauptsatzes der Integral- und Differentialrechnung
+\begin{align}
+\begin{split}
+A(t) - A(0) &= \int_0^t e^{-a \tau} F\bigl( \varphi_t(\tau) \bigr) \dd \tau\\
+&= \int_0^t e^{-a \tau} F\bigl( \tau, x + \tau - t \bigr) \dd \tau
+\end{split}
+\end{align}
+gelten. Für den speziellen Fall, dass $F$ selbst Lösung der homogenen partiellen Differentialgleichung \eqref{eq:transport:analytisch:exp:homogen} mit $F(0,x) = V(x)$ ist, folgt $F(t,x) = e^{at} V(x - t)$ und somit gilt
+\begin{align}
+A(\tau) &= A(0) +\int_0^\tau e^{-a s} F\bigl( \varphi_t(s) \bigr) \dd s\\
+&= U(x-t) +\int_0^\tau e^{-a s} e^{as} V(x - t) \dd s\\
+&= U(x-t) + \tau V(x-t) \qquad \text{für alle $\tau, t \in \Rp.$}
+\end{align}
+Insgesamt erhält man ganz analog wie bisher in diesem Spezialfall die folgende Lösung für alle $(t,x) \in \Rp \times \R$:
+\begin{align}
+u(t,x)= A(t) e^{a t} = \bigl( U(x-t) + t V(x-t) \bigr) e^{a t}.
+\end{align}
+
+\subsection{Rechnungen für den regulären Ansatz}
+\label{appendix:regulaer:rechnungen}
+
 
 \subsection{Diskreter Ansatz: Summanden vom Upwind-Schema entwickeln}
 \label{appendix:diskret:summanden}
