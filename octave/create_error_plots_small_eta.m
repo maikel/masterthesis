@@ -1,5 +1,5 @@
 warning ("off", "Octave:broadcast");
-
+format long e;
 % calculate max difference between numerical scheme and true solution
 sinus_max_err_fn = @(N,X,V,h,eta) ...
     max(abs( sin(pi*(X-(N-1)*(h+h*eta))) - V(:,N) ));

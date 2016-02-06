@@ -100,7 +100,7 @@ v^n_i = (U * G_\tau)(x_i - t_n) + o(h).
     title={$\err^n = \max_{i \in \Z} \abs{\sin\bigl(\pi (x_i -t_n)\bigr) - v^n_i}$},
     xlabel={Iterationen $n$},
     ylabel={maximaler Fehler},
-    legend entries={$\err^n \, \eta=0.1;\, h=0.01$,$\err^n \, \eta=0.1;\, h=0.001$,$\err^n \, \eta=0.05;\, h=0.001$},
+    legend entries={$\err^n \, \eta=0.1;\, h=0.01$,$\err^n \, \eta=0.1;\, h=0.001$,$\err^n \, \eta=0.05;\, h=0.001$, $\bar \err^n = t_n \eta \frac{\pi^2}{2}$},
     legend style={at={(1.8,1)}}
 ]
 \addplot[red, line width={0.8}, mark=*] table [x index={0}, y index={1}] {data/max_errors_eta_0.100_h_0.010.dat};
@@ -166,7 +166,7 @@ Weil $\lambda > 1$ gilt, können wir \eqref{eq:transport:regulaer:tau:ergebnis} 
 In Abbildung \ref{figure:regular:fehler} vergleichen wir den maximalen Fehler der numerischen Lösungen mit dem Fehler der asymptotischen Entwicklung in \eqref{eq:transport:regulaer:ansatz:ergebnis}
 \begin{align}\label{eq:transport:regulaer:fehler}
 \begin{split}
-\err^n &= \max_{i \in \Z} \abs{ \sin\bigl( \pi (x_n - t_i) \bigr) - v^n_i }\\
+\bar {\err}^n &= \max_{i \in \Z} \abs{ \sin\bigl( \pi (x_n - t_i) \bigr) - v^n_i }\\
 &= \max_{i \in \Z} \abs{ t_n \frac{1-\lambda}{2} \partial^2_x \sin\bigl( \pi (x_n - t_i) \bigr) }\\
 &=  t_n \frac{\pi^2 \eta}{2} \max_{i \in \Z} \abs{ \sin\bigl( \pi (x_n - t_i) \bigr) }\\
 &= t_n \frac{\pi^2 \eta}{2}.

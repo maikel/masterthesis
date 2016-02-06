@@ -1,5 +1,5 @@
 warning ("off", "Octave:broadcast");
-
+format long e;
 % calculate max difference between numerical scheme and true solution
 sinus_max_err_fn = @(N,X,V,h,eta) ...
     max(abs( sin(pi*(X-(N-1)*(h+h*eta))) - V(:,N) ));
@@ -38,7 +38,7 @@ for i = 1:length(examples)
     V = transport_example(eta, h, max_N);
 
     % calculate real and estimated errors and skip some indices
-    indizes = 1:floor(max_N/10):max_N;
+    indizes = 1:floor((max_N)/10):max_N;
     max_errors = [
       indizes;
       sinus_max_err_fn(indizes, X, V, h, eta);
