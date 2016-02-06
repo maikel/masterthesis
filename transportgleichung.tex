@@ -241,12 +241,12 @@ u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)
 \vspace{0.4cm}
 \noindent \emph{Mit den Anfangsbedingungen:}
 \begin{align}\label{eq:transport:diskret:anfangsbedinungen}
-u_0(0, i, 0, x_i) = \rd{U(x_i)}, \quad u_1(0, i, 0, x_i) = 0 \quad \text{und} \quad u_2(0, i, 0, x_i) = 0 \qquad \forall i \in \Z.
+u_0(0, i, 0, x_i) = U(x_i), \quad u_1(0, i, 0, x_i) = 0 \quad \text{und} \quad u_2(0, i, 0, x_i) = 0 \qquad \forall i \in \Z.
 \end{align}
 
 Diese Gleichungen gelten nun für alle $h > 0$ und alle $n, i \in \N$.
 Noch gelingt es uns nicht, aus diesen Bedinungen eine eindeutige Lösung für unsere Ansatzfunktionen $u_0, u_1$ und $u_2$ zu bestimmen.
-Daher folgt im nächstem Kapitel ein konkreterer Produktansatz.
+Daher folgt im nächstem Kapitel ein konkreterer Ansatz.
 Trotzdem beweisen wir hier noch zwei Lemmata, um besser zu verstehen wie man von Bedingungen auf dem Gitter auf Bedingungen im Raum schließen kann.
 
 \begin{lemma}[Konstanz für eine Dimension] \label{lemma:transport:diskret:konstant1}
@@ -271,7 +271,7 @@ Da \eqref{eq:lemma:const1d:voraussetzung} für alle $h > 0$ gilt, folgt hiermit
 Das Lemma~\ref{lemma:transport:diskret:konstant1} bedeutet, dass $f$, oder die Folge $f_n$, in solchen Fällen unabhängig von, bzw. konstant in $n \in \N$ ist.
 Wir wollen dies auf unseren Fall übertragen und beweisen nun das zweidimensionale Analogon, 
 
-\begin{lemma}[Punktweise Kovergenz in der Raumzeit]\label{lemma:transport:diskret:konvergenz_gitter}
+\begin{lemma}[Punktweise Kovergenz in zwei Dimensionen]\label{lemma:transport:diskret:konvergenz_gitter}
 Sei $f\colon (\N \times \Z) \times (\Rp \times \R) \to \R$ eine Abbildung, so dass $f(n,i,\pkt,\pkt)$ für alle $n \in \N$ und $i \in \Z$ differenzierbar ist.
 Sei weiter\, $G_h \subset \Rp \times \R$ ein äquidistantes Gitter mit\, $G_h(n,i) = (t^h_n, x^h_i) = h \cdot (\lambda n, i)$, für $n \in \N$.
 Wenn ein differenzierbares $F\colon \Rp \times \R \to \R$ für alle $h > 0$ und somit alle Gitter $G_h$ mit
@@ -351,7 +351,7 @@ Setzt man dies in die vorherigen Rechnungen ein, so erhält man anstelle von Gle
 Da diese Gleichung für alle Gitterpunkte $(n,i)$ gilt und die Funktion $F(t,x) = 0$ glatt ist, können wir unter der Annahme, dass $z_0 \neq 0$ gilt, Lemma \ref{lemma:transport:diskret:konvergenz_gitter} benutzen.
 \begin{satz}\label{satz:omega_n}
 Es gilt
-\[ \Omega(n) = (1 - 2 \lambda)^n = (-1)^n (1 + 2 \eta)^n. \]
+\[ \Omega(n) = (1 - 2 \lambda)^n. \]
 \end{satz}
 \begin{proof}
 Weil $z_0 \neq 0$ gilt, existiert ein Punkt $(t,x) \in \Rp \times \R$ mit $z_0(t,x) \neq 0$.
@@ -365,7 +365,7 @@ Das impliziert $\Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) = 0$ für alle $n \in 
 \end{proof}
 
 Setzt man Satz \ref{satz:omega_n} nun in den Ansatz ein, so fallen die Anteile von $u_2$ in der Gleichung \eqref{eq:transport:diskret:oh2} für diskrete Ansätze weg.
-Daher reduziert sich mit $\lambda = 1 + \eta$ dieser Ansatz hier zu
+Setzen wir $\lambda = 1 + \eta$ für ein $#eta > 0$, dann reduziert sich dieser Ansatz hier zu
 \begin{align}\label{eq:transport:osz:ansatz}
 v^n_i = w_0(t_n, x_i) + h  w_1(t_n, x_i) + (-1)^{i+n} (1 + 2 \eta)^n \bigl( z_0(t_n, x_i) + h z_1(t_n, x_i) \bigr) + o(h)
 \end{align}
