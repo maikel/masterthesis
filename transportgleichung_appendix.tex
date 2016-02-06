@@ -1,5 +1,6 @@
 \section{Die lineare Transportgleichung}
 \subsection{Analytische Lösungen}
+\label{appendix:loesungen}
 Im Laufe der asymptotischen Entwicklung von \eqref{eq:adv:scheme} stellt sich heraus, dass die Ansatzfunktionen häufig selbst Lösungen der Transportgleichung \eqref{eq:adv:pde} oder Variationen von dieser sind.
 Deshalb ist es nützlich und sinnvoll, die richtige Lösung solcher Gleichungen auch analytisch zu untersuchen.
 Wir betrachten hier bekannte Gleichungen, deren Lösungen $u$ sogar exakt zu bestimmen sind.
@@ -22,7 +23,7 @@ Dann gilt für alle $t,\tau \in \Rp:$ $D \varphi_t(\tau) = (1, 1)$ und folglich 
 D u\bigl(\varphi_t(\tau)\bigr) = \partial_t u(\tau, x + \tau - t) + \partial_x u(\tau, x + \tau - t) = 0.
 \end{align}
 Insbesondere impliziert das wegen des Hauptsatzes für die Integral und Differentialrechnung für alle $t \in \Rp$
-\begin{align} \label{eq:transport:analytisch:homogen:loesung}
+\begin{align}
 u(t,x) - u(0, x-t) = \int_0^t D u(\tau, x + \tau - t) \dd \tau = \int_0^t D u\bigl( \varphi_t(\tau) \bigr) \dd \tau = 0
 \end{align}
 und wegen der Anfangsbedingung $u(0,x) = U(x-t)$ gilt also auch für alle $(t, x) \in \Rp \times \R$

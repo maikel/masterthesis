@@ -3,30 +3,93 @@ Wir betrachten die Differentialgleichung der eindimensionalen Advektion
 \partial_t u(t, x) + \partial_x u(t, x) = 0, \quad u(0, x) = U(x).
 \end{align}
 Auf diese partielle Differentialgleichung wenden wir das Upwindverfahren mit dem Gitter $G_h(n,i) = (t_n, x_i) = h \cdot (\lambda n, i)$ an.
-Wenn wir also von Punkten $(t_n, x_i)$ in der Raumzeit sprechen, so sind diese eigentlich noch von Gitterweite $h$ abhängig. 
-Dieses Gitter ist nicht quadratisch, falls $\lambda \neq 1$ gilt und das Verfahren ist durch die Gleichung
+Wenn wir also von Punkten $(t_n, x_i)$ in der Zeit und Raum sprechen, so sind diese eigentlich noch von Gitterweite $h$ abhängig. 
+Die Gitterzellen sind nicht quadratisch, falls $\lambda \neq 1$ gilt und das Verfahren ist durch die Gleichung
 \begin{align}\label{eq:adv:scheme_rechnung}
 \frac {v^{n+1}_i - v^n_i} {\lambda h} + \frac {v^n_i - v^n_{i-1}} h = 0
 \end{align}
 bzw. in der Praxis durch
 \begin{align}\label{eq:adv:scheme}
-v^{n+1}_i = v^n_i - \lambda (v^n_i - v^n_{i-1})
+v^{n+1}_i - v^n_i + \lambda (v^n_i - v^n_{i-1}) = 0, \quad v^0_i = U(x_i)
 \end{align}
 bestimmt.
 Es ist bereits bekannt, dass das Verfahren f"ur $\lambda \leq 1$ stabil und f"ur $\lambda = 1$ sogar exakt ist.
-Wir versuchen hier den instabilen Fall $\lambda > 1$ besser zu verstehen.
+Wir versuchen in dieser Arbeit den instabilen Fall $\lambda > 1$ besser zu verstehen.
 
 \section{Ein erster regulärer Ansatz}
 
 Zunächst präsentieren wir die Ergebnisse, welche die Autoren Junk und Yang aus \cite{Junk2004} für das Upwind-Schema entwickeln.
 Angenommen es gäbe Abbildungen $u_0, u_1 \in C^\infty\left( \Rp \times \R \right)$, so dass für alle $h > 0$, $n \in \N$ und $i \in \Z$
 \begin{align}\label{eq:regulaer:ansatz}
-v^n_i = u_0(t_n,x_i) + h u_1(t_n,x_i) + o(h).
+v^n_i = u_0(t_n,x_i) + h u_1(t_n,x_i) + o(h)
 \end{align}
-gilt.
-Im Anhang \eqref{appendix:regulaer:rechnungen} werden die Differenzen $v^{n+1}_i - v^n_i$ und $\lambda ( v^n_i - v^n_{i-1} )$ aus \eqref{eq:adv:scheme} ausgerechnet.
-In diese Rechnungen geht wesentlich ein, dass $u_0$ und $u_1$ differenzierbar sind.
-Sortiert man die Ergebnisse nun nach den Ordnungen von $h$, so erhält man das Gleichungssystem
+gilt, $v^n_i$ die Gleichung \eqref{eq:adv:scheme} erfüllt und die Anfangsbedingungen
+\begin{align}\label{eq:regulaer:anfangsbedingungen}
+u_0(0,x) = U(x) \quad \text{und} \quad u_1(0, x) = 0
+\end{align}
+gelten.
+Im Anhang \ref{appendix:regulaer:rechnungen} setzen wir den Ansatz \eqref{eq:regulaer:ansatz} in die beiden Differenzen $v^{n+1}_i - v^n_i$ und $\lambda ( v^n_i - v^n_{i-1} )$ ein, verwenden, dass $u_0$ und $u_1$ differenzierbar sind und erhalten für alle Zeit-Raum Punkte $(t,x) \in \Rp \times \R$ das Gleichungssystem 
+\begin{align}
+\label{eq:regulaer:oh}
+\partial_t u_0(t,x) + \partial_x u_0(t,x) &= 0\\
+\label{eq:regulaer:oh2}
+\partial_t u_1(t,x) + \partial_x u_1(t,x) &= \frac{1-\lambda}{2} \partial^2_x u_0(t,x).
+\end{align}
+Gleichung \eqref{eq:regulaer:oh} zeigt, dass $u_0$ selbst schon eine Lösung von \eqref{eq:adv:pde} ist.
+Somit bestimmt $u_1$ direkt den Fehler des Verfahres zur echten Lösung, zumindest solange die asymptotische Entwicklung \eqref{eq:regulaer:ansatz} gültig ist.
+Im Anhang \ref{appendix:loesungen} haben wir bereits die Lösung dieser Gleichungen bestimmt.
+$u_0$ ist wegen $u_0(0,x) = U(x)$ durch
+\begin{align*}
+u_0(t,x) = U(x-t)
+\end{align*}
+gegeben.
+Die Gleichung \eqref{eq:regulaer:oh2} fällt hingegen in den Fall einer inhomogenen Transportgleichung und weil $u_0$ selbst Lösung der homogenen Gleichung ist, greift die Lösung \eqref{eq:transport:analytisch:inhomogen:loesung:spezial}:
+\begin{align*}
+u_1(t,x) = t \frac{1-\lambda}{2} \partial^2_x U(x-t).
+\end{align*}
+Zwar bleibt der Ansatz \eqref{eq:regulaer:ansatz} für festes $t \in \Rp$ asymptotisch in $h$ geordnet, d.\,h. es gilt stets
+\begin{align*}
+\lim_{h \to 0} h \frac{u_1(t,x)}{u_0(t,x)} = 0,
+\end{align*}
+allerdings konvergiert die asymptotische Entwicklung nicht gleichmäßig in $t$, denn es gilt für jedes $h > 0$
+\begin{align*}
+\lim_{t \to \infty} h \frac{u_1(t,x)}{u_0(t,x)} = \lim_{t \to \infty} h t \frac{(1-\lambda) \partial^2_x U(x-t) }{2 U(x-t)} = \infty.
+\end{align*}
+Das ist nach \cite{Junk2004} ein Zeichen dafür, dass der resultierende Ansatz
+\begin{align}\label{eq:regulaer:ansatz:ergebnis}
+v^n_i = U(x-t) + h t \frac{1-\lambda}{2} \partial^2_x U(x-t) + o(h)
+\end{align}
+das Langzeitverhalten des Verfahrens nicht gut widergibt und dieses Problem greifen die Autoren mit einer zusätzlichen \emph{langsamen} Zeitskala $\tau = h t$ an.
+Aus \eqref{eq:regulaer:ansatz} wird
+\begin{align}\label{eq:regulaer:tau:ansatz}
+v^n_i = u_0(t, \tau, x) + h u_1(t, \tau, x) + o(h)
+\end{align}
+und die Gleichungen \eqref{eq:regulaer:oh} und \eqref{eq:regulaer:oh2} ändern sich zu
+\begin{align}
+\begin{split}
+\label{eq:regulaer:tau:gleichungen}
+\partial_t u_0(t,\tau,x) + \partial_x u_0(t,\tau,x) &= 0\\
+\partial_t u_1(t,\tau,x) + \partial_x u_1(t,\tau,x) &= \frac{1-\lambda}{2} \partial^2_x u_0(t,\tau,x) - \partial_\tau u_0(t,\tau,x).
+\end{split}
+\end{align}
+Durch die zusätzliche Zeitvariable $\tau$ haben wir einen weiteren Freiheitsgrad zur Verfügung und können
+\begin{align}\label{eq:regulaer:waermeleit}
+\partial_\tau u_0(t,\tau,x) = \frac{1-\lambda}{2} \partial^2_x u_0(t,\tau,x)
+\end{align}
+fordern. Dies ist die Wärmeleitungsgleichung, welche nur für $\lambda \leq 1$ lösbar ist.
+Sei $G_\tau$ der Glättungskern
+$$G_\tau(y) = \frac{1}{2 \pi (1-\lambda)\tau} \exp\left( - \frac{y^2}{2 (1 - \lambda) \tau} \right).$$
+Für $\lambda \leq 1$ lautet  die Lösung des Anfangswertproblems \eqref{eq:regulaer:tau:gleichungen} mit der Bedingng \eqref{eq:regulaer:waermeleit}
+\begin{align}
+\begin{split}
+u_0(t,\tau,x) &= (U * G_\tau)(x - t) \quad \text{und}\\
+u_1(t,\tau,x) &= 0
+\end{split}
+\end{align}
+und der Ansatz \eqref{eq:regulaer:tau:ansatz} reduziert sich zu
+\begin{align}
+v^n_i = (U * G_\tau)(x_i - t_n) + o(h).
+\end{align}
 
 \section{Ein Beispiel für instabiles Verhalten}\label{sec:transport:beispiel}
 
@@ -339,12 +402,12 @@ Damit ist dann die Fehlerabschätzung verbunden
     title={$\err^n = \max_{i \in \Z} \abs{\sin\bigl(\pi (x_i -t_n)\bigr) - v^n_i}$},
     xlabel={Iterationen $n$},
     ylabel={maximaler Fehler},
-    legend entries={$\err^n \, \eta=0.01$,$\err^n \, \eta=0.05$,$\err^n \, \eta=0.1$,$(1+2 \eta)^n\eps_M + n \frac{\pi^2}{2} h^2 (1 + \eta) \eta$, $(1+2 \eta)^n\eps_M$},
+    legend entries={$\err^n \, \eta=0.1$,$\err^n \, \eta=0.05$,$\err^n \, \eta=0.01$,$(1+2 \eta)^n\eps_M + n \frac{\pi^2}{2} h^2 (1 + \eta) \eta$, $(1+2 \eta)^n\eps_M$},
     legend style={at={(1.8,1)}}
 ]
-\addplot[myblue, line width={0.8}, mark=*] table {data/max_errors_eta_0.010_h_0.001.dat};
-\addplot[dg, line width={0.8}, mark=*] table {data/max_errors_eta_0.050_h_0.001.dat};
 \addplot[red, line width={0.8}, mark=*] table {data/max_errors_eta_0.100_h_0.001.dat};
+\addplot[dg, line width={0.8}, mark=*] table {data/max_errors_eta_0.050_h_0.001.dat};
+\addplot[myblue, line width={0.8}, mark=*] table {data/max_errors_eta_0.010_h_0.001.dat};
 \addplot[black, line width={0.3}, mark=x] table [y index={2}] {data/max_errors_eta_0.050_h_0.001.dat};
 \addplot[mygray, line width={0.5}, dotted] table [y index={3}] {data/max_errors_eta_0.010_h_0.001.dat};
 \addplot[mygray, line width={0.5}, dotted] table [y index={3}] {data/max_errors_eta_0.050_h_0.001.dat};
