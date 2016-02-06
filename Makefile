@@ -14,17 +14,29 @@ all: Masterarbeit.pdf
 # "raw2tex" and "dat2tex" are just placeholders for whatever custom steps
 # you might have.
 
-data/%.dat: octave/upwind.m \
-	        octave/transport_example.m \
-            octave/create_example_plots.m \
-	        octave/create_error_plots.m
-		octave --silent --path octave octave/create_example_plots.m
+octave/create_%.m: octave/upwind.m \
+				   octave/transport_example.m
+
+data/max_errors_eta_%.dat: octave/create_error_plots.m
 		octave --silent --path octave octave/create_error_plots.m
 
-transportgleichung.tex: data/V_sinus_eta_0.100_h_0.010.dat \
-	                    data/V_sinus_eta_0.100_h_0.001.dat \
-	                    data/V_sinus_eta_0.050_h_0.001.dat \
-	                    data/V_sinus_eta_0.010_h_0.001.dat
+data/max_errors_small_eta_0.001.dat: octave/create_error_plots_small_eta.m
+		octave --silent --path octave octave/create_error_plots_small_eta.m
+
+
+data/V_sinus_eta_%.dat: octave/create_example_plots.m
+		octave --silent --path octave octave/create_example_plots.m
+
+
+data: data/V_sinus_eta_0.100_h_0.010.dat \
+	  data/V_sinus_eta_0.100_h_0.001.dat \
+	  data/V_sinus_eta_0.050_h_0.001.dat \
+      data/max_errors_eta_0.100_h_0.001.dat \
+      data/max_errors_eta_0.050_h_0.001.dat \
+      data/max_errors_eta_0.010_h_0.001.dat \
+      data/max_errors_small_eta_0.001.dat
+
+transportgleichung.tex: data
 
 main.tex: transportgleichung.tex \
 	      transportgleichung_appendix.tex \

@@ -134,15 +134,98 @@ u(t,x)= A(t) e^{a t} = \bigl( U(x-t) + t V(x-t) \bigr) e^{a t}.
 
 \subsection{Rechnungen für den regulären Ansatz}
 \label{appendix:regulaer:rechnungen}
-
+\subsection*{Ohne langsame Zeitskala}
+Sei der Ansatz aus \eqref{eq:transport:regulaer:ansatz}
+\begin{align}
+v^n_i = u_0(t_n, x_i) + h u_1(t_n, x_i) + o(h)
+\end{align}
+für glatte Abbildungen $u_0, u_1 \in C^{\infty}\left( \Rp \times \R \right)$ gegeben.
+Wir rechnen nun die beiden Summanden aus \eqref{eq:adv:scheme} aus und benutzen dabei, dass $t_n = n h \lambda$ und $x_i = i h$ gilt.
+Das impliziert nämlich
+\begin{align}
+\begin{split}
+v^{n+1}_i - v^n_i &= \bigl( u_0(t_{n+1}, x_i) + h u_1(t_{n+1}, x_i)\bigr) - \bigl( u_0(t_n, x_i) + h u_1(t_n, x_i) \bigr)\\
+&= \bigl( u_0(t_{n+1}, x_i) - u_0(t_n, x_i) \bigr) + h \cdot \bigl( u_1(t_{n+1}, x_i) - u_1(t_n, x_i)\bigr)\\
+&= \bigl( u_0(t_n + h \lambda, x_i) - u_0(t_n, x_i) \bigr) + h \cdot \bigl( u_1(t_n + h \lambda, x_i) - u_1(t_n, x_i)\bigr)\\
+&= \left( h \cdot \lambda \partial_t u_0(t_n, x_i) + \frac{(h \lambda)^2}{2} \partial^2_t u_0(t_n, x_i) + o(h^2) \right)\\
+&\quad + h \cdot \Bigr( h \lambda \partial_t u_1(t_n, x_i) + o(h) \Bigr)\\
+&= h \cdot \lambda \partial_t u_0(t_n, x_i) + h^2 \cdot \left( \frac{\lambda^2}{2} \partial^2_t u_0(t_n, x_i) + \lambda \partial_t u_1(t_n, x_i) \right) + o(h^2)
+\end{split}
+\end{align}
+und
+\begin{align} \label{appendix:regulaer:rechnungen:diff2}
+\begin{split}
+\lambda \bigl( v^n_i - v^n_{i-1} \bigr)
+&= \lambda \Bigl[ \bigl( u_0(t_n, x_i) + h u_1(t_n, x_i)\bigr) - \bigl( u_0(t_n, x_{i-1}) + h u_1(t_n, x_{i-1}) \bigr) \Bigr]\\
+&= \lambda \Bigl[ \bigl( u_0(t_n, x_i) - u_0(t_n, x_{i-1})\bigr) + h \cdot \bigl( u_1(t_n, x_i) - h u_1(t_n, x_{i-1}) \bigr) \Bigr]\\
+&= \lambda \Bigl[ \bigl( u_0(t_n, x_i) - u_0(t_n, x_i - h)\bigr) + h \cdot \bigl( u_1(t_n, x_i) - h u_1(t_n, x_i - h) \bigr) \Bigr]\\
+&= \lambda \Bigl[ h \cdot \partial_x u_0(t_n, x_i) - \frac{h^2}{2} \partial^2_x u_0(t_n,x_i) + o(h^2)\\
+&\qquad + h \cdot \bigl( h \cdot \partial_x u_1(t_n, x_i) + o(h) \bigr) \Bigr]\\
+&= h \cdot \lambda \partial_x u_0(t_n, x_i) + h^2 \cdot \left( - \frac{\lambda}{2} \partial^2_x u_0(t_n,x_i) + \lambda \partial_x u_1(t_n, x_i) \right) + o(h^2).
+\end{split}
+\end{align}
+Sortiert man diese Ergebnisse nun nach den Ordnungen von $h$ so erhält man die beiden Gleichungen für alle Gitterpunkte $(t_n, x_i) \in G_h$
+\begin{align*}
+\lambda \cdot \bigl( \partial_t u_0(t_n, x_i) + \partial_x u_0(t_n, x_i) \bigr) &= 0\\
+\lambda \cdot \bigl( \partial_t u_1(t_n, x_i) + \partial_x u_1(t_n, x_i) \bigr) &= \lambda \left( \frac{1}{2} \partial^2_x u_0(t_n, x_i) - \frac{\lambda}{2} \partial^2_t u_0(t_n, x_i) \right)
+\end{align*}
+Diese Gleichungen gelten nun für alle Gitterweiten $h > 0$.
+Teilt man die Gleichungen durch $\lambda > 0$ und verwendet die stetige Differenzierbarkeit der Ansatzfunktionen, so erhält man hieraus für alle $(t,x) \in \Rp \times \R$
+\begin{align}\label{eq:appendix:regulaer:oh}
+\partial_t u_0(t, x) + \partial_x u_0(t, x) &= 0\\
+\partial_t u_1(t, x) + \partial_x u_1(t, x) &= \frac{1}{2} \partial^2_x u_0(t, x) - \frac{\lambda}{2} \partial^2_t u_0(t, x) \nonumber\\
+&= \frac{1-\lambda}{2} \partial^2_x u_0(t, x) \label{eq:appendix:regulaer:oh2}
+\end{align}
+wobei wir in \eqref{eq:appendix:regulaer:oh2} schon die Gleichung \eqref{eq:appendix:regulaer:oh} für $u_0$ benutzt haben, denn es gilt
+\begin{align*}
+\partial^2_t u_0(t,x) &= \partial_t \, \bigl( \partial_t u_0(t,x) \bigr)\\
+&= \partial_t \, \bigl( - \partial_x u_0(t,x) \bigr)\\
+&= - \partial_x \, \bigl( \partial_t u_0(t,x) \bigr)\\
+&= - \partial_x \, \bigl( - \partial_x u_0(t,x) \bigr)\\
+&= \partial^2_x u_0(t,x).
+\end{align*}
+\subsection*{Mit langsamer Zeitskala}
+Wir betrachten nun den Ansatz \eqref{eq:transport:regulaer:tau:ansatz}
+\begin{align}
+v^n_i = u_0(t, \tau, x) + h u_1(t, \tau, x) + o(h)
+\end{align}
+mit $\tau = h t.$
+Die beiden Summanden aus dem Upwind-Verfahren \eqref{eq:adv:scheme} ergeben nun
+{\small \begin{align} \label{eq:appendix:regulaer:tau:diff1}
+\begin{split}
+v^{n+1}_i - v^n_i &= \bigl( u_0(t_{n+1}, \tau_{n+1}, x_i) + h u_1(t_{n+1}, \tau_{n+1}, x_i)\bigr) - \bigl( u_0(t_n, \tau_n, x_i) + h u_1(t_n, \tau_n, x_i) \bigr)\\
+&= \bigl( u_0(t_{n+1}, \tau_{n+1}, x_i) - u_0(t_n, \tau_n, x_i) \bigr) + h \cdot \bigl( u_1(t_{n+1}, \tau_{n+1}, x_i) - u_1(t_n, \tau_n, x_i)\bigr)\\
+&= \bigl( u_0(t_n + h \lambda, \tau_n + h^2 \lambda, x_i) - u_0(t_n, \tau_n, x_i) \bigr)\\
+&\quad + h \cdot \bigl( u_1(t_n + h \lambda, \tau_n + h^2 \lambda, x_i) - u_1(t_n, \tau_n, x_i)\bigr)\\
+&= \left( h \cdot \lambda \partial_t u_0(t_n, \tau_n, x_i) + \frac{(h \lambda)^2}{2} \partial^2_t u_0(t_n, \tau_n, x_i) + h^2 \lambda \partial_\tau u_0(t_n, \tau_n, x_i) + o(h^2) \right)\\
+&\quad + h \cdot \Bigr( h \lambda \partial_t u_1(t_n, \tau_n, x_i) + o(h) \Bigr)\\
+&= h \cdot \lambda \partial_t u_0(t_n, \tau_n, x_i)\\
+&\quad + h^2 \cdot \left( \frac{\lambda^2}{2} \partial^2_t u_0(t_n, \tau_n, x_i) + \lambda \partial_\tau u_0(t_n, \tau_n, x_i) + \lambda \partial_t u_1(t_n, \tau_n, x_i) \right) + o(h^2)
+\end{split}
+\end{align}}
+und, weil $\tau_n$ nicht von $i$ abhängt, folgt ganz analog wie in \eqref{appendix:regulaer:rechnungen:diff2} für die zweite Differenz
+{\small \begin{align} \label{eq:appendix:regulaer:tau:diff2}
+\begin{split}
+\lambda \bigl( v^n_i - v^n_{i-1} \bigr)
+&= \lambda \Bigl[ \bigl( u_0(t_n, \tau_n, x_i) + h u_1(t_n, \tau_n,  x_i)\bigr) - \bigl( u_0(t_n, \tau_n, x_{i-1}) + h u_1(t_n, \tau_n, x_{i-1}) \bigr) \Bigr]\\
+&= h \cdot \lambda \partial_x u_0(t_n,\tau_n,  x_i) + h^2 \cdot \left( - \frac{\lambda}{2} \partial^2_x u_0(t_n,\tau_n, x_i) + \lambda \partial_x u_1(t_n, \tau_n, x_i) \right) + o(h^2).
+\end{split}
+\end{align} }
+Addiert man beide Summanden \eqref{eq:appendix:regulaer:tau:diff1} und \eqref{eq:appendix:regulaer:tau:diff2}, teilt durch $\lambda$, sortiert nach den Ordnungen von $h$ und benutzt wieder die stetige Differenzierbarkeit der Ansatzfunktionen $u_0$ und $u_1$, so erhält man für alle $(t, \tau, x)$ das Gleichungssystem
+\begin{align}\label{eq:appendix:regulaer:tau:oh}
+\partial_t u_0(t, \tau, x) + \partial_x u_0(t, \tau, x) &= 0\\
+\partial_t u_1(t, \tau, x) + \partial_x u_1(t, \tau, x) &= \frac{1-\lambda}{2} \partial^2_x u_0(t, \tau, x) - \partial_\tau u_0(t, \tau, x) \label{eq:appendix:regulaer:tau:oh2}
+\end{align}
 
 \subsection{Diskreter Ansatz: Summanden vom Upwind-Schema entwickeln}
 \label{appendix:diskret:summanden}
 
+
+
 Wir rechnen hier nun die einzelnen Summanden von \eqref{eq:adv:scheme_rechnung} aus:
 {
 \begin{align} \label{eq:transport:diskret:diff1}
-v^{n+1}_i - v^n_i =
+v^{n+1}_i - v^{n}_i =
 \begin{split}
 & u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)\\
 &\lambda h \partial_t u_0(n+1, i, t_n, x_i) + \frac {(\lambda h)^2}{2} \partial^2_t u_0(n+1, i, t_n, x_i)\\
