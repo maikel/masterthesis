@@ -217,40 +217,68 @@ Addiert man beide Summanden \eqref{eq:appendix:regulaer:tau:diff1} und \eqref{eq
 \partial_t u_1(t, \tau, x) + \partial_x u_1(t, \tau, x) &= \frac{1-\lambda}{2} \partial^2_x u_0(t, \tau, x) - \partial_\tau u_0(t, \tau, x) \label{eq:appendix:regulaer:tau:oh2}
 \end{align}
 
-\subsection{Diskreter Ansatz: Summanden vom Upwind-Schema entwickeln}
+\subsection{Rechnungen für diskrete Ansätze}
 \label{appendix:diskret:summanden}
-
-
-
-Wir rechnen hier nun die einzelnen Summanden von \eqref{eq:adv:scheme_rechnung} aus:
-{
-\begin{align} \label{eq:transport:diskret:diff1}
-v^{n+1}_i - v^{n}_i =
+In diesem Kapitel betrachten wir den allgemeinen Ansatz \eqref{eq:transport:diskret:ansatz} mit der diskreten Skala $(n,i)$
+\begin{align*}
+v^n_i = u_0(n, i, t_n, x_i) + h u_1(n, i, t_n, x_i) + h^2 u_2(n, i, t_n, x_i) + o(h^2),
+\end{align*}
+wobei $u_k(n, i, \pkt, \pkt) \in C^\infty\left( \Rp \times \R \right)$ für alle $n \in \N$, $i \in \Z$ und $k=0,1,2$ gilt.
+Wir rechnen nun die einzelnen Summanden von \eqref{eq:adv:scheme_rechnung} aus und benutzen dabei ganz wesentlich folgende Gleichungen für alle $k = 0,1,2$:
+\begin{align}\label{apx:diskret:lemma1}
 \begin{split}
-& u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)\\
-&\lambda h \partial_t u_0(n+1, i, t_n, x_i) + \frac {(\lambda h)^2}{2} \partial^2_t u_0(n+1, i, t_n, x_i)\\
-&+ \frac {(\lambda h)^3}{6} \partial^3_t u_0(n+1, i, t_n, x_i)\\
-&+ h \bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i, t_n, x_i) \bigr)\\
-&+ \lambda h^2 \partial_t u_1(n+1, i, t_n, x_i) + \frac {\lambda^2 h^3}{2} \partial^2_t u_1(n+1, i, t_n, x_i)\\
-&+ h^2 \bigl( u_2(n+1, i, t_n, x_i) - u_2(n, i, t_n, x_i) \bigr)\\
-&+ \lambda h^3 \partial_t u_2(n+1, i, t_n, x_i) + o(h^3).
+u_k(n+1, i, t_{n+1}, x_i)\\
+- u_k(n, i, t_n, x_i)
+&= u_k(n+1, i, t_n + \lambda h, x_i) - u_k(n, i, t_n, x_i)\\
+&= u_k(n+1, i, t_n, x_i) - u_k(n, i, t_n, x_i) + \lambda h \partial_t u_k(n+1, i, t_n, x_i)\\
+&\quad + \frac{(\lambda h)^2}{2} \partial^2_t u_k(n+1, i, t_n, x_i) + \frac{(\lambda h)^3}{6} \partial^3_t u_k(n+1, i, t_n, x_i)
 \end{split}
 \end{align}
-} und
-{ 
-\begin{align} \label{eq:transport:diskret:diff2}
-\lambda (v^n_i - v^n_{i-1}) =
-\begin{split}
-& \lambda( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) )\\
-&\lambda h \partial_x u_0(n, i-1, t_n, x_i) - \frac {\lambda h^2}{2} \partial^2_x u_0(n, i-1, t_n, x_i)\\
-& + \frac {\lambda h^3}{6} \partial^3_x u_0(n, i-1, t_n, x_i)\\
-&+ \lambda h \bigl( u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)\\
-&+ \lambda h^2 \partial_x u_1(n, i-1, t_n, x_i) - \frac {\lambda h^3}{2} \partial^2_x u_1(n, i-1, t_n, x_i)\\
-&+ \lambda h^2 \bigl( u_2(n, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr)\\
-&+ \lambda h^3 \partial_t u_2(n, i-1, t_n, x_i) + o(h^2).
+und
+\begin{align}
+\begin{split}\label{apx:diskret:lemma2}
+u_k(n, i, t_n, x_i)\qquad \qquad&\\
+- u_k(n, i-1, t_n, x_{i-1})
+&= u_k(n, i, t_n, x_i) - u_k(n, i-1, t_n, x_i - h)\\
+&= u_k(n, i, t_n, x_i) - u_k(n, i-1, t_n, x_i) + h \partial_x u_k(n, i-1, t_n, x_i)\\
+&\quad - \frac{h^2}{2} \partial^2_x u_k(n, i-1, t_n, x_i) + \frac{h^3}{6} \partial^3_x u_k(n, i-1, t_n, x_i) + o(h^3).
 \end{split}
 \end{align}
-}
+Somit folgt mit \eqref{apx:diskret:lemma1} zunächst für die Differenz in $n$
+{\begin{align*}
+v^{n+1}_i - v^{n}_i
+&= \sum_{k=0}^2 h^k \bigl( u_k(n+1, i, t_{n+1}, x_i) - u_k(n, i, t_n, x_i) \bigr)\\
+&= \sum_{k=0}^2 h^k \Biggl( u_k(n+1, i, t_n, x_i) - u_k(n, i, t_n, x_i) + \lambda h \partial_t u_k(n+1, i, t_n, x_i)\\
+&\qquad \qquad + \frac{(\lambda h)^2}{2} \partial^2_t u_k(n+1, i, t_n, x_i) + \frac{(\lambda h)^3}{6} \partial^3_t u_k(n+1, i, t_n, x_i) + o(h^3) \Biggr).
+\end{align*}}
+und sortiert man das nach den Ordnungen von $h$, so erhält man weiterhin
+{\footnotesize\begin{align}\label{eq:transport:diskret:diff1}
+\begin{split}
+v^{n+1}_i - v^{n}_i
+&= u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)\\
+&+ h \cdot \bigl( \lambda \partial_t u_0(n+1, i, t_n, x_i) + u_1(n+1, i, t_n, x_i) - u_1(n, i, t_n, x_i) \bigr)\\
+&+ h^2 \cdot \Biggl( \frac{\lambda^2}{2} \partial^2_t u_0(n+1, i, t_n, x_i) + \lambda \partial_t u_1(n+1, i, t_n, x_i) + u_2(n+1, i, t_n, x_i) - u_2(n, i, t_n, x_i) \Biggr)\\
+&+ h^3 \cdot \Biggl( \frac{\lambda^3}{6} \partial^3_t u_0(n+1, i, t_n, x_i) \frac{\lambda^2}{2} \partial^2_t u_1(n+1, i, t_n, x_i) + \lambda \partial_t u_2(n+1, i, t_n, x_i)\Biggr)\\
+&+ o(h^3).
+\end{split}
+\end{align}}
+Mit \eqref{apx:diskret:lemma2} folgt ganz analog für die Differenz in $i$
+{\footnotesize\begin{align}\nonumber
+\begin{split}
+\lambda \bigl( v^n_i - v^n_{i-1} \bigr)
+&= \lambda \cdot \Biggl[ \sum_{k=0}^2 h^k \bigl( u_k(n, i, t_n, x_i) - u_k(n, i-1, t_n, x_{i-1}) \bigr) \Biggr]\\
+&= \lambda \cdot \Biggl[ \sum_{k=0}^2 h^k \Bigl( u_k(n, i, t_n, x_i) - u_k(n, i-1, t_n, x_i) + h \partial_x u_k(n, i-1, t_n, x_i)\\
+&\qquad \qquad - \frac{h^2}{2} \partial^2_x u_k(n, i-1, t_n, x_i) + \frac{h^3}{6} \partial^3_x u_k(n, i-1, t_n, x_i) + o(h^3) \Bigr) \Biggr]
+\end{split}\\
+\label{eq:transport:diskret:diff2}
+\begin{split}
+&= \lambda \cdot \bigl( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr)\\
+&+ h \cdot \Bigl(\lambda \partial_x u_0(n, i-1, t_n, x_i) + \lambda \bigl( u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i)\bigr)\Bigr)\\
+&+ h^2 \cdot \left( - \frac{\lambda}{2} \partial^2_x u_0(n, i-1, t_n, x_i) + \lambda \partial_x u_1(n, i-1, t_n, x_i) + \lambda \bigl( u_2(n, i, t_n, x_i) - u_2(n, i-1, t_n, x_i)\bigr)\right)\\
+&+ h^3 \cdot \left( \frac{h^3}{6} \partial^3_x u_k(n, i-1, t_n, x_i) - \frac{\lambda}{2} \partial^2_x u_1(n, i-1, t_n, x_i) + \lambda \partial_x u_2(n, i-1, t_n, x_i) \right)\\
+&+ o(h^3).
+\end{split}
+\end{align}}
 
 \subsection{Oszillatorischer Produktansatz: Sortiere nach Frequenz}
 \label{appendix:osz:sortiere_nach_frequenz}
@@ -412,4 +440,53 @@ Es gilt wegen \eqref{eq:appendix:kleineta:korollar:h2}
 \begin{align}
 \frac{1}{2} \partial^2_x u_0(n, i-1, t_n, x_i) - \partial^2_t u_0(n+1,i, t_n, x_i) &=
 \frac{1}{2} \bigl( \partial^2_x w_0(t_n, x_i) + (-1)^{i+n-1} \partial^2_x z_0(t,x) \bigr) - 4 z_0(t,x) - \partial^2_x u_0(n, )
+\end{align}
+
+\subsection{WKB Ansatz}
+
+Es seien die Ansätze 
+\begin{align}
+u_l(n,k,t,x) = w_l(t,x) + e^{i (\omega k - \theta n)} z_l(t,x) \quad \text{für $l=0,1,2$}
+\end{align}
+gegeben. Dann gilt
+{\small\begin{align}\nonumber
+u_l(n+1,k,t_n,x_k) - u_l(n,k,t_n,x_k)
+&= w_l(t,x) + e^{i (\omega k - \theta (n+1))} z_l(t,x) - \bigl( w_l(t,x) + e^{i (\omega k - \theta n)} z_l(t,x) \bigr)\\
+&= e^{i (\omega k - \theta n)} (e^{-i\theta} - 1) z_l(t,x).
+\end{align}}
+und
+{\small\begin{align}\nonumber
+u_l(n,k,t_n,x_k) - u_l(n,k-1,t_n,x_k)
+&= w_l(t,x) + e^{i (\omega k - \theta n)} z_l(t,x) - \bigl( w_l(t,x) + e^{i (\omega (k-1) - \theta n)} z_l(t,x) \bigr)\\
+&= e^{i (\omega k - \theta n)} (1 - e^{-i \omega}) z_l(t,x).
+\end{align}
+also folgt aus
+\[ u_0(n+1,k,t_n,x_k) - u_0(n,k,t_n,x_k) + \lambda (u_0(n,k,t_n,x_k) - u_0(n,k-1,t_n,x_k)) = 0 \]
+auch
+\begin{align}
+0 &= e^{i (\omega k - \theta n)} (e^{-i\theta} - 1) z_0(t,x) + \lambda e^{i (\omega k - \theta n)} (1 - e^{-i \omega}) z_0(t,x)\\
+&= e^{i (\omega k - \theta n)} z_0(t,x) ( \lambda - 1 + e^{-i\theta} - \lambda e^{-i \omega} )
+\end{align}
+Somit muss
+\begin{align}
+e^{-i \theta} - \lambda e^{-i \omega} = 1 - \lambda
+\end{align}
+gelten und das liefert uns das Gleichungssystem
+\begin{align}
+\Ima\left( e^{-i \theta} - \lambda e^{-i \omega} \right) &= 0 \qquad \text{und}\\
+\Ree\left( e^{-i \theta} - \lambda e^{-i \omega} \right) &= 1 - \lambda.
+\end{align}
+Das impliziert
+\begin{align}
+\sin(- \theta) - \lambda \sin(- \omega) &= 0\\
+\sin(\theta) &= \lambda \sin(\omega) & \Leftrightarrow\\
+\theta &= \arcsin\bigl(\lambda \sin(\omega)\bigr) & \Leftrightarrow
+\end{align}
+und
+\begin{align}
+\cos(\theta) - \lambda \cos(\omega) &= 1 - \lambda\\
+\cos(\theta) &= 1 - \lambda + \lambda \cos(\omega) & \Leftrightarrow\\
+&= 1 - \lambda (1 - \cos(\omega))\\
+\cos^2(\theta) &= (1 - \lambda ( 1 -  \cos(\omega)))^2 & \Leftarrow\\
+&= 1 - 2 \lambda ( 1 -  \cos(\omega)) + (1 - \cos(\omega))^2. &
 \end{align}
