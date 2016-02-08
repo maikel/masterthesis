@@ -211,6 +211,22 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "transportgleichung.tex",
+			"settings":
+			{
+				"buffer_size": 36527,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "transportgleichung_appendix.tex",
+			"settings":
+			{
+				"buffer_size": 31458,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -423,6 +439,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"w_l",
+			"z_l",
+			"z_2",
+			"z_\\lambda",
+			"z_1",
+			"z_2",
 			"D",
 			"u\\bigl(\\varphi_t(\\tau)\\bigr)",
 			"len_steps",
@@ -513,8 +535,67 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "transportgleichung.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 36527,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2907.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "transportgleichung_appendix.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 31458,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								31446,
+								31446
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 8208.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -608,7 +689,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 289.0,
+	"side_bar_width": 192.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
