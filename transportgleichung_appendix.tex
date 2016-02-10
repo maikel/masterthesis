@@ -284,7 +284,7 @@ Mit \eqref{apx:diskret:lemma2} folgt ganz analog für die Differenz in $i$
 Wir arbeiten nun mit dem im Kapitel \ref{sec:transport:osz} hergeleitetem Ansatz \eqref{eq:transport:osz:ansatz}. 
 D.\,h. unsere diskreten Funktionen $u_i$ sind durch
 \[ u_k(n, i, t, x) = w_k(t, x) + (-1)^{i+n} (1 + 2\eta)^n z_k(t, x) \quad \text{für $k = 0,1$} \]
-gegeben, wobei $w_k, z_k \in \Cinf$ für $k=1,2$ gilt.
+gegeben, wobei $w_k, z_k \in \Cinf$ für $k=0, 1$ gilt.
 Dieser diskrete Ansatz ist gerade so bestimmt, dass für beide $k=0$ und $k=1$ die Gleichung
 \begin{align}\label{eq:apx:alt:prop1}
 u_k(n+1, i, t_n, x_i) - u_k(n, i, t_n, x_i) + (1 + 2\eta)\bigl(u_k(n, i, t_n, x_i) - u_k(n, i-1, t_n, x_i) \bigr) = 0
@@ -573,3 +573,43 @@ die Gleichung
 &= \Omega(n+1) e^{-i\theta} - \lambda \Omega(n) e^{-i\omega} + (\lambda - 1) \Omega(n)\\
 &= \Omega(n+1) e^{-i\theta} + \Omega(n) \bigl( \lambda (1 - e^{-i\omega}) - 1 \bigr)
 \end{align}
+
+\begin{satz}\label{satz:glgregulaer}
+Sei $\omega \in (0, 2\pi)$.
+Es gelte für alle $h > 0$, alle Gitterpunkte $(t_n, x_k) \in G_h$
+\begin{align}\label{satz:glgreg:vor}
+\begin{split}
+F(t_n, x_k) &= e^{i \omega k} f(t_n, x_k) \qquad \text{bzw.}\\
+F(t_n, x_k) &= \Ree\left( e^{i \omega k} f(t_n, x_k) \right)
+\end{split}
+\end{align}
+für zwei glatte Funktionen $F,f \in \Cinf$. Dann gilt für alle $(t,x) \in \Rp \times \R$
+\[ F(t, x) = f(t, x) = 0. \]
+\end{satz}
+\begin{proof}
+Weil $f$ stetig differenzierbar ist, gilt mit der Voraussetzung \eqref{satz:glgreg:vor}
+\begin{align*}
+F(t_n, x_k) &= e^{i \omega k} f(t_n, x_k)\\
+&\text{und}\\
+F(t_n, x_{k+1}) &= e^{i \omega (k + 1)} f(t_n, x_{k+1})\\
+&= e^{i \omega k} e^{i \omega} f(t_n, x_{k+1})\\
+&= e^{i \omega k} e^{i \omega} \bigl( f(t_n, x_k) + h \partial_x f(t_n, x_k) + o(h) \bigr)
+\end{align*}
+also gilt für alle $h > 0$ auch
+\begin{align}
+\begin{split}\nonumber
+\abs{F(t_n, x_k + h) - F(t_n, x_k)} &= \abs{F(t_n, x_{k+1}) - F(t_n, x_k)}\\
+&= \abs{e^{i \omega k} (e^{i \omega} - 1) f(t_n, x_k) + h e^{i \omega k} \partial_x f(t_n, x_k)}\\
+&\leq \abs{ e^{i \omega k} (e^{i \omega} - 1) f(t_n, x_k) }  + h  \abs{ e^{i \omega k} \partial_x f(t_n, x_k) }\\
+&= \underbrace{\abs{ e^{i \omega k} }}_{= 1} \abs{ (e^{i \omega} - 1) f(t_n, x_k) } + h  \underbrace{\abs{ e^{i \omega k} }}_{= 1} \abs{ \partial_x f(t_n, x_k) }
+\end{split}\\ \label{satz:glgregulaer:bed}
+&= \underbrace{\abs{e^{i \omega} - 1}}_{\neq 0} \abs{f(t_n, x_k)} + h \abs{\partial_x f(t_n, x_k)}.
+\end{align}
+Unser Gitter $G_h$ ist gerade so gemacht, dass es für alle $(t,x) \in \Rp \times \R$ und zu jeder Folge von Gitterweiten $(h^p)_{p \in \N}$ mit $h_p \to 0$ eine Folge von Gitterpunkten $(t^p, x^p) \in G_{h_p}$ und $(t^p, x^p) \to (t,x)$ gibt.
+Es gilt $\lim_{h_p \to 0} \abs{F(t^p, x^p + h_p) - F(t^p, x^p)} = 0$ für $h_p \to 0$, weil $F$ stetig ist.
+Es gilt weiterhin
+\[ \lim_{p \to \infty} \abs{e^{i \omega} - 1} \abs{f(t^p, x^p)} + h_p \abs{\partial_x f(t^p, x^p)} = \lim_{p \to \infty} \abs{e^{i \omega} - 1} \abs{f(t^p, x^p)}. \]
+Die Voraussetzung $0 < \omega < 2 \pi$ impliziert nun $\abs{e^{i \omega} - 1} \neq 0$ und somit folgt aus der Stetigkeit von $f$ und der Gleichung \eqref{satz:glgregulaer:bed}
+\[ f(t,x) = \lim_{p \to \infty} f(t^p, x^p) = 0 \qquad \text{für } h \to 0 \: \text{und} \: (t^p, x^p) \to (t,x), \]
+was zu zeigen war.
+\end{proof}
