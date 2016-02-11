@@ -395,109 +395,77 @@ Mit \eqref{apx:diskret:lemma2} folgt ganz analog für die Differenz in $i$
 
 \subsection{Rechnung des Ansatzes für kleine Störungen der CFL Zahl}
 \label{appendix:kleineta:rechnung}
-Unsere Ansatzfunktionen sind dieses mal durch
-\begin{align} u_k(n, i, t, x) = w_k(t,x) + (-1)^{i+n} z_k(t, x) \qquad k = 0,1,2 \end{align}
-gegeben. Hieraus folgt zunächst für alle $k = 0,1,2$
-\begin{align}\label{eq:appendix:kleineta:bedingung}
-u_k(n+1, i, t, x) - u_k(n, i-1, t, x) = 0.
-\end{align}
-und somit gilt in Ordnung $O(h)$ auf der linken Seite von \eqref{eq:transport:kleineta:oh}
-\begin{align}\label{eq:appendix:kleineta:oh:linkeseite}
-\partial_t u_0(n+1, i, t_n, x_i) \qquad&\nonumber \\
-+ \partial_x u_0(n, i-1, t_n, x_i) &= \partial_t w_0(t_n,x_i) + (-1)^{i+n+1} \partial_t z_0(t_n,x_i)\nonumber\\
-&\qquad + \partial_x w_0(t_n,x_i) + (-1)^{i+n-1} \partial_x z_0(t_n,x_i)\nonumber\\
-\begin{split}
-&= \partial_t w_0(t_n,x_i) + \partial_x w_0(t_n,x_i) \\
-&\qquad - (-1)^{i+n} \bigl( \partial_t z_0(t_n,x_i) + \partial_x z_0(t_n,x_i) \bigr).
-\end{split}
-\end{align}
-Auf der rechten Seite von \eqref{eq:transport:kleineta:oh} finden wir wegen \eqref{eq:appendix:kleineta:bedingung}
-\begin{align}\label{eq:appendix:kleineta:oh:rechteseite}
-- \bigl( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr) &= -\Bigl( w_0(t_n, x_i) + (-1)^{i+n} z_0(t_n, x_i)\nonumber\\
-&\qquad - \bigl( w_0(t_n, x_i) + (-1)^{i+n-1} z_0(t_n, x_i) \bigr) \Bigr) \nonumber\\
-&= - (-1)^{i+n} 2 z_0(t_n,x_i) 
-\end{align}
-Setzt man \eqref{eq:appendix:kleineta:oh:linkeseite} und \eqref{eq:appendix:kleineta:oh:rechteseite} nun gleich, so leitet man hieraus in $O(h)$ die beiden Gleichungen
-\begin{align}\label{eq:appendix:kleineta:oh}
-\partial_t w_0(t,x) + \partial_x w_0(t,x) &= 0 \qquad \text{und}\\
-\partial_t z_0(t,x) + \partial_x z_0(t,x) &= 2 z_0(t,x)
-\end{align}
-ab. Insbesondere gelten dann
-\begin{align}\label{eq:appendix:kleineta:korollar:h2}
-\begin{split}
-\partial^2_t w_0(t,x) &= \partial^2_x w_0(t,x)\qquad\\&\text{und}\\
-\partial^2_t z_0(t,x) &= \partial_t \bigl( 2z_0(t,x)  - \partial_x z_0(t,x) \bigr)\\
-&= 2 \partial_t z_0(t,x) - \partial_t \bigl( \partial_x z_0(t,x) \bigr)\\
-&= 2 \partial_t z_0(t,x) - \partial_x \bigl( \partial_t z_0(t,x) \bigr)\\
-&= 2 \bigl( 2z_0(t,x) - \partial_x z_0(t,x) \bigr) - \partial_x \bigl( 2 z_0(t,x) - \partial_x z_0(t,x) \bigr)\\
-&= 4 z_0(t,x) - 4 \partial_x z_0(t,x) + \partial^2_x z_0(t,x).
-\end{split}
-\end{align}
+% Unsere Ansatzfunktionen sind dieses mal durch
+% \begin{align} u_k(n, i, t, x) = w_k(t,x) + (-1)^{i+n} z_k(t, x) \qquad k = 0,1,2 \end{align}
+% gegeben. Hieraus folgt zunächst für alle $k = 0,1,2$
+% \begin{align}\label{eq:appendix:kleineta:bedingung}
+% u_k(n+1, i, t, x) - u_k(n, i-1, t, x) = 0.
+% \end{align}
+% und somit gilt in Ordnung $O(h)$ auf der linken Seite von \eqref{eq:transport:kleineta:oh}
+% \begin{align}\label{eq:appendix:kleineta:oh:linkeseite}
+% \partial_t u_0(n+1, i, t_n, x_i) \qquad&\nonumber \\
+% + \partial_x u_0(n, i-1, t_n, x_i) &= \partial_t w_0(t_n,x_i) + (-1)^{i+n+1} \partial_t z_0(t_n,x_i)\nonumber\\
+% &\qquad + \partial_x w_0(t_n,x_i) + (-1)^{i+n-1} \partial_x z_0(t_n,x_i)\nonumber\\
+% \begin{split}
+% &= \partial_t w_0(t_n,x_i) + \partial_x w_0(t_n,x_i) \\
+% &\qquad - (-1)^{i+n} \bigl( \partial_t z_0(t_n,x_i) + \partial_x z_0(t_n,x_i) \bigr).
+% \end{split}
+% \end{align}
+% Auf der rechten Seite von \eqref{eq:transport:kleineta:oh} finden wir wegen \eqref{eq:appendix:kleineta:bedingung}
+% \begin{align}\label{eq:appendix:kleineta:oh:rechteseite}
+% - \bigl( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr) &= -\Bigl( w_0(t_n, x_i) + (-1)^{i+n} z_0(t_n, x_i)\nonumber\\
+% &\qquad - \bigl( w_0(t_n, x_i) + (-1)^{i+n-1} z_0(t_n, x_i) \bigr) \Bigr) \nonumber\\
+% &= - (-1)^{i+n} 2 z_0(t_n,x_i) 
+% \end{align}
+% Setzt man \eqref{eq:appendix:kleineta:oh:linkeseite} und \eqref{eq:appendix:kleineta:oh:rechteseite} nun gleich, so leitet man hieraus in $O(h)$ die beiden Gleichungen
+% \begin{align}\label{eq:appendix:kleineta:oh}
+% \partial_t w_0(t,x) + \partial_x w_0(t,x) &= 0 \qquad \text{und}\\
+% \partial_t z_0(t,x) + \partial_x z_0(t,x) &= 2 z_0(t,x)
+% \end{align}
+% ab. Insbesondere gelten dann
+% \begin{align}\label{eq:appendix:kleineta:korollar:h2}
+% \begin{split}
+% \partial^2_t w_0(t,x) &= \partial^2_x w_0(t,x)\qquad\\&\text{und}\\
+% \partial^2_t z_0(t,x) &= \partial_t \bigl( 2z_0(t,x)  - \partial_x z_0(t,x) \bigr)\\
+% &= 2 \partial_t z_0(t,x) - \partial_t \bigl( \partial_x z_0(t,x) \bigr)\\
+% &= 2 \partial_t z_0(t,x) - \partial_x \bigl( \partial_t z_0(t,x) \bigr)\\
+% &= 2 \bigl( 2z_0(t,x) - \partial_x z_0(t,x) \bigr) - \partial_x \bigl( 2 z_0(t,x) - \partial_x z_0(t,x) \bigr)\\
+% &= 4 z_0(t,x) - 4 \partial_x z_0(t,x) + \partial^2_x z_0(t,x).
+% \end{split}
+% \end{align}
 
-\subsection*{AB HIER ROHFASSUNG}
-In der Ordnung $O(h^2)$ steht auf der linken Seite wegen \eqref{eq:appendix:kleineta:oh:rechteseite} in der Gleichung \eqref{eq:transport:kleineta:oh2} die Summe
-\begin{align}\label{eq:appendix:kleineta:oh2:linkeseite}
-&\partial_t u_1(n+1, i, t_n, x_i) + \partial_x u_1(n, i-1, t_n, x_i)\nonumber\\
-&\quad + \underbrace{\partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i)}_{= - \bigl( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr)}\nonumber\\
-&= \partial_t u_1(n+1, i, t_n, x_i) + \partial_x u_1(n, i-1, t_n, x_i)\nonumber\\
-&\quad \underbrace{- \bigl( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr)}_{= -(-1)^{i+n} 2 z_0(t_n, x_i)}\nonumber\\
-&= \partial_t w_1(t_n,x_i) + (-1)^{i+n+1} \partial_t z_1(t_n,x_i) + \partial_x w_1(t_n,x_i) + (-1)^{i+n-1} \partial_x z_1(t_n,x_i)\nonumber\\
-&\quad - (-1)^{i+n} 2 z_0(t_n,x_i)\nonumber\\
-\begin{split}
-&= \partial_t w_1(t_n, x_i) + \partial_x w_1(t_n, x_i)\\
-&\quad - (-1)^{i+n} \bigl( \partial_t z_1(t_n,x_i) + \partial_x z_1(t_n,x_i) + 2z_0(t_n, x_i) \bigr)
-\end{split}
-\end{align}
-und wegen der Gleichungen in \eqref{eq:appendix:kleineta:korollar:h2} gilt
-{\small
+Sei
 \begin{align}
-&\partial^2_x u_0(n, i-1, t_n, x_i) - \partial^2_t u_0(n+1,i, t_n, x_i)\nonumber\\
-&= \partial^2_x w_0(t_n, x_i) + (-1)^{i+n-1} \partial^2_x z_0(t_n, x_i) - \bigl( \partial^2_t w_0(t_n, x_i) + (-1)^{i+n+1} \partial^2_t z_0(t_n, x_i) \bigr)\nonumber\\
-&= \partial^2_x w_0(t_n, x_i) - (-1)^{i+n} \partial^2_x z_0(t_n, x_i) - \bigl( \partial^2_t w_0(t_n, x_i) - (-1)^{i+n} \partial^2_t z_0(t_n, x_i) \bigr)\nonumber\\
-&= - (-1)^{i+n} \partial^2_x z_0(t_n, x_i) + (-1)^{i+n} \partial^2_t z_0(t_n, x_i) \bigr)\nonumber\\
-&= - (-1)^{i+n} \partial^2_x z_0(t_n, x_i) + (-1)^{i+n} \bigl( 4 z_0(t,x) - 4 \partial_x z_0(t,x) + \partial^2_x z_0(t,x) \bigr)\nonumber\\
-&= (-1)^{i+n} 4 \bigl( z_0(t,x) - \partial_x z_0(t,x) \bigr).
-\end{align}}
-und man erhält auf der rechten Seite
+v^n_i &= w_0(t_n, x_i) + h w_1(t_n, x_i) + h^2 w_2(t_n, x_i)\\
+&\quad + (-1)^{i+n} \bigl( z_0(t_n, 2 h t_n, x_i) + h^2 z_1(t_n, 2 h t_n, x_i) + h^2 z_2(t_n, 2 h t_n, x_i) \bigr).
+\end{align}
+Dann gilt
+\begin{align*}
+v^{n+1}_i - v^n_i &= h (1 + h) \partial_t w_0 + h^2 \frac{1 + 2h}{2} \partial^2_t w_0 +  \frac{h^3}{6} \partial^3_t w_0\\
+&+ h^2 (1 + h) \partial_t w_1 + \frac{h^3}{2} \partial^2_t w_1 + h^3 \partial_t w_2\\
+&- (-1)^{i+n} \Bigl( 2z_0 + h (1 + h) \partial_t z_0  + 2 h^2 (1 + h) \partial_\tau z_0 + h^2 \frac{(1 + 2h)}{2} \partial^2_t z_0 + 2 h^3 \partial^2_\tau z_0 + \frac{h^3}{6} \partial^3_t z_0\\
+&+  h 2z_1 + h^2 (1 + h) \partial_t z_1  + 2 h^3 \partial_\tau z_1 + \frac{h^3}{2} \partial^2_t z_1 + h^2 2 z_2 + h^3 \partial_t z_2 \Bigr) + o(h^3)
+\end{align*}
+und
+\begin{align*}
+(1 + h) (v^n_i - v^n_{i-1}) &= h (1 + h) \partial_x w_0 - h^2 \frac{1 + h}{2} \partial^2_x w_0 + \frac{h^3}{6} \partial^3_x w_0\\
+&+ h^2 (1 + h) \partial_x w_1 - \frac{h^3}{2} \partial^2_x w_1 + h^3 \partial_x w_2\\
+&+ (-1)^{i+n} \Bigl( (1+h)2z_0 - h(1+h) \partial_x z_0 + h^2 \frac{1+h}{2} \partial^2_x z_0 - \frac{h^3}{6} \partial^3_x z_0\\
+&+ h(1+h) 2z_1 - h^2 (1 + h) \partial_x z_1 + \frac{h^3}{2} \partial^2_x z_1 + h^2 (1 + h) 2 z_2 - h^3 \partial_x z_2 \Bigr) + o(h^3)
+\end{align*}
+und somit folgt mit $z_1 = 0$
+\begin{align*}
+0 &= v^{n+1}_i - v^n_i + (1 + h) (v^n_i - v^n_{i-1})\\
+&= h \bigl( \partial_t w_0 + \partial_x w_0  + 2 z_0 - \partial_t z_0 - \partial_x z_0 \bigr)\\
+&+ h^2 \Bigl( - 2 \partial_\tau z_0 + \frac{1}{2} \bigl( \partial^2_x z_0 - \partial^2_t z_0 \bigr)  - \partial_t z_0 - \partial_x z_0 \Bigr)\\
+&+ h^3 \Bigl( \partial_t w_2 + \partial_x w_2 + \frac{1}{2} \partial^2_t w_0\\
+&\quad - (-1)^{i+n} \bigl( 2 \partial_\tau z_0 + \frac{1}{2} (2\partial^2_t z_0 - \partial^2_x z_0) + 2 \partial^2_\tau z_0 + \frac{1}{6} \bigl(\partial^3_t z_0 + \partial^3_x z_0\bigr) + \partial_t z_2  + \partial_x z_2  - 2 z_2\bigr) \Bigr).
+\end{align*}
+Es folgt
 \begin{align}
-&\frac{1}{2} \underbrace{\bigl( \partial^2_x u_0(n, i-1, t_n, x_i) - \partial^2_t u_0(n+1,i, t_n, x_i)\bigr)}_{= - (-1)^{i+n} 4 z_0(t_n, x_i)}\nonumber\\
-&\quad \underbrace{- \bigl( u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)}_{= - (-1)^{i+n} 2 z_1(t_n, x_i) }\nonumber\\
-&\quad - \underbrace{\bigl( u_2(n+1, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr)}_{= 0}\nonumber\\
-&= - (-1)^{i+n} \bigl( 2 z_0(t_n, x_i)+ 2 z_1(t_n, x_i) \bigr).
+\partial_t w_2 + \partial_x w_2 &= - \frac{1}{2} \partial^2_t w_0\\
+\partial_t z_2 + \partial_x z_2 &= 2 z_2 - \left( 2 \bigl( \partial_\tau z_0 + \partial^2_\tau z_0 \bigr) + \frac{1}{2} (2\partial^2_t z_0 - \partial^2_x z_0) + \frac{1}{6} \bigl(\partial^3_t z_0 + \partial^3_x z_0\bigr) \right)
 \end{align}
-Insgesamt erhalten wir also die beiden Gleichungen in der Ordnung $O(h^2)$:
-\begin{align}\label{eq:appendix:kleineta:oh2}
-\partial_t w_1(t,x) + \partial_x w_1(t,x) &= 0 \qquad \text{und}\\
-\partial_t z_1(t,x) + \partial_x z_1(t,x) &= 2 z_1(t,x)
-\end{align}
-Wegen $w_1(0,x) = z_1(0,x) = 0$ in Anfangsbedingungen aus \eqref{eq:transport:kleineta:anfangsbedinungen} folgt somit $w_1 = z_1 = 0$.
-Daher wird die Gleichung \eqref{eq:transport:kleineta:oh3} für die Ordnung in $O(h^3)$ zu
-{\small
-\begin{align}\label{eq:appendix:kleineta:oh3}
-\partial_t u_2(n+1, i, t_n, x_i) + \partial_x u_2(n, i-1, t_n, x_i)
-&=
-\begin{split}
-&\frac{1}{2} \partial^2_x u_0(n, i-1, t_n, x_i) - \partial^2_t u_0(n+1,i, t_n, x_i)\\
-&- \frac{1}{6}\bigl(\partial^3_x u_0(n, i-1, t_n, x_i) + \partial^3_t u_0(n+1,i, t_n, x_i) \bigr)\\
-&- \bigl( u_2(n, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr).
-\end{split}
-\end{align} }
-\noindent
-Die linke Seite dieser Gleichung ist analog wie in \eqref{eq:appendix:kleineta:oh:linkeseite} durch
-\begin{align}\label{eq:appendix:kleineta:oh3:linkeseite}
-\partial_t u_2(n+1, i, t_n, x_i) + \partial_x u_2(n, i-1, t_n, x_i) =
-\begin{split}
-&\partial_t w_2(t_n,x_i) + \partial_x w_2(t_n,x_i) \\
-&\quad - (-1)^{i+n} \bigl( \partial_t z_2(t_n,x_i) + \partial_x z_2(t_n,x_i) \bigr).
-\end{split}
-\end{align}
-gegeben. Um die rechte Seite von \eqref{eq:appendix:kleineta:oh3} auszurechnen, betrachten die einzelnen Zeilen.
-Es gilt wegen \eqref{eq:appendix:kleineta:korollar:h2}
-\begin{align}
-\frac{1}{2} \partial^2_x u_0(n, i-1, t_n, x_i) - \partial^2_t u_0(n+1,i, t_n, x_i) &=
-\frac{1}{2} \bigl( \partial^2_x w_0(t_n, x_i) + (-1)^{i+n-1} \partial^2_x z_0(t,x) \bigr) - 4 z_0(t,x) - \partial^2_x u_0(n, )
-\end{align}
-
 \subsection{WKB Ansatz}
 
 Es seien die Ansätze 
@@ -574,47 +542,3 @@ die Gleichung
 &= \Omega(n+1) e^{-i\theta} + \Omega(n) \bigl( \lambda (1 - e^{-i\omega}) - 1 \bigr)
 \end{align}
 
-\begin{satz}\label{satz:glgregulaer}
-Sei $\omega \in (0, 2\pi)$ und $\Omega\colon \N \to \R$ beschränkt.
-D.\,h. es gibt ein $K \in \R$ mit $\abs{\Omega(n)} < K$ für alle $n \in \N$.
-Es gelte für alle $h > 0$, alle Gitterpunkte $(t_n, x_k) \in G_h$
-\begin{align}\label{satz:glgreg:vor}
-\begin{split}
-F(t_n, x_k) &= e^{i \omega k} \Omega(n) f(t_n, x_k) \qquad \text{bzw.}\\
-F(t_n, x_k) &= \Ree\left( e^{i \omega k} \Omega(n) f(t_n, x_k) \right)
-\end{split}
-\end{align}
-für zwei glatte Funktionen $F,f \in \Cinf$. Dann gilt für alle $(t,x) \in \Rp \times \R$
-\begin{align*}
-F(t, x) &= 0 \quad \text{und}\\
-f(t, x) &= 0.
-\end{align*}
-\end{satz}
-\begin{proof}
-Weil $f$ stetig differenzierbar ist, gilt mit der Voraussetzung \eqref{satz:glgreg:vor}
-\begin{align*}
-F(t_n, x_k) &= e^{i \omega k} \Omega(n) f(t_n, x_k)\\
-&\text{und}\\
-F(t_n, x_{k+1}) &= e^{i \omega (k + 1)} \Omega(n) f(t_n, x_{k+1})\\
-&= e^{i \omega k} e^{i \omega} \Omega(n) f(t_n, x_{k+1})\\
-&= e^{i \omega k} e^{i \omega} \Omega(n) \bigl( f(t_n, x_k) + h \partial_x f(t_n, x_k) + o(h) \bigr)
-\end{align*}
-also gilt für alle $h > 0$ auch
-\begin{align}
-\begin{split}\nonumber
-\abs{F(t_n, x_k + h) - F(t_n, x_k)} &= \abs{F(t_n, x_{k+1}) - F(t_n, x_k)}\\
-&= \abs{e^{i \omega k} (e^{i \omega} - 1) \Omega(n) f(t_n, x_k) + h e^{i \omega k} \Omega(n) \partial_x f(t_n, x_k)}\\
-&\leq \abs{ e^{i \omega k} (e^{i \omega} - 1) \Omega(n) f(t_n, x_k) }  + h  \abs{ e^{i \omega k} \Omega(n) \partial_x f(t_n, x_k) }\\
-&\leq K \cdot \abs{ e^{i \omega k} (e^{i \omega} - 1) f(t_n, x_k) }  + h  K \cdot \abs{ e^{i \omega k} \partial_x f(t_n, x_k) }\\
-&= K \cdot \underbrace{\abs{ e^{i \omega k} }}_{= 1} \abs{ (e^{i \omega} - 1) f(t_n, x_k) } + hK \cdot  \underbrace{\abs{ e^{i \omega k} }}_{= 1} \abs{ \partial_x f(t_n, x_k) }
-\end{split}\\ \label{satz:glgregulaer:bed}
-&= K \cdot \underbrace{\abs{e^{i \omega} - 1}}_{\neq 0} \abs{f(t_n, x_k)} + hK \cdot \abs{\partial_x f(t_n, x_k)}.
-\end{align}
-Unser Gitter $G_h$ ist gerade so gemacht, dass es für alle $(t,x) \in \Rp \times \R$ und zu jeder Folge von Gitterweiten $(h^p)_{p \in \N}$ mit $h_p \to 0$ eine Folge von Gitterpunkten $(t^p, x^p) \in G_{h_p}$ und $(t^p, x^p) \to (t,x)$ gibt.
-Es gilt $\lim_{h_p \to 0} \abs{F(t^p, x^p + h_p) - F(t^p, x^p)} = 0$ für $h_p \to 0$, weil $F$ stetig ist.
-Es gilt weiterhin
-\[ \lim_{p \to \infty} K\abs{e^{i \omega} - 1} \abs{f(t^p, x^p)} + h_pK \abs{\partial_x f(t^p, x^p)} = \lim_{p \to \infty} K \abs{e^{i \omega} - 1} \abs{f(t^p, x^p)}. \]
-Die Voraussetzung $0 < \omega < 2 \pi$ impliziert nun $\abs{e^{i \omega} - 1} \neq 0$ und somit folgt aus der Stetigkeit von $f$ und der Gleichung \eqref{satz:glgregulaer:bed}
-\[ f(t,x) = \lim_{p \to \infty} f(t^p, x^p) = 0 \qquad \text{für } p \to \infty \: \text{und} \: (t^p, x^p) \to (t,x), \]
-was zu zeigen war.
-\end{proof}

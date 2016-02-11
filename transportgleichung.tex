@@ -532,7 +532,11 @@ hinnehmen, da wir uns sowieso nicht wie z.\,B. für den Fall $\lambda < 1$ für 
 
 Der Faktor $\frac{\eta}{2 (1 + 2 \eta)^2}$ in Gleichung \eqref{eq:transport:osz:oh2_B} ist für $\eta > 0$ positiv!
 Das heißt, dass wir hier wie die Autoren in \cite{Junk2004} den im regulären Fall aus Kapitel \ref{sec:regulaer} gezeigten Ansatz mit langsamer Zeitskala $\tau_n = h t_n$ für $z_0$ anwenden können.
-Es gilt dann
+Dazu nehmen wir die Existenz einer Funktion $\tilde z(t,\tau,x)$ an, fürdie $\tilde z(t_n, h t_n, x) = z(t_n,x_i)$ gilt und es folgt
+\begin{align*}
+\partial_t z(t_n,x_i) = \partial_t \bigl( \tilde z(t_n, h t_n, x) \bigr) = \partial_t \tilde z(t_n, h t_n, x) + h \partial_\tau \tilde z(t_n, h t_n, x)
+\end{align*}
+und auch
 \begin{align*}
 \partial_t z_0(t, \tau, x) + \frac {1} {1 + 2 \eta} \partial_x z_0(t, \tau, x) &= 0\\
 \partial_t z_1(t, \tau, x) + \frac {1} {1 + 2 \eta} \partial_x z_1(t, \tau, x) &= \frac{\eta}{2 (1 + 2 \eta)^2} \partial^2_x z_0(t, \tau, x) - \partial_\tau z_0(t, \tau, x)\\
@@ -669,8 +673,14 @@ z_2(0, x_i) &= 0
 Setzt man wieder den Ansatz mit alternierenden Gittervorzeichen
 \[ u_k(n, i, t, x) = w_k(t, x) + (-1)^i \Omega(n) z_k(t, x), \qquad k = 0,1,2 \]
 ein, so folgt aus \eqref{eq:transport:kleineta:o1}
-\[ (-1)^i z_0(t_n, x_i) \bigl( \Omega(n+1) + \Omega(n) \bigr) = 0, \]
-und das impliziert ganz analog wie in Satz \ref{satz:omega_n}, dass $\Omega(n) = (-1)^n$ gilt.
+\begin{align*}
+0 &= u_0(n+1, i, t_n, x_i) - u_0(n, i-1, t_n, x_i)\\
+&= w_0(t_n, x_i) + (-1)^i \Omega(n+1) z_0(t_n, x_i) - \bigl( w_k(t_n, x_i) + (-1)^{i-1} \Omega(n) z_k(t_n, x_i) \bigr)\\
+&= (-1)^i \Omega(n+1) z_0(t_n, x_i) - (-1)^{i-1} \Omega(n) z_k(t_n, x_i)\\
+&= (-1)^i \Omega(n+1) z_0(t_n, x_i) + (-1)^{i} \Omega(n) z_k(t_n, x_i)\\
+&= (-1)^i z_0(t_n, x_i) \bigl( \Omega(n+1) + \Omega(n) \bigr),
+\end{align*}
+und das impliziert ganz analog wie in Satz \ref{satz:omega_n}, dass dieses mal $\Omega(n) = (-1)^n$ gilt.
 Folglich ist unser Ansatz durch
 \begin{align}
 v^n_i = \begin{split}
@@ -678,88 +688,268 @@ v^n_i = \begin{split}
 &\qquad + (-1)^{i+n} \bigl( z_0(t_n, x_i) + h z_1(t_n, x_i) + h^2 z_2(t_n, x_i) \bigr)
 \end{split}
 \end{align}
-gegeben. Hieraus folgen dieses mal die Gleichungen:
-
-\vspace{0.4cm}
-\noindent \emph{In der Ordnung $O(h)$}
+und diskreten Ansatzfunktionen sind dieses mal durch
+\begin{align}\label{eq:ke:ansatz} u_k(n, i, t, x) = w_k(t,x) + (-1)^{i+n} z_k(t, x) \qquad k = 0,1,2 \end{align}
+gegeben. Hieraus folgt zunächst für alle $k = 0,1,2$
+\begin{align}\label{eq:appendix:kleineta:bedingung}
+u_k(n+1, i, t, x) - u_k(n, i-1, t, x) = 0.
+\end{align}
+Die Gleichung \eqref{eq:transport:kleineta:oh} lautet mit der Bedingung \eqref{eq:appendix:kleineta:bedingung} nun
 \begin{align*}
-\partial_t w_0(t, x) + \partial_x w_0(t, x) &= 0 \qquad \text{und}\\
-\partial_t z_0(t, x) + \partial_x z_0(t, x) &= 2 z_0(t, x)
+\partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i) = - \bigl( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr)\\
 \end{align*}
-woraus Wegen der Anfangsbedingungen \eqref{eq:transport:kleineta:anfangsbedinungen} $w_0(t,x) = U(x -t)$ und $z_0(t,x) = V(x - t) e^{2 t}$ folgt.
+Setzt man \eqref{eq:ke:ansatz} für $u_0$ ein, so gilt für die linke Seite ferner
+\begin{align}\label{eq:appendix:kleineta:oh:linkeseite}
+&\partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i) \nonumber\\
+&= \partial_t w_0(t_n,x_i) + (-1)^{i+n+1} \partial_t z_0(t_n,x_i)+ \partial_x w_0(t_n,x_i) + (-1)^{i+n-1} \partial_x z_0(t_n,x_i)\nonumber\\
+&= \partial_t w_0(t_n,x_i) + \partial_x w_0(t_n,x_i) - (-1)^{i+n} \bigl( \partial_t z_0(t_n,x_i) + \partial_x z_0(t_n,x_i) \bigr).
+\end{align}
+und für die rechte Seite erhalten wir
+\begin{align}\label{eq:appendix:kleineta:oh:rechteseite}
+&- \bigl( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr)\\
+&= -\Bigl( w_0(t_n, x_i) + (-1)^{i+n} z_0(t_n, x_i) - \bigl( w_0(t_n, x_i) + (-1)^{i+n-1} z_0(t_n, x_i) \bigr) \Bigr) \nonumber\\
+&= - (-1)^{i+n} 2 z_0(t_n,x_i) 
+\end{align}
 
-\begin{figure}
-\centering
-\begin{tikzpicture}
-\begin{semilogyaxis}[
-    title={$\err^n = \max_{i \in \Z} \abs{\sin\bigl(\pi (x_i - t_n )\bigr) - v^n_i}$},
-    xlabel={Zeit $t$},
-    ylabel={maximaler Fehler},
-    legend entries={$\err^n$,$\eps_M e^{2t}$, $t h^2 \frac{\pi^2}{2}$, $\eps_M e^{2t} + t h^2 \frac{\pi^2}{2}$},
-    legend style={at={(1.5,1)}}
-]
-\addplot[myblue, line width={2}] table {data/max_errors_small_eta_0.001.dat};
-\addplot[black, line width={0.5}, dotted] table [y index={2}] {data/max_errors_small_eta_0.001.dat};
-\addplot[mygray, line width={1}, dashdotted] table [y index={4}] {data/max_errors_small_eta_0.001.dat};
-\addplot[black, line width={0.5}, mark=o, mark repeat={10}] table [y index={3}] {data/max_errors_small_eta_0.001.dat};
-\end{semilogyaxis}
-\end{tikzpicture}
-\caption{Hier vergleichen wir die maximalen Fehler der numerischen Lösungen für die Startwerte $U(x) = sin(\pi x)$, $V(x) = \eps_M$ und $\eta = h = 10^{-3}$ zur echten Lösung $u(t,x) = sin(\pi(x - t))$ mit dem geschätztem Fehler $\eps_M e^{2t}$ aus der asymptotischen Entwicklung in .}
-\label{fig:transport:kleineta:max_error}
-\end{figure}
-
-\vspace{0.4cm}
-\noindent \emph{In der Ordnung $O(h^2)$}
+Genau wie im vorangegangen Kapitel \ref{sec:transport:osz} folgern wir hieraus je eine Bedingung für die Funktionen $w_0$ und $z_0$.
+Jedoch können wir nicht das Gleiche wie in Satz \ref{satz:alt:beidenull} machen, da es dort essentiell war, dass wir eine in $n$ unbeschränkte Funktion betrachten.
+Allerdings haben wir im Ansatz glatte Abbildungen $w_k, z_k \in \Cinf$ für $k = 0,1,2$ angenommen und wir können hier mit ihrer Regularität argumentieren.
+\begin{satz}\label{satz:glgregulaer}
+Sei $\omega \in (0, 2\pi)$ und $\Omega\colon \N \to \R$ beschränkt.
+D.\,h. es gibt ein $K \in \R$ mit $\abs{\Omega(n)} < K$ für alle $n \in \N$.
+Es gelte für alle $h > 0$, alle Gitterpunkte $(t_n, x_k) \in G_h$
+\begin{align}\label{satz:glgreg:vor}
+\begin{split}
+F(t_n, x_k) &= e^{i \omega k} \Omega(n) f(t_n, x_k) \qquad \text{bzw.}\\
+F(t_n, x_k) &= \Ree\left( e^{i \omega k} \Omega(n) f(t_n, x_k) \right)
+\end{split}
+\end{align}
+für zwei glatte Funktionen $F,f \in \Cinf$. Dann gilt für alle $(t,x) \in \Rp \times \R$
 \begin{align*}
-\partial_t w_1(t, x) + \partial_x w_1(t, x) &= 0 \qquad \text{und}\\
-\partial_t z_1(t, x) + \partial_x z_1(t, x) &= 2 z_1(t, x).
+F(t, x) &= 0 \quad \text{und}\\
+f(t, x) &= 0.
 \end{align*}
-Dieses mal folgt aus $w_1(0,x) = z_1(0,x) = 0$ sogar $z_1 = w_1 = 0$.
-
-\vspace{0.4cm}
-\noindent \emph{In der Ordnung $O(h^3)$}
+\end{satz}
+\begin{proof}
+Weil $f$ stetig differenzierbar ist, gilt mit der Voraussetzung \eqref{satz:glgreg:vor}
 \begin{align*}
-\partial_t w_2(t, x) + \partial_x w_2(t, x) &= - \frac{1}{2} \partial^2_x w_0(t, x) \qquad \text{und}\\
-\partial_t z_2(t, x) + \partial_x z_2(t, x) &= \frac{1}{2} \partial^2_x z_0(t, x) - \partial^2_t z_0(t, x) + 2 z_2(t, x)\\
-&= \frac{1}{2} \partial^2_x z_0(t, x) - \partial_t \bigl( z_0(t, x) - \partial_x z_0 \bigr) + 2 z_2(t, x)\\
-&= \frac{1}{2} \partial^2_x z_0(t, x) + \partial_x z_0(t, x) - z_0(t, x) + \partial_x \bigl( z_0 - \partial_x z_0 \bigr) + 2 z_2(t, x)\\
-&= - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t, x) + 2 z_2(t, x)\\
+F(t_n, x_k) &= e^{i \omega k} \Omega(n) f(t_n, x_k)\\
+&\text{und}\\
+F(t_n, x_{k+1}) &= e^{i \omega (k + 1)} \Omega(n) f(t_n, x_{k+1})\\
+&= e^{i \omega k} e^{i \omega} \Omega(n) f(t_n, x_{k+1})\\
+&= e^{i \omega k} e^{i \omega} \Omega(n) \bigl( f(t_n, x_k) + h \partial_x f(t_n, x_k) + o(h) \bigr)
 \end{align*}
+also gilt für alle $h > 0$ auch
+\begin{align}
+\begin{split}\nonumber
+\abs{F(t_n, x_k + h) - F(t_n, x_k)} &= \abs{F(t_n, x_{k+1}) - F(t_n, x_k)}\\
+&= \abs{e^{i \omega k} (e^{i \omega} - 1) \Omega(n) f(t_n, x_k) + h e^{i \omega k} \Omega(n) \partial_x f(t_n, x_k)}\\
+&\leq \abs{ e^{i \omega k} (e^{i \omega} - 1) \Omega(n) f(t_n, x_k) }  + h  \abs{ e^{i \omega k} \Omega(n) \partial_x f(t_n, x_k) }\\
+&\leq K \cdot \abs{ e^{i \omega k} (e^{i \omega} - 1) f(t_n, x_k) }  + h  K \cdot \abs{ e^{i \omega k} \partial_x f(t_n, x_k) }\\
+&= K \cdot \underbrace{\abs{ e^{i \omega k} }}_{= 1} \abs{ (e^{i \omega} - 1) f(t_n, x_k) } + hK \cdot  \underbrace{\abs{ e^{i \omega k} }}_{= 1} \abs{ \partial_x f(t_n, x_k) }
+\end{split}\\ \label{satz:glgregulaer:bed}
+&= K \cdot \underbrace{\abs{e^{i \omega} - 1}}_{\neq 0} \abs{f(t_n, x_k)} + hK \cdot \abs{\partial_x f(t_n, x_k)}.
+\end{align}
+Unser Gitter $G_h$ ist gerade so gemacht, dass es für alle $(t,x) \in \Rp \times \R$ und zu jeder Folge von Gitterweiten $(h^p)_{p \in \N}$ mit $h_p \to 0$ eine Folge von Gitterpunkten $(t^p, x^p) \in G_{h_p}$ und $(t^p, x^p) \to (t,x)$ gibt.
+Es gilt $\lim_{h_p \to 0} \abs{F(t^p, x^p + h_p) - F(t^p, x^p)} = 0$ für $h_p \to 0$, weil $F$ stetig ist.
+Es gilt weiterhin
+\[ \lim_{p \to \infty} K\abs{e^{i \omega} - 1} \abs{f(t^p, x^p)} + h_pK \abs{\partial_x f(t^p, x^p)} = \lim_{p \to \infty} K \abs{e^{i \omega} - 1} \abs{f(t^p, x^p)}. \]
+Die Voraussetzung $0 < \omega < 2 \pi$ impliziert nun $\abs{e^{i \omega} - 1} \neq 0$ und somit folgt aus der Stetigkeit von $f$ und der Gleichung \eqref{satz:glgregulaer:bed}
+\[ f(t,x) = \lim_{p \to \infty} f(t^p, x^p) = 0 \qquad \text{für } p \to \infty \: \text{und} \: (t^p, x^p) \to (t,x), \]
+was zu zeigen war.
+\end{proof}
+In Satz \ref{satz:glgregulaer} ist nun hingegen wichtig, dass $\Omega(n)$ eine Art Sublinear-Growth-Bedingung erfüllt.
+D.\,h. wir brauchen in Gleichung \eqref{satz:glgregulaer:bed}, dass $h \cdot \Omega\left( h^{-1} \right) \to 0$ für $h \to 0$ gilt. 
+Setzt man \eqref{eq:appendix:kleineta:oh:linkeseite} und \eqref{eq:appendix:kleineta:oh:rechteseite} nun gleich, so leitet man mithilfe des Satzes \ref{satz:glgregulaer} die beiden Anfangswertprobleme
+\begin{align}\label{eq:appendix:kleineta:oh}
+\partial_t w_0(t,x) + \partial_x w_0(t,x) &= 0 &w_0(0,x) &= U(x) \quad \text{und}\\
+\partial_t z_0(t,x) + \partial_x z_0(t,x) &= 2 z_0(t,x)  &z_0(0,x) &= V(x) 
+\end{align}
+her. Die Lösungen dieser Anfangswertprobleme haben wir schon im Anhang \ref{appendix:loesungen} bestimmt und sie lauten
+\begin{align}
+w_0(t,x) = U(x - t) \qquad \text{und} \qquad z_0(t,x) = V(x - t) e^{2 t}.
+\end{align}
+Insbesondere gelten dann
+\begin{align}\label{eq:appendix:kleineta:korollar:h2}
+\begin{split}
+\partial^2_t w_0(t,x) &= \partial^2_x w_0(t,x)\qquad\\&\text{und}\\
+\partial^2_t z_0(t,x) &= \partial_t \bigl( \partial_t z_0(t,x) \bigr)\\
+&= \partial_t \bigl( 2z_0(t,x)  - \partial_x z_0(t,x) \bigr)\\
+&= 2 \partial_t z_0(t,x) - \partial_t \bigl( \partial_x z_0(t,x) \bigr)\\
+&= 2 \partial_t z_0(t,x) - \partial_x \bigl( \partial_t z_0(t,x) \bigr)\\
+&= 2 \bigl( 2z_0(t,x) - \partial_x z_0(t,x) \bigr) - \partial_x \bigl( 2 z_0(t,x) - \partial_x z_0(t,x) \bigr)\\
+&= 4 z_0(t,x) - 4 \partial_x z_0(t,x) + \partial^2_x z_0(t,x).
+\end{split}
+\end{align}
 
-Um die Differentialgleichung für $z_2$ zu lösen, machen wir den Ansatz
-
-\[ z(t,x) = e^{2t} A(t,x). \]
-
-Dann gilt
-
+Wir widmen uns nun der nächsten Ordnung zu, der Gleichung \eqref{eq:transport:kleineta:oh2} in der Ordnung $O(h^2)$.
+Mit der Eigenschaft \eqref{eq:appendix:kleineta:bedingung} lautet sie
+{\small
+\begin{align}\label{eq:ke:oh2}
+\begin{split}
+\partial_t u_1(n+1, i, t_n, x_i) + \partial_x u_1(n, i-1, t_n, x_i) +\\
+\partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i)
+\end{split}
+&=
+\begin{split}
+&\frac{1}{2} \bigl( \partial^2_x u_0(n, i-1, t_n, x_i) - \partial^2_t u_0(n+1,i, t_n, x_i)\bigr)\\
+&- \bigl( u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)\\
+\end{split}
+\end{align}
+}
+Und ganz analog wie schon im Fall von $u_0$ gelten die beiden Gleichungen
+\begin{align} \label{eq:ke:glg1}
+- \bigl( u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr) = - (-1)^{i+n} 2 z_1(t_n,x_i) 
+\end{align}
+und
+\begin{align}
+\begin{split}
+&\partial_t u_1(n+1, i, t_n, x_i) + \partial_x u_1(n, i-1, t_n, x_i)\\
+&=\partial_t w_1(t_n,x_i) + \partial_x w_1(t_n,x_i) - (-1)^{i+n} \bigl( \partial_t z_1(t_n,x_i) + \partial_x z_1(t_n,x_i) \bigr).
+\end{split}
+\end{align}
+Außerdem gilt
+\begin{align}
+\begin{split}
+\partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i)
+&= - \bigl( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr)
+&= - (-1)^{i+n} 2 z_0(t_n,x_i).
+\end{split}
+\end{align}
+Und aus der kleinen Nebenrechnung in \eqref{eq:appendix:kleineta:korollar:h2} folgern wir 
+\begin{align}\label{eq:ke:glg4}
+\begin{split}
+&\frac{1}{2} \bigl( \partial^2_x u_0(n, i-1, t_n, x_i) - \partial^2_t u_0(n+1,i, t_n, x_i)\bigr)\\
+&= \frac{1}{2} \Bigl[ \partial^2_x u_0(n, i-1, t_n, x_i) - \partial^2_t \bigl( u_0(n+1,i, t_n, x_i)\bigr) \Bigr]\\
+&= \frac{1}{2} \Bigl[ \partial^2_x w_0(t_n, x_i) + (-i)^{i+n-1} \partial^2_x z_0(t_n, x_i) - \bigl( \underbrace{\partial^2_t w_0(t_n, x_i)}_{= \partial^2_x w_0(t_n, x_i)} + (-i)^{i+n+1} \partial^2_t z_0(t_n, x_i) \bigr) \Bigr]\\
+&= \frac{1}{2} \Bigl[ (-i)^{i+n-1} \partial^2_x z_0(t_n, x_i) - (-i)^{i+n+1} \partial^2_t z_0(t_n, x_i) \Bigr]\\
+&= (-1)^{i+n} \frac{1}{2} \Bigl[ \underbrace{\partial^2_t z_0(t_n, x_i)}_{= 4 z_0(t_n,x_i) - 4 \partial_x z_0(t_n,x_i) + \partial^2_x z_0(t_n,x_i)} - \partial^2_x z_0(t_n, x_i) \Bigr]\\
+&= (-1)^{i+n} 2 \Bigl[ z_0(t_n,x_i) - \partial_x z_0(t_n,x_i) \Bigr]\\
+\end{split}
+\end{align}
+Setzen wir die vier Gleichungen \eqref{eq:ke:glg1} bis \eqref{eq:ke:glg4} zu der Gleichung \eqref{eq:ke:oh2} zusammen, so erhalten wir
 \begin{align*}
-\partial_x z(t,x) &= e^{2t} \partial_x A(t,x)\\
-\partial_t z(t,x) &= 2 e^{2t} A(t,x) + e^{2t} \partial_t A(t, x)\\
-                  &= 2 z(t, x) + e^{2t} \partial_t A(t, x).
+&\partial_t w_1(t_n,x_i) + \partial_x w_1(t_n,x_i) - (-1)^{i+n} \bigl( \partial_t z_1(t_n,x_i) + \partial_x z_1(t_n,x_i) \bigr)\\
+&= (-1)^{i+n} \Bigl[ - 2 z_1(t_n,x_i) + 2 \left( 2 z_0(t_n,x_i) - \partial_x z_0(t_n,x_i) \right) \Bigr] 
 \end{align*}
-
-Wenn also
-\[ \partial_t z(t, x) + \partial_x z(t, x) = - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t, x) + 2 z(t, x) \]
-gelten soll, so müssen wir $A$ derart bestimmen, so dass
-\[ \partial_t A(t, x) + \partial_x A(t,x) = e^{-2t} \bigl( - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t, x) \bigr) \]
-gilt. Da nun $z_0(t,x) = e^{2t} V(x - t)$ gilt, folgt
-\[ \partial_t A(t, x) + \partial_x A(t,x) = - \frac{1}{2} \partial^2_x V(x - t) + 2 \partial_x V(x - t) - V(x - t) \]
-und das ist die inhomogene Transportgleichung für $A$. Somit ist die Lösung durch
-\[ A(t,x) = t \left( - \frac{1}{2} \partial^2_x V(x - t) + 2 \partial_x V(x - t) - V(x - t) \right) \]
-gegeben und es gilt insgesamt
-\[ z(t,x) = t e^{2t} \left( - \frac{1}{2} \partial^2_x V(x - t) + 2 \partial_x V(x - t) - V(x - t) \right) \]
-
+Und wir erhalten mit Satz \ref{satz:glgregulaer} die Anfangswertprobleme 
+\begin{align}\label{eq:appendix:kleineta:oh2}
+\partial_t w_1(t,x) + \partial_x w_1(t,x) &= 0 &w_1(0,x) &= 0 \quad \text{und}\\
+\partial_t z_1(t,x) + \partial_x z_1(t,x) &= 2 z_1(t,x) + 2 \bigl( \partial_x z_0(t,x) - 2z_0(t,x) \bigr)  &z_1(0,x) &= 0
+\end{align}
+Folglich gilt schon mal $w_1 = 0$ und wir können für $z_0$ wieder eine langsame Zeitvariable, dieses mal $\tau = 2ht$, einführen.
+Unsere Ansatzfunktionen $u_k$ lautet nun für $k = 0, 1, 2$
+\[ u_k(n, i, t, x) = w_k(t, x) + (-1)^{i+n} \tilde z_k(t_n, 2 h t_n, x_i). \]
+Sei $\tilde z(t, \tau, x)$ derart, dass $z(t_n, x_i) = \tilde z(t_n, 2 h t_n, x_i)$ gilt, dann folgt
+\[ \partial_t z(t_n, x_i) = \partial_t \tilde z(t_n, \tau_n, x_i) + 2 h \partial_\tau \tilde z(t_n, \tau_n, x_i). \]
+Mit diesem Ansatz stellen wir das Anfangswertproblem
 \begin{align*}
-w_2(t,x) &= - t \frac{1}{2} \partial^2_x U(x - t) \qquad \text{und}\\
-z_2(t,x) &= t e^{2t} \left( - \frac{1}{2} \partial^2_x V(x - t) + 2 \partial_x V(x - t) - V(x - t) \right)\\
+\partial_t z_0(t,\tau,x) + \partial_x z_0(t,\tau,x) &= 2 z_0(t,\tau,x)\\
+\partial_t z_1(t,\tau,x) + \partial_x z_1(t,\tau,x) &= 2 z_1(t,\tau,x) + 2 \bigl( \partial_x z_0(t,\tau,x) - \partial_\tau z_0(t,\tau,x) - 2z_0(t,\tau,x) \bigr)\\
+z_0(0,0,x) &= V(x) \quad \forall x \in \R\\
+z_1(0,0,x) &= 0  \quad \forall x \in \R
 \end{align*}
+auf und fordern zusätzlich
+\begin{align}\label{eq:ke:lang}
+\partial_\tau z_0(t,\tau,x) - \partial_x z_0(t, \tau, x) = -2z_0(t,\tau,x).
+\end{align}
+Aus der ersten Gleichung $\partial_t z_0(t,\tau,x) + \partial_x z_0(t,\tau,x) &= 2 z_0(t,\tau,x)$, mit $z_0(0,0,x) = V(x)$ folgern wir
+$z_0(t, \tau, x) = A(\tau, x - t) e^{2t}$ für eine Abbildung $A$ mit $A(0, x) = V(x)$ für alle $x \in \R$.
+Mit \eqref{eq:ke:lang} lässt sich A dann für alle $(t, \tau, x) \in \Rp^2 \times \R$ durch
+\[ A(\tau, x - t) = A(0, x - t + \tau) e^{- 2\tau} \]
+bestimmen und es folgt für alle $(t, \tau, x) \in \Rp \times \R$
+\[ z_0(t, \tau, x) = V(x - t + \tau) e^{2 (t - \tau)}, \qquad z_1(t, \tau, x) = 0. \]
 
-Denn es gilt 
+Setzen wir unsere bisherigen Erkenntnisse nun wie in Anhang \ref{appendix:kleineta:rechnung} ein, so erhalten wir in Ordnung $O(h^3)$ schlussendlich die Gleichungen
+\begin{align}
+\partial_t w_2(t,x) + \partial_x w_2(t,x) &= - \frac{1}{2} \partial^2_t w_0(t,x)\\
+\begin{split}
+\partial_t z_2(t,x) + \partial_x z_2(t,x) &= 2 z_2(t,x) - \left( 2 \bigl( \partial_\tau z_0(t,x) + \partial^2_\tau z_0(t,x) \bigr)\\
+&\quad + \frac{1}{2} (2\partial^2_t z_0(t,x) - \partial^2_x z_0(t,x)) + \frac{1}{6} \bigl(\partial^3_t z_0(t,x) + \partial^3_x z_0(t,x)\bigr) \right)
+\end{split}
+\end{align}
+% Hieraus folgen dieses mal die Gleichungen:
 
-\begin{align*}
-\partial_t z_2(t,x) &= \partial_t \left( e^{2t} \int_0^t e^{-2s} \left[ - \frac{1}{2} \partial^2_x z_0(s, x) + 2 \partial_x z_0(s, x) - z_0(s,x) \right] \dd s \right)\\
-&= 2 z_2(t,x) + e^{2t} e^{-2t} \left[ - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t,x) \right]\\
-&= 2 z_2(t,x) - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t,x)
-\end{align*}
+% \vspace{0.4cm}
+% \noindent \emph{In der Ordnung $O(h)$}
+% \begin{align*}
+% \partial_t w_0(t, x) + \partial_x w_0(t, x) &= 0 \qquad \text{und}\\
+% \partial_t z_0(t, x) + \partial_x z_0(t, x) &= 2 z_0(t, x)
+% \end{align*}
+% woraus Wegen der Anfangsbedingungen \eqref{eq:transport:kleineta:anfangsbedinungen} $w_0(t,x) = U(x -t)$ und $z_0(t,x) = V(x - t) e^{2 t}$ folgt.
+
+% \begin{figure}
+% \centering
+% \begin{tikzpicture}
+% \begin{semilogyaxis}[
+%     title={$\err^n = \max_{i \in \Z} \abs{\sin\bigl(\pi (x_i - t_n )\bigr) - v^n_i}$},
+%     xlabel={Zeit $t$},
+%     ylabel={maximaler Fehler},
+%     legend entries={$\err^n$,$\eps_M e^{2t}$, $t h^2 \frac{\pi^2}{2}$, $\eps_M e^{2t} + t h^2 \frac{\pi^2}{2}$},
+%     legend style={at={(1.5,1)}}
+% ]
+% \addplot[myblue, line width={2}] table {data/max_errors_small_eta_0.001.dat};
+% \addplot[black, line width={0.5}, dotted] table [y index={2}] {data/max_errors_small_eta_0.001.dat};
+% \addplot[mygray, line width={1}, dashdotted] table [y index={4}] {data/max_errors_small_eta_0.001.dat};
+% \addplot[black, line width={0.5}, mark=o, mark repeat={10}] table [y index={3}] {data/max_errors_small_eta_0.001.dat};
+% \end{semilogyaxis}
+% \end{tikzpicture}
+% \caption{Hier vergleichen wir die maximalen Fehler der numerischen Lösungen für die Startwerte $U(x) = sin(\pi x)$, $V(x) = \eps_M$ und $\eta = h = 10^{-3}$ zur echten Lösung $u(t,x) = sin(\pi(x - t))$ mit dem geschätztem Fehler $\eps_M e^{2t}$ aus der asymptotischen Entwicklung in .}
+% \label{fig:transport:kleineta:max_error}
+% \end{figure}
+
+% \vspace{0.4cm}
+% \noindent \emph{In der Ordnung $O(h^2)$}
+% \begin{align*}
+% \partial_t w_1(t, x) + \partial_x w_1(t, x) &= 0 \qquad \text{und}\\
+% \partial_t z_1(t, x) + \partial_x z_1(t, x) &= 2 z_1(t, x).
+% \end{align*}
+% Dieses mal folgt aus $w_1(0,x) = z_1(0,x) = 0$ sogar $z_1 = w_1 = 0$.
+
+% \vspace{0.4cm}
+% \noindent \emph{In der Ordnung $O(h^3)$}
+% \begin{align*}
+% \partial_t w_2(t, x) + \partial_x w_2(t, x) &= - \frac{1}{2} \partial^2_x w_0(t, x) \qquad \text{und}\\
+% \partial_t z_2(t, x) + \partial_x z_2(t, x) &= \frac{1}{2} \partial^2_x z_0(t, x) - \partial^2_t z_0(t, x) + 2 z_2(t, x)\\
+% &= \frac{1}{2} \partial^2_x z_0(t, x) - \partial_t \bigl( z_0(t, x) - \partial_x z_0 \bigr) + 2 z_2(t, x)\\
+% &= \frac{1}{2} \partial^2_x z_0(t, x) + \partial_x z_0(t, x) - z_0(t, x) + \partial_x \bigl( z_0 - \partial_x z_0 \bigr) + 2 z_2(t, x)\\
+% &= - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t, x) + 2 z_2(t, x)\\
+% \end{align*}
+
+% Um die Differentialgleichung für $z_2$ zu lösen, machen wir den Ansatz
+
+% \[ z(t,x) = e^{2t} A(t,x). \]
+
+% Dann gilt
+
+% \begin{align*}
+% \partial_x z(t,x) &= e^{2t} \partial_x A(t,x)\\
+% \partial_t z(t,x) &= 2 e^{2t} A(t,x) + e^{2t} \partial_t A(t, x)\\
+%                   &= 2 z(t, x) + e^{2t} \partial_t A(t, x).
+% \end{align*}
+
+% Wenn also
+% \[ \partial_t z(t, x) + \partial_x z(t, x) = - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t, x) + 2 z(t, x) \]
+% gelten soll, so müssen wir $A$ derart bestimmen, so dass
+% \[ \partial_t A(t, x) + \partial_x A(t,x) = e^{-2t} \bigl( - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t, x) \bigr) \]
+% gilt. Da nun $z_0(t,x) = e^{2t} V(x - t)$ gilt, folgt
+% \[ \partial_t A(t, x) + \partial_x A(t,x) = - \frac{1}{2} \partial^2_x V(x - t) + 2 \partial_x V(x - t) - V(x - t) \]
+% und das ist die inhomogene Transportgleichung für $A$. Somit ist die Lösung durch
+% \[ A(t,x) = t \left( - \frac{1}{2} \partial^2_x V(x - t) + 2 \partial_x V(x - t) - V(x - t) \right) \]
+% gegeben und es gilt insgesamt
+% \[ z(t,x) = t e^{2t} \left( - \frac{1}{2} \partial^2_x V(x - t) + 2 \partial_x V(x - t) - V(x - t) \right) \]
+
+% \begin{align*}
+% w_2(t,x) &= - t \frac{1}{2} \partial^2_x U(x - t) \qquad \text{und}\\
+% z_2(t,x) &= t e^{2t} \left( - \frac{1}{2} \partial^2_x V(x - t) + 2 \partial_x V(x - t) - V(x - t) \right)\\
+% \end{align*}
+
+% Denn es gilt 
+
+% \begin{align*}
+% \partial_t z_2(t,x) &= \partial_t \left( e^{2t} \int_0^t e^{-2s} \left[ - \frac{1}{2} \partial^2_x z_0(s, x) + 2 \partial_x z_0(s, x) - z_0(s,x) \right] \dd s \right)\\
+% &= 2 z_2(t,x) + e^{2t} e^{-2t} \left[ - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t,x) \right]\\
+% &= 2 z_2(t,x) - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t,x)
+% \end{align*}
 
 \section{Andere Frequenzen auf Gitterniveau -- ein Exponentialansatz}
