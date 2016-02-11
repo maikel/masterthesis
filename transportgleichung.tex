@@ -16,7 +16,7 @@ bestimmt.
 Es ist bereits bekannt, dass das Verfahren f"ur $\lambda \leq 1$ stabil und f"ur $\lambda = 1$ sogar exakt ist.
 Wir versuchen in dieser Arbeit den instabilen Fall $\lambda > 1$ besser zu verstehen.
 
-\section{Ein erster regulärer Ansatz}
+\section{Ein erster regulärer Ansatz}\label{sec:regulaer}
 
 Zunächst präsentieren wir die Ergebnisse, welche die Autoren Junk und Yang aus \cite{Junk2004} für das Upwind-Schema entwickeln.
 Angenommen es gäbe Abbildungen $u_0, u_1 \in C^\infty\left( \Rp \times \R \right)$, so dass für alle $h > 0$, $n \in \N$ und $i \in \Z$
@@ -111,7 +111,7 @@ v^n_i = (U * G_\tau)(x_i - t_n) + o(h).
 \addplot[mygray, line width={0.8}, dashdotted] table [y index={4}] {data/max_errors_eta_0.100_h_0.010.dat};
 \end{semilogyaxis}
 \end{tikzpicture}
-\caption{Hier vergleichen wir die maximalen Fehler der numerischen Lösungen für die Startwerte $U(x) = sin(\pi x)$, $V(x) = \eps_M$ und $h = 10^{-3}$ für $\eta = 0.1, 0.05$ und $0.001$ zur echten Lösung $u(t,x) = sin(\pi(x - t))$ mit dem geschätztem Fehler $u(t_n, x_i) - v^n_i$ in \eqref{eq:transport:regulaer:fehler}.}
+\caption{Hier vergleichen wir die maximalen Fehler der numerischen Lösungen für die Startwerte $U(x) = sin(\pi x)$ und $h = 10^{-3}$ für $\eta = 0.1, 0.05$ und $0.001$ zur echten Lösung $u(t,x) = sin(\pi(x - t))$ mit dem geschätztem Fehler $u(t_n, x_i) - v^n_i$ in \eqref{eq:transport:regulaer:fehler}.}
 \label{figure:regular:fehler}
 \end{figure}
 
@@ -280,7 +280,7 @@ F(t^h_n, x^h_i) = f(n, i, t^h_n, x^h_i) \qquad \text{für alle $(n,i) \in \N \ti
 \end{align}
 existiert, dann gilt für alle $(t, x) \in \Rp \times \R$, dass für alle $n \in \N$ ein $i(n) \in \Z$ existiert mit
 \begin{align}\label{eq:lemma:diag:aussage}
-\abs{F(t, x) - f(n, i(n), t, x)} \leq \frac {t}{\lambda n} \Bigl(\bigl\lvert f_x(n, i(n), t, x) \bigr\rvert + \bigl\lvert F_x(t, x) \bigr\rvert \Bigr)
+\abs{F(t, x) - f(n, i(n), t, x)} \leq \frac {t}{\lambda n} \Bigl(\bigl\lvert \partial_x f(n, i(n), t, x) \bigr\rvert + \bigl\lvert \partial_x F(t, x) \bigr\rvert \Bigr)
 \end{align}
 \end{lemma}
 \begin{proof}
@@ -291,15 +291,15 @@ Dann gibt es ein kleinstes $i(n) = i \in \N$, für das $x_{i-1} < x \leq x_i$ gi
 Dies impliziert $x_i - x < h$ und wegen $t_n = t$ folgt auch
 \[ \norm{(t,x) - (t_n, x_i)} = \abs{x - x_i} < h. \]
 Weil $f$ und $F$ differenzierbar in $x$ sind, folgt somit
-\[ \abs{f(n, i, t_n, x_i) - f(n, i, t, x)} = \abs{(x_i - x) f_x(n, i, t, x) + o(h)} \leq h \abs{f_x(n, i, t, x)} + o(h) \]
+\[ \abs{f(n, i, t_n, x_i) - f(n, i, t, x)} = \abs{(x_i - x) \partial_x f(n, i, t, x) + o(h)} \leq h \abs{\partial_x f(n, i, t, x)} + o(h) \]
 und
-\[ \abs{F(t_n, x_i) - F(t, x)} = \abs{(x_i - x) F_x(t, x) + o(h)} \leq h \abs{F_x(t, x)} + o(h). \]
+\[ \abs{F(t_n, x_i) - F(t, x)} = \abs{(x_i - x) \partial_x F(t, x) + o(h)} \leq h \abs{\partial_x F(t, x)} + o(h). \]
 Zusammen ergibt das
 {\small
 \begin{align*}
 \abs{F(t,x) - f(n, i, t, x)} &\leq \abs{F(t, x) - F(t_n, x_i)} + \underbrace{\abs{F(t_n, x_i) - f(n, i, t_n, x_i)}}_{= 0} + \abs{f(n,i, t, x) - f(n, i, t_n, x_i)}\\
-&\leq h \Bigl(\bigl\lvert f_x(n, i, t, x) \bigr\rvert + \bigl\lvert F_x(t, x) \bigr\rvert \Bigr)\\
-&= \frac {t}{\lambda n} \Bigl(\bigl\lvert f_x(n, i, t, x) \bigr\rvert + \bigl\lvert F_x(t, x) \bigr\rvert \Bigr). \qedhere
+&\leq h \Bigl(\bigl\lvert \partial_x f(n, i, t, x) \bigr\rvert + \bigl\lvert \partial_x F(t, x) \bigr\rvert \Bigr)\\
+&= \frac {t}{\lambda n} \Bigl(\bigl\lvert \partial_x f(n, i, t, x) \bigr\rvert + \bigl\lvert \partial_x F(t, x) \bigr\rvert \Bigr). \qedhere
 \end{align*}
 }
 \end{proof}
@@ -313,18 +313,18 @@ Und diese Bedingung tretet schon ein, ohne dass wir die Sublinear-Growth Bedingu
 Hier präzisieren wir unseren Ansatz \eqref{eq:transport:diskret:ansatz} aus dem letztem Unterkapitel. % \ref{sec:transport:diskret}.
 Sei $\eps_M > 0$ die Maschinengenauigkeit.
 Diese Größe ist von System zu System unterschiedlich und ist in der Regel in der Größenordnung von etwa $10^{-16}$ groß.
-Die Anfangsbedingung für $u_0$ in \eqref{eq:transport:diskret:anfangsbedinungen} lautet
+Die Anfangsbedingung für $u_0$ in \eqref{eq:transport:diskret:anfangsbedinungen} lautet $u_0(0, x) = U(x)$, doch in Wahrheit rechnet der Computer mit gerundeten Zahlen, also
 \begin{align*}
 u_0(0, i, 0, x_i) &= \rd{U(x_i)} = U(x_i) - \underbrace{\left( U(x_i) - \rd{U(x_i)} \right)}_{=: \Delta_{\eps_M} U(x_i)}\\
 &= U(x_i) - \Delta_{\eps_M} U(x_i),
 \end{align*}
-Das Vorzeichen der Rundungsfehler kann nach der ersten Iteration jedoch von Gitterzelle zur Gitterzelle schon anders sein!
+Das Vorzeichen der Rundungsfehler $\Delta_{\eps_M} U(x_i)$ kann nach der ersten Iteration jedoch von Gitterzelle zur Gitterzelle schon verschieden sein!
 Deshalb motiviert das hier den Ansatz, dass Oszillationen im Raum und auf Gitterniveau vorhanden sind und wir untersuchen, wie sich die Amplitude in der Zeit ausbreitet.
 Weil wir in \eqref{eq:adv:pde} eine lineare Differentialgleichung betrachten, vermuten wir, dass man $u_k$ für $k = 0,1,2$ und alle Iterationen $n \in \N$ als Summe einer glatten und einer unstetigen, hochfrequenten Funktion schreiben kann.
 Daher wählen wir für $u_0, u_1$ und $u_2$ aus \eqref{eq:transport:diskret:ansatz} nun konkreter 
-\begin{align*}
+\begin{align}\label{eq:transport:osz:ansatz1}
 u_k(n, i, t, x) &= w_k(t, x) + (-1)^i \Omega(n) z_k(t, x), \qquad \text{für $k = 0,1,2$}
-\end{align*}
+\end{align}
 für glatte Funktionen $w_k, z_k$, $\Omega(0) = 1$ und
 \begin{align}\label{eq:transport:osz:anfangsbedinungen}
 \begin{split}
@@ -339,49 +339,59 @@ z_2(0, x_i) &= 0.
 \end{split}
 \end{align}
 Wobei $U$ und $V$ derart sind, dass alle nötigen Regularitätsbedingungen für die kommenden Betachtungen erfüllt seien sollen.
-Setzt man dies in die vorherigen Rechnungen ein, so erhält man anstelle von Gleichung \eqref{eq:transport:diskret:o1}
+Wir wollen nun $\Omega(n)$ näher bestimmen.
+Setzt man dies in die vorherigen Rechnungen ein, so erhält man wegen der Gleichung \eqref{eq:transport:diskret:o1}
 
-\vspace{0.4cm}
 \noindent \emph{in der Ordnung $O(1)$:}
-\begin{align}\label{eq:transport:osz:o1} 
-- (-1)^i z_0(t_n, x_i) \Bigl[ \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \Bigr] = 0.
-\end{align}
+{\small \begin{align}\label{eq:transport:osz:o1} 
+u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i) + \lambda \bigl(u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr) &= 0. \nonumber\\
+\begin{split}
+w_k(t, x) + (-1)^i \Omega(n+1) z_k(t, x) - \bigl( w_k(t, x) + (-1)^i \Omega(n) z_k(t, x) \bigr) \quad &\nonumber\\
++ \lambda \bigl[ w_k(t, x) + (-1)^i \Omega(n) z_k(t, x) - \bigl( w_k(t, x) + (-1)^{i-1} \Omega(n) z_k(t, x) \bigr) \bigr]&
+\end{split} = \nonumber\\
+(-1)^i \Omega(n+1) z_k(t, x) - (-1)^i \Omega(n) z_k(t, x) + \lambda \bigl[ (-1)^i \Omega(n) z_k(t, x) - (-1)^{i-1} \Omega(n) z_k(t, x) \bigr] & =\nonumber\\
+(-1)^i \Omega(n+1) z_k(t, x) - (-1)^i \Omega(n) z_k(t, x) + \lambda \bigl[ (-1)^i \Omega(n) z_k(t, x) + (-1)^{i} \Omega(n) z_k(t, x) \bigr] & =\nonumber\\
+(-1)^i \Omega(n+1) z_k(t, x) - (-1)^i \Omega(n) z_k(t, x) + 2 \lambda (-1)^i \Omega(n) z_k(t, x) & =\nonumber\\
+(-1)^i \Omega(n+1) z_k(t, x) + (-1 + 2\lambda) (-1)^i \Omega(n) z_k(t, x) & =\nonumber\\
+- (-1)^i z_0(t_n, x_i) \Bigl[ \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \Bigr] & =
+\end{align} }
 
-Da diese Gleichung für alle Gitterpunkte $(n,i)$ gilt und die Funktion $F(t,x) = 0$ glatt ist, können wir unter der Annahme, dass $z_0 \neq 0$ gilt, Lemma \ref{lemma:transport:diskret:konvergenz_gitter} benutzen.
+Da diese Gleichung für alle Gitterkoordinaten $(n,i)$ gilt und die Funktion $F(t,x) = 0$ glatt ist, können wir unter der Annahme, dass $z_0 \neq 0$ gilt, Lemma \ref{lemma:transport:diskret:konvergenz_gitter} benutzen.
 \begin{satz}\label{satz:omega_n}
-Es gilt
+Es gelte für alle $(n,i) \in \N \times \Z$ die Gleichung \eqref{eq:transport:osz:o1}. Dann gilt für fast alle $n \in \N$
 \[ \Omega(n) = (1 - 2 \lambda)^n. \]
 \end{satz}
 \begin{proof}
 Weil $z_0 \neq 0$ gilt, existiert ein Punkt $(t,x) \in \Rp \times \R$ mit $z_0(t,x) \neq 0$.
 Nach Lemma \ref{lemma:transport:diskret:konvergenz_gitter} existiert für jedes $n \in \N$ ein $i \in \Z$ mit
 \[  \abs{(-1)^i z_0(t, x) \bigl( \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \bigr)} \leq \abs{(-1)^i \frac {t}{\lambda n} \partial_x z_0(t, x) \bigl( \Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \bigr)}. \]
-Angenommen es gelte $\Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \neq 0$.
-Hieraus folgt wiederum für alle $n \in \N$
+Angenommen es gelte $\Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) \neq 0$ für unendlich viele $n \in \N$.
+Hieraus folgt wiederum für unendlich viele $n \in \N$
 \[ \abs{z_0(t, x)} \leq \frac {t}{\lambda n} \abs{\partial_x z_0(t,x)}, \]
 was zu $z_0(t,x) = 0$ führt, ein Widerspruch zur Voraussetzung $z_0(t,x) \neq 0$.
-Das impliziert $\Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) = 0$ für alle $n \in \N$ und mit $\Omega(0) = 1$ folgt die Behauptung.
+Das impliziert $\Omega(n+1) - ( 1 - 2 \lambda ) \Omega(n) = 0$ für fast alle $n \in \N$ und mit $\Omega(0) = 1$ folgt die Behauptung.
 \end{proof}
 
-Mit dem Satz \ref{satz:omega_n} und weil wir in jeder Ordnung die selbe Frequenz nehmen, folgt hiermit, dass für alle $k = 0,1,2$ und für alle $n \in \N$ und $i \in \Z$
+Von nun an, setzen betrachten wir $\lambda = 1 + \eta$ für ein $\eta > 0$.
+Mit dem Satz \ref{satz:omega_n} und weil wir im Ansatz \eqref{eq:transport:osz:ansatz1} für jedes $k = 0,1,2$ die selbe Abhängigkeit von $(n,i)$ annehmen, folgt hiermit, dass für alle $k = 0,1,2$ und für alle $n \in \N$ und $i \in \Z$
 \begin{align}\label{eq:apx:alt:prop1}
-u_k(n+1, i, t_n, x_i) - u_k(n, i, t_n, x_i) + (1 + 2\eta)\bigl(u_k(n, i, t_n, x_i) - u_k(n, i-1, t_n, x_i) \bigr) = 0
+u_k(n+1, i, t_n, x_i) - u_k(n, i, t_n, x_i) + (1 + \eta)\bigl(u_k(n, i, t_n, x_i) - u_k(n, i-1, t_n, x_i) \bigr) = 0
 \end{align}
 erfüllt ist.
 Setzt man dies nun in den Ansatz ein, so fallen die Anteile von $u_2$ in der Gleichung \eqref{eq:transport:diskret:oh2} für diskrete Ansätze weg.
-Setzen wir $\lambda = 1 + \eta$ für ein $\eta > 0$, dann schreiben wir diesen Ansatz hier nun als
+Mit $\lambda = 1 + \eta$ gilt $\Omega(n) = (-1)^n (1 + 2 \eta)^n$ und wir schreiben diesen Ansatz hier nun als
 \begin{align}\label{eq:transport:osz:ansatz}
 v^n_i = w_0(t_n, x_i) + h  w_1(t_n, x_i) + (-1)^{i+n} (1 + 2 \eta)^n \bigl( z_0(t_n, x_i) + h z_1(t_n, x_i) \bigr) + o(h)
 \end{align}
 auf und setzen ihn weiter in die Bedingungen aus \eqref{eq:transport:diskret:oh} bis \eqref{eq:transport:regulaer:oh2} ein.
 In der Ordnung $O(h)$ gilt nach den Rechnungen zum diskreten Ansatz die Gleichung \eqref{eq:transport:diskret:oh}, die mit $\lambda = 1 + \eta$ hier lautet:
-\begin{align*}
-(1 + 2\eta) \bigl( \partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i) \bigr) =
+{\small \begin{align*}
+(1 + \eta) \bigl( \partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i) \bigr) =
 \begin{split}
 &- \bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i, t_n, x_i) \bigr)\\
-&- (1 + 2 \eta) \bigl(u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr).
+&- (1 + \eta) \bigl(u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr).
 \end{split}
-\end{align*}
+\end{align*} }
 Die Rechte Seite dieser Gleichung verschwindet wegen der Eigenschaft \eqref{eq:apx:alt:prop1} und es folgt demnach für alle $n \in \N$, $i \in \Z$ und $h > 0$
 \begin{align*}
 \partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i) = 0.
@@ -401,49 +411,51 @@ und
 \end{split}
 \end{align}
 In der Summe ergibt das nun
-\begin{align*}
+\begin{align}\label{alt:summe1}
+\begin{split}
 0 &= \partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i)\\
 &= \partial_t w_0(t_n, x_i) + \partial_x w_0(t_n, x_i)\\
 &\quad - (-1)^{i+n} (1 + 2\eta)^n \bigl( (1 + 2 \eta) \partial_t z_0(t_n, x_i) + \partial_x z_0(t_n, x_i) \bigr),
-\end{align*}
+\end{split}
+\end{align}
 also
-\begin{align}\label{eq:apx:beidenull}
+\begin{align}\label{eq:apx:beidenull1}
 \partial_t w_0(t_n, x_i) + \partial_x w_0(t_n, x_i) = (-1)^{i+n} (1 + 2\eta)^n \bigl( (1 + 2 \eta) \partial_t z_0(t_n, x_i) + \partial_x z_0(t_n, x_i) \bigr).
 \end{align}
 Wir verwenden nun Lemma \ref{lemma:transport:diskret:konvergenz_gitter}, um zu zeigen, dass beide Seiten umanhängig von einander Null sein müssen.
-\begin{satz}
-Für alle $(t, x) \in \Rp \times \R$ gilt
-\begin{align}\label{eq:apx:wgl}
-\partial_t w_0(t, x) + \partial_x w_0(t, x) &= 0 \qquad \text{und}\\ 
-(1 + 2 \eta) \partial_t z_0(t, x) + \partial_x z_0(t, x) &= 0. \label{eq:apx:zgl}
-\end{align} 
+\begin{satz}\label{satz:alt:beidenull}
+Es seien $F$ und $g$ Funktionen aus $\Cinf$. Für alle $h > 0$ und alle $n \in \N$ und $i \in \Z$ gelte außerdem
+\begin{align}\label{eq:apx:beidenull}
+F(t_n,x_i) = (-1)^{i+n} (1 + 2\eta)^n g(t_n,x_i).
+\end{align}
+Dann folgt für alle $(t,x) \in \Rp \times \R$
+\begin{align*}
+F(t,x) &= 0 \qquad \text{und}\\ 
+g(t,x) &= 0. 
+\end{align*} 
 \end{satz}
 \begin{proof}
-In das Lemma setzen wir
-\[ F(t,x) = \partial_t w_0(t, x) + \partial_x w_0(t, x)\] 
-und
-\begin{align*}
-f(n,i,t,x) &= (-1)^{i+n} (1 + 2\eta)^n \bigl( \underbrace{(1 + 2 \eta) \partial_t z_0(t, x) + \partial_x z_0(t, x)}_{=: g(t,x)} \bigr) = (-1)^{i+n} (1 + 2\eta)^n g(t,x)
-\end{align*}
-ein, wobei wegen $w_0, z_0 \in \Cinf$ die beiden Abbildungen $F$ und $g$ beide stetig differenzierbar sind.
-Es existiert also für alle $(t,x) \in \Rp \times \R$ und $n \in \N$ ein $i(n) \in \Z$, so dass die Ungleichung \eqref{eq:lemma:diag:aussage}
+Für das Lemma \ref{lemma:transport:diskret:konvergenz_gitter} setzen wir für $f$ die rechte Seite der Gleichung \eqref{eq:apx:beidenull} ein, also $f(n, i, t, x) = (-1)^{i+n} (1 + 2\eta)^n g(t,x)$.
+Dann ist $f$ für alle $n \in \N$ und $i \in \Z$ differenzierbar und die Voraussetzungen von Lemma \ref{lemma:transport:diskret:konvergenz_gitter} sind erfüllt.
+
+Es existiert also für alle $(t,x) \in \Rp \times \R$ und $n \in \N$ ein $i(n) \in \Z$, so dass die Ungleichung
 \begin{align}
-\abs{F(t, x) - f(n, i(n), t, x)} \leq \frac {t}{\lambda n} \Bigl(\bigl\lvert f_x(n, i(n), t, x) \bigr\rvert + \bigl\lvert F_x(t, x) \bigr\rvert \Bigr)
+\abs{F(t, x) - f(n, i(n), t, x)} \leq \frac {t}{\lambda n} \Bigl(\bigl\lvert \partial_x f(n, i(n), t, x) \bigr\rvert + \bigl\lvert \partial_x F(t, x) \bigr\rvert \Bigr)
 \end{align}
 erfüllt ist.
-Wegen $\abs{f(n, i(n), t, x)} - \abs{F(t,x)} \leq \abs{F(t, x) - f(n, i(n), t, x)}$ und $\frac {t}{\lambda n} \bigl\lvert F_x(t, x) \bigr\rvert \to 0$ für $n \to \infty$, impliziert das
-\[ \abs{f(n, i(n), t, x)} \leq \frac {t}{\lambda n} \abs{f_x(n, i(n), t, x)} +  \frac {t}{\lambda n} \bigl\lvert F_x(t, x) \bigr\rvert + \abs{F(t,x)} \]
+Das impliziert wegen $\abs{f(n, i(n), t, x)} - \abs{F(t,x)} \leq \abs{F(t, x) - f(n, i(n), t, x)}$ die Gleichung
+\[ \abs{f(n, i(n), t, x)} \leq \frac {t}{\lambda n} \abs{\partial_x f(n, i(n), t, x)} +  \frac {t}{\lambda n} \bigl\lvert \partial_x F(t, x) \bigr\rvert + \abs{F(t,x)} \]
 also
-\begin{align}
+\begin{align*}
 (1 + 2\eta)^n \abs{g(t,x)} &\leq \frac{t}{\lambda n} \cdot (1 + 2\eta)^n \abs{\partial_x g(t,x)} + \frac {t}{\lambda n} \bigl\lvert \partial_x F(t, x) \bigr\rvert + \abs{F(t,x)}\\
 \Leftrightarrow \qquad \abs{g(t,x)} &\leq \underbrace{\frac{t}{\lambda n} \abs{\partial_x g(t,x)}}_{\to 0} + \underbrace{(1 + 2 \eta)^{-n} \left( \frac {t}{\lambda n} \bigl\lvert \partial_x F(t, x) \bigr\rvert + \abs{F(t,x)} \right)}_{\to 0} \to 0 \qquad \text{für $n \to \infty$},
-\end{align}
+\end{align*}
 woraus $g(t,x) = 0$ und somit auch $F(t,x) = 0$ für alle $(t,x) \in \Rp \times \R$ folgt.
 \end{proof}
-Aus den Gleichungen \eqref{eq:apx:wgl} und \eqref{eq:apx:zgl} folgt insbesondere auch
-\[ \partial^2_t w_0 = \partial^2_x w_0 \quad \text{und} \quad \partial^2_t z_0 = \frac {1}{(2\lambda - 1)^2} \partial^2_x z_0. \]
-
-Insgesamt erhalten wir das Ergebnis
+In Satz \ref{satz:alt:beidenull} haben wir ganz wesentlich benutzt, dass $(1 + 2 \eta)^n \to \infty$ für $n \to \infty$ gilt.
+Später beweisen wir mit Satz \ref{satz:glgregulaer} eine analoge Aussage um solche Bedingungen in anderen Ansätzen zu bekommen, bei denen man keine solche Wachstumsbedingung hat.
+Wenden wir nun Satz \ref{satz:alt:beidenull} auf Gleichung \eqref{eq:apx:beidenull1} an, so erhalten wir
+\\
 
 \noindent \emph{in der Ordnung $O(h)$:}
 \begin{align}
@@ -451,20 +463,66 @@ Insgesamt erhalten wir das Ergebnis
 \partial_t z_0(t, x) + \frac {1} {1 + 2\eta} \partial_x z_0(t, x) = 0 \label{eq:transport:osz:oh_B}
 \end{align}
 
+Aus den Gleichungen \eqref{eq:transport:osz:oh_A} und \eqref{eq:transport:osz:oh_B} folgt insbesondere nun auch
+\begin{align}\label{alt:abl2}
+\partial^2_t w_0 = \partial^2_x w_0 \quad \text{und} \quad \partial^2_t z_0 = \frac {1}{(1 + 2 \eta)^2} \partial^2_x z_0.
+\end{align}
+Mit den Anfangsbedingungen \eqref{eq:transport:osz:anfangsbedinungen}, insbesondere $w_0(0, x) = U(x)$ und $z(0, x) = V(x)$, kann man diese Anfangswertprobleme wie in Anhang \ref{eq:transport:analytisch:homogen} lösen und $w_0$ und $z_0$ durch
+\[ w_0(t,x) = U(x-t) \quad \text{und} \quad z_0(t,x) = V\left( x - \frac{t}{1 + 2 \eta} \right) \]
+bestimmen.
+
+Ferner setzen wir den Ansatz \eqref{eq:transport:osz:ansatz} nun in die Gleichung der Ordnung $O(h^2)$ für diskrete Ansätze \eqref{eq:transport:diskret:oh2} ein.
+Diese lautet mit $\lambda = 1 + \eta$
+
 \noindent \emph{in der Ordnung $O(h^2)$:}
-% {\small
-\begin{align}\label{eq:transport:osz:oh2_A}
-\partial_t w_1(t, x) + \partial_x w_1(t, x) &= - \frac {\eta}{2} \partial^2_x w_0(t, x)\\
-\partial_t z_1(t, x) + \frac{1}{1 + 2 \eta} \partial_x z_1(t, x) &= \frac{\eta}{2 (1 + 2 \eta)^2} \partial^2_x z_0(t, x) \label{eq:transport:osz:oh2_B}
+\begin{align*}
+\begin{split}
+(1 + \eta) \bigl( \partial_t u_1(n+1, i, t_n, x_i)\quad\\
++ \partial_x u_1(n, i-1, t_n, x_i) \bigr)
+\end{split} =& \begin{split}
+&\frac {1 + \eta}{2} \partial^2_x u_0(n, i-1, t_n, x_i)\\
+&- \frac{(1 + \eta)^2}{2} \partial^2_t u_0(n+1, i, t_n, x_i)\\
+& 0 = \begin{cases}
+- \bigl( u_2(n+1, i, t_n, x_i) - u_2(n, i, t_n, x_i) \bigr)\\
+- (1 + \eta) \bigl(u_2(n, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr)
+\end{cases}
+\end{split}
+\end{align*}
+also gilt
+{\small \begin{align}\label{eq:alt:oh21}
+\partial_t u_1(n+1, i, t_n, x_i) + \partial_x u_1(n, i-1, t_n, x_i) &= \frac {1}{2} \partial^2_x u_0(n, i-1, t_n, x_i) - \frac{(1 + \eta)}{2} \partial^2_t u_0(n+1, i, t_n, x_i)\\
+\end{align}}
+Wegen \eqref{alt:abl2} gilt für die rechte Seite dieser Gleichung
+{\small \begin{align*}
+&\frac {1}{2} \partial^2_x u_0(n, i-1, t_n, x_i) - \frac{(1 + \eta)}{2} \partial^2_t u_0(n+1, i, t_n, x_i)\\
+&= \frac 12  \partial^2_x \bigl[ w_k(t_n, x_i) + (-1)^{i+n-1} (1 + 2\eta)^n z_k(t_n, x_i) \bigr]
+ - \frac{(1 + \eta)}{2}  \partial^2_t  \bigl[ w_k(t_n, x_i) + (-1)^{i+n+1} (1 + 2\eta)^{n+1} z_k(t_n, x_i) \bigr]\\
+ &= \frac 12  \bigl[ \partial^2_x w_k(t_n, x_i) - (-1)^{i+n} (1 + 2\eta)^n \partial^2_x z_k(t_n, x_i) \bigr]
+ - \frac{(1 + \eta)}{2}  \bigl[ \partial^2_t w_k(t_n, x_i) - (-1)^{i+n} (1 + 2\eta)^{n+1} \partial^2_t z_k(t_n, x_i) \bigr]\\
+ &= \frac 12  \bigl[ \partial^2_x w_k(t_n, x_i) - (-1)^{i+n} (1 + 2\eta)^n \partial^2_x z_k(t_n, x_i) \bigr]
+ - \frac{(1 + \eta)}{2}  \bigl[ \partial^2_x w_k(t_n, x_i) - (-1)^{i+n} \frac{(1 + 2\eta)^{n}}{(1 + 2\eta)} \partial^2_x z_k(t_n, x_i) \bigr]\\
+ &= - \frac {\eta} 2  \partial^2_x w_k(t_n, x_i) - \frac {1} {2} (-1)^{i+n} (1 + 2\eta)^n \partial^2_x z_k(t_n, x_i)
+ + \frac{(1 + \eta)}{2} (-1)^{i+n} \frac{(1 + 2\eta)^n}{(1 + 2\eta)} \partial^2_x z_k(t_n, x_i)\\
+&= - \frac {\eta} 2  \partial^2_x w_k(t_n, x_i) - \frac {1} {2} (-1)^{i+n} (1 + 2\eta)^n \partial^2_x z_k(t_n, x_i)
+ + \frac{(1 + 2\eta - \eta)}{2} (-1)^{i+n} \frac{(1 + 2\eta)^n}{(1 + 2\eta)} \partial^2_x z_k(t_n, x_i)\\
+ &= - \frac {\eta} 2  \partial^2_x w_k(t_n, x_i) - (-1)^{i+n} (1 + 2\eta)^n \left( \frac {\eta} {2 (1 + 2\eta)} \partial^2_x z_k(t_n, x_i) \right)
+\end{align*}}
+Für die linke Seite der Gleichung \eqref{eq:alt:oh21} gilt ganz analog wie im Fall von $O(h)$ der Gleichung \eqref{alt:summe1}
+\begin{align*}
+\begin{split}
+&\partial_t u_1(n+1, i, t_n, x_i) + \partial_x u_1(n, i-1, t_n, x_i)\\
+&= \partial_t w_0(t_n, x_i) + \partial_x w_0(t_n, x_i) - (-1)^{i+n} (1 + 2\eta)^n \bigl( (1 + 2 \eta) \partial_t z_0(t_n, x_i) + \partial_x z_0(t_n, x_i) \bigr)
+\end{split}
+\end{align*}
+Hierauf kann man wieder Satz \ref{satz:alt:beidenull} anwenden und wir gelangen mit den Anfangswerten in \eqref{eq:transport:diskret:anfangsbedinungen} zu den Anfangswertproblemen
+\begin{align}
+\partial_t w_1(t, x) + \partial_x w_1(t, x) &= -\frac{\eta}{2}  \partial^2_x w_0(t, x), &w_1(0,x) &= 0 \qquad \text{und}\\
+\partial_t z_1(t, x) + \frac{1}{1 + 2 \eta} \partial_x z_1(t, x) &= \frac{\eta}{2 (1 + 2 \eta)^2} \partial^2_x z_0(t, x), &z_1(0,x) &= 0 \label{eq:transport:osz:oh2_B}
 \end{align}
 
-\noindent \emph{Mit den Anfangsbedingungen in \eqref{eq:transport:osz:anfangsbedinungen}}
-
-\vspace{0.4cm}
 Betrachtet man den Ansatz \eqref{eq:transport:osz:ansatz} nun genauer, so erkennt man, dass der Faktor $(1 + 2 \eta)^n$ für $\eta > 0$ und $n \to \infty$ unbeschränkt ist.
-Das heißt, der Ansatz kann bestenfalls nur für feste $h > 0$ gelten und hilft, wenn überhaupt, zu verstehen, wie sich das Verfahren unter solchen Bedingungen und in endlich vielen Iterationen verhält.
-In diesem Fall gibt es für jede Zeit $t > 0$ und zu jeder Schranke $X > 0$ ein $h > 0$, so dass $\abs{v^n_i} > X$ und $n \lambda h = t_n < t$ gilt.
-Das heißt, dass es für $h \to 0$ gar kein Zeitinterval geben kann, in dem der Ansatz \eqref{eq:transport:osz:ansatz} konvergiert. 
+Das heißt, dass der Ansatz für $h \to 0$ zu jeder noch so kleinen Zeit $t > 0$ beliebig groß wird, was das instabile Verhalten ja auch widergibt. 
+Genauer gibt es für jede Zeit $t > 0$ und zu jeder Schranke $X > 0$ ein $h > 0$, so dass $\abs{v^n_i} > X$ und $n \lambda h = t_n < t$ gilt.
 Allerdings bedeutet das auch, dass wir im Gegensatz zum regulären Fall die Lösungen $w_k$
 \begin{align}\label{eq:transport:osz:wk_loesungen}
 w_0(t, x) &= U(x - t) \qquad \text{und}\\
@@ -473,14 +531,13 @@ w_1(t, x) &= - t \frac{\eta} 2 \partial^2_x U(x - t)
 hinnehmen, da wir uns sowieso nicht wie z.\,B. für den Fall $\lambda < 1$ für das Langzeitverhalten der Lösung interessieren.
 
 Der Faktor $\frac{\eta}{2 (1 + 2 \eta)^2}$ in Gleichung \eqref{eq:transport:osz:oh2_B} ist für $\eta > 0$ positiv!
-Das heißt, dass sich $z_0$ diffusiv in der Zeit ausbreitet.
-Wie die Autoren in \cite{Junk2004} kann man für diesen Fall eine langsame Zeitskala $\tau_n = h t_n$ für $z_0$ in den Ansatz einbauen.
-Dann gilt
+Das heißt, dass wir hier wie die Autoren in \cite{Junk2004} den im regulären Fall aus Kapitel \ref{sec:regulaer} gezeigten Ansatz mit langsamer Zeitskala $\tau_n = h t_n$ für $z_0$ anwenden können.
+Es gilt dann
 \begin{align*}
 \partial_t z_0(t, \tau, x) + \frac {1} {1 + 2 \eta} \partial_x z_0(t, \tau, x) &= 0\\
 \partial_t z_1(t, \tau, x) + \frac {1} {1 + 2 \eta} \partial_x z_1(t, \tau, x) &= \frac{\eta}{2 (1 + 2 \eta)^2} \partial^2_x z_0(t, \tau, x) - \partial_\tau z_0(t, \tau, x)\\
 \end{align*}
-und fordert, dass
+und wir fordern mit dem zusätzlichen Freiheitsgrad, dass
 \[ 
 \partial_\tau z_0(t, \tau, x) = \frac{\eta}{2 (1 + 2 \eta)^2} \partial^2_x z_0(t, \tau, x) 
 \]
@@ -491,7 +548,7 @@ G_\tau(y) &= \sqrt {\frac{1}{\tau} \frac {(1 + 2 \eta)^2}{2 \pi \eta}} \exp\left
 \end{align*}
 Wenn wir alle Ergebnisse zusammensetzen gelangen wir zu dem folgendem Ausdruck
 \begin{align}\label{eq:transport:osz:loesung}
-v^n_i = U(x_i - t_n) + (-1)^{i+n} (1+ 2 \eta)^n (V * G_{\tau_n})\left(x - \frac{t_n}{1 + 2 \eta} \right) - \frac{h\eta} 2 t_n \partial^2_x U(x_i - t_n) + o(h).
+v^n_i = U(x_i - t_n) + (-1)^{i+n} (1+ 2 \eta)^n (V * G_{\tau_n})\left(x_i - \frac{t_n}{1 + 2 \eta} \right) - \frac{h\eta} 2 t_n \partial^2_x U(x_i - t_n) + o(h).
 \end{align}
 Wir nehmen für ein konkretes Beispiel die Startwerte $U(x) = \sin(\pi x)$ und $V(x) = \eps_M$.
 Wenn wir das in \eqref{eq:transport:osz:loesung} einsetzen, so gilt zunächst für alle $x, \tau \in \R:$ $(V * G_\tau)(x) = \eps_M$ und es gilt $\partial^2_x U(x_i - t_n) = -\pi^2 \sin\bigl(\pi (x_i - t_n)\bigr)$ für alle $(t_n, x_i) \in G_h$.

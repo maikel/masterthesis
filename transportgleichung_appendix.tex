@@ -279,86 +279,86 @@ Mit \eqref{apx:diskret:lemma2} folgt ganz analog für die Differenz in $i$
 &+ o(h^3).
 \end{split}
 \end{align}}
-\subsection{Rechnungen für alternierende Vorzeichen}
-\label{appendix:osz:sortiere_nach_frequenz}
-Wir arbeiten nun mit dem im Kapitel \ref{sec:transport:osz} hergeleitetem Ansatz \eqref{eq:transport:osz:ansatz}. 
-D.\,h. unsere diskreten Funktionen $u_i$ sind durch
-\[ u_k(n, i, t, x) = w_k(t, x) + (-1)^{i+n} (1 + 2\eta)^n z_k(t, x) \quad \text{für $k = 0,1$} \]
-gegeben, wobei $w_k, z_k \in \Cinf$ für $k=0, 1$ gilt.
-Dieser diskrete Ansatz ist gerade so bestimmt, dass für beide $k=0$ und $k=1$ die Gleichung
-\begin{align}\label{eq:apx:alt:prop1}
-u_k(n+1, i, t_n, x_i) - u_k(n, i, t_n, x_i) + (1 + 2\eta)\bigl(u_k(n, i, t_n, x_i) - u_k(n, i-1, t_n, x_i) \bigr) = 0
-\end{align}
-für alle $n \in \N$ und $i \in \Z$ erfüllt ist.
-Dies setzen wir in die Gleichungen \eqref{eq:transport:diskret:oh} und \eqref{eq:transport:diskret:oh2} ein und bestimmen daraus Bedingungen für die glatten Funktionen $w_k$ und $z_k$. 
-In der Ordnung $O(h)$ gilt nach den Rechnungen zum diskreten Ansatz die Gleichung \eqref{eq:transport:diskret:oh}, die da lautet:
-\begin{align*}
-(1 + 2\eta) \bigl( \partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i) \bigr) =
-\begin{split}
-&- \bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i, t_n, x_i) \bigr)\\
-&- (1 + 2 \eta) \bigl(u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr).
-\end{split}
-\end{align*}
-Die Rechte Seite dieser Gleichung verschwindet wegen der Eigenschaft \eqref{eq:apx:alt:prop1} und es folgt demnach für alle $n \in \N$, $i \in \Z$ und $h > 0$
-\begin{align*}
-\partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i) = 0.
-\end{align*}
-Weil sowohl $w_0$ als auch $z_0$ stetig differenzierbar sind, folgt für $n \in \N$ und $i \in \Z$
-\begin{align}
-\begin{split}
-\partial_t u_0(n+1, i, t_n, x_i) &= \partial_t \bigl( w_0(t_n, x_i) + (-1)^{i+n+1} (1 + 2\eta)^{n+1} z_0(t_n, x_i) \bigr)\\
-&= \partial_t w_0(t_n, x_i) + (-1)^{i+n} (1 + 2\eta)^n \bigl( - (1 + 2 \eta) \partial_t z_0(t_n, x_i) \bigr)
-\end{split}
-\end{align}
-und
-\begin{align}
-\begin{split}
-\partial_x u_0(n, i-1, t_n, x_i) &= \partial_x \bigl( w_0(t_n, x_i) + (-1)^{i+n-1} (1 + 2\eta)^n z_0(t_n, x_i) \bigr)\\
-&= \partial_x w_0(t_n, x_i) + (-1)^{i+n} (1 + 2\eta)^n \bigl( - \partial_x z_0(t_n, x_i) \bigr).
-\end{split}
-\end{align}
-In der Summe ergibt das nun
-\begin{align*}
-0 &= \partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i)\\
-&= \partial_t w_0(t_n, x_i) + \partial_x w_0(t_n, x_i)\\
-&\quad - (-1)^{i+n} (1 + 2\eta)^n \bigl( (1 + 2 \eta) \partial_t z_0(t_n, x_i) + \partial_x z_0(t_n, x_i) \bigr),
-\end{align*}
-also
-\begin{align}\label{eq:apx:beidenull}
-\partial_t w_0(t_n, x_i) + \partial_x w_0(t_n, x_i) = (-1)^{i+n} (1 + 2\eta)^n \bigl( (1 + 2 \eta) \partial_t z_0(t_n, x_i) + \partial_x z_0(t_n, x_i) \bigr).
-\end{align}
-Wir verwenden nun Lemma \ref{lemma:transport:diskret:konvergenz_gitter}, um zu zeigen, dass beide Seiten umanhängig von einander Null sein müssen.
-\begin{satz}
-Für alle $(t, x) \in \Rp \times \R$ gilt
-\begin{align}\label{eq:apx:wgl}
-\partial_t w_0(t, x) + \partial_x w_0(t, x) &= 0 \qquad \text{und}\\ 
-(1 + 2 \eta) \partial_t z_0(t, x) + \partial_x z_0(t, x) &= 0. \label{eq:apx:zgl}
-\end{align} 
-\end{satz}
-\begin{proof}
-In das Lemma setzen wir
-\[ F(t,x) = \partial_t w_0(t, x) + \partial_x w_0(t, x)\] 
-und
-\begin{align*}
-f(n,i,t,x) &= (-1)^{i+n} (1 + 2\eta)^n \bigl( \underbrace{(1 + 2 \eta) \partial_t z_0(t, x) + \partial_x z_0(t, x)}_{=: g(t,x)} \bigr) = (-1)^{i+n} (1 + 2\eta)^n g(t,x)
-\end{align*}
-ein, wobei wegen $w_0, z_0 \in \Cinf$ die beiden Abbildungen $F$ und $g$ beide stetig differenzierbar sind.
-Es existiert also für alle $(t,x) \in \Rp \times \R$ und $n \in \N$ ein $i(n) \in \Z$, so dass die Ungleichung \eqref{eq:lemma:diag:aussage}
-\begin{align}
-\abs{F(t, x) - f(n, i(n), t, x)} \leq \frac {t}{\lambda n} \Bigl(\bigl\lvert f_x(n, i(n), t, x) \bigr\rvert + \bigl\lvert F_x(t, x) \bigr\rvert \Bigr)
-\end{align}
-erfüllt ist.
-Wegen $\abs{f(n, i(n), t, x)} - \abs{F(t,x)} \leq \abs{F(t, x) - f(n, i(n), t, x)}$ und $\frac {t}{\lambda n} \bigl\lvert F_x(t, x) \bigr\rvert \to 0$ für $n \to \infty$, impliziert das
-\[ \abs{f(n, i(n), t, x)} \leq \frac {t}{\lambda n} \abs{f_x(n, i(n), t, x)} +  \frac {t}{\lambda n} \bigl\lvert F_x(t, x) \bigr\rvert + \abs{F(t,x)} \]
-also
-\begin{align}
-(1 + 2\eta)^n \abs{g(t,x)} &\leq \frac{t}{\lambda n} \cdot (1 + 2\eta)^n \abs{\partial_x g(t,x)} + \frac {t}{\lambda n} \bigl\lvert \partial_x F(t, x) \bigr\rvert + \abs{F(t,x)}\\
-\Leftrightarrow \qquad \abs{g(t,x)} &\leq \underbrace{\frac{t}{\lambda n} \abs{\partial_x g(t,x)}}_{\to 0} + \underbrace{(1 + 2 \eta)^{-n} \left( \frac {t}{\lambda n} \bigl\lvert \partial_x F(t, x) \bigr\rvert + \abs{F(t,x)} \right)}_{\to 0} \to 0 \qquad \text{für $n \to \infty$},
-\end{align}
-woraus $g(t,x) = 0$ und somit auch $F(t,x) = 0$ für alle $(t,x) \in \Rp \times \R$ folgt.
-\end{proof}
-Aus den Gleichungen \eqref{eq:apx:wgl} und \eqref{eq:apx:zgl} folgt insbesondere auch
-\[ \partial^2_t w_0 = \partial^2_x w_0 \quad \text{und} \quad \partial^2_t z_0 = \frac {1}{(2\lambda - 1)^2} \partial^2_x z_0. \]
+% \subsection{Rechnungen für alternierende Vorzeichen}
+% \label{appendix:osz:sortiere_nach_frequenz}
+% Wir arbeiten nun mit dem im Kapitel \ref{sec:transport:osz} hergeleitetem Ansatz \eqref{eq:transport:osz:ansatz}. 
+% D.\,h. unsere diskreten Funktionen $u_i$ sind durch
+% \[ u_k(n, i, t, x) = w_k(t, x) + (-1)^{i+n} (1 + 2\eta)^n z_k(t, x) \quad \text{für $k = 0,1$} \]
+% gegeben, wobei $w_k, z_k \in \Cinf$ für $k=0, 1$ gilt.
+% Dieser diskrete Ansatz ist gerade so bestimmt, dass für beide $k=0$ und $k=1$ die Gleichung
+% \begin{align}\label{eq:apx:alt:prop1}
+% u_k(n+1, i, t_n, x_i) - u_k(n, i, t_n, x_i) + (1 + 2\eta)\bigl(u_k(n, i, t_n, x_i) - u_k(n, i-1, t_n, x_i) \bigr) = 0
+% \end{align}
+% für alle $n \in \N$ und $i \in \Z$ erfüllt ist.
+% Dies setzen wir in die Gleichungen \eqref{eq:transport:diskret:oh} und \eqref{eq:transport:diskret:oh2} ein und bestimmen daraus Bedingungen für die glatten Funktionen $w_k$ und $z_k$. 
+% In der Ordnung $O(h)$ gilt nach den Rechnungen zum diskreten Ansatz die Gleichung \eqref{eq:transport:diskret:oh}, die da lautet:
+% \begin{align*}
+% (1 + 2\eta) \bigl( \partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i) \bigr) =
+% \begin{split}
+% &- \bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i, t_n, x_i) \bigr)\\
+% &- (1 + 2 \eta) \bigl(u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr).
+% \end{split}
+% \end{align*}
+% Die Rechte Seite dieser Gleichung verschwindet wegen der Eigenschaft \eqref{eq:apx:alt:prop1} und es folgt demnach für alle $n \in \N$, $i \in \Z$ und $h > 0$
+% \begin{align*}
+% \partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i) = 0.
+% \end{align*}
+% Weil sowohl $w_0$ als auch $z_0$ stetig differenzierbar sind, folgt für $n \in \N$ und $i \in \Z$
+% \begin{align}
+% \begin{split}
+% \partial_t u_0(n+1, i, t_n, x_i) &= \partial_t \bigl( w_0(t_n, x_i) + (-1)^{i+n+1} (1 + 2\eta)^{n+1} z_0(t_n, x_i) \bigr)\\
+% &= \partial_t w_0(t_n, x_i) + (-1)^{i+n} (1 + 2\eta)^n \bigl( - (1 + 2 \eta) \partial_t z_0(t_n, x_i) \bigr)
+% \end{split}
+% \end{align}
+% und
+% \begin{align}
+% \begin{split}
+% \partial_x u_0(n, i-1, t_n, x_i) &= \partial_x \bigl( w_0(t_n, x_i) + (-1)^{i+n-1} (1 + 2\eta)^n z_0(t_n, x_i) \bigr)\\
+% &= \partial_x w_0(t_n, x_i) + (-1)^{i+n} (1 + 2\eta)^n \bigl( - \partial_x z_0(t_n, x_i) \bigr).
+% \end{split}
+% \end{align}
+% In der Summe ergibt das nun
+% \begin{align*}
+% 0 &= \partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i)\\
+% &= \partial_t w_0(t_n, x_i) + \partial_x w_0(t_n, x_i)\\
+% &\quad - (-1)^{i+n} (1 + 2\eta)^n \bigl( (1 + 2 \eta) \partial_t z_0(t_n, x_i) + \partial_x z_0(t_n, x_i) \bigr),
+% \end{align*}
+% also
+% \begin{align}\label{eq:apx:beidenull}
+% \partial_t w_0(t_n, x_i) + \partial_x w_0(t_n, x_i) = (-1)^{i+n} (1 + 2\eta)^n \bigl( (1 + 2 \eta) \partial_t z_0(t_n, x_i) + \partial_x z_0(t_n, x_i) \bigr).
+% \end{align}
+% Wir verwenden nun Lemma \ref{lemma:transport:diskret:konvergenz_gitter}, um zu zeigen, dass beide Seiten umanhängig von einander Null sein müssen.
+% \begin{satz}
+% Für alle $(t, x) \in \Rp \times \R$ gilt
+% \begin{align}\label{eq:apx:wgl}
+% \partial_t w_0(t, x) + \partial_x w_0(t, x) &= 0 \qquad \text{und}\\ 
+% (1 + 2 \eta) \partial_t z_0(t, x) + \partial_x z_0(t, x) &= 0. \label{eq:apx:zgl}
+% \end{align} 
+% \end{satz}
+% \begin{proof}
+% In das Lemma setzen wir
+% \[ F(t,x) = \partial_t w_0(t, x) + \partial_x w_0(t, x)\] 
+% und
+% \begin{align*}
+% f(n,i,t,x) &= (-1)^{i+n} (1 + 2\eta)^n \bigl( \underbrace{(1 + 2 \eta) \partial_t z_0(t, x) + \partial_x z_0(t, x)}_{=: g(t,x)} \bigr) = (-1)^{i+n} (1 + 2\eta)^n g(t,x)
+% \end{align*}
+% ein, wobei wegen $w_0, z_0 \in \Cinf$ die beiden Abbildungen $F$ und $g$ beide stetig differenzierbar sind.
+% Es existiert also für alle $(t,x) \in \Rp \times \R$ und $n \in \N$ ein $i(n) \in \Z$, so dass die Ungleichung \eqref{eq:lemma:diag:aussage}
+% \begin{align}
+% \abs{F(t, x) - f(n, i(n), t, x)} \leq \frac {t}{\lambda n} \Bigl(\bigl\lvert f_x(n, i(n), t, x) \bigr\rvert + \bigl\lvert F_x(t, x) \bigr\rvert \Bigr)
+% \end{align}
+% erfüllt ist.
+% Wegen $\abs{f(n, i(n), t, x)} - \abs{F(t,x)} \leq \abs{F(t, x) - f(n, i(n), t, x)}$ und $\frac {t}{\lambda n} \bigl\lvert F_x(t, x) \bigr\rvert \to 0$ für $n \to \infty$, impliziert das
+% \[ \abs{f(n, i(n), t, x)} \leq \frac {t}{\lambda n} \abs{f_x(n, i(n), t, x)} +  \frac {t}{\lambda n} \bigl\lvert F_x(t, x) \bigr\rvert + \abs{F(t,x)} \]
+% also
+% \begin{align}
+% (1 + 2\eta)^n \abs{g(t,x)} &\leq \frac{t}{\lambda n} \cdot (1 + 2\eta)^n \abs{\partial_x g(t,x)} + \frac {t}{\lambda n} \bigl\lvert \partial_x F(t, x) \bigr\rvert + \abs{F(t,x)}\\
+% \Leftrightarrow \qquad \abs{g(t,x)} &\leq \underbrace{\frac{t}{\lambda n} \abs{\partial_x g(t,x)}}_{\to 0} + \underbrace{(1 + 2 \eta)^{-n} \left( \frac {t}{\lambda n} \bigl\lvert \partial_x F(t, x) \bigr\rvert + \abs{F(t,x)} \right)}_{\to 0} \to 0 \qquad \text{für $n \to \infty$},
+% \end{align}
+% woraus $g(t,x) = 0$ und somit auch $F(t,x) = 0$ für alle $(t,x) \in \Rp \times \R$ folgt.
+% \end{proof}
+% Aus den Gleichungen \eqref{eq:apx:wgl} und \eqref{eq:apx:zgl} folgt insbesondere auch
+% \[ \partial^2_t w_0 = \partial^2_x w_0 \quad \text{und} \quad \partial^2_t z_0 = \frac {1}{(2\lambda - 1)^2} \partial^2_x z_0. \]
 
 % \vspace{0.4cm}
 % \noindent \textbf{In der Ordnung $O(h^2)$:}
@@ -585,7 +585,10 @@ F(t_n, x_k) &= \Ree\left( e^{i \omega k} \Omega(n) f(t_n, x_k) \right)
 \end{split}
 \end{align}
 für zwei glatte Funktionen $F,f \in \Cinf$. Dann gilt für alle $(t,x) \in \Rp \times \R$
-\[ F(t, x) = f(t, x) = 0. \]
+\begin{align*}
+F(t, x) &= 0 \quad \text{und}\\
+f(t, x) &= 0.
+\end{align*}
 \end{satz}
 \begin{proof}
 Weil $f$ stetig differenzierbar ist, gilt mit der Voraussetzung \eqref{satz:glgreg:vor}
