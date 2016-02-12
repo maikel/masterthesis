@@ -64,11 +64,30 @@ Beschreibung hochfrequenter numerischer Instabilitäten mit Hilfe asymptotischer
 
 \begin{document}
 
-\newgeometry{margin=1in}
+\pagenumbering{alph}
 \maketitle
-\restoregeometry
+\thispagestyle{empty}
+
+% \vfill{}
+
+% \begin{abstract}
+% Abstract
+% \end{abstract}
+
+% \vfill{}
+
+\end{titlepage}
+
+\pagestyle{empty}
+\clearpage\pagenumbering{roman}
+
+\include{declaration}
 
 \tableofcontents
+
+\clearpage\pagenumbering{arabic}
+\pagestyle{fancy}
+\setcounter{page}{1}
 
 \chapter{Vorwort}
 \input{vorwort}

@@ -608,6 +608,8 @@ Gerade für Probleme, bei denen numerische Daten nur in einem ``kurzem'' Zeitint
 Der bisherige Ansatz hat dies ignoriert und obwohl Abbildung \ref{fig:transport:osz:max_error} zeigt, dass \eqref{eq:transport:osz:loesung} bereits gute Approximationen liefert, werden solche Überlegungen spätestens für die Advektion mit variabler Geschwindigkeit oder auch nichtlineare Probleme von Nöten sein.
 Daher betrachten wir nun die Koppelung $\eta = h$ und setzen $\lambda = 1 + h$ in die Gleichungen ein \eqref{eq:transport:diskret:o1} bis \eqref{eq:transport:diskret:oh3} ein:
 
+\subsection*{Allgemeine Gleichungen}
+
 \vspace{0.4cm}
 \noindent \emph{in der Ordnung $O(1)$:}
 \begin{align}\label{eq:transport:kleineta:o1}
@@ -669,6 +671,8 @@ z_1(0, x_i) &= 0,\\
 z_2(0, x_i) &= 0
 \end{split}
 \end{align}
+
+\subsection*{Alternierende Gittervorzeichen}
 
 Setzt man wieder den Ansatz mit alternierenden Gittervorzeichen
 \[ u_k(n, i, t, x) = w_k(t, x) + (-1)^i \Omega(n) z_k(t, x), \qquad k = 0,1,2 \]
@@ -860,113 +864,86 @@ Mit \eqref{eq:ke:lang} lässt sich A dann für alle $(t, \tau, x) \in \Rp^2 \tim
 bestimmen und es folgt für alle $(t, \tau, x) \in \Rp \times \R$
 \[ z_0(t, \tau, x) = V(x - t + \tau) e^{2 (t - \tau)}, \qquad z_1(t, \tau, x) = 0. \]
 
+
+Zumindest bis zur Ordnung $O(h^2)$ können wir unseren Ansatz nun schon konkretisieren und er ist bestimmt, durch
+\begin{align}\label{eq:ke:loesung}
+v^n_i = U(x_i - t_n) + V(x_i - t_n + 2 h t_i) e^{2 (t_i - 2 h t_i)} + O(h^2).
+\end{align}
+
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\begin{semilogyaxis}[
+    title={$\err^n = \max_{i \in \Z} \abs{\sin\bigl(\pi (x_i - t_n )\bigr) - v^n_i}$},
+    xlabel={Zeit $t$},
+    ylabel={maximaler Fehler},
+    legend entries={$\err^n$,$\eps_M e^{2t}$, $t h^2 \frac{\pi^2}{2}$, $\eps_M e^{2t} + t h^2 \frac{\pi^2}{2}$},
+    legend style={at={(1.5,1)}}
+]
+\addplot[myblue, line width={2}] table {data/max_errors_small_eta_0.001.dat};
+\addplot[black, line width={0.5}, dotted] table [y index={2}] {data/max_errors_small_eta_0.001.dat};
+\addplot[mygray, line width={1}, dashdotted] table [y index={4}] {data/max_errors_small_eta_0.001.dat};
+\addplot[black, line width={0.5}, mark=o, mark repeat={10}] table [y index={3}] {data/max_errors_small_eta_0.001.dat};
+\end{semilogyaxis}
+\end{tikzpicture}
+\caption{Hier vergleichen wir die maximalen Fehler der numerischen Lösungen für die Startwerte $U(x) = sin(\pi x)$, $V(x) = \eps_M$ und $\eta = h = 10^{-3}$ zur echten Lösung $u(t,x) = sin(\pi(x - t))$ mit dem geschätztem Fehler $\eps_M e^{2t}$ aus der asymptotischen Entwicklung in .}
+\label{fig:transport:kleineta:max_error}
+\end{figure}
+
+Auch dieses Ergebnis vergleichen wir nun mit unserer Referenzlösung in der Abbildung \ref{fig:transport:kleineta:max_error} und man erkennt, dass wir die Steigung des Fehlerwachstums gut eingefangen haben.
+
+\subsection*{Fehler bestimmen: eine Ordnung weiter}
+
 Setzen wir unsere bisherigen Erkenntnisse nun wie in Anhang \ref{appendix:kleineta:rechnung} ein, so erhalten wir in Ordnung $O(h^3)$ schlussendlich die Gleichungen
 \begin{align}
 \partial_t w_2(t,x) + \partial_x w_2(t,x) &= - \frac{1}{2} \partial^2_t w_0(t,x)\\
 \begin{split}
-\partial_t z_2(t,x) + \partial_x z_2(t,x) &= 2 z_2(t,x) - \Bigl( 2 \bigl( \partial_\tau z_0(t,x) + \partial^2_\tau z_0(t,x) \bigr)\\
-&\quad + \partial^2_t z_0(t,x) - \frac{1}{2} \partial^2_x z_0(t,x) + \frac{1}{6} \bigl(\partial^3_t z_0(t,x) + \partial^3_x z_0(t,x)\bigr) \Bigr)
+\partial_t z_2(t,\tau,x) + \partial_x z_2(t,\tau,x) &= 2 z_2(t,\tau,x) - \Bigl( 2 \bigl( \partial_\tau z_0(t,\tau,x) + \partial^2_\tau z_0(t,\tau,x) \bigr)\\
+&\quad + \partial^2_t z_0(t,\tau,x) - \frac{1}{2} \partial^2_x z_0(t,\tau,x) + \frac{1}{6} \bigl(\partial^3_t z_0(t,\tau,x) + \partial^3_x z_0(t,\tau,x)\bigr) \Bigr)
 \end{split}
 \end{align}
-Damit gilt halten wir schonmal die Lösung $w_2(t,x) = -\frac{t}{2} \partial^2_t w_0(t,x)$ fest.
-Es gilt weiterhin
+
+Damit halten wir schonmal die Lösung $w_2(t,x) = -\frac{t}{2} \partial^2_t w_0(t,x)$ fest und führen für $z_2$ ein paar Nebenrechnungen durch.
+Es gilt
 \begin{align}
 \begin{split}
-\partial^3_t z_0(t,x) &= \partial_t \bigl( \partial^2_t z_0(t,x) \bigr)\\
-&= \partial_t \bigl( 4 z_0(t_n,x_i) - 4 \partial_x z_0(t_n,x_i) + \partial^2_x z_0(t_n,x_i) \bigr)\\
+\partial^3_t z_0 &= \partial_t \bigl( \partial^2_t z_0 \bigr)\\
+&= \partial_t \bigl( 4 z_0 - 4 \partial_x z_0 + \partial^2_x z_0 \bigr)\\
 &= 4 ( 2z_0 - \partial_x z_0 ) - 4 \partial_x \bigl( 2z_0 - \partial_x z_0 \bigr) + \partial^2_x \bigl( 2 z_0 - \partial_x z_0 \bigr)\\
 &= 8z_0 - 4 \partial_x z_0 - 8 \partial_x z_0 + 4 \partial^2_x z_0 + 2 \partial^2_x z_0 - \partial^3_x z_0\\
-&= 8 z_0 - 12 \partial_x z_0 + 6 \partial^2 z_0 - \partial^3_x z_0
+&= 8 z_0 - 12 \partial_x z_0 + 6 \partial^2_x z_0 - \partial^3_x z_0
 \end{split}
 \end{align}
 also
 \begin{align}
-\frac{1}{6} \bigl(\partial^3_t z_0(t,x) + \partial^3_x z_0(t,x)\bigr)
+\frac{1}{6} \bigl(\partial^3_t z_0 + \partial^3_x z_0 \bigr)
 = \frac{4}{3} z_0 - 2 \partial_x z_0 + \partial^2_x z_0.
 \end{align}
-
-% Hieraus folgen dieses mal die Gleichungen:
-
-% \vspace{0.4cm}
-% \noindent \emph{In der Ordnung $O(h)$}
-% \begin{align*}
-% \partial_t w_0(t, x) + \partial_x w_0(t, x) &= 0 \qquad \text{und}\\
-% \partial_t z_0(t, x) + \partial_x z_0(t, x) &= 2 z_0(t, x)
-% \end{align*}
-% woraus Wegen der Anfangsbedingungen \eqref{eq:transport:kleineta:anfangsbedinungen} $w_0(t,x) = U(x -t)$ und $z_0(t,x) = V(x - t) e^{2 t}$ folgt.
-
-% \begin{figure}
-% \centering
-% \begin{tikzpicture}
-% \begin{semilogyaxis}[
-%     title={$\err^n = \max_{i \in \Z} \abs{\sin\bigl(\pi (x_i - t_n )\bigr) - v^n_i}$},
-%     xlabel={Zeit $t$},
-%     ylabel={maximaler Fehler},
-%     legend entries={$\err^n$,$\eps_M e^{2t}$, $t h^2 \frac{\pi^2}{2}$, $\eps_M e^{2t} + t h^2 \frac{\pi^2}{2}$},
-%     legend style={at={(1.5,1)}}
-% ]
-% \addplot[myblue, line width={2}] table {data/max_errors_small_eta_0.001.dat};
-% \addplot[black, line width={0.5}, dotted] table [y index={2}] {data/max_errors_small_eta_0.001.dat};
-% \addplot[mygray, line width={1}, dashdotted] table [y index={4}] {data/max_errors_small_eta_0.001.dat};
-% \addplot[black, line width={0.5}, mark=o, mark repeat={10}] table [y index={3}] {data/max_errors_small_eta_0.001.dat};
-% \end{semilogyaxis}
-% \end{tikzpicture}
-% \caption{Hier vergleichen wir die maximalen Fehler der numerischen Lösungen für die Startwerte $U(x) = sin(\pi x)$, $V(x) = \eps_M$ und $\eta = h = 10^{-3}$ zur echten Lösung $u(t,x) = sin(\pi(x - t))$ mit dem geschätztem Fehler $\eps_M e^{2t}$ aus der asymptotischen Entwicklung in .}
-% \label{fig:transport:kleineta:max_error}
-% \end{figure}
-
-% \vspace{0.4cm}
-% \noindent \emph{In der Ordnung $O(h^2)$}
-% \begin{align*}
-% \partial_t w_1(t, x) + \partial_x w_1(t, x) &= 0 \qquad \text{und}\\
-% \partial_t z_1(t, x) + \partial_x z_1(t, x) &= 2 z_1(t, x).
-% \end{align*}
-% Dieses mal folgt aus $w_1(0,x) = z_1(0,x) = 0$ sogar $z_1 = w_1 = 0$.
-
-% \vspace{0.4cm}
-% \noindent \emph{In der Ordnung $O(h^3)$}
-% \begin{align*}
-% \partial_t w_2(t, x) + \partial_x w_2(t, x) &= - \frac{1}{2} \partial^2_x w_0(t, x) \qquad \text{und}\\
-% \partial_t z_2(t, x) + \partial_x z_2(t, x) &= \frac{1}{2} \partial^2_x z_0(t, x) - \partial^2_t z_0(t, x) + 2 z_2(t, x)\\
-% &= \frac{1}{2} \partial^2_x z_0(t, x) - \partial_t \bigl( z_0(t, x) - \partial_x z_0 \bigr) + 2 z_2(t, x)\\
-% &= \frac{1}{2} \partial^2_x z_0(t, x) + \partial_x z_0(t, x) - z_0(t, x) + \partial_x \bigl( z_0 - \partial_x z_0 \bigr) + 2 z_2(t, x)\\
-% &= - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t, x) + 2 z_2(t, x)\\
-% \end{align*}
-
-% Um die Differentialgleichung für $z_2$ zu lösen, machen wir den Ansatz
-
-% \[ z(t,x) = e^{2t} A(t,x). \]
-
-% Dann gilt
-
-% \begin{align*}
-% \partial_x z(t,x) &= e^{2t} \partial_x A(t,x)\\
-% \partial_t z(t,x) &= 2 e^{2t} A(t,x) + e^{2t} \partial_t A(t, x)\\
-%                   &= 2 z(t, x) + e^{2t} \partial_t A(t, x).
-% \end{align*}
-
-% Wenn also
-% \[ \partial_t z(t, x) + \partial_x z(t, x) = - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t, x) + 2 z(t, x) \]
-% gelten soll, so müssen wir $A$ derart bestimmen, so dass
-% \[ \partial_t A(t, x) + \partial_x A(t,x) = e^{-2t} \bigl( - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t, x) \bigr) \]
-% gilt. Da nun $z_0(t,x) = e^{2t} V(x - t)$ gilt, folgt
-% \[ \partial_t A(t, x) + \partial_x A(t,x) = - \frac{1}{2} \partial^2_x V(x - t) + 2 \partial_x V(x - t) - V(x - t) \]
-% und das ist die inhomogene Transportgleichung für $A$. Somit ist die Lösung durch
-% \[ A(t,x) = t \left( - \frac{1}{2} \partial^2_x V(x - t) + 2 \partial_x V(x - t) - V(x - t) \right) \]
-% gegeben und es gilt insgesamt
-% \[ z(t,x) = t e^{2t} \left( - \frac{1}{2} \partial^2_x V(x - t) + 2 \partial_x V(x - t) - V(x - t) \right) \]
-
-% \begin{align*}
-% w_2(t,x) &= - t \frac{1}{2} \partial^2_x U(x - t) \qquad \text{und}\\
-% z_2(t,x) &= t e^{2t} \left( - \frac{1}{2} \partial^2_x V(x - t) + 2 \partial_x V(x - t) - V(x - t) \right)\\
-% \end{align*}
-
-% Denn es gilt 
-
-% \begin{align*}
-% \partial_t z_2(t,x) &= \partial_t \left( e^{2t} \int_0^t e^{-2s} \left[ - \frac{1}{2} \partial^2_x z_0(s, x) + 2 \partial_x z_0(s, x) - z_0(s,x) \right] \dd s \right)\\
-% &= 2 z_2(t,x) + e^{2t} e^{-2t} \left[ - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t,x) \right]\\
-% &= 2 z_2(t,x) - \frac{1}{2} \partial^2_x z_0(t, x) + 2 \partial_x z_0(t, x) - z_0(t,x)
-% \end{align*}
+Außerdem gilt
+\[ \partial_\tau z_0 = - \partial_t z_0 \]
+und das impliziert
+\begin{align*}
+2 \bigl( \partial_\tau z_0 + \partial^2_\tau z_0 \bigr) + \partial^2_t z_0
+&= - 2 \partial_t z_0 + 2 \partial^2_t z_0 + \partial^2_t z_0\\
+&= - 2 \partial_t z_0 + 3 \partial^2_t z_0 \\
+&= - 2 (2 z_0 - \partial_x z_0) + 3 (4 z_0 - 4 \partial_x z_0 + \partial^2_x z_0)\\
+&= - 4 z_0 - 2 \partial_x z_0 + 12 z_0 - 12 \partial_x z_0 + 3 \partial^2_x z_0\\
+&= 8 z_0 - 14 \partial_x z_0 + 3 \partial^2_x z_0.
+\end{align}
+In Summe ergeben diese Rechnungen
+\begin{align}
+\begin{split}
+&2 \bigl( \partial_\tau z_0 + \partial^2_\tau z_0 \bigr) + \partial^2_t z_0 - \frac{1}{2} \partial^2_x z_0 + \frac{1}{6} \bigl(\partial^3_t z_0 + \partial^3_x z_0 \bigr)\\
+&= 8 z_0 - 14 \partial_x z_0 + 3 \partial^2_x z_0 - \frac{1}{2} \partial^2_x z_0 + \frac{4}{3} z_0 - 2 \partial_x z_0 + \partial^2_x z_0\\
+&= \frac{28}{3} z_0 - 16 \partial_x z_0 + \frac{7}{2} \partial^2_x z_0
+\end{split}
+\end{align}
+Man kann das gleiche Spiel wie in der letzten Ordnung, $O(h^2)$, wiederholen und eine langsame weitere Zeitvariable $\tau_2 = h^2 t$ einführen.
+Fordert man nun, dass 
+\begin{align} \label{eq:ke:addiff}
+\partial_{\tau_2} z_0 + 16 \partial_x z_0 = \frac{28}{3} z_0 + \frac{7}{2} \partial^2_x z_0
+\end{align}
+gilt, so folgt auch $z_2 = 0$. Gleichung \eqref{eq:ke:addiff} ist eine Advektion-Diffusion Gleichung und bedeutet, dass $z_0$ entlang von Geraden advektiert und diffundiert wird.
+Diese Gleichung ist wohl gestellt, weil $\frac{7}{2} > 0$ gilt.
 
 \section{Andere Frequenzen auf Gitterniveau -- ein Exponentialansatz}
