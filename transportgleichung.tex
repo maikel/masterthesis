@@ -859,7 +859,7 @@ auf und fordern zusätzlich
 \end{align}
 Aus der ersten Gleichung $\partial_t z_0(t,\tau,x) + \partial_x z_0(t,\tau,x) &= 2 z_0(t,\tau,x)$, mit $z_0(0,0,x) = V(x)$ folgern wir
 $z_0(t, \tau, x) = A(\tau, x - t) e^{2t}$ für eine Abbildung $A$ mit $A(0, x) = V(x)$ für alle $x \in \R$.
-Mit \eqref{eq:ke:lang} lässt sich A dann für alle $(t, \tau, x) \in \Rp^2 \times \R$ durch
+Mit \eqref{eq:ke:lang} lässt sich A dann für alle $(t, \tau, x) \in \left(\Rp\right)^2 \times \R$ durch
 \[ A(\tau, x - t) = A(0, x - t + \tau) e^{- 2\tau} \]
 bestimmen und es folgt für alle $(t, \tau, x) \in \Rp \times \R$
 \[ z_0(t, \tau, x) = V(x - t + \tau) e^{2 (t - \tau)}, \qquad z_1(t, \tau, x) = 0. \]
@@ -929,7 +929,7 @@ und das impliziert
 &= - 2 (2 z_0 - \partial_x z_0) + 3 (4 z_0 - 4 \partial_x z_0 + \partial^2_x z_0)\\
 &= - 4 z_0 - 2 \partial_x z_0 + 12 z_0 - 12 \partial_x z_0 + 3 \partial^2_x z_0\\
 &= 8 z_0 - 14 \partial_x z_0 + 3 \partial^2_x z_0.
-\end{align}
+\end{align*}
 In Summe ergeben diese Rechnungen
 \begin{align}
 \begin{split}
@@ -943,7 +943,79 @@ Fordert man nun, dass
 \begin{align} \label{eq:ke:addiff}
 \partial_{\tau_2} z_0 + 16 \partial_x z_0 = \frac{28}{3} z_0 + \frac{7}{2} \partial^2_x z_0
 \end{align}
-gilt, so folgt auch $z_2 = 0$. Gleichung \eqref{eq:ke:addiff} ist eine Advektion-Diffusion Gleichung und bedeutet, dass $z_0$ entlang von Geraden advektiert und diffundiert wird.
-Diese Gleichung ist wohl gestellt, weil $\frac{7}{2} > 0$ gilt.
+gilt, so folgt auch $z_2 = 0$. Gleichung \eqref{eq:ke:addiff} ist eine Advektion-Diffusion Gleichung.
 
 \section{Andere Frequenzen auf Gitterniveau -- ein Exponentialansatz}
+
+Bisher haben wir für die Störungen $z(t,x)$ immer nur eine feste Frequenz angenommen, nämlich alternierende Gittervorzeichen.
+Wir untersuchen nun, wie das Upwindverfahren auf andere hochfrequente, also von Gitterkoordinaten abhängige, Ansätze wirkt.
+Wir beschreiben unsere Oszillationen mithilfe der komplexen Exponentialfunktion und schreiben für die Ortsindizes von jetzt an $k$ statt $i$.
+Im Folgenden betrachten wir immer den Ansatz
+
+\begin{align}\label{eq:exp:ansatz}
+v^n_k = \Ree \Bigl[ w_0(t_n, x_k) + h w_1(t_n, x_k) + e^{i(\omega k - \theta n)} \bigl( z_0(t_n, x_k) + h z_1(t_n, x_k) \bigr) + O(h^2) \Bigr].
+\end{align}
+
+bzw.
+
+\begin{align}
+u_k(n, k, t, x) = \Ree \bigl[ w_k(t, x) + e^{i (\omega k - \theta n)} z_k(t, x) \bigr], \qquad \text{für $k = 0,1$}
+\end{align}
+
+Weil wir nur lineare Gleichungen betrachten, schreiben wir von nun an nicht mehr hin, dass wir immer nur den Realanteil betrachten.
+Wir schauen nun wieder, welche Bedingung an die Frequenz wir aus der der Gleichung \eqref{eq:transport:diskret:o1} in der ersten Ordnung $O(1)$ herleiten können.
+Es gilt
+\begin{align}\begin{split}
+u_0(n+1,k,t_n,x_k)&\qquad\quad\\
+- u_0(n,k,t_n,x_k) &= w_0(t_n,x_i) + e^{i (\omega k - \theta (n+1))} z_0(t_n,x_i)\\
+    &\qquad - \bigl( w_0(t_n,x_i) + e^{i (\omega k - \theta n)} z_0(t_n,x_i) \bigr)\\
+&= e^{i (\omega k - \theta n)} (e^{-i\theta} - 1) z_0(t_n,x_i)
+\end{split}\end{align}
+und
+\begin{align}\begin{split}
+u_0(n,k,t_n,x_k)\qquad \quad &\\
+- u_0(n,k-1,t_n,x_k) &= w_0(t_n,x_i) + e^{i (\omega k - \theta n)} z_0(t_n,x_i)\\
+& \qquad - \bigl( w_0(t_n,x_i) + e^{i (\omega (k-1) - \theta n)} z_0(t_n,x_i) \bigr)\\
+&= e^{i (\omega k - \theta n)} (1 - e^{-i \omega}) z_0(t_n,x_i).
+\end{split}\end{align}
+also folgt aus
+\begin{align}\label{eq:wkb:bed1}
+u_0(n+1,k,t_n,x_k) - u_0(n,k,t_n,x_k) + \lambda (u_0(n,k,t_n,x_k) - u_0(n,k-1,t_n,x_k)) = 0
+\end{align}
+auch für alle $(n, k) \in \N \times \Z$
+\begin{align}
+0 &= e^{i (\omega k - \theta n)} (e^{-i\theta} - 1) z_0(t_n,x_i) + \lambda e^{i (\omega k - \theta n)} (1 - e^{-i \omega}) z_0(t_n,x_i)\\
+&= e^{i (\omega k - \theta n)} z_0(t_n,x_i) ( \lambda - 1 + e^{-i\theta} - \lambda e^{-i \omega} )
+\end{align}
+Und wenn wir $z_0 \neq 0$ annehmen, so folgt
+\begin{align}
+e^{-i \theta} - \lambda e^{-i \omega} = 1 - \lambda
+\end{align}
+bzw.
+\begin{align*}\label{eq:wkb:gl1}
+\cos(\theta) - \lambda \cos(\omega) &= 1 - \lambda\\
+\theta  &=  \arccos\bigl(1 - \lambda + \lambda \cos(\omega) \bigr). &\Leftrightarrow
+\end{align*}
+
+Weil wir für $u_1$ dieselbe Frequenz annehmen wie für $u_0$, folgt mit so bestimmtem $\omega$ und $\theta$ für alle $n \in \N$ und $k \in \Z$
+\begin{align}\label{eq:wkb:bed1}
+u_1(n+1,k,t_n,x_k) - u_1(n,k,t_n,x_k) + \lambda \bigl(u_1(n,k,t_n,x_k) - u_1(n,k-1,t_n,x_k) \bigr) = 0
+\end{align}
+
+Es gilt die Gleichung \eqref{eq:transport:diskret:oh} in der Ordnung $O(h)$ für diskrete Ansätze, also
+\begin{align}\begin{split}
+0 &= \partial_t u_0(n+1, k, t_n, x_k) + \partial_x u_0(n, i-1, t_n, x_k)\\
+&= \partial_t \bigl( w_0(t_n, x_k) + e^{i (\omega k - \theta (n+1))} z_0(t_n, x_k) \bigr)\\
+&\qquad + \partial_x \bigl(  w_0(t_n, x_k) + e^{i (\omega (k-1) - \theta n)} z_0(t_n, x_k)\bigr)\\
+&= \partial_t w_0(t_n, x_k) + \partial_x w_0(t_n, x_k) \\
+&\qquad + e^{i (\omega k - \theta (n+1))} \partial_t z_0(t_n, x_k) + e^{i (\omega (k-1) - \theta n)} \partial_x z_0(t_n, x_k)\\
+&= \partial_t w_0(t_n, x_k) + \partial_x w_0(t_n, x_k) \\
+&\qquad + e^{i (\omega k - \theta n)} e^{- i \theta} \partial_t z_0(t_n, x_k) + e^{i (\omega k - \theta n)} e^{-i \omega} \partial_x z_0(t_n, x_k)\\
+&= \partial_t w_0(t_n, x_k) + \partial_x w_0(t_n, x_k) \\
+&\qquad + e^{i (\omega k - \theta n)}  \left( e^{- i \theta} \partial_t z_0(t_n, x_k) + e^{-i \omega} \partial_x z_0(t_n, x_k) \right)\\
+\end{split}\end{align}
+Hierauf können wir wieder Satz \ref{satz:glgregulaer} anwenden und bekommen das für $w_0$ und $z_0$ das Gleichungssystem
+\begin{align}\label{eq:exp:oh}
+\partial_t w_0(t,x) + \partial_x w_0(t,x) &= 0 &w_0(0,x) &= U(x) \quad \text{und}\\
+\partial_t z_0(t,x) + e^{i (\theta - \omega)} \partial_x z_0(t,x) &= 0 &z_0(0,x) &= V(x) 
+\end{align}

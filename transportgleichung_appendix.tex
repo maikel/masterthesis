@@ -466,79 +466,80 @@ Es folgt
 \partial_t w_2 + \partial_x w_2 &= - \frac{1}{2} \partial^2_t w_0\\
 \partial_t z_2 + \partial_x z_2 &= 2 z_2 - \left( 2 \bigl( \partial_\tau z_0 + \partial^2_\tau z_0 \bigr) + \frac{1}{2} (2\partial^2_t z_0 - \partial^2_x z_0) + \frac{1}{6} \bigl(\partial^3_t z_0 + \partial^3_x z_0\bigr) \right)
 \end{align}
-\subsection{WKB Ansatz}
 
-Es seien die Ansätze 
-\begin{align}\label{wkb:ansatz}
-u_l(n,k,t,x) = w_l(t,x) + e^{i (\omega k - \theta n)} z_l(t,x) \quad \text{für $l=0,1,2$}
-\end{align}
-gegeben. Dann gilt
-{\small\begin{align}\nonumber
-u_l(n+1,k,t_n,x_k) - u_l(n,k,t_n,x_k)
-&= w_l(t,x) + e^{i (\omega k - \theta (n+1))} z_l(t,x) - \bigl( w_l(t,x) + e^{i (\omega k - \theta n)} z_l(t,x) \bigr)\\
-&= e^{i (\omega k - \theta n)} (e^{-i\theta} - 1) z_l(t,x).
-\end{align}}
-und
-{\small\begin{align}\nonumber
-u_l(n,k,t_n,x_k) - u_l(n,k-1,t_n,x_k)
-&= w_l(t,x) + e^{i (\omega k - \theta n)} z_l(t,x) - \bigl( w_l(t,x) + e^{i (\omega (k-1) - \theta n)} z_l(t,x) \bigr)\\
-&= e^{i (\omega k - \theta n)} (1 - e^{-i \omega}) z_l(t,x).
-\end{align}
-also folgt aus
-\begin{align}\label{eq:wkb:bed1}
-u_0(n+1,k,t_n,x_k) - u_0(n,k,t_n,x_k) + \lambda (u_0(n,k,t_n,x_k) - u_0(n,k-1,t_n,x_k)) = 0
-\end{align}
-auch
-\begin{align}
-0 &= e^{i (\omega k - \theta n)} (e^{-i\theta} - 1) z_0(t,x) + \lambda e^{i (\omega k - \theta n)} (1 - e^{-i \omega}) z_0(t,x)\\
-&= e^{i (\omega k - \theta n)} z_0(t,x) ( \lambda - 1 + e^{-i\theta} - \lambda e^{-i \omega} )
-\end{align}
-Somit muss
-\begin{align}
-e^{-i \theta} - \lambda e^{-i \omega} = 1 - \lambda
-\end{align}
-gelten und das liefert uns das Gleichungssystem
-\begin{align}\label{eq:wkb:gl1}
-\Ima\left( e^{-i \theta} - \lambda e^{-i \omega} \right) &= 0 \qquad \text{und}\\
-\Ree\left( e^{-i \theta} - \lambda e^{-i \omega} \right) &= 1 - \lambda. \label{eq:wkb:gl2}
-\end{align}
-Die Abbildungen $S_1\colon \theta \mapsto e^{-i \theta}$ bzw. $S_\lambda\colon \omega \mapsto \lambda e^{- \omega}$ beschreiben jeweils einen Kreis in der komplexen Zahleneben mit den Radien $1$ und $\lambda > 1$.
-Wegen der Dreiecksungleichung haben zwei Komplexe Zahlen $z_\theta \in S_1$ und $z_\omega \in S_\lambda$ nur dann Abstand $\abs{z_\theta - z_\omega} = \lambda-1$, wenn $z_\theta = \lambda z_\omega =: \lambda z$ gilt.
-Das folgt beispielsweise aus
-\begin{align}
-\left(\abs{z_\theta - z_\omega}\right)^2 = (z_\theta - z_\omega)^2 &= (1 - \lambda)^2\\
-z_\theta^2 - 2 z_\theta z_\omega + z_\omega^2 &= 1 - 2 \lambda + \lambda^2 & \Leftrightarrow\\
-z_\theta z_\omega &= \lambda = \abs{z_\theta} \cdot \abs{z_\omega}  &\Leftrightarrow
-\end{align}
-Aus Gleichung \eqref{eq:wkb:gl1} folgt, dass $z$ reell sein muss und aus \eqref{eq:wkb:gl2} folgt $z = 1$.
-Im Wesentlichen kommt nun raus, dass der Ansatz \eqref{wkb:ansatz} nur funktionieren kann, wenn wir keine Oszillationen annehmen.
-Der Unterschied zum diskreten Ansatz mit alternierenden Gitterzeichen ist, dass wir hier keine in $n$ steigende Amplitudenfunktion
-angenommen haben, die uns einen zusätzlichen Freiheitsgrad bei der Bestimmung der gibt.
-Das korrigieren wir, indem wir $\Omega(n)$ als Faktor hinzufügen und so erhalten wir nun den diskreten Ansatz
-\begin{align}\label{wkb:diskret:ansatz}
-u_l(n,k,t,x) = w_l(t,x) + \Omega(n) e^{i (\omega k - \theta n)} z_l(t,x) \quad \text{für $l=0,1,2$}
-\end{align}
-mit den Gleichungen
-{\small\begin{align}\nonumber
-u_0(n+1, k, t_n, x_k) \quad &\\
-- u_0(n, k, t_n, x_k) &= w_0 + \Omega(n+1) e^{i (\omega k - \theta (n+1))} z_0(t,x) - \bigl( w_0(t,x) + \Omega(n) e^{i (\omega k - \theta n)} z_0(t,x) \bigr)\\
-&= e^{i (\omega k - \theta n)} (\Omega(n+1) e^{-i\theta} - \Omega(n)) z_0(t,x).
-\end{align}}
-und
-{\small\begin{align}\nonumber
-u_0(n,k,t_n,x_k) \qquad&\\
-- u_0(n,k-1,t_n,x_k)
-&= w_0(t,x) + \Omega(n) e^{i (\omega k - \theta n)} z_0(t,x) - \bigl( w_0(t,x) + \Omega(n) e^{i (\omega (k-1) - \theta n)} z_0(t,x) \bigr)\\
-&= e^{i (\omega k - \theta n)} \Omega(n) (1 - e^{-i \omega}) z_0(t,x).
-\end{align}}
-Es gilt weiterhin immernoch \eqref{eq:wkb:bed1}, also folgt aus
-\begin{align}
-e^{i (\omega k - \theta n)} (\Omega(n+1) e^{-i\theta} - \Omega(n)) z_0(t,x) + \lambda e^{i (\omega k - \theta n)} \Omega(n) (1 - e^{-i \omega}) z_0(t,x) = 0
-\end{align}
-die Gleichung
-\begin{align}
-0 &= \Omega(n+1) e^{-i\theta} - \Omega(n) + \lambda \Omega(n) (1 - e^{-i \omega})\\
-&= \Omega(n+1) e^{-i\theta} - \lambda \Omega(n) e^{-i\omega} + (\lambda - 1) \Omega(n)\\
-&= \Omega(n+1) e^{-i\theta} + \Omega(n) \bigl( \lambda (1 - e^{-i\omega}) - 1 \bigr)
-\end{align}
+% \subsection{WKB Ansatz}
+
+% Es seien die Ansätze 
+% \begin{align}\label{wkb:ansatz}
+% u_l(n,k,t,x) = w_l(t,x) + e^{i (\omega k - \theta n)} z_l(t,x) \quad \text{für $l=0,1,2$}
+% \end{align}
+% gegeben. Dann gilt
+% {\small\begin{align}\nonumber
+% u_l(n+1,k,t_n,x_k) - u_l(n,k,t_n,x_k)
+% &= w_l(t,x) + e^{i (\omega k - \theta (n+1))} z_l(t,x) - \bigl( w_l(t,x) + e^{i (\omega k - \theta n)} z_l(t,x) \bigr)\\
+% &= e^{i (\omega k - \theta n)} (e^{-i\theta} - 1) z_l(t,x).
+% \end{align}}
+% und
+% {\small\begin{align}\nonumber
+% u_l(n,k,t_n,x_k) - u_l(n,k-1,t_n,x_k)
+% &= w_l(t,x) + e^{i (\omega k - \theta n)} z_l(t,x) - \bigl( w_l(t,x) + e^{i (\omega (k-1) - \theta n)} z_l(t,x) \bigr)\\
+% &= e^{i (\omega k - \theta n)} (1 - e^{-i \omega}) z_l(t,x).
+% \end{align}
+% also folgt aus
+% \begin{align}\label{eq:wkb:bed1}
+% u_0(n+1,k,t_n,x_k) - u_0(n,k,t_n,x_k) + \lambda (u_0(n,k,t_n,x_k) - u_0(n,k-1,t_n,x_k)) = 0
+% \end{align}
+% auch
+% \begin{align}
+% 0 &= e^{i (\omega k - \theta n)} (e^{-i\theta} - 1) z_0(t,x) + \lambda e^{i (\omega k - \theta n)} (1 - e^{-i \omega}) z_0(t,x)\\
+% &= e^{i (\omega k - \theta n)} z_0(t,x) ( \lambda - 1 + e^{-i\theta} - \lambda e^{-i \omega} )
+% \end{align}
+% Somit muss
+% \begin{align}
+% e^{-i \theta} - \lambda e^{-i \omega} = 1 - \lambda
+% \end{align}
+% gelten und das liefert uns das Gleichungssystem
+% \begin{align}\label{eq:wkb:gl1}
+% \Ima\left( e^{-i \theta} - \lambda e^{-i \omega} \right) &= 0 \qquad \text{und}\\
+% \Ree\left( e^{-i \theta} - \lambda e^{-i \omega} \right) &= 1 - \lambda. \label{eq:wkb:gl2}
+% \end{align}
+% Die Abbildungen $S_1\colon \theta \mapsto e^{-i \theta}$ bzw. $S_\lambda\colon \omega \mapsto \lambda e^{- \omega}$ beschreiben jeweils einen Kreis in der komplexen Zahleneben mit den Radien $1$ und $\lambda > 1$.
+% Wegen der Dreiecksungleichung haben zwei Komplexe Zahlen $z_\theta \in S_1$ und $z_\omega \in S_\lambda$ nur dann Abstand $\abs{z_\theta - z_\omega} = \lambda-1$, wenn $z_\theta = \lambda z_\omega =: \lambda z$ gilt.
+% Das folgt beispielsweise aus
+% \begin{align}
+% \left(\abs{z_\theta - z_\omega}\right)^2 = (z_\theta - z_\omega)^2 &= (1 - \lambda)^2\\
+% z_\theta^2 - 2 z_\theta z_\omega + z_\omega^2 &= 1 - 2 \lambda + \lambda^2 & \Leftrightarrow\\
+% z_\theta z_\omega &= \lambda = \abs{z_\theta} \cdot \abs{z_\omega}  &\Leftrightarrow
+% \end{align}
+% Aus Gleichung \eqref{eq:wkb:gl1} folgt, dass $z$ reell sein muss und aus \eqref{eq:wkb:gl2} folgt $z = 1$.
+% Im Wesentlichen kommt nun raus, dass der Ansatz \eqref{wkb:ansatz} nur funktionieren kann, wenn wir keine Oszillationen annehmen.
+% Der Unterschied zum diskreten Ansatz mit alternierenden Gitterzeichen ist, dass wir hier keine in $n$ steigende Amplitudenfunktion
+% angenommen haben, die uns einen zusätzlichen Freiheitsgrad bei der Bestimmung der gibt.
+% Das korrigieren wir, indem wir $\Omega(n)$ als Faktor hinzufügen und so erhalten wir nun den diskreten Ansatz
+% \begin{align}\label{wkb:diskret:ansatz}
+% u_l(n,k,t,x) = w_l(t,x) + \Omega(n) e^{i (\omega k - \theta n)} z_l(t,x) \quad \text{für $l=0,1,2$}
+% \end{align}
+% mit den Gleichungen
+% {\small\begin{align}\nonumber
+% u_0(n+1, k, t_n, x_k) \quad &\\
+% - u_0(n, k, t_n, x_k) &= w_0 + \Omega(n+1) e^{i (\omega k - \theta (n+1))} z_0(t,x) - \bigl( w_0(t,x) + \Omega(n) e^{i (\omega k - \theta n)} z_0(t,x) \bigr)\\
+% &= e^{i (\omega k - \theta n)} (\Omega(n+1) e^{-i\theta} - \Omega(n)) z_0(t,x).
+% \end{align}}
+% und
+% {\small\begin{align}\nonumber
+% u_0(n,k,t_n,x_k) \qquad&\\
+% - u_0(n,k-1,t_n,x_k)
+% &= w_0(t,x) + \Omega(n) e^{i (\omega k - \theta n)} z_0(t,x) - \bigl( w_0(t,x) + \Omega(n) e^{i (\omega (k-1) - \theta n)} z_0(t,x) \bigr)\\
+% &= e^{i (\omega k - \theta n)} \Omega(n) (1 - e^{-i \omega}) z_0(t,x).
+% \end{align}}
+% Es gilt weiterhin immernoch \eqref{eq:wkb:bed1}, also folgt aus
+% \begin{align}
+% e^{i (\omega k - \theta n)} (\Omega(n+1) e^{-i\theta} - \Omega(n)) z_0(t,x) + \lambda e^{i (\omega k - \theta n)} \Omega(n) (1 - e^{-i \omega}) z_0(t,x) = 0
+% \end{align}
+% die Gleichung
+% \begin{align}
+% 0 &= \Omega(n+1) e^{-i\theta} - \Omega(n) + \lambda \Omega(n) (1 - e^{-i \omega})\\
+% &= \Omega(n+1) e^{-i\theta} - \lambda \Omega(n) e^{-i\omega} + (\lambda - 1) \Omega(n)\\
+% &= \Omega(n+1) e^{-i\theta} + \Omega(n) \bigl( \lambda (1 - e^{-i\omega}) - 1 \bigr)
+% \end{align}
 
