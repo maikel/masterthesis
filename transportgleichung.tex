@@ -864,10 +864,27 @@ Setzen wir unsere bisherigen Erkenntnisse nun wie in Anhang \ref{appendix:kleine
 \begin{align}
 \partial_t w_2(t,x) + \partial_x w_2(t,x) &= - \frac{1}{2} \partial^2_t w_0(t,x)\\
 \begin{split}
-\partial_t z_2(t,x) + \partial_x z_2(t,x) &= 2 z_2(t,x) - \left( 2 \bigl( \partial_\tau z_0(t,x) + \partial^2_\tau z_0(t,x) \bigr)\\
-&\quad + \frac{1}{2} (2\partial^2_t z_0(t,x) - \partial^2_x z_0(t,x)) + \frac{1}{6} \bigl(\partial^3_t z_0(t,x) + \partial^3_x z_0(t,x)\bigr) \right)
+\partial_t z_2(t,x) + \partial_x z_2(t,x) &= 2 z_2(t,x) - \Bigl( 2 \bigl( \partial_\tau z_0(t,x) + \partial^2_\tau z_0(t,x) \bigr)\\
+&\quad + \partial^2_t z_0(t,x) - \frac{1}{2} \partial^2_x z_0(t,x) + \frac{1}{6} \bigl(\partial^3_t z_0(t,x) + \partial^3_x z_0(t,x)\bigr) \Bigr)
 \end{split}
 \end{align}
+Damit gilt halten wir schonmal die Lösung $w_2(t,x) = -\frac{t}{2} \partial^2_t w_0(t,x)$ fest.
+Es gilt weiterhin
+\begin{align}
+\begin{split}
+\partial^3_t z_0(t,x) &= \partial_t \bigl( \partial^2_t z_0(t,x) \bigr)\\
+&= \partial_t \bigl( 4 z_0(t_n,x_i) - 4 \partial_x z_0(t_n,x_i) + \partial^2_x z_0(t_n,x_i) \bigr)\\
+&= 4 ( 2z_0 - \partial_x z_0 ) - 4 \partial_x \bigl( 2z_0 - \partial_x z_0 \bigr) + \partial^2_x \bigl( 2 z_0 - \partial_x z_0 \bigr)\\
+&= 8z_0 - 4 \partial_x z_0 - 8 \partial_x z_0 + 4 \partial^2_x z_0 + 2 \partial^2_x z_0 - \partial^3_x z_0\\
+&= 8 z_0 - 12 \partial_x z_0 + 6 \partial^2 z_0 - \partial^3_x z_0
+\end{split}
+\end{align}
+also
+\begin{align}
+\frac{1}{6} \bigl(\partial^3_t z_0(t,x) + \partial^3_x z_0(t,x)\bigr)
+= \frac{4}{3} z_0 - 2 \partial_x z_0 + \partial^2_x z_0.
+\end{align}
+
 % Hieraus folgen dieses mal die Gleichungen:
 
 % \vspace{0.4cm}
