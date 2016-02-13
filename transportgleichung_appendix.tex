@@ -436,33 +436,38 @@ Mit \eqref{apx:diskret:lemma2} folgt ganz analog für die Differenz in $i$
 
 Sei
 \begin{align}
-v^n_i &= w_0(t_n, x_i) + h w_1(t_n, x_i) + h^2 w_2(t_n, x_i)\\
-&\quad + (-1)^{i+n} \bigl( z_0(t_n, 2 h t_n, x_i) + h^2 z_1(t_n, 2 h t_n, x_i) + h^2 z_2(t_n, 2 h t_n, x_i) \bigr).
+\begin{split}
+v^n_i &= w_0(t_n, x_i) + h^2 w_2(t_n, x_i)\\
+&\quad + (-1)^{i+n} \bigl( z_0(t_n, 2 h t_n, x_i) + h^2 z_2(t_n, 2 h t_n, x_i) \bigr).
+\end{split}
 \end{align}
 Dann gilt
-\begin{align*}
-v^{n+1}_i - v^n_i &= h (1 + h) \partial_t w_0 + h^2 \frac{1 + 2h}{2} \partial^2_t w_0 +  \frac{h^3}{6} \partial^3_t w_0\\
-&+ h^2 (1 + h) \partial_t w_1 + \frac{h^3}{2} \partial^2_t w_1 + h^3 \partial_t w_2\\
-&- (-1)^{i+n} \Bigl( 2z_0 + h (1 + h) \partial_t z_0  + 2 h^2 (1 + h) \partial_\tau z_0 + h^2 \frac{(1 + 2h)}{2} \partial^2_t z_0 + 2 h^3 \partial^2_\tau z_0 + \frac{h^3}{6} \partial^3_t z_0\\
-&+  h 2z_1 + h^2 (1 + h) \partial_t z_1  + 2 h^3 \partial_\tau z_1 + \frac{h^3}{2} \partial^2_t z_1 + h^2 2 z_2 + h^3 \partial_t z_2 \Bigr) + o(h^3)
-\end{align*}
+\begin{align}
+\begin{split}
+v^{n+1}_i - v^n_i &= h (1 + h) \partial_t w_0 + h^2 \frac{1 + 2h}{2} \partial^2_t w_0 +  \frac{h^3}{6} \partial^3_t w_0 + h^3 \partial_t w_2\\
+&- (-1)^{i+n} \Bigl( 2z_0 + h (1 + h) \partial_t z_0  + 2 h^2 (1 + h) \partial_\tau z_0 + h^2 \frac{(1 + 2h)}{2} \partial^2_t z_0\\
+& + 2 h^3 \partial^2_\tau z_0 + \frac{h^3}{6} \partial^3_t z_0 + h^2 2 z_2 + h^3 \partial_t z_2 \Bigr) + o(h^3)
+\end{split}
+\end{align}
+und damit auch
+\begin{align}
+\begin{split}
+(1 + h) (v^n_i - v^n_{i-1}) &= h (1 + h) \partial_x w_0 - h^2 \frac{1 + h}{2} \partial^2_x w_0 + \frac{h^3}{6} \partial^3_x w_0+ h^3 \partial_x w_2\\
+&+ (-1)^{i+n} \Bigl( (1+h)2z_0 - h(1+h) \partial_x z_0 + h^2 \frac{1+h}{2} \partial^2_x z_0 - \frac{h^3}{6} \partial^3_x z_0\\
+&+ h^2 (1 + h) 2 z_2 - h^3 \partial_x z_2 \Bigr) + o(h^3)
+\end{split}
+\end{align}
 und
 \begin{align*}
-(1 + h) (v^n_i - v^n_{i-1}) &= h (1 + h) \partial_x w_0 - h^2 \frac{1 + h}{2} \partial^2_x w_0 + \frac{h^3}{6} \partial^3_x w_0\\
-&+ h^2 (1 + h) \partial_x w_1 - \frac{h^3}{2} \partial^2_x w_1 + h^3 \partial_x w_2\\
-&+ (-1)^{i+n} \Bigl( (1+h)2z_0 - h(1+h) \partial_x z_0 + h^2 \frac{1+h}{2} \partial^2_x z_0 - \frac{h^3}{6} \partial^3_x z_0\\
-&+ h(1+h) 2z_1 - h^2 (1 + h) \partial_x z_1 + \frac{h^3}{2} \partial^2_x z_1 + h^2 (1 + h) 2 z_2 - h^3 \partial_x z_2 \Bigr) + o(h^3)
-\end{align*}
-und somit folgt mit $z_1 = 0$
-\begin{align*}
 0 &= v^{n+1}_i - v^n_i + (1 + h) (v^n_i - v^n_{i-1})\\
-&= h \bigl( \partial_t w_0 + \partial_x w_0  + 2 z_0 - \partial_t z_0 - \partial_x z_0 \bigr)\\
-&+ h^2 \Bigl( - 2 \partial_\tau z_0 + \frac{1}{2} \bigl( \partial^2_x z_0 - \partial^2_t z_0 \bigr)  - \partial_t z_0 - \partial_x z_0 \Bigr)\\
+&= h \bigl( \partial_t w_0 + \partial_x w_0  + (-1)^{i+n} (2 z_0 - \partial_t z_0 - \partial_x z_0) \bigr)\\
+&+ h^2 \left( \partial_t w_0 + \partial_x w_0 + (-1)^{i+n} \Bigl( - 2 \partial_\tau z_0 + \frac{1}{2} \bigl( \partial^2_x z_0 - \partial^2_t z_0 \bigr)  - \partial_t z_0 - \partial_x z_0 \Bigr) \right)\\
 &+ h^3 \Bigl( \partial_t w_2 + \partial_x w_2 + \frac{1}{2} \partial^2_t w_0\\
 &\quad - (-1)^{i+n} \bigl( 2 \partial_\tau z_0 + \frac{1}{2} (2\partial^2_t z_0 - \partial^2_x z_0) + 2 \partial^2_\tau z_0 + \frac{1}{6} \bigl(\partial^3_t z_0 + \partial^3_x z_0\bigr) + \partial_t z_2  + \partial_x z_2  - 2 z_2\bigr) \Bigr).
 \end{align*}
-Es folgt
+Es folgt das Gleichungsystem
 \begin{align}
+
 \partial_t w_2 + \partial_x w_2 &= - \frac{1}{2} \partial^2_t w_0\\
 \partial_t z_2 + \partial_x z_2 &= 2 z_2 - \left( 2 \bigl( \partial_\tau z_0 + \partial^2_\tau z_0 \bigr) + \frac{1}{2} (2\partial^2_t z_0 - \partial^2_x z_0) + \frac{1}{6} \bigl(\partial^3_t z_0 + \partial^3_x z_0\bigr) \right)
 \end{align}
