@@ -823,7 +823,7 @@ Außerdem gilt
 \begin{align}
 \begin{split}
 \partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i)
-&= - \bigl( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr)
+&= - \bigl( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr)\\
 &= - (-1)^{i+n} 2 z_0(t_n,x_i).
 \end{split}
 \end{align}
@@ -864,7 +864,7 @@ auf und fordern zusätzlich
 \begin{align}\label{eq:ke:lang}
 \partial_\tau z_0(t,\tau,x) - \partial_x z_0(t, \tau, x) = -2z_0(t,\tau,x).
 \end{align}
-Aus der ersten Gleichung $\partial_t z_0(t,\tau,x) + \partial_x z_0(t,\tau,x) &= 2 z_0(t,\tau,x)$, mit $z_0(0,0,x) = V(x)$ folgern wir
+Aus der ersten Gleichung $\partial_t z_0(t,\tau,x) + \partial_x z_0(t,\tau,x) = 2 z_0(t,\tau,x)$, mit $z_0(0,0,x) = V(x)$ folgern wir
 $z_0(t, \tau, x) = A(\tau, x - t) e^{2t}$ für eine Abbildung $A$ mit $A(0, x) = V(x)$ für alle $x \in \R$.
 Mit \eqref{eq:ke:lang} lässt sich A dann für alle $(t, \tau, x) \in \left(\Rp\right)^2 \times \R$ durch
 \[ A(\tau, x - t) = A(0, x - t + \tau) e^{- 2\tau} \]
@@ -1001,9 +1001,9 @@ u_0(n,k,t_n,x_k)\qquad \quad &\\
 &= e^{i (\omega k - \theta n)} (1 - e^{-i \omega}) z_0(t_n,x_i).
 \end{split}\end{align}
 also folgt aus
-\begin{align}\label{eq:wkb:bed1}
-u_0(n+1,k,t_n,x_k) - u_0(n,k,t_n,x_k) + \lambda (u_0(n,k,t_n,x_k) - u_0(n,k-1,t_n,x_k)) = 0
-\end{align}
+\begin{align*}
+u_0(n+1,k,t_n,x_k) - u_0(n,k,t_n,x_k) + \lambda \bigl(u_0(n,k,t_n,x_k) - u_0(n,k-1,t_n,x_k) \bigr) = 0
+\end{align*}
 auch für alle $(n, k) \in \N \times \Z$
 \begin{align}
 0 &= e^{i (\omega k - \theta n)} (e^{-i\theta} - 1) z_0(t_n,x_i) + \lambda e^{i (\omega k - \theta n)} (1 - e^{-i \omega}) z_0(t_n,x_i)\\
@@ -1081,7 +1081,7 @@ also folgt in Summe
 \end{align}
 und damit das Gleichungssystem
 {\small
-\begin{align}\label{eq:exp:oh2}
+\begin{align}
 \partial_t w_1(t,x) + \partial_x w_1(t,x) &= \frac {1-\lambda}{2} \partial^2_x w_0(t_n, x_k) &w_1(0,x) &= 0 \quad \text{und}\\
 \partial_t z_1(t,x) + e^{-i (\omega - \theta)} \partial_x z_1(t,x) &= \frac{1}{2} e^{- i(\omega - \theta)} \left(1 - \lambda e^{-i(\omega - \theta)} \right) \partial^2 z_0(t_n, x_k) &z_0(0,x) &= 0 
 \end{align}}

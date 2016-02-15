@@ -1,0 +1,117 @@
+%!TEX root=main.tex
+
+Wir betrachten weiterhin das Upwind-Verfahren. Diesmal lassen wir jedoch eine
+variable Geschwindigkeit zu und untersuchen insbesonders wie sich diese auf
+hochfrequente Schwingungen auswirkt. Wie schon im Vorkapitel machen wir uns die
+Linearität der Gleichungen und die Sätze \ref{satz:alt:beidenull} und
+\ref{satz:glgregulaer} zu nutze und rechnen den hochfrequenten und den glatten
+Anteil getrennt von einander aus.
+
+Es sei also für alle das folgende Dirichlet Problem gegeben:
+\begin{align}\label{eq:varadv:pde}
+\begin{split}
+\partial_t u(t, x) + a(x) \partial_x u(t, x) &= 0 \qquad \forall (t, x) \in \Rp \times \R\\
+u(0, x) &= U(x),
+\end{split}
+\end{align}
+wobei $a \in C^\infty(\R)$ und $U \in L^1(\R)$ gelten.
+
+Wir betrachten weiterhin das Gitter $G_h = (h \lambda n, h i)$ und dazugehörige
+Upwindverfahren
+\begin{align}\label{eq:varadv:verfahren}
+\begin{split}
+v^{n+1}_i - v^n_i + a(x_i) \lambda \bigl( v^n_i - v^n_{i-1} \bigr) &= 0.\\
+v^0_i &= U(x_i).
+\end{split}
+\end{align}
+
+\section{Regulärer Ansatz}
+
+\subsection*{Das zugrundeliegende Problem}
+
+Angenommen es gibt glatte Abbildungen $u_0, u_1 \in \Cinf$ mit
+\begin{align}\label{eq:varadv:reg:ansatz}
+\begin{split}
+v^n_i = u_0(t_n, x_i) + h u_1(t_n, x_i) + O(h^2).
+\end{split}
+\end{align}
+Wir setzen das in \eqref{eq:varadv:verfahren} ein und erhalten die Gleichung
+\begin{align}
+\begin{split}
+v^{n+1}_i - v^n_i &= u_0(t_{n+1}, x_i) - u_0(t_n, x_i) + h \bigl( u_1(t_{n+1}, x_i) - u_1(t_n, x_i) \bigr)\\
+&= \lambda h \partial_t u_0(t_n, x_i) + h^2 \frac{\lambda^2}{2} \partial^2_t u_0(t_n, x_i)\\
+&\quad + h^2 \lambda \partial_t u_1(t_n, x_i) + O(h^2).
+\end{split}
+\end{align}
+und
+\begin{align}
+\begin{split}
+a(x_i) \lambda \bigl( v^n_i - v^n_{i-1} \bigr) &= a(x_i) \lambda \Bigl( u_0(t_n, x_i) - u(t_n, x_{i-1}) + h \bigl( u_1(t_n, x_i) - u_1(t_n, x_{i-1}) \bigr) \Bigr)\\
+&= a(x_i) \lambda \Bigl( h \partial_x u(t_n, x_i) + h^2 \frac{1}{2} \partial^2_x u(t_n, x_i) + h^2 \partial_x u_1(t_n, x_i) \Bigr) + O(h^2).
+\end{split}
+\end{align}
+In der Summe ergibt das
+\begin{align}
+\begin{split}
+0 &= v^{n+1}_i - v^n_i + a(x_i) \lambda \bigl( v^n_i - v^n_{i-1} \bigr)\\
+&= \lambda h \partial_t u_0(t_n, x_i) + h^2 \frac{\lambda^2}{2} \partial^2_t u_0(t_n, x_i) + h^2 \lambda \partial_t u_1(t_n, x_i)\\
+&\quad + h a(x_i) \lambda \partial_x u(t_n, x_i) - h^2 \frac{a(x_i) \lambda}{2} \partial^2_x u(t_n, x_i) + h^2 a(x_i) \lambda \partial_x u_1(t_n, x_i) + O(h^2).\\
+\Leftrightarrow \quad 0 &= h \partial_t u_0(t_n, x_i) + h^2 \frac{\lambda}{2} \partial^2_t u_0(t_n, x_i) + h^2 \partial_t u_1(t_n, x_i)\\
+&\quad + h a(x_i) \partial_x u(t_n, x_i) - h^2 \frac{a(x_i)}{2} \partial^2_x u(t_n, x_i) + h^2 a(x_i) \partial_x u_1(t_n, x_i) + O(h^2).
+\end{split}
+\end{align}
+Sortiert nach den Ordnungen von $h$ und aufgrund der Stetigkeit der Abbildungen
+$u_0, u_1$ und $a$ erhalten wir das Gleichungsystem für alle $(t,x) \in \Rp
+\times \R$
+\begin{align}
+\label{eq:varadv:reg:u0}
+\partial_t u_0(t,x) + a(x) \partial_x u_0(t, x) &= 0,\\
+\label{eq:varadv:reg:u1}
+\partial_t u_1(t,x) + a(x) \partial_x u_1(t, x) &= \frac{a(x)}{2} \partial^2_x u_0(t,x) - \frac{\lambda}{2} \partial^2_t u_0(t,x),\\
+u_0(0,x) &= U(x) \quad \text{und}\\
+u_1(0,x) &= 0.
+\end{align}
+Die Abbildung $u_0$ ist dann also eine Lösung der Differentialgleichung
+\eqref{eq:varadv:pde} und eine Lösung zu $u_1$ gibt uns den Fehler des Verfahren
+zur ersten Ordnung.
+Die Lösung des Anfangswertproblems für $u_0$ lautet 
+\begin{align}
+\label{eq:varadv:reg:u0_loesung}
+u_0(t,x) = U( \phi_a(-t, x) ).
+\end{align}
+Wobei $\phi_a \in C^\infty \left( \R \times \R \right)$ der Fluss der Differentialgleichung $\dot y = a(y)$ ist.
+Aus Gleichung \eqref{eq:varadv:reg:u0} entnehmen wir
+\begin{align}
+\begin{split}
+\partial^2_t u_0(t,x) &= \partial_t \bigl( \partial_t u_0(t,x) \bigr)\\
+&= \partial_t \bigl( - a(x) \partial_x u_0(t, x) \bigr)\\
+&= - a(x) \partial_x \bigl( \partial_t u_0(t, x) \bigr)\\
+&= a(x) \partial_x \bigl( a(x) \partial_x u_0(t, x) \bigr)\\
+&= a(x) a'(x) \partial_x u_0(t,x) + a^2(x) \partial^2_x u_0(t,x)
+\end{split}
+\end{align}
+und setzen dies in Gleichung \eqref{eq:varadv:reg:u1} ein:
+\begin{align}\label{eq:varadv:reg:u1_neu}
+\begin{split}
+\partial_t u_1(t,x) + a(x) \partial_x u_1(t, x) &= \frac{a(x)}{2} \partial^2_x u_0(t,x) - \frac{\lambda}{2} \partial^2_t u_0(t,x)\\
+&= \frac{a(x)(1 - a(x) \lambda)}{2} \partial^2_x u_0(t,x) - a(x) a'(x) \lambda \partial_x u_0(t,x).
+\end{split}
+\end{align}
+Und ganz analog wie im regulären Fall des Unterkapitels \ref{sec:regulaer} kann
+man für den Fall $a(x)\lambda < 1$ ein langsame Zeitvariable $\tau = ht$
+einführen und löst eine Diffusionsgleichung um die Quellterme in der Gleichung
+\eqref{eq:varadv:reg:u1_neu} zu eliminieren.
+In dem Fall, dass in einer offenen Umgebung $U$ die Ungleichung $a(x)\lambda > 1$
+gilt, schreiben wir für $u_1$ die Lösung
+\begin{align}
+\begin{split}
+u_1(t,x) &= t \left( \frac{a(x)(1 - a(x) \lambda)}{2} \partial^2_x U( \phi_a(-t, x) ) - a(x) a'(x) \lambda \partial_x U( \phi_a(-t, x) )\right)\\
+&= t a(x) a'(x) \left( \frac{1 - a(x) \lambda}{2} U''( \phi_a(-t, x) ) - a(x) \lambda U'( \phi_a(-t, x) )\right).
+\end{split}
+\end{align}
+
+\subsection*{Kleine Störungen}
+
+Wir schreiben für $a$ nun $a(x) = \frac{1 + h A(x)}{\lambda}$ und $A(x) > 0$ in
+einer Umgebung $U$. D.\,.h. wir untersuchen, wie sich das Verfahren für den Fall
+$a \lambda \sim 1$ für $h \to 0$ verhält.

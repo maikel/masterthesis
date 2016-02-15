@@ -1,7 +1,7 @@
 \documentclass[a4paper
                ,11pt%
                %,draft%
-               ,5BCOM%
+               %,5BCOM%
                ,openright%
                ,titlepage%
                ,twoside%
@@ -30,7 +30,7 @@
             urlcolor=blue,
             citecolor=gray]{hyperref}
 \usepackage{geometry}
-
+\usepackage{parskip}
 
 \usepackage{tikz}
 \usepackage{pgfplots}
@@ -64,6 +64,8 @@ Beschreibung hochfrequenter numerischer Instabilitäten mit Hilfe asymptotischer
 
 \begin{document}
 
+\begin{titlepage}
+
 \pagenumbering{alph}
 \maketitle
 \thispagestyle{empty}
@@ -95,8 +97,8 @@ Beschreibung hochfrequenter numerischer Instabilitäten mit Hilfe asymptotischer
 % \input{asymptotik_finite_differenzen}
 \chapter{Die lineare Transportgleichung mit konstanter Geschwindigkeit}
 \input{transportgleichung}
-% \chapter{Die lineare Transportgleichung mit ortsabhängiger Geschwindigkeit}
-% \input{variable_advektion}
+\chapter{Die lineare Transportgleichung mit ortsabhängiger Geschwindigkeit}
+\input{variable_advektion}
 % \chapter{Die Burgersgleichung}
 % \input{burgers}
 
