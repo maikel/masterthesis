@@ -427,7 +427,11 @@ Wir verwenden nun Lemma \ref{lemma:transport:diskret:konvergenz_gitter}, um zu z
 Sei $\omega \in (0, 2 \pi)$ und $\Omega\colon \N \to \R$ unbeschränkt. 
 Es seien $F$ und $g$ Funktionen aus $\Cinf$. Für alle $h > 0$ und alle $n \in \N$ und $k \in \Z$ gelte außerdem
 \begin{align}\label{eq:apx:beidenull}
-F(t_n,x_k) = e^{i \omega k} \Omega(n) g(t_n,x_k).
+\begin{split}
+F(t_n,x_k) &= e^{i \omega k} \Omega(n) g(t_n,x_k) \quad \text{bzw.}\\
+F(t_n,x_k) &= \Ree \left[ e^{i \omega k} \Omega(n) g(t_n,x_k) \right]\\
+           &= \cos(\omega k) \Omega(n) g(t_n, x_k)
+\end{split}
 \end{align}
 Dann folgt für alle $(t,x) \in \Rp \times \R$
 \begin{align*}
@@ -436,25 +440,29 @@ g(t,x) &= 0.
 \end{align*} 
 \end{satz}
 \begin{proof}
-Für das Lemma \ref{lemma:transport:diskret:konvergenz_gitter} setzen wir für $f$ die rechte Seite der Gleichung \eqref{eq:apx:beidenull} ein, also $f(n, i, t, x) = (-1)^{i+n} (1 + 2\eta)^n g(t,x)$.
+Für das Lemma \ref{lemma:transport:diskret:konvergenz_gitter} setzen wir für $f$ die rechte Seite der Gleichung \eqref{eq:apx:beidenull} ein, also $f(n, i, t, x) = \cos(\omega k) \Omega(n) g(t_n, x_k)$.
 Dann ist $f$ für alle $n \in \N$ und $k \in \Z$ differenzierbar und die Voraussetzungen von Lemma \ref{lemma:transport:diskret:konvergenz_gitter} sind erfüllt.
 
 Es existiert also für alle $(t,x) \in \Rp \times \R$ und $n \in \N$ ein $k(n) \in \Z$, so dass die Ungleichung
-\begin{align}
-\abs{F(t, x) - f(n, k(n), t, x)} \leq \frac {t}{\lambda n} \Bigl(\bigl\lvert \partial_x f(n, k(n), t, x) \bigr\rvert + \bigl\lvert \partial_x F(t, x) \bigr\rvert \Bigr)
+\begin{align}\label{eq:satz:lemmaglg}
+\begin{split}
+\abs{F(t, x) - f(n, k(n), t, x)} &\leq \frac {t}{\lambda n} \Bigl(\bigl\lvert \partial_x f(n, k(n), t, x) \bigr\rvert + \bigl\lvert \partial_x F(t, x) \bigr\rvert \Bigr)\\
+\Leftrightarrow \quad \abs{F(t, x) - \cos(\omega k) \Omega(n) g(t_n, x_k)} &\leq \frac {t}{\lambda n} \Bigl(\bigl\lvert \cos(\omega k) \Omega(n) \partial_x g(t_n, x_k) \bigr\rvert + \bigl\lvert \partial_x F(t, x) \bigr\rvert \Bigr)\\
+\end{split}
 \end{align}
-erfüllt ist.
-Das impliziert wegen $\abs{f(n, k(n), t, x)} - \abs{F(t,x)} \leq \abs{F(t, x) - f(n, k(n), t, x)}$ die Gleichung
+erfüllt ist. Sollte es unendlich viele $k(n) \in \Z$ derart geben, dass $\cos(\omega k) = 0$ gilt, so folgt für unendlich viele $n \in \N$ die Ungleichung $\abs{F(t, x)} \leq \frac {t}{\lambda n} \abs{\partial_x F(t,x)}$, was die Behauptung impliziert.
+Angenommen das wäre nicht der Fall.
+Dann impliziert die Ungleichung \eqref{eq:satz:lemmaglg} wegen $\abs{f(n, k(n), t, x)} - \abs{F(t,x)} \leq \abs{F(t, x) - f(n, k(n), t, x)}$ die Gleichung
 \[ \abs{f(n, k(n), t, x)} \leq \frac {t}{\lambda n} \abs{\partial_x f(n, k(n), t, x)} +  \frac {t}{\lambda n} \bigl\lvert \partial_x F(t, x) \bigr\rvert + \abs{F(t,x)} \]
-also
+also folgt, weil für fast alle $n \in \N$ die Ungleichung $\cos(\omega k(n)) \neq 0$ gilt und $\Omega(n)$ unbeschränkt ist, für fast alle $n \in \N$ mit $\Omega(n) \neq 0$
 \begin{align*}
 \abs{\Omega(n)} \abs{g(t,x)} &\leq \frac{t}{\lambda n} \cdot \abs{\Omega(n)} \abs{\partial_x g(t,x)} + \frac {t}{\lambda n} \bigl\lvert \partial_x F(t, x) \bigr\rvert + \abs{F(t,x)}\\
-\Leftrightarrow \qquad \abs{g(t,x)} &\leq \underbrace{\frac{t}{\lambda n} \abs{\partial_x g(t,x)}}_{\to 0} + \underbrace{(1 + 2 \eta)^{-n} \left( \frac {t}{\lambda n} \bigl\lvert \partial_x F(t, x) \bigr\rvert + \abs{F(t,x)} \right)}_{\to 0} \to 0 \qquad \text{für $n \to \infty$},
+\Leftrightarrow \qquad \abs{g(t,x)} &\leq \frac{t}{\lambda n} \abs{\partial_x g(t,x)} + \abs{\Omega(n)}^{-1} \left( \frac {t}{\lambda n} \bigl\lvert \partial_x F(t, x) \bigr\rvert + \abs{F(t,x)} \right),
 \end{align*}
-woraus $g(t,x) = 0$ und somit auch $F(t,x) = 0$ für alle $(t,x) \in \Rp \times \R$ folgt.
+woraus, weil $\Omega(n)$ unbeschränkt ist, $g(t,x) = 0$ und somit auch $F(t,x) = 0$ für alle $(t,x) \in \Rp \times \R$ folgt.
 \end{proof}
-In Satz \ref{satz:alt:beidenull} haben wir ganz wesentlich benutzt, dass $(1 + 2 \eta)^n \to \infty$ für $n \to \infty$ gilt.
-Später beweisen wir mit Satz \ref{satz:glgregulaer} eine analoge Aussage um solche Bedingungen in anderen Ansätzen zu bekommen, bei denen man keine solche Wachstumsbedingung hat.
+Wir wenden nun Satz \ref{satz:alt:beidenull} auf unser $\Omega(n) = (1 + 2\eta)^n$ an und benutzen, dass $(1 + 2 \eta)^n \to \infty$ für $n \to \infty$ gilt.
+Später beweisen wir mit Satz \ref{satz:glgregulaer} eine analoge Aussage um solche Bedingungen in anderen Ansätzen zu bekommen, bei denen man keine solche Wachstumsbedingung für $\Omega$ hat.
 Wenden wir nun Satz \ref{satz:alt:beidenull} auf Gleichung \eqref{eq:apx:beidenull1} an, so erhalten wir
 \\
 
@@ -720,13 +728,13 @@ Genau wie im vorangegangen Kapitel \ref{sec:transport:osz} folgern wir hieraus j
 Jedoch können wir nicht das Gleiche wie in Satz \ref{satz:alt:beidenull} machen, da es dort essentiell war, dass wir eine in $n$ unbeschränkte Funktion betrachten.
 Allerdings haben wir im Ansatz glatte Abbildungen $w_k, z_k \in \Cinf$ für $k = 0,1,2$ angenommen und wir können hier mit ihrer Regularität argumentieren.
 \begin{satz}\label{satz:glgregulaer}
-Sei $\omega \in (0, 2\pi)$ und $\Omega\colon \N \to \R$ beschränkt.
-D.\,h. es gibt ein $K \in \R$ mit $\abs{\Omega(n)} < K$ für alle $n \in \N$.
-Es gelte für alle $h > 0$, alle Gitterpunkte $(t_n, x_k) \in G_h$
+Sei $\omega \in (0, 2\pi)$ und $\Omega\colon \N \to \R$.
+Angenommen es gäbe außerdem zwei positiven Zahlen $\kappa, K > 0$ mit $\kappa \leq \abs{\Omega(n)} \leq K$ für alle $n \in \N$.
+Es gelte für alle $h > 0$ und alle Gitterpunkte $(t_n, x_k) \in G_h$
 \begin{align}\label{satz:glgreg:vor}
 \begin{split}
 F(t_n, x_k) &= e^{i \omega k} \Omega(n) f(t_n, x_k) \qquad \text{bzw.}\\
-F(t_n, x_k) &= \Ree\left( e^{i \omega k} \Omega(n) f(t_n, x_k) \right)
+F(t_n, x_k) &= \Ree\left[ e^{i \omega k} \Omega(n) f(t_n, x_k) \right]
 \end{split}
 \end{align}
 für zwei glatte Funktionen $F,f \in \Cinf$. Dann gilt für alle $(t,x) \in \Rp \times \R$
@@ -749,22 +757,20 @@ also gilt für alle $h > 0$ auch
 \begin{split}\nonumber
 \abs{F(t_n, x_k + h) - F(t_n, x_k)} &= \abs{F(t_n, x_{k+1}) - F(t_n, x_k)}\\
 &= \abs{e^{i \omega k} (e^{i \omega} - 1) \Omega(n) f(t_n, x_k) + h e^{i \omega k} \Omega(n) \partial_x f(t_n, x_k)}\\
-&\leq \abs{ e^{i \omega k} (e^{i \omega} - 1) \Omega(n) f(t_n, x_k) }  + h  \abs{ e^{i \omega k} \Omega(n) \partial_x f(t_n, x_k) }\\
-&\leq K \cdot \abs{ e^{i \omega k} (e^{i \omega} - 1) f(t_n, x_k) }  + h  K \cdot \abs{ e^{i \omega k} \partial_x f(t_n, x_k) }\\
-&= K \cdot \underbrace{\abs{ e^{i \omega k} }}_{= 1} \abs{ (e^{i \omega} - 1) f(t_n, x_k) } + hK \cdot  \underbrace{\abs{ e^{i \omega k} }}_{= 1} \abs{ \partial_x f(t_n, x_k) }
+&\geq \abs{ e^{i \omega k} (e^{i \omega} - 1) \Omega(n) f(t_n, x_k) }  - h  \abs{ e^{i \omega k} \Omega(n) \partial_x f(t_n, x_k) }\\
+&\geq \kappa \cdot \abs{ e^{i \omega k} (e^{i \omega} - 1) f(t_n, x_k) }  - h  K \cdot \abs{ e^{i \omega k} \partial_x f(t_n, x_k) }\\
+&= \kappa \cdot \underbrace{\abs{ e^{i \omega k} }}_{= 1} \abs{ (e^{i \omega} - 1) f(t_n, x_k) } - hK \cdot  \underbrace{\abs{ e^{i \omega k} }}_{= 1} \abs{ \partial_x f(t_n, x_k) }
 \end{split}\\ \label{satz:glgregulaer:bed}
-&= K \cdot \underbrace{\abs{e^{i \omega} - 1}}_{\neq 0} \abs{f(t_n, x_k)} + hK \cdot \abs{\partial_x f(t_n, x_k)}.
+&= \kappa \cdot \underbrace{\abs{e^{i \omega} - 1}}_{\neq 0} \abs{f(t_n, x_k)} - hK \cdot \abs{\partial_x f(t_n, x_k)}.
 \end{align}
 Unser Gitter $G_h$ ist gerade so gemacht, dass es für alle $(t,x) \in \Rp \times \R$ und zu jeder Folge von Gitterweiten $(h^p)_{p \in \N}$ mit $h_p \to 0$ eine Folge von Gitterpunkten $(t^p, x^p) \in G_{h_p}$ und $(t^p, x^p) \to (t,x)$ gibt.
 Es gilt $\lim_{h_p \to 0} \abs{F(t^p, x^p + h_p) - F(t^p, x^p)} = 0$ für $h_p \to 0$, weil $F$ stetig ist.
 Es gilt weiterhin
-\[ \lim_{p \to \infty} K\abs{e^{i \omega} - 1} \abs{f(t^p, x^p)} + h_pK \abs{\partial_x f(t^p, x^p)} = \lim_{p \to \infty} K \abs{e^{i \omega} - 1} \abs{f(t^p, x^p)}. \]
-Die Voraussetzung $0 < \omega < 2 \pi$ impliziert nun $\abs{e^{i \omega} - 1} \neq 0$ und somit folgt aus der Stetigkeit von $f$ und der Gleichung \eqref{satz:glgregulaer:bed}
-\[ f(t,x) = \lim_{p \to \infty} f(t^p, x^p) = 0 \qquad \text{für } p \to \infty \: \text{und} \: (t^p, x^p) \to (t,x), \]
-was zu zeigen war.
+\[ \lim_{p \to \infty} \kappa \abs{e^{i \omega} - 1} \abs{f(t^p, x^p)} - h_pK \abs{\partial_x f(t^p, x^p)} = \kappa \abs{e^{i \omega} - 1} \abs{f(t, x)}. \]
+Die Voraussetzung $0 < \omega < 2 \pi$ impliziert nun $\abs{e^{i \omega} - 1} \neq 0$ und somit folgt aus der Stetigkeit von $f$ und der Ungleichung \eqref{satz:glgregulaer:bed} $f(t,x) = 0$, was zu zeigen war.
 \end{proof}
-In Satz \ref{satz:glgregulaer} ist nun hingegen wichtig, dass $\Omega(n)$ eine Art Sublinear-Growth-Bedingung erfüllt.
-D.\,h. wir brauchen in Gleichung \eqref{satz:glgregulaer:bed}, dass $h \cdot \Omega\left( h^{-1} \right) \to 0$ für $h \to 0$ gilt. 
+% In Satz \ref{satz:glgregulaer} ist nun hingegen wichtig, dass $\Omega(n)$ eine Art Sublinear-Growth-Bedingung erfüllt.
+% D.\,h. wir brauchen in Gleichung \eqref{satz:glgregulaer:bed}, dass $h \cdot \Omega\left( h^{-1} \right) \to 0$ für $h \to 0$ gilt. 
 Setzt man \eqref{eq:appendix:kleineta:oh:linkeseite} und \eqref{eq:appendix:kleineta:oh:rechteseite} nun gleich, so leitet man mithilfe des Satzes \ref{satz:glgregulaer} die beiden Anfangswertprobleme
 \begin{align}\label{eq:appendix:kleineta:oh}
 \partial_t w_0(t,x) + \partial_x w_0(t,x) &= 0 &w_0(0,x) &= U(x) \quad \text{und}\\
@@ -952,13 +958,21 @@ z_0(0,0,0,x) &= V(x)\\
 \partial_{\tau_2} z_0(t,\tau, \tau_2, x) + 16 \partial_x z_0(t,\tau, \tau_2, x) &= \frac{28}{3} z_0(t,\tau, \tau_2, x) + \frac{7}{2} \partial^2_x z_0(t,\tau, \tau_2, x)
 \end{align}
 gilt, so folgt auch $z_2 = 0$. Gleichung \eqref{eq:ke:addiff} ist eine Advektion-Diffusion Gleichung.
+Zusammen kriegt man nun das Ergebnis
 
-\section{Andere Frequenzen auf Gitterniveau -- ein Exponentialansatz}
+\begin{align*}
+v^n_i = U(x_n-t_n) + z_0(t_n, 2 h t_n, h^2 t_n, x_i) -\frac{th^2}{2} \partial^2_t U(t,x) + O(h^3).
+\end{align*}
+
+\section{Andere Frequenzen auf Gitterniveau -- Exponentialansätze}
 
 Bisher haben wir für die Störungen $z(t,x)$ immer nur eine feste Frequenz angenommen, nämlich alternierende Gittervorzeichen.
 Wir untersuchen nun, wie das Upwindverfahren auf andere hochfrequente, also von Gitterkoordinaten abhängige, Ansätze wirkt.
 Wir beschreiben unsere Oszillationen mithilfe der komplexen Exponentialfunktion und schreiben für die Ortsindizes von jetzt an $k$ statt $i$.
-Im Folgenden betrachten wir immer den Ansatz
+
+\subsection*{Beschränkt in $k$ und $n$}
+
+Im Folgenden betrachten wir den Ansatz
 
 \begin{align}\label{eq:exp:ansatz}
 v^n_k = \Ree \Bigl[ w_0(t_n, x_k) + h w_1(t_n, x_k) + e^{i(\omega k - \theta n)} \bigl( z_0(t_n, x_k) + h z_1(t_n, x_k) \bigr) + O(h^2) \Bigr].
@@ -996,11 +1010,14 @@ auch für alle $(n, k) \in \N \times \Z$
 &= e^{i (\omega k - \theta n)} z_0(t_n,x_i) ( \lambda - 1 + e^{-i\theta} - \lambda e^{-i \omega} )
 \end{align}
 Und wenn wir $z_0 \neq 0$ annehmen, so folgt
-\begin{align}
-e^{-i \theta} - \lambda e^{-i \omega} = 1 - \lambda
+\begin{align}\label{eq:wkb:gl1}
+\begin{split}
+e^{-i \theta} - \lambda e^{-i \omega} &= 1 - \lambda\\
+\Leftrightarrow \quad e^{-i (\omega - \theta)} &= \left( e^{i \omega} (1 -  \lambda) + \lambda \right)^{-1}
+\end{split}
 \end{align}
 bzw.
-\begin{align*}\label{eq:wkb:gl1}
+\begin{align*}
 \cos(\theta) - \lambda \cos(\omega) &= 1 - \lambda\\
 \theta  &=  \arccos\bigl(1 - \lambda + \lambda \cos(\omega) \bigr). &\Leftrightarrow
 \end{align*}
@@ -1044,18 +1061,72 @@ und für die rechte Seite der Gleichung \eqref{eq:exp:oh2} gilt außerdem
 \begin{align*}
 \frac {1}{2} \partial^2_x u_0(n, k-1, t_n, x_k)
 &= \frac {1}{2} \partial^2_x \left( w_0(t_n, x_k) + e^{i(\omega (k-1) - \theta n)} z_0(t_n, x_k) \right) \\
-&= \frac{1}{2} \partial^2_x w_0(t_n, x_k) + e^{i(\omega k - \theta n)} e^{- i\omega} \partial^2_x z_0(t_n, x_k)
+&= \frac{1}{2} \partial^2_x w_0(t_n, x_k) + \frac{1}{2} e^{i(\omega k - \theta n)} e^{- i\omega} \partial^2_x z_0(t_n, x_k)
 \end{align*}
 und
 \begin{align*}
 -\frac {\lambda}{2} \partial^2_t u_0(n+1, k, t_n, x_k)
 &= -\frac {\lambda}{2} \partial^2_t \left( w_0(t_n, x_k) + e^{i(\omega k - \theta (n+1))} z_0(t_n, x_k) \right) \\
-&= -\frac{\lambda}{2} \partial^2_t w_0(t_n, x_k) - e^{i(\omega k - \theta n)} e^{- i\theta} \partial^2_t z_0(t_n, x_k)\\
-&= -\frac{\lambda}{2} \partial^2_x w_0(t_n, x_k) - e^{i(\omega k - \theta n)} e^{- i\theta} e^{- 2 (\omega - \theta)} \partial^2_x z_0(t_n, x_k)
+&= -\frac{\lambda}{2} \partial^2_t w_0(t_n, x_k) - \frac{\lambda}{2} e^{i(\omega k - \theta n)} e^{- i\theta} \partial^2_t z_0(t_n, x_k)\\
+&= -\frac{\lambda}{2} \partial^2_x w_0(t_n, x_k) - \frac{\lambda}{2} e^{i(\omega k - \theta n)} e^{- i\theta} e^{- 2i (\omega - \theta)} \partial^2_x z_0(t_n, x_k)
 \end{align*}
 also folgt in Summe
 \begin{align}
+\begin{split}
 &\frac {1}{2} \partial^2_x u_0(n, k-1, t_n, x_k) -\frac {\lambda}{2} \partial^2_t u_0(n+1, k, t_n, x_k)\\
 &= \frac {1-\lambda}{2} \partial^2_x w_0(t_n, x_k)\\
-&\qquad + e^{i(\omega k - \theta n)} \left(  \right)
+&\qquad + e^{i(\omega k - \theta n)} \partial^2 z_0(t_n, x_k) \left( e^{- \omega} - \frac{\lambda}{2} e^{- \theta} e^{-2 i(\omega - \theta)} \right)\\
+&\qquad + e^{i(\omega k - \theta n)} \partial^2 z_0(t_n, x_k) e^{- i\omega} \left( 1 - \frac{\lambda}{2} e^{-i(\omega - \theta)} \right)
+\end{split}
+\end{align}
+und damit das Gleichungssystem
+{\small
+\begin{align}\label{eq:exp:oh2}
+\partial_t w_1(t,x) + \partial_x w_1(t,x) &= \frac {1-\lambda}{2} \partial^2_x w_0(t_n, x_k) &w_1(0,x) &= 0 \quad \text{und}\\
+\partial_t z_1(t,x) + e^{-i (\omega - \theta)} \partial_x z_1(t,x) &= \frac{1}{2} e^{- i(\omega - \theta)} \left(1 - \lambda e^{-i(\omega - \theta)} \right) \partial^2 z_0(t_n, x_k) &z_0(0,x) &= 0 
+\end{align}}
+Wir setzen hier nun \eqref{eq:wkb:gl1} ein und erhalten
+\begin{align*}
+e^{- i(\omega - \theta)} \left(1 - \lambda e^{-i(\omega - \theta)} \right) &= \frac{1}{ e^{i \omega} (1 -  \lambda) + \lambda } \left( 1 - \frac{\lambda}{ e^{i \omega} (1 -  \lambda) + \lambda } \right)\\
+&= \frac{1}{ e^{i \omega} (1 -  \lambda) + \lambda } \left( \frac{e^{i \omega} (1 -  \lambda) + \lambda - \lambda}{ e^{i \omega} (1 -  \lambda) + \lambda } \right)\\
+&= \frac{1}{ e^{i \omega} (1 -  \lambda) + \lambda } \left( \frac{e^{i \omega} (1 -  \lambda) }{ e^{i \omega} (1 -  \lambda) + \lambda } \right)\\
+&= \frac{e^{i \omega} (1 -  \lambda) }{ \left(e^{i \omega} (1 -  \lambda) + \lambda \right)^2 }
+\end{align*}
+
+\subsection*{Unbestimmt in $n$}
+
+Der Ansatz lautet dieses mal 
+
+\[ v^n_k = e^{i \omega k} \Omega(n) \left( z_0(t_n, x_k) + h z_1(t_n, x_k) \right) \]
+
+Aus der Gleichung \eqref{eq:transport:diskret:o1} in $O(1)$ folgt
+\begin{align} 
+\begin{split}
+0 &= e^{i \omega k} z_0(t_n, x_k) \left( \Omega(n+1) - \Omega(n) + \lambda \Omega(n) - \lambda e^{-i \omega}) \Omega(n) \right)\\
+&= e^{i \omega k} z_0(t_n, x_k) \left(\Omega(n+1) - (1 - \lambda + \lambda e^{-i \omega}) \Omega(n) \right)
+\end{split}
+\end{align}
+und somit $\Omega(n) = (1 - \lambda + \lambda e^{-i \omega})^n$. Wir schreiben also nun 
+\[ 
+v^n_k = e^{i \omega k} (1 - \lambda + \lambda e^{-i \omega})^n \left( z_0(t_n, x_k) + h z_1(t_n, x_k) \right)
+\]
+und setzen in die Gleichung \eqref{eq:transport:diskret:oh} ein
+\begin{align}
+\begin{split}
+0 &= \partial_t u_0(n+1, k, t_n, x_k) + \partial_x u_0(n, i-1, t_n, x_k)\\
+&= e^{i \omega k} (1 - \lambda + \lambda e^{-i \omega})^{n+1} \partial_t z_0(t_n, x_k) + e^{i \omega (k-1)} (1 - \lambda + \lambda e^{-i \omega})^n \partial_x z_0(t_n, x_k)\\
+&= e^{i \omega k} (1 - \lambda + \lambda e^{-i \omega})^{n} \left( (1 - \lambda + \lambda e^{-i \omega}) \partial_t z_0(t_n, x_k) + e^{- i \omega} \partial_x z_0(t_n, x_k) \right)
+\end{split}
+\end{align}
+
+und in der Gleichung \eqref{eq:transport:diskret:oh2} gilt
+\begin{align}
+\begin{split}
+&e^{i \omega k} (1 - \lambda + \lambda e^{-i \omega})^{n} \left( (1 - \lambda + \lambda e^{-i \omega}) \partial_t z_1(t_n, x_k) + e^{- i \omega} \partial_x z_1(t_n, x_k) \right)\\
+&= e^{i \omega k} (1 - \lambda + \lambda e^{-i \omega})^{n} \left( \frac{1}{2} \partial_x z_0(t_n, x_k) - \frac{\lambda}{2} \partial_t z_0(t_n, x_k) \right)\\
+&= e^{i \omega k} (1 - \lambda + \lambda e^{-i \omega})^{n} \frac{1}{2} \left( \partial_x z_0(t_n, x_k) - \lambda \partial_t z_0(t_n, x_k) \right)\\
+&= e^{i \omega k} (1 - \lambda + \lambda e^{-i \omega})^{n} \frac{1}{2} \left( \partial_x z_0(t_n, x_k) - \left( \frac{e^{- i \omega}}{1 - \lambda + \lambda e^{-i \omega}} \right)^2 \lambda \partial_x z_0(t_n, x_k) \right)\\
+&= e^{i \omega k} (1 - \lambda + \lambda e^{-i \omega})^{n} \partial_x z_0(t_n, x_k) \frac{1}{2} \left( 1 - \frac{e^{- 2 i \omega} \lambda}{(1 - \lambda + \lambda e^{-i \omega})^2}  \right)\\
+&= e^{i \omega k} (1 - \lambda + \lambda e^{-i \omega})^{n} \partial_x z_0(t_n, x_k) \frac{1}{2} \left( 1 - \frac{e^{- 2 i \omega} \lambda}{(1 - \lambda + \lambda e^{-i \omega})^2}  \right)\\
+\end{split}
 \end{align}
