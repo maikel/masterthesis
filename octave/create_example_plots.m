@@ -1,3 +1,5 @@
+more off;
+format long e;
 % create plots for section 2.2 "Ein Beispiel fuer instabiles Verhalten"
 %
 % save gnuplot table data in data/max_errors_*.dat and data/V_sinus_*.dat

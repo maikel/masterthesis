@@ -36,14 +36,14 @@ data: data/V_sinus_eta_0.100_h_0.010.dat \
       data/max_errors_eta_0.010_h_0.001.dat \
       data/max_errors_small_eta_0.001.dat
 
-transportgleichung.tex: data
+2_transportgleichung.tex: data
 
-main.tex: transportgleichung.tex \
-	      transportgleichung_appendix.tex \
-	      vorwort.tex \
-	      variable_advektion.tex \
-	      burgers.tex \
-	      Macros.tex
+thesis.tex: 2_transportgleichung.tex \
+	      A_transportgleichung_appendix.tex \
+	      1_vorwort.tex \
+	      3_variable_advektion.tex \
+	      macros.tex \
+	      titlepage.pdf
 
 # MAIN LATEXMK RULE
 
@@ -54,15 +54,18 @@ main.tex: transportgleichung.tex \
 # -interaction=nonstopmode keeps the pdflatex backend from stopping at a
 # missing file reference and interactively asking you for an alternative.
 
-Masterarbeit.pdf: main.tex
-		latexmk -pdf -pdflatex="pdflatex -shell-escape -interaction=nonstopmode" -use-make main.tex
+titlepage.pdf: titlepage.tex
+		latexmk -pdf -pdflatex="pdflatex -shell-escape -interaction=nonstopmode" -use-make titlepage.tex
+
+Masterarbeit.pdf: thesis.tex
+		latexmk -pdf -pdflatex="pdflatex -shell-escape -interaction=nonstopmode" -use-make thesis.tex
 
 clean:
 		latexmk -CA
-		rm -f main.run.xml
-		rm -f main.bbl
+		rm -f thesis.run.xml
+		rm -f thesis.bbl
 		rm -f data/*.dat
 		rm -f figures/*
-		rm -f main.auxlock
-		rm -f main.maf 
-		rm -f main.mtc* 
+		rm -f thesis.auxlock
+		rm -f thesis.maf 
+		rm -f thesis.mtc* 

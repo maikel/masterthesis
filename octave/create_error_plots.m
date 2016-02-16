@@ -1,4 +1,5 @@
 warning ("off", "Octave:broadcast");
+more off;
 format long e;
 % calculate max difference between numerical scheme and true solution
 sinus_max_err_fn = @(N,X,V,h,eta) ...

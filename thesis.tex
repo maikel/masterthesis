@@ -37,49 +37,26 @@
 \usepackage{pgfplotstable}
 % \pgfplotsset{compat=1.11}
 \usetikzlibrary{external}
+\usepackage{pdfpages}
 % \pgfkeys{/pgf/images/include external/.code=\includegraphics{#1}}
-\tikzexternalize[prefix=figures/]
+\tikzexternalize[prefix=figures/,shell escape=-enable-write18,optimize command away=\includepdf]
 
 \usepackage{csquotes}
 \usepackage[citestyle=alphabetic-verb]{biblatex} 
-\bibliography{Bibliography}
+\bibliography{bibliography.bib}
+
 
 \usepackage[toc,page]{appendix}
     
 % \usepackage[german]{minitoc}
 % \dominitoc
 
-\input{Macros}
-
-\title{\includegraphics[width=0.6\textwidth]{pictures/logo}\\
-{\normalsize Masterarbeit am Institut für Mathematik der Freien Universität Berlin, Arbeitsgruppe Geophysical Fluid Dynamics}\\[6ex]
-Beschreibung hochfrequenter numerischer Instabilitäten mit Hilfe asymptotischer WKB Ansätze}
-
-\author{Maikel Nadolski\\
-{\normalsize Matrikelnummer: 4207314}\\
-{\normalsize \href{mailto:nadolski@math.fu-berlin.de}{nadolski@math.fu-berlin.de}}
-\vspace{3cm}\\\\
-{\normalsize Betreuer: Prof. Dr. Rupert Klein}}
-
+\input{macros}
 
 \begin{document}
 
-\begin{titlepage}
-
 \pagenumbering{alph}
-\maketitle
-\thispagestyle{empty}
-
-% \vfill{}
-
-% \begin{abstract}
-% Abstract
-% \end{abstract}
-
-% \vfill{}
-
-\end{titlepage}
-
+\includepdf{titlepage.pdf}
 \pagestyle{empty}
 \clearpage\pagenumbering{roman}
 
@@ -92,22 +69,22 @@ Beschreibung hochfrequenter numerischer Instabilitäten mit Hilfe asymptotischer
 \setcounter{page}{1}
 
 \chapter{Vorwort}
-\input{vorwort}
+\input{1_vorwort}
 % \chapter{Multiskalen Asymptotik für finite Differenzen}
 % \input{asymptotik_finite_differenzen}
 \chapter{Die lineare Transportgleichung mit konstanter Geschwindigkeit}
-\input{transportgleichung}
+\input{2_transportgleichung}
 \chapter{Die lineare Transportgleichung mit ortsabhängiger Geschwindigkeit}
-\input{variable_advektion}
+\input{3_variable_advektion}
 % \chapter{Die Burgersgleichung}
 % \input{burgers}
 
-\input{FrontBackMatter/Bibliography}
+\input{bibliography.tex}
 
 \appendix
 
 \chapter{Anhang}
-\input{transportgleichung_appendix}
-\input{programme_appendix}
+\input{A_transportgleichung_appendix}
+\input{A_programme_appendix}
 
 \end{document}
