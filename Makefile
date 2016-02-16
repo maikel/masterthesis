@@ -36,12 +36,12 @@ data: data/V_sinus_eta_0.100_h_0.010.dat \
       data/max_errors_eta_0.010_h_0.001.dat \
       data/max_errors_small_eta_0.001.dat
 
-2_transportgleichung.tex: data
+2.transportgleichung.tex: data
 
-thesis.tex: 2_transportgleichung.tex \
-	      A_transportgleichung_appendix.tex \
-	      1_vorwort.tex \
-	      3_variable_advektion.tex \
+thesis.tex: 2.transportgleichung.tex \
+	      A.transportgleichung_appendix.tex \
+	      1.vorwort.tex \
+	      3.variable_advektion.tex \
 	      macros.tex \
 	      titlepage.pdf
 
