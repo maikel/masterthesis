@@ -434,22 +434,64 @@ Mit \eqref{apx:diskret:lemma2} folgt ganz analog für die Differenz in $i$
 % \end{split}
 % \end{align}
 
-Sei
+Es sei der Ansatz
 \begin{align}
 \begin{split}
-v^n_i &= w_0(t_n, x_i) + h^2 w_2(t_n, x_i)\\
-&\quad + (-1)^{i+n} \bigl( z_0(t_n, 2 h t_n, x_i) + h^2 z_2(t_n, 2 h t_n, x_i) \bigr).
-\end{split}
+v^n_i &= w_0(t_n, x_i) + h w_1(t_n, x_i) + h^2 w_2(t_n, x_i)\\
+&\quad + (-1)^{i+n} \bigl( z_0(t_n, 2 h t_n, x_i) + + h z_1(t_n, 2 h t_n, x_i) + h^2 z_2(t_n, 2 h t_n, x_i) \bigr) + O(h^3)
+\end{split}\\
+&= w_0 + h w_1 + h^2 w_2 + (-1)^{i+n} (z_0 + h z_1 + h^2 z_2) + O(h^3) .
 \end{align}
-Dann gilt
+für glatte Abbildungen $w_k(t,x)$ und $z_k(t, \tau, x)$ gegeben.
+Für alle $k = 0, 1, 2$ gilt
+{\small
 \begin{align}
 \begin{split}
-v^{n+1}_i - v^n_i &= h (1 + h) \partial_t w_0 + h^2 \frac{1 + 2h}{2} \partial^2_t w_0 +  \frac{h^3}{6} \partial^3_t w_0 + h^3 \partial_t w_2\\
-&- (-1)^{i+n} \Bigl( 2z_0 + h (1 + h) \partial_t z_0  + 2 h^2 (1 + h) \partial_\tau z_0 + h^2 \frac{(1 + 2h)}{2} \partial^2_t z_0\\
-& + 2 h^3 \partial^2_\tau z_0 + \frac{h^3}{6} \partial^3_t z_0 + h^2 2 z_2 + h^3 \partial_t z_2 \Bigr) + o(h^3)
+w_k(t_{n+1}, x_i) &= w_k(t_n + h(1+h), x_i)\\
+&= \left(1 + h(1+h) \partial_t + \frac{h^2(1+h)^2}{2} \partial^2_t + \frac{h^3(1+h)^3}{6} \partial^3_t \right) w_k + O(h^4)\\
+&= \left(1 + h(1+h) \partial_t + \frac{h^2(1+2h)}{2} \partial^2_t + \frac{h^3}{6} \partial^3_t \right) w_k + O(h^4)\\
+&= \left(1 + h \partial_t + h^2 \left( \partial_t + \frac{1}{2} \partial^2_t \right) + h^3 \left( \partial^2_t + \frac{1}{6} \partial^3_t \right) \right) w_k + O(h^4)
 \end{split}
 \end{align}
-und damit auch
+}
+{\small
+\begin{align}
+\begin{split}
+z_k(t_{n+1}, 2h t_{n+1}, x_i) &= z_k(t_n + h(1+h), 2 h t_n + 2 h^2(1+h), x_i)\\
+&= \left(1 + h(1+h) \partial_t + 2 h^2(1+h) \partial_\tau + \frac{h^2(1+h)^2}{2} \partial^2_t + \frac{h^3(1+h)^3}{6} \partial^3_t \right) z_k + O(h^4)\\
+&= \left(1 + h(1+h) \partial_t + 2 h^2(1+h) \partial_\tau + \frac{h^2(1+2h)}{2} \partial^2_t + \frac{h^3}{6} \partial^3_t \right) z_k + O(h^4)\\
+&= \left(1 + h \partial_t + h^2 \left( \partial_t + 2 \partial_\tau + \frac{1}{2} \partial^2_t \right) + h^3 \left( 2 \partial_\tau + \partial^2_t + \frac{1}{6} \partial^3_t \right) \right) z_k + O(h^4)
+\end{split}
+\end{align}
+}
+{\small
+\begin{align}
+\begin{split}
+(1 + h) w_k(t_n, x_{i-1}) &= (1+h) w_k(t_n, x_i - h)\\
+&= (1 + h) \left( 1 - h \partial_x + \frac{h^2}{2} \partial^2_x - \frac {h^3}{6} \partial^3_x \right) w_k + O(h^4)\\
+&= \left( 1 + h( 1 - \partial_x ) + h^2  \left( -\partial_x + \frac{1}{2} \partial^2_x \right) - h^3 \frac{1}{6} \partial^3_x \right) w_k + O(h^4)
+\end{split}
+\end{align}
+}
+{\small
+\begin{align}
+\begin{split}
+(1 + h) z_k(t_n, 2 h t_n, x_{i-1}) &= (1+h) z_k(t_n, 2 h t_n, x_i - h)\\
+&= (1 + h) \left( 1 - h \partial_x + \frac{h^2}{2} \partial^2_x - \frac {h^3}{6} \partial^3_x \right) z_k + O(h^4)\\
+&= \left( 1 + h( 1 - \partial_x ) + h^2  \left( -\partial_x + \frac{1}{2} \partial^2_x \right) - h^3 \frac{1}{6} \partial^3_x \right) z_k + O(h^4)
+\end{split}
+\end{align}
+}
+und somit folgt
+\begin{align}
+\begin{split}
+v^{n+1}_i - v^n_i &= \left(h \partial_t + h^2 \left( \partial_t + \frac{1}{2} \partial^2_t \right) + h^3 \left( \partial^2_t + \frac{1}{6} \partial^3_t \right) \right) w_0\\
+&\quad + \left(h^2 \partial_t + h^3 \left( \partial_t + \frac{1}{2} \partial^2_t \right) \right) w_1 + h^3 \partial_t w_2\\
+&\quad + (-1)^{n+i} \left(h \partial_t + h^2 \left( \partial_t + 2 \partial_\tau + \frac{1}{2} \partial^2_t \right) + h^3 \left( 2 \partial_\tau + \partial^2_t + \frac{1}{6} \partial^3_t \right) \right) z_0\\
+&\quad + (-1)^{n+i} \left(h^2 \partial_t + h^3 \left( \partial_t + 2 \partial_\tau + \frac{1}{2} \partial^2_t \right)\right) z_1 + h^3 \partial_t z_2 + O(h^4)\\
+\end{split}
+\end{align}
+aber auch
 \begin{align}
 \begin{split}
 (1 + h) (v^n_i - v^n_{i-1}) &= h (1 + h) \partial_x w_0 - h^2 \frac{1 + h}{2} \partial^2_x w_0 + \frac{h^3}{6} \partial^3_x w_0+ h^3 \partial_x w_2\\

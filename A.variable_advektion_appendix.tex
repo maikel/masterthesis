@@ -1,2 +1,16 @@
 %!TEX root=thesis.tex
 
+Wir betrachten das Gitter $G_h = (t_n, x_i) = h (n, i)$ und den Multiskalenansatz
+\begin{align}
+\begin{split}
+v^n_i = u_0(t_n, h t_n, x_i) + h u_1(t_n, h t_n, x_i) + h^2 u_2(t_n, h t_n, x_i) + O(h^3)
+\end{split}
+\end{align}
+wobei $u_k(t, \tau, x)$ glatte Abbildungen seien.
+Dann gilt einerseits für $k = 0,1,2$
+\begin{align}
+u_k(t_{n+1}, h t_{n+1}, x_i)
+&= u_k(t_n + h, h t_n + h^2,  x_i)\\
+&= u_k(t_n, h t_n, x_i) + h \partial_t u_k(t_n, h t_n, x_i) + h^2 \partial_\tau u_k(t_n, h t_n, x_i)\\
+&\quad + \frac{h^2}{2} \partial_t u_k(t_n, h t_n, x_i) + \underbrace{\frac{\left(h^2\right)^2}{2} \partial_\tau u_k(t_n, h t_n, x_i)}_{\in O(h^4)}
+\end{align}
