@@ -1,3 +1,5 @@
+%!TEX root=thesis.tex
+
 \section{Die lineare Transportgleichung}
 \subsection{Analytische Lösungen}
 \label{appendix:loesungen}
@@ -469,7 +471,7 @@ z_k(t_{n+1}, 2h t_{n+1}, x_i) &= z_k(t_n + h(1+h), 2 h t_n + 2 h^2(1+h), x_i)\\
 \begin{split}
 (1 + h) w_k(t_n, x_{i-1}) &= (1+h) w_k(t_n, x_i - h)\\
 &= (1 + h) \left( 1 - h \partial_x + \frac{h^2}{2} \partial^2_x - \frac {h^3}{6} \partial^3_x \right) w_k + O(h^4)\\
-&= \left( 1 + h( 1 - \partial_x ) + h^2  \left( -\partial_x + \frac{1}{2} \partial^2_x \right) - h^3 \frac{1}{6} \partial^3_x \right) w_k + O(h^4)
+&= \left( 1 + h( 1 - \partial_x ) + h^2  \left( -\partial_x + \frac{1}{2} \partial^2_x \right) + h^3 \left(\frac{1}{2} \partial^2_x - \frac{1}{6} \partial^3_x \right) \right) w_k + O(h^4)
 \end{split}
 \end{align}
 }
@@ -478,17 +480,45 @@ z_k(t_{n+1}, 2h t_{n+1}, x_i) &= z_k(t_n + h(1+h), 2 h t_n + 2 h^2(1+h), x_i)\\
 \begin{split}
 (1 + h) z_k(t_n, 2 h t_n, x_{i-1}) &= (1+h) z_k(t_n, 2 h t_n, x_i - h)\\
 &= (1 + h) \left( 1 - h \partial_x + \frac{h^2}{2} \partial^2_x - \frac {h^3}{6} \partial^3_x \right) z_k + O(h^4)\\
-&= \left( 1 + h( 1 - \partial_x ) + h^2  \left( -\partial_x + \frac{1}{2} \partial^2_x \right) - h^3 \frac{1}{6} \partial^3_x \right) z_k + O(h^4)
+&= \left( 1 + h( 1 - \partial_x ) + h^2  \left( -\partial_x + \frac{1}{2} \partial^2_x \right) + h^3 \left(\frac{1}{2} \partial^2_x - \frac{1}{6} \partial^3_x \right) \right) z_k + O(h^4)
 \end{split}
 \end{align}
 }
-und somit folgt
+und somit folgt unter Verwendung die Rechnung
 \begin{align}
 \begin{split}
-v^{n+1}_i - v^n_i &= \left(h \partial_t + h^2 \left( \partial_t + \frac{1}{2} \partial^2_t \right) + h^3 \left( \partial^2_t + \frac{1}{6} \partial^3_t \right) \right) w_0\\
-&\quad + \left(h^2 \partial_t + h^3 \left( \partial_t + \frac{1}{2} \partial^2_t \right) \right) w_1 + h^3 \partial_t w_2\\
-&\quad + (-1)^{n+i} \left(h \partial_t + h^2 \left( \partial_t + 2 \partial_\tau + \frac{1}{2} \partial^2_t \right) + h^3 \left( 2 \partial_\tau + \partial^2_t + \frac{1}{6} \partial^3_t \right) \right) z_0\\
-&\quad + (-1)^{n+i} \left(h^2 \partial_t + h^3 \left( \partial_t + 2 \partial_\tau + \frac{1}{2} \partial^2_t \right)\right) z_1 + h^3 \partial_t z_2 + O(h^4)\\
+v^{n+1}_i - v^n_i &= w_0(t_{n+1}, 2 h t_{n+1}, x_i) - w_0(t_n, 2 h t_n, x_i)\\
+&\quad + h \left(  w_1(t_{n+1}, 2 h t_{n+1}, x_i) - w_1(t_n, 2 h t_n, x_i) \right)\\
+&\quad + h^2 \left(  w_2(t_{n+1}, 2 h t_{n+1}, x_i) - w_2(t_n, 2 h t_n, x_i) \right)\\
+&\quad + (-1)^{i+n+1} z_0(t_{n+1}, 2 h t_{n+1}, x_i) - (-1)^{n+i} z_0(t_n, 2 h t_n, x_i)\\
+&\quad + h \left( (-1)^{i+n+1} z_1(t_{n+1}, 2 h t_{n+1}, x_i) - (-1)^{n+i} z_1(t_n, 2 h t_n, x_i) \right)\\
+&\quad + h^2 \left( (-1)^{i+n+1} z_2(t_{n+1}, 2 h t_{n+1}, x_i) - (-1)^{n+i} z_2(t_n, 2 h t_n, x_i) \right)
+\end{split}\\
+\begin{split}
+&= \left( h \partial_t + h^2 \left( \partial_t + \frac{1}{2} \partial^2_t \right) + h^3 \left( \partial^2_t + \frac{1}{6} \partial^3_t \right) \right) w_0\\
+&\quad + h \left(h \partial_t + h^2 \left( \partial_t + \frac{1}{2} \partial^2_t \right) \right) w_1\\
+&\quad + h^3 \partial_t w_2 + O(h^4)\\
+&\quad - (-1)^{i+n}     \left( z_0(t_{n+1}, 2 h t_{n+1}, x_i) + z_0(t_n, 2 h t_n, x_i) \right)\\
+&\quad - (-1)^{i+n} h   \left( z_1(t_{n+1}, 2 h t_{n+1}, x_i) + z_1(t_n, 2 h t_n, x_i) \right)\\
+&\quad - (-1)^{i+n} h^2 \left( z_2(t_{n+1}, 2 h t_{n+1}, x_i) + z_2(t_n, 2 h t_n, x_i) \right)
+\end{split}\\
+\begin{split}
+&= \left( h \partial_t + h^2 \left( \partial_t + \frac{1}{2} \partial^2_t \right) + h^3 \left( \partial^2_t + \frac{1}{6} \partial^3_t \right) \right) w_0\\
+&\quad + h \left(h \partial_t + h^2 \left( \partial_t + \frac{1}{2} \partial^2_t \right) \right) w_1\\
+&\quad + h^3 \partial_t w_2\\
+&\quad - (-1)^{i+n}     \left( 2 + h \partial_t + h^2 \left( \partial_t + 2 \partial_\tau + \frac{1}{2} \partial^2_t \right) + h^3 \left( 2 \partial_\tau + \partial^2_t + \frac{1}{6} \partial^3_t \right) \right) z_0\\
+&\quad - (-1)^{i+n} h   \left( 2 + h \partial_t + h^2 \left( \partial_t + 2 \partial_\tau + \frac{1}{2} \partial^2_t \right) \right) z_1\\
+&\quad - (-1)^{i+n} h^2 \left( 2 + h \partial_t \right) z_2 + O(h^4)
+\end{split}\\
+\begin{split}
+&=  h \partial_t w_0 \\
+&\quad + h^2 \left( \partial_t w_1 + \partial_t w_0 + \frac{1}{2} \partial^2_t w_0 \right)\\
+&\quad + h^3 \left( \partial_t w_2 + \partial_t w_1 + \frac{1}{2} \partial^2_t w_1 + \partial^2_t w_0 + \frac{1}{6} \partial^3_t w_0 \right)\\
+&\quad - (-1)^{i+n} \left( 2 z_0 + h 2 z_1 + h^3 2 z_2 \right)\\
+&\quad - (-1)^{i+n} h \partial_t z_0\\
+&\quad - (-1)^{i+n} h^2 \left( \partial_t z_1 + \partial_t z_0 + 2 \partial_\tau z_0 + \frac{1}{2} \partial^2_t z_0 \right)\\
+&\quad - (-1)^{i+n} h^3 \left( \partial_t z_2 + \partial_t z_1 + 2 \partial_\tau z_1 + \frac{1}{2} \partial^2_t z_1\\
+&\qquad + 2 \partial_\tau z_0 + \partial^2_t z_0+ \frac{1}{6} \partial^3_t z_0 \right) + O(h^4)\\
 \end{split}
 \end{align}
 aber auch
