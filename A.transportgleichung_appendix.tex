@@ -515,7 +515,7 @@ v^{n+1}_i - v^n_i &= w_0(t_{n+1}, 2 h t_{n+1}, x_i) - w_0(t_n, 2 h t_n, x_i)\\
 &=  h \partial_t w_0 \\
 &\quad + h^2 \left( \partial_t w_1 + \partial_t w_0 + \frac{1}{2} \partial^2_t w_0 \right)\\
 &\quad + h^3 \left( \partial_t w_2 + \partial_t w_1 + \frac{1}{2} \partial^2_t w_1 + \partial^2_t w_0 + \frac{1}{6} \partial^3_t w_0 \right)\\
-&\quad - (-1)^{i+n} \left( 2 z_0 + h 2 z_1 + h^3 2 z_2 \right)\\
+&\quad - (-1)^{i+n} \left( 2 z_0 + h 2 z_1 + h^2 2 z_2 \right)\\
 &\quad - (-1)^{i+n} h \partial_t z_0\\
 &\quad - (-1)^{i+n} h^2 \left( \partial_t z_1 + \partial_t z_0 + 2 \partial_\tau z_0 + \frac{1}{2} \partial^2_t z_0 \right)\\
 &\quad - (-1)^{i+n} h^3 \Bigl( \partial_t z_2 + \partial_t z_1 + 2 \partial_\tau z_1 + \frac{1}{2} \partial^2_t z_1\\
@@ -554,7 +554,7 @@ und andererseits auch die Rechnung
 &= h \partial_x w_0\\
 &\quad + h^2 \left( \partial_x w_1 + \partial_x w_0 - \frac{1}{2} \partial^2_x w_0 \right)\\
 &\quad + h^3 \left( \partial_x  w_2 + \partial_x w_1 - \frac{1}{2} \partial^2_x w_1 - \frac{1}{2} \partial^2_x w_0 + \frac{1}{6} \partial^3_x w_0 \right)\\
-&\quad + (-1)^{i+n} \left( 2 z_0 + h 2 z_1 + h^2 z_2 \right)\\
+&\quad + (-1)^{i+n} \left( 2 z_0 + h 2 z_1 + h^2 2 z_2 \right)\\
 &\quad + (-1)^{i+n} h \left( 2 z_0 - \partial_x z_0 \right)\\
 &\quad + (-1)^{i+n} h^2 \left( 2 z_1 - \partial_x z_1 -\partial_x z_0 + \frac{1}{2} \partial^2_x z_0 \right)\\
 &\quad + (-1)^{i+n} h^3 \left( 2 z_2 - \partial_x z_2 -\partial_x z_1 + \frac{1}{2} \partial^2_x z_1 + \frac{1}{2} \partial^2_x z_0 - \frac{1}{6} \partial^3_x z_0 \right) + O(h^4).
@@ -562,24 +562,50 @@ und andererseits auch die Rechnung
 \end{align}
 }
 Wir summieren \eqref{eq:apx:mega_lang1} und \eqref{eq:apx:mega_lang2} und erhalten
-\begin{align}
+\begin{align}\begin{split}
 & v^{n+1}_i - v^n_i + (1 + h) \left(v^n_i - v^n_{i-1}\right)\\
-\begin{split}
 &= h \left( \partial_t w_0 + \partial_x w_0 \right)\\
 &\quad + h^2\left( \partial_t w_1 + \partial_t w_0 + \frac{1}{2} \partial^2_t w_0 + \partial_x w_1 + \partial_x w_0 - \frac{1}{2} \partial^2_x w_0 \right)\\
 &\quad + h^3 \Bigl( \partial_t w_2 + \partial_t w_1 + \frac{1}{2} \partial^2_t w_1 + \partial^2_t w_0 + \frac{1}{6} \partial^3_t w_0\\
 &\qquad +  \partial_x  w_2 + \partial_x w_1 - \frac{1}{2} \partial^2_x w_1 - \frac{1}{2} \partial^2_x w_0 + \frac{1}{6} \partial^3_x w_0 \Bigr)\\
-&\quad + (-1)^{i+n} h \left( \partial_t z_0 - \partial_x z_0 + 2 z_0 \right)\\
-&\quad + (-1)^{i+n} h^2 \left( \partial_t z_1 - \partial_x z_1 + 2 z_1 - \partial_x z_0 + \frac{1}{2} \partial^2_x z_0 + \partial_t z_0 + 2 \partial_\tau z_0 + \frac{1}{2} \partial^2_t z_0  \right)\\
-&\quad + (-1)^{i+n} h^3 \Bigl( \partial_t z_2 + \partial_t z_1 + 2 \partial_\tau z_1 + \frac{1}{2} \partial^2_t z_1 + 2 \partial_\tau z_0 + \partial^2_t z_0+ \frac{1}{6} \partial^3_t z_0\\
+&\quad + (-1)^{i+n} h \left( - \partial_t z_0 - \partial_x z_0 + 2 z_0 \right)\\
+&\quad + (-1)^{i+n} h^2 \left( - \partial_t z_1 - \partial_x z_1 + 2 z_1 - \partial_x z_0 + \frac{1}{2} \partial^2_x z_0 - \partial_t z_0 - 2 \partial_\tau z_0 - \frac{1}{2} \partial^2_t z_0  \right)\\
+&\quad + (-1)^{i+n} h^3 \Bigl( - \partial_t z_2 - \partial_t z_1 - 2 \partial_\tau z_1 - \frac{1}{2} \partial^2_t z_1 - 2 \partial_\tau z_0 - \partial^2_t z_0 - \frac{1}{6} \partial^3_t z_0\\
 &\qquad + 2 z_2 - \partial_x z_2 -\partial_x z_1 + \frac{1}{2} \partial^2_x z_1 + \frac{1}{2} \partial^2_x z_0 - \frac{1}{6} \partial^3_x z_0 \Bigr) + O(h^4).
 \end{split}
 \end{align}
-Für jede Ordnung in $h$ erhalten wir mit Hilfe des Satzes \ref{satz:alt:beidenull} je für den glatten Anteil $w$ und auch oszillierenden Anteil $z$ eine Gleichung.
-Mit einem Stetigkeitsargument und wegen der Dichtheit von $\bigcup_{h > 0} G_h$ gilt für alle $(t,\tau,x)$
+Für jede Ordnung in $h$ erhalten wir mit Hilfe des Satzes \ref{satz:glgregulaer} je für den glatten Anteil $w$ und auch oszillierenden Anteil $z$ eine Gleichung.
+Für $w$ gelten dann die Gleichungen
+\begin{align}
+\begin{split}
+\partial_t w_0 + \partial_x w_0 &= 0\\ 
+\partial_t w_1 + \partial_x w_1 + \underbrace{\partial_t w_0 + \partial_x w_0}_{= 0} &= \frac{1}{2} \bigl( \underbrace{ \partial^2_x w_0 - \partial^2_t w_0}_{= 0} \bigr)\\
+\partial_t w_2 + \partial_x  w_2 + \underbrace{\partial_t w_1 + \partial_x w_1}_{= 0} &= \frac{1}{2} \bigl( \underbrace{\partial^2_x w_0 - 2 \partial^2_t w_0}_{= - \partial^2_x w_0} \bigr)\\
+&\quad + \frac{1}{2} \bigl( \underbrace{\partial^2_x w_1 - \partial^2_t w_1}_{= 0} \bigr) - \frac{1}{6} \bigl( \underbrace{\partial^3_t w_0 +  \partial^3_x w_0}_{= 0} \bigr)
+\end{split}
+\end{align}
+also
 \begin{align}\label{eq:apx:fuerw}
 \partial_t w_0 + \partial_x w_0 &= 0\\ 
-\partial_t w_1 + \partial_x w_1 + \underbrace{\partial_t w_0 + \partial_x w_0}_{= 0} &= \underbrace{\frac{1}{2} \partial^2_x w_0 - \frac{1}{2} \partial^2_t w_0}_{= 0}
+\partial_t w_1 + \partial_x w_1 &= 0\\
+\partial_t w_2 + \partial_x w_2 &= -\frac{1}{2} \partial^2_x w_0\\
+\begin{split}
+w_0(0, 0, x) &= U(x),\\
+w_1(0, 0, x) &= 0, \qquad \qquad \forall x \in \R\\
+w_2(0, 0, x) &= 0.
+\end{split}
+\end{align}
+Für die Abbildungen $z_k$, $k = 0,1,2$ folgt hingegen
+\begin{align}
+\begin{split}
+\partial_t z_0 + \partial_x z_0 &= 2 z_0\\ 
+\partial_t z_1 + \partial_x z_1 &= 2 z_1 \underbrace{- \bigl( \partial_t z_0 + \partial_x z_0 \bigr) + \frac{1}{2} \left(\partial^2_x z_0 - \partial^2_t z_0\right) - 2 \partial_\tau z_0}_{= 0}\\
+\partial_t z_2 + \partial_x z_2 &= 2 z_2 - \frac{1}{6} \bigl( \partial^3_x z_0 + \partial^3_t z_0 \bigr) + \underbrace{\frac{1}{2} \bigl(\partial^2_x z_0 - \partial^2_t z_0 \bigr) - 2 \partial_\tau z_0}_{= \partial_t z_0 + \partial_x z_0 = 2z_0} - \frac{1}{2} \partial^2_t z_0\\
+&\quad \underbrace{ - \bigl(\partial_t z_1 +\partial_x z_1 \bigr) + \frac{1}{2}\bigl( \partial^2_x z_1 - \partial^2_t z_1 \bigr) - 2 \partial_\tau z_1}_{= 0}\\
+z_0(0,0,x) &= U(x),\\
+z_1(0,0,x) &= 0,\\
+z_2(0,0,x) &= 0.
+\end{split}
 \end{align}
 
 % \subsection{WKB Ansatz}

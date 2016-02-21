@@ -126,7 +126,7 @@ Das liefert uns also das Gleichungssystem
 \partial_t u_1(t, x) + \partial_x u_1(t, x) &= \frac{1}{2} \bigl( \underbrace{\partial^2_x u_0(t,x) - \partial^2_t u_0(t,x)}_{= 0} \bigr) - b(x) \partial_x u_0(t, x)\\
 \label{eq:varadv:kleina:oh3}
 \begin{split}
-\partial_t u_2(t, x) + \partial_x u_2(t, x) &= \frac{b(x)}{2} \partial^2_x u_0(t,x) - b(x) \partial_x u_1(t,x)\\
+\partial_t u_2(t, x) + \partial_x u_2(t, x) &= -\frac{b(x)}{2} \partial^2_x u_0(t,x) - b(x) \partial_x u_1(t,x)\\
 &\quad - \frac{1}{6} \bigl( \underbrace{\partial^3_t u_0(t,x) + \partial^3_x u_0(t,x)}_{= 0} \bigr) + \frac{1}{2} \bigl( \partial^2_x u_1(t,x) - \partial^2_t u_1(t,x) \bigr).
 \end{split}\\
 u_0(0,x) &= U(x)\\
@@ -158,23 +158,14 @@ Dies liefert uns insgesamt, wie im Anhang gezeigt, das Gleichungssystem
 \partial_\tau u_0(t, \tau, x) + b(x) \partial_x u_0(t, \tau, x) &= 0\\
 \partial_t u_1(t, \tau, x) + \partial_x u_1(t, \tau, x) &= 0\\
 \partial_\tau u_1(t, \tau, x) + b(x) \partial_x u_1(t, \tau, x) &= 0\\
-\partial_t u_2(t, \tau, x) + \partial_x u_2(t, \tau, x) &= \frac{b(x)}{2} \partial^2_x u_0(t, \tau,x) - \frac{1}{2} \partial^2_\tau u_0(t, \tau, x)\\
+\label{eq:3_1.regulaer:quellterm_2}
+\partial_t u_2(t, \tau, x) + \partial_x u_2(t, \tau, x) &= \frac{b(x)}{2} \partial^2_x u_0(t, \tau,x)\\
 u_0(0,0,x) &= U(x)\\
 u_1(0,0,x) &= u_2(0,0,x) = 0.
 \end{split}
 \end{align}
-Wir schreiben die rechte Seite wieder nur in Abhängigkeit von partiellen Ableitungen in $x$.
-Es folgt ganz analog wie in \eqref{eq:varadv:kleina:2teabl} die Gleichung
+Um den Quellterm in Gleichung \eqref{eq:3_1.regulaer:quellterm_2} zu eliminieren, führen wir eine zweite langsame Zeitvariable $\sigma = h^2 t$ ein, fordern
 \begin{align}
-\partial^2_\tau u_0(t, \tau, x) %&= \partial_\tau \bigl( \partial_\tau u_0(t, \tau, x) \bigr)\\
-% &= \partial_\tau \bigl( - b(x) \partial_x u_0(t, \tau, x) \bigr)\\
-% &= - b(x) \partial_x \bigl( \partial_\tau u_0(t, \tau, x) \bigr)\\
-% &= - b(x) \partial_x \bigl( - b(x) \partial_x u_0(t, \tau, x) \bigr)\\
-% &= b(x) \bigl( b'(x) \partial_x u_0(t, \tau, x) + b(x) \partial^2_x u_0(t,x) \bigr)\\
-&= b^2(x) \partial^2_x u_0(t, \tau, x) + b(x) b'(x) \partial_x u_0(t,x)
+\partial_\sigma u_0(t, \tau, \sigma, x) &= \frac{b(x)}{2} \partial^2_x u_0(t, \tau, \sigma, x) \qquad \text{und}\\
+u_0(0, 0, 0, x) &= 0.
 \end{align}
-und daher folgt
-\begin{align}
-\partial_t u_2(t, \tau, x) + \partial_x u_2(t, \tau, x) &= \frac{b(x) \bigl(1 - b(x)\bigr)}{2} \partial^2_x u_0(t,x) - \frac{b(x)b'(x)}{2} \partial_x u_0(t,x).
-\end{align}
-Und hieraus lesen wir die Stabilitätsbedingung $0 < b(x) \leq 1$ ab!

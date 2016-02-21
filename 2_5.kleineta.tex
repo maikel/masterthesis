@@ -295,8 +295,8 @@ Setzen wir unsere bisherigen Erkenntnisse nun wie in Anhang \ref{appendix:kleine
 \begin{align}
 \partial_t w_2(t,x) + \partial_x w_2(t,x) &= - \frac{1}{2} \partial^2_t w_0(t,x)\\
 \begin{split}
-\partial_t z_2(t,\tau,x) + \partial_x z_2(t,\tau,x) &= 2 z_2(t,\tau,x) - \Bigl( 2 \bigl( \partial_\tau z_0(t,\tau,x) + \partial^2_\tau z_0(t,\tau,x) \bigr)\\
-&\quad + \partial^2_t z_0(t,\tau,x) - \frac{1}{2} \partial^2_x z_0(t,\tau,x) + \frac{1}{6} \bigl(\partial^3_t z_0(t,\tau,x) + \partial^3_x z_0(t,\tau,x)\bigr) \Bigr)
+\partial_t z_2(t,\tau,x) + \partial_x z_2(t,\tau,x) &= 2 z_2(t,\tau,x) - \frac{1}{6} \bigl( \partial^3_x z_0(t,\tau,x) + \partial^3_t z_0(t, \tau, x) \bigr)\\
+&\quad + 2 z_0(t, \tau, x) - \frac{1}{2} \partial^2_t z_0(t, \tau, x)
 \end{split}
 \end{align}
 
@@ -313,43 +313,43 @@ Es gilt
 \end{align}
 also
 \begin{align}
-\frac{1}{6} \bigl(\partial^3_t z_0 + \partial^3_x z_0 \bigr)
-= \frac{4}{3} z_0 - 2 \partial_x z_0 + \partial^2_x z_0.
+- \frac{1}{6} \bigl(\partial^3_t z_0 + \partial^3_x z_0 \bigr)
+= -\frac{4}{3} z_0 + 2 \partial_x z_0 - \partial^2_x z_0.
 \end{align}
 Außerdem gilt
-\[ \partial_\tau z_0 = - \partial_t z_0 \]
-und das impliziert
-\begin{align*}
-2 \bigl( \partial_\tau z_0 + \partial^2_\tau z_0 \bigr) + \partial^2_t z_0
-&= - 2 \partial_t z_0 + 2 \partial^2_t z_0 + \partial^2_t z_0\\
-&= - 2 \partial_t z_0 + 3 \partial^2_t z_0 \\
-&= - 2 (2 z_0 - \partial_x z_0) + 3 (4 z_0 - 4 \partial_x z_0 + \partial^2_x z_0)\\
-&= - 4 z_0 - 2 \partial_x z_0 + 12 z_0 - 12 \partial_x z_0 + 3 \partial^2_x z_0\\
-&= 8 z_0 - 14 \partial_x z_0 + 3 \partial^2_x z_0.
-\end{align*}
+\[ -\frac{1}{2} \partial^2_t z_0 = -2 z_0 + 2 \partial_x z_0 - \frac{1}{2} \partial^2_x z_0 \]
+% und das impliziert
+% \begin{align*}
+% 2 \bigl( \partial_\tau z_0 + \partial^2_\tau z_0 \bigr) + \partial^2_t z_0
+% &= - 2 \partial_t z_0 + 2 \partial^2_t z_0 + \partial^2_t z_0\\
+% &= - 2 \partial_t z_0 + 3 \partial^2_t z_0 \\
+% &= - 2 (2 z_0 - \partial_x z_0) + 3 (4 z_0 - 4 \partial_x z_0 + \partial^2_x z_0)\\
+% &= - 4 z_0 - 2 \partial_x z_0 + 12 z_0 - 12 \partial_x z_0 + 3 \partial^2_x z_0\\
+% &= 8 z_0 - 14 \partial_x z_0 + 3 \partial^2_x z_0.
+% \end{align*}
 In Summe ergeben diese Rechnungen
 \begin{align}
 \begin{split}
-&2 \bigl( \partial_\tau z_0 + \partial^2_\tau z_0 \bigr) + \partial^2_t z_0 - \frac{1}{2} \partial^2_x z_0 + \frac{1}{6} \bigl(\partial^3_t z_0 + \partial^3_x z_0 \bigr)\\
-&= 8 z_0 - 14 \partial_x z_0 + 3 \partial^2_x z_0 - \frac{1}{2} \partial^2_x z_0 + \frac{4}{3} z_0 - 2 \partial_x z_0 + \partial^2_x z_0\\
-&= \frac{28}{3} z_0 - 16 \partial_x z_0 + \frac{7}{2} \partial^2_x z_0
+&- \frac{1}{6} \bigl( \partial^3_x z_0 + \partial^3_t z_0 \bigr) + 2 z_0 - \frac{1}{2} \partial^2_t z_0\\
+&\quad = \bigl(-\frac{4}{3} z_0 + 2 \partial_x z_0 - \partial^2_x z_0\bigr) + 2 z_0 + \bigl(-2 z_0 + 2 \partial_x z_0 - \frac{1}{2} \partial^2_x z_0\bigr)\\
+&\quad = -\frac{4}{3} z_0 + 4 \partial_x z_0 - \frac{3}{2} \partial^2_x z_0
 \end{split}
 \end{align}
-Man kann das gleiche Spiel wie in der letzten Ordnung, $O(h^2)$, wiederholen und eine langsame weitere Zeitvariable $\tau_2 = h^2 t$ einführen.
-Fordert man nun, dass 
-\begin{align}
-\nonumber
-z_0(0,0,0,x) &= V(x)\\
-\nonumber
-\partial_t z_0(t,\tau, \tau_2, x) + \partial_x z_0(t,\tau,\tau_2,x) &= 2 z_0(t,\tau,\tau_2,x)\\
-\nonumber
-\partial_\tau z_0(t,\tau, \tau_2, x) - \partial_x z_0(t,\tau, \tau_2, x) &= -2z_0(t,\tau, \tau_2, x)\\
-\label{eq:ke:addiff}
-\partial_{\tau_2} z_0(t,\tau, \tau_2, x) + 16 \partial_x z_0(t,\tau, \tau_2, x) &= \frac{28}{3} z_0(t,\tau, \tau_2, x) + \frac{7}{2} \partial^2_x z_0(t,\tau, \tau_2, x)
-\end{align}
-gilt, so folgt auch $z_2 = 0$. Gleichung \eqref{eq:ke:addiff} ist eine Advektion-Diffusion Gleichung.
-Zusammen kriegt man nun das Ergebnis
+% Man kann das gleiche Spiel wie in der letzten Ordnung, $O(h^2)$, wiederholen und eine langsame weitere Zeitvariable $\tau_2 = h^2 t$ einführen.
+% Fordert man nun, dass 
+% \begin{align}
+% \nonumber
+% z_0(0,0,0,x) &= V(x)\\
+% \nonumber
+% \partial_t z_0(t,\tau, \tau_2, x) + \partial_x z_0(t,\tau,\tau_2,x) &= 2 z_0(t,\tau,\tau_2,x)\\
+% \nonumber
+% \partial_\tau z_0(t,\tau, \tau_2, x) - \partial_x z_0(t,\tau, \tau_2, x) &= -2z_0(t,\tau, \tau_2, x)\\
+% \label{eq:ke:addiff}
+% \partial_{\tau_2} z_0(t,\tau, \tau_2, x) + 16 \partial_x z_0(t,\tau, \tau_2, x) &= \frac{28}{3} z_0(t,\tau, \tau_2, x) + \frac{7}{2} \partial^2_x z_0(t,\tau, \tau_2, x)
+% \end{align}
+% gilt, so folgt auch $z_2 = 0$. Gleichung \eqref{eq:ke:addiff} ist eine Advektion-Diffusion Gleichung.
+% Zusammen kriegt man nun das Ergebnis
 
-\begin{align*}
-v^n_i = U(x_n-t_n) + z_0(t_n, 2 h t_n, h^2 t_n, x_i) -\frac{th^2}{2} \partial^2_t U(t,x) + O(h^3).
-\end{align*}
+% \begin{align*}
+% v^n_i = U(x_n-t_n) + z_0(t_n, 2 h t_n, h^2 t_n, x_i) -\frac{th^2}{2} \partial^2_t U(t,x) + O(h^3).
+% \end{align*}
