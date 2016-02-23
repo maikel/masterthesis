@@ -3,35 +3,33 @@
 Bisher haben wir für die Störungen $z(t,x)$ immer nur eine feste Frequenz angenommen, nämlich alternierende Gittervorzeichen.
 Wir untersuchen nun, wie das Upwindverfahren auf andere hochfrequente, also von Gitterkoordinaten abhängige, Ansätze wirkt.
 Wir beschreiben unsere Oszillationen mithilfe der komplexen Exponentialfunktion und schreiben für die Ortsindizes von jetzt an $k$ statt $i$.
+Außerdem haben wir in unseren Ausführungen mithilfe der Sätze \ref{satz:glgregulaer} und \ref{satz:alt:beidenull} Werkzeuge geschaffen, die es uns erlauben sich in den Ansätzen nur auf Summanden einer Frequenz zu konzentrieren.
+Das erleichtert das rechnen und macht die zu betrachtenden Gleichungen kleiner.
 
 \subsection*{Beschränkt in $k$ und $n$}
 
 Im Folgenden betrachten wir den Ansatz
 
 \begin{align}\label{eq:exp:ansatz}
-v^n_k = \Ree \Bigl[ w_0(t_n, x_k) + h w_1(t_n, x_k) + e^{i(\omega k - \theta n)} \bigl( z_0(t_n, x_k) + h z_1(t_n, x_k) \bigr) + O(h^2) \Bigr].
+v^n_k = \Ree \left[ e^{i(\omega k - \theta n)} \bigl( z_0(t_n, x_k) + h z_1(t_n, x_k) \bigr) + O(h^2) \right].
 \end{align}
 
 bzw.
 
 \begin{align}
-u_k(n, k, t, x) = \Ree \bigl[ w_k(t, x) + e^{i (\omega k - \theta n)} z_k(t, x) \bigr], \qquad \text{für $k = 0,1$}
+u_l(n, k, t, x) = \Ree \bigl[ e^{i (\omega k - \theta n)} z_l(t, x) \bigr], \qquad \text{für $l = 0,1$}
 \end{align}
 
 Weil wir nur lineare Gleichungen betrachten, schreiben wir von nun an nicht mehr hin, dass wir immer nur den Realanteil betrachten.
 Wir schauen nun wieder, welche Bedingung an die Frequenz wir aus der der Gleichung \eqref{eq:transport:diskret:o1} in der ersten Ordnung $O(1)$ herleiten können.
 Es gilt
 \begin{align}\begin{split}
-u_0(n+1,k,t_n,x_k)&\qquad\quad\\
-- u_0(n,k,t_n,x_k) &= w_0(t_n,x_i) + e^{i (\omega k - \theta (n+1))} z_0(t_n,x_i)\\
-    &\qquad - \bigl( w_0(t_n,x_i) + e^{i (\omega k - \theta n)} z_0(t_n,x_i) \bigr)\\
-&= e^{i (\omega k - \theta n)} (e^{-i\theta} - 1) z_0(t_n,x_i)
+u_0(n+1,k,t_n,x_k) - u_0(n,k,t_n,x_k) &= e^{i (\omega k - \theta (n+1))} z_0(t_n,x_i) - e^{i (\omega k - \theta n)} z_0(t_n,x_i) \\
+&= e^{i (\omega k - \theta n)} \left(e^{-i\theta} - 1 \right) z_0(t_n,x_i)
 \end{split}\end{align}
 und
 \begin{align}\begin{split}
-u_0(n,k,t_n,x_k)\qquad \quad &\\
-- u_0(n,k-1,t_n,x_k) &= w_0(t_n,x_i) + e^{i (\omega k - \theta n)} z_0(t_n,x_i)\\
-& \qquad - \bigl( w_0(t_n,x_i) + e^{i (\omega (k-1) - \theta n)} z_0(t_n,x_i) \bigr)\\
+u_0(n,k,t_n,x_k) - u_0(n,k-1,t_n,x_k) &= e^{i (\omega k - \theta n)} z_0(t_n,x_i) - e^{i (\omega (k-1) - \theta n)} z_0(t_n,x_i)\\
 &= e^{i (\omega k - \theta n)} (1 - e^{-i \omega}) z_0(t_n,x_i).
 \end{split}\end{align}
 also folgt aus
@@ -64,60 +62,55 @@ u_1(n+1,k,t_n,x_k) - u_1(n,k,t_n,x_k) + \lambda \bigl(u_1(n,k,t_n,x_k) - u_1(n,k
 Es gilt die Gleichung \eqref{eq:transport:diskret:oh} in der Ordnung $O(h)$ für diskrete Ansätze, also
 \begin{align}\begin{split}
 0 &= \partial_t u_0(n+1, k, t_n, x_k) + \partial_x u_0(n, i-1, t_n, x_k)\\
-&= \partial_t \bigl( w_0(t_n, x_k) + e^{i (\omega k - \theta (n+1))} z_0(t_n, x_k) \bigr)\\
-&\qquad + \partial_x \bigl(  w_0(t_n, x_k) + e^{i (\omega (k-1) - \theta n)} z_0(t_n, x_k)\bigr)\\
-&= \partial_t w_0(t_n, x_k) + \partial_x w_0(t_n, x_k) \\
-&\qquad + e^{i (\omega k - \theta (n+1))} \partial_t z_0(t_n, x_k) + e^{i (\omega (k-1) - \theta n)} \partial_x z_0(t_n, x_k)\\
-&= \partial_t w_0(t_n, x_k) + \partial_x w_0(t_n, x_k) \\
-&\qquad + e^{i (\omega k - \theta n)} e^{- i \theta} \partial_t z_0(t_n, x_k) + e^{i (\omega k - \theta n)} e^{-i \omega} \partial_x z_0(t_n, x_k)\\
-&= \partial_t w_0(t_n, x_k) + \partial_x w_0(t_n, x_k) \\
-&\qquad + e^{i (\omega k - \theta n)}  \left( e^{- i \theta} \partial_t z_0(t_n, x_k) + e^{-i \omega} \partial_x z_0(t_n, x_k) \right)\\
+&= \partial_t  \bigl( e^{i (\omega k - \theta (n+1))} z_0(t_n, x_k) \bigr) + \partial_x \bigl(  e^{i (\omega (k-1) - \theta n)} z_0(t_n, x_k)\bigr)\\
+&= e^{i (\omega k - \theta (n+1))} \partial_t z_0(t_n, x_k) + e^{i (\omega (k-1) - \theta n)} \partial_x z_0(t_n, x_k)\\
+&= e^{i (\omega k - \theta n)} e^{- i \theta} \partial_t z_0(t_n, x_k) + e^{i (\omega k - \theta n)} e^{-i \omega} \partial_x z_0(t_n, x_k)\\
+&= e^{i (\omega k - \theta n)}  \left( e^{- i \theta} \partial_t z_0(t_n, x_k) + e^{-i \omega} \partial_x z_0(t_n, x_k) \right)\\
 \end{split}\end{align}
-Hierauf können wir wieder Satz \ref{satz:glgregulaer} anwenden und bekommen für $w_0$ und $z_0$ das Gleichungssystem
-\begin{align}\label{eq:exp:oh}
-\partial_t w_0(t,x) + \partial_x w_0(t,x) &= 0 &w_0(0,x) &= U(x) \quad \text{und}\\
-\partial_t z_0(t,x) + e^{-i (\omega - \theta)} \partial_x z_0(t,x) &= 0 &z_0(0,x) &= V(x) 
-\end{align}
+% Hierauf können wir wieder Satz \ref{satz:glgregulaer} anwenden und bekommen für $w_0$ und $z_0$ das Gleichungssystem
+% \begin{align}\label{eq:exp:oh}
+% \partial_t w_0(t,x) + \partial_x w_0(t,x) &= 0 &w_0(0,x) &= U(x) \quad \text{und}\\
+% \partial_t z_0(t,x) + e^{-i (\omega - \theta)} \partial_x z_0(t,x) &= 0 &z_0(0,x) &= V(x) 
+% \end{align}
 
 Betrachten wir nun die nächste Ordnung so lautet die Gleichung \eqref{eq:transport:diskret:oh2} hier
 \begin{align}\label{eq:exp:oh2}
 \partial_t u_1(n+1, k, t_n, x_k)+ \partial_x u_1(n, i-1, t_n, x_k) =
 &\frac {1}{2} \partial^2_x u_0(n, k-1, t_n, x_k) - \frac{\lambda}{2} \partial^2_t u_0(n+1, k, t_n, x_k).
 \end{align}
-Ebenso wie für $u_0$ gilt für $u_1$ weiterhin
+Ebenso wie für $u_0$ gilt für $u_1$ die Gleichung
 \begin{align*}
-\partial_t u_1(n+1, k, t_n, x_k) \qquad\\
-+ \partial_x u_1(n, k-1, t_n, x_k)
-&= \partial_t w_1(t_n, x_k) + \partial_x w_1(t_n, x_k) \\
-&\qquad + e^{i (\omega k - \theta n)}  \left( e^{- i \theta} \partial_t z_1(t_n, x_k) + e^{-i \omega} \partial_x z_1(t_n, x_k) \right)\\
+\partial_t u_1(n+1, k, t_n, x_k) + \partial_x u_1(n, k-1, t_n, x_k)
+&= e^{i (\omega k - \theta n)}  \left( e^{- i \theta} \partial_t z_1(t_n, x_k) + e^{-i \omega} \partial_x z_1(t_n, x_k) \right)\\
 \end{align*}
 und für die rechte Seite der Gleichung \eqref{eq:exp:oh2} gilt außerdem
-\begin{align*}
-\frac {1}{2} \partial^2_x u_0(n, k-1, t_n, x_k)
-&= \frac {1}{2} \partial^2_x \left( w_0(t_n, x_k) + e^{i(\omega (k-1) - \theta n)} z_0(t_n, x_k) \right) \\
-&= \frac{1}{2} \partial^2_x w_0(t_n, x_k) + \frac{1}{2} e^{i(\omega k - \theta n)} e^{- i\omega} \partial^2_x z_0(t_n, x_k)
-\end{align*}
-und
-\begin{align*}
--\frac {\lambda}{2} \partial^2_t u_0(n+1, k, t_n, x_k)
-&= -\frac {\lambda}{2} \partial^2_t \left( w_0(t_n, x_k) + e^{i(\omega k - \theta (n+1))} z_0(t_n, x_k) \right) \\
-&= -\frac{\lambda}{2} \partial^2_t w_0(t_n, x_k) - \frac{\lambda}{2} e^{i(\omega k - \theta n)} e^{- i\theta} \partial^2_t z_0(t_n, x_k)\\
-&= -\frac{\lambda}{2} \partial^2_x w_0(t_n, x_k) - \frac{\lambda}{2} e^{i(\omega k - \theta n)} e^{- i\theta} e^{- 2i (\omega - \theta)} \partial^2_x z_0(t_n, x_k)
-\end{align*}
-also folgt in Summe
+% \begin{align*}
+% \frac {1}{2} \partial^2_x u_0(n, k-1, t_n, x_k)
+% &= \frac {1}{2} \partial^2_x \left( w_0(t_n, x_k) + e^{i(\omega (k-1) - \theta n)} z_0(t_n, x_k) \right) \\
+% &= \frac{1}{2} \partial^2_x w_0(t_n, x_k) + \frac{1}{2} e^{i(\omega k - \theta n)} e^{- i\omega} \partial^2_x z_0(t_n, x_k)
+% \end{align*}
+% und
+% \begin{align*}
+% -\frac {\lambda}{2} \partial^2_t u_0(n+1, k, t_n, x_k)
+% &= -\frac {\lambda}{2} \partial^2_t \left( w_0(t_n, x_k) + e^{i(\omega k - \theta (n+1))} z_0(t_n, x_k) \right) \\
+% &= -\frac{\lambda}{2} \partial^2_t w_0(t_n, x_k) - \frac{\lambda}{2} e^{i(\omega k - \theta n)} e^{- i\theta} \partial^2_t z_0(t_n, x_k)\\
+% &= -\frac{\lambda}{2} \partial^2_x w_0(t_n, x_k) - \frac{\lambda}{2} e^{i(\omega k - \theta n)} e^{- i\theta} e^{- 2i (\omega - \theta)} \partial^2_x z_0(t_n, x_k)
+% \end{align*}
+% also folgt in Summe
 \begin{align}
 \begin{split}
 &\frac {1}{2} \partial^2_x u_0(n, k-1, t_n, x_k) -\frac {\lambda}{2} \partial^2_t u_0(n+1, k, t_n, x_k)\\
-&= \frac {1-\lambda}{2} \partial^2_x w_0(t_n, x_k)\\
-&\qquad + e^{i(\omega k - \theta n)} \partial^2 z_0(t_n, x_k) \left( e^{- \omega} - \frac{\lambda}{2} e^{- \theta} e^{-2 i(\omega - \theta)} \right)\\
-&\qquad + e^{i(\omega k - \theta n)} \partial^2 z_0(t_n, x_k) e^{- i\omega} \left( 1 - \frac{\lambda}{2} e^{-i(\omega - \theta)} \right)
+&= \frac {1}{2} \left( e^{i(\omega (k-1) - \theta n)} \partial^2_x z_0(t_n, x_k) - \lambda e^{i(\omega k - \theta (n+1))} \partial^2_t z_0(t_n,x_k) \right)\\
+&= e^{i(\omega k - \theta n)} \frac {1}{2} \left( e^{-i \omega} \partial^2_x z_0(t_n, x_k) - \lambda e^{- i \theta} \partial^2_t z_0(t_n,x_k) \right)\\
+&= e^{i(\omega k - \theta n)} \frac {1}{2} \left( e^{-i \omega} \partial^2_x z_0(t_n, x_k) - \lambda e^{- i \theta} e^{- 2i (\omega - \theta)} \partial^2_x z_0(t_n,x_k) \right)\\
+&= e^{i(\omega k - \theta n)} \frac {1}{2} \left( e^{-i \omega} - \lambda e^{- i \theta} e^{- 2i (\omega - \theta)}\right) \partial^2_x z_0(t_n,x_k)
 \end{split}
 \end{align}
 und damit das Gleichungssystem
 {\small
 \begin{align}
-\partial_t w_1(t,x) + \partial_x w_1(t,x) &= \frac {1-\lambda}{2} \partial^2_x w_0(t_n, x_k) &w_1(0,x) &= 0 \quad \text{und}\\
-\partial_t z_1(t,x) + e^{-i (\omega - \theta)} \partial_x z_1(t,x) &= \frac{1}{2} e^{- i(\omega - \theta)} \left(1 - \lambda e^{-i(\omega - \theta)} \right) \partial^2 z_0(t_n, x_k) &z_0(0,x) &= 0 
+\partial_t z_0(t,x) + e^{-i (\omega - \theta)} \partial_x z_0(t,x) &= 0\\
+\partial_t z_1(t,x) + e^{-i (\omega - \theta)} \partial_x z_1(t,x) &= \frac{1}{2} e^{- i(\omega - \theta)} \left(1 - \lambda e^{-i(\omega - \theta)} \right) \partial^2_x z_0(t_n, x_k)
 \end{align}}
 Wir setzen hier nun \eqref{eq:wkb:gl1} ein und erhalten
 \begin{align*}
@@ -126,12 +119,24 @@ e^{- i(\omega - \theta)} \left(1 - \lambda e^{-i(\omega - \theta)} \right) &= \f
 &= \frac{1}{ e^{i \omega} (1 -  \lambda) + \lambda } \left( \frac{e^{i \omega} (1 -  \lambda) }{ e^{i \omega} (1 -  \lambda) + \lambda } \right)\\
 &= \frac{e^{i \omega} (1 -  \lambda) }{ \left(e^{i \omega} (1 -  \lambda) + \lambda \right)^2 }
 \end{align*}
+also
+{\small
+\begin{align}
+\partial_t z_0(t,x) + \frac{1}{ e^{i \omega} (1 -  \lambda) + \lambda } \partial_x z_0(t,x) &= 0\\
+\partial_t z_1(t,x) + \frac{1}{ e^{i \omega} (1 -  \lambda) + \lambda } \partial_x z_1(t,x) &= \frac{1}{2} \frac{e^{i \omega} (1 -  \lambda) }{ \left(e^{i \omega} (1 -  \lambda) + \lambda \right)^2 } \partial^2_x z_0(t_n, x_k)
+\end{align}}
+
+\begin{note}
+Soll ich das allegemein Lösen?
+Also Fallunterscheidung nach Vorzeichen?
+Ist der Fall $\Ree e^{i \omega} = 0$, also $\omega = \frac{\pi}{2}$ irgendwie interessant?
+\end{note}
 
 \subsection*{Unbestimmt in $n$}
 
 Der Ansatz lautet dieses mal 
 
-\[ v^n_k = e^{i \omega k} \Omega(n) \left( z_0(t_n, x_k) + h z_1(t_n, x_k) \right) \]
+\[ v^n_k = e^{i \omega k} \Omega(n) \left( z_0(t_n, x_k) + h z_1(t_n, x_k) \right) + O(h^2) \]
 
 Aus der Gleichung \eqref{eq:transport:diskret:o1} in $O(1)$ folgt
 \begin{align} 
@@ -164,3 +169,8 @@ und in der Gleichung \eqref{eq:transport:diskret:oh2} gilt
 &= e^{i \omega k} (1 - \lambda + \lambda e^{-i \omega})^{n} \partial_x z_0(t_n, x_k) \frac{1}{2} \left( 1 - \frac{e^{- 2 i \omega} \lambda}{(1 - \lambda + \lambda e^{-i \omega})^2}  \right)\\
 \end{split}
 \end{align}
+
+\begin{note}
+Warum kommt hier so ein ``anderes'' Ergebnis raus als im Vorfall?
+Soll ich noch kleine $\eta$ machen?
+\end{note}

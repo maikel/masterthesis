@@ -159,6 +159,15 @@ Es gilt weiterhin
 \[ \lim_{p \to \infty} \kappa \abs{e^{i \omega} - 1} \abs{f(t^p, x^p)} - h_pK \abs{\partial_x f(t^p, x^p)} = \kappa \abs{e^{i \omega} - 1} \abs{f(t, x)}. \]
 Die Voraussetzung $0 < \omega < 2 \pi$ impliziert nun $\abs{e^{i \omega} - 1} \neq 0$ und somit folgt aus der Stetigkeit von $f$ und der Ungleichung \eqref{satz:glgregulaer:bed} $f(t,x) = 0$, was zu zeigen war.
 \end{proof}
+
+\begin{note}
+Soll ich die Sätze \ref{satz:glgregulaer} und \ref{satz:alt:beidenull} zusammemführen?
+Die Sätze erlauben einem jetzt einfachere Ansätze durchzurechnen.
+Also nicht mehr in Summe sondern nach $z$ und $w$ getrennt. 
+Zu kompliziert bewiesen? Kann man hier irgendwie mit diskreten Maßen und Integralgleichungen argumentieren für bessere Regularität?
+Averagekram von Mark?
+\end{note}
+
 % In Satz \ref{satz:glgregulaer} ist nun hingegen wichtig, dass $\Omega(n)$ eine Art Sublinear-Growth-Bedingung erfüllt.
 % D.\,h. wir brauchen in Gleichung \eqref{satz:glgregulaer:bed}, dass $h \cdot \Omega\left( h^{-1} \right) \to 0$ für $h \to 0$ gilt. 
 Setzt man \eqref{eq:appendix:kleineta:oh:linkeseite} und \eqref{eq:appendix:kleineta:oh:rechteseite} nun gleich, so leitet man mithilfe des Satzes \ref{satz:glgregulaer} die beiden Anfangswertprobleme
@@ -353,3 +362,7 @@ In Summe ergeben diese Rechnungen
 % \begin{align*}
 % v^n_i = U(x_n-t_n) + z_0(t_n, 2 h t_n, h^2 t_n, x_i) -\frac{th^2}{2} \partial^2_t U(t,x) + O(h^3).
 % \end{align*}
+\begin{note}
+Was mache ich hiermit? Wie sieht die Lösung qualitativ aus? Der Faktor in der
+Abbildung ist so gut.
+\end{note}

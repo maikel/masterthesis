@@ -12,8 +12,7 @@ Wir setzen das in \eqref{eq:varadv:verfahren} ein und erhalten die Gleichung
 \begin{align}
 \begin{split}
 v^{n+1}_i - v^n_i &= u_0(t_{n+1}, x_i) - u_0(t_n, x_i) + h \bigl( u_1(t_{n+1}, x_i) - u_1(t_n, x_i) \bigr)\\
-&= h \partial_t u_0(t_n, x_i) + h^2 \frac{1}{2} \partial^2_t u_0(t_n, x_i)\\
-&\quad + h^2  \partial_t u_1(t_n, x_i) + O(h^3).
+&= h \partial_t u_0(t_n, x_i) + h^2 \frac{1}{2} \partial^2_t u_0(t_n, x_i) + h^2  \partial_t u_1(t_n, x_i) + O(h^3).
 \end{split}
 \end{align}
 und
@@ -28,7 +27,7 @@ In der Summe ergibt das
 \begin{split}
 0 &= v^{n+1}_i - v^n_i + a(x_i)  \bigl( v^n_i - v^n_{i-1} \bigr)\\
 &=  h \partial_t u_0(t_n, x_i) + h^2 \frac{1}{2} \partial^2_t u_0(t_n, x_i) + h^2  \partial_t u_1(t_n, x_i)\\
-&\quad + h a(x_i)  \partial_x u(t_n, x_i) - h^2 \frac{a(x_i) }{2} \partial^2_x u(t_n, x_i) + h^2 a(x_i)  \partial_x u_1(t_n, x_i) + O(h^2).\\
+&\quad + h a(x_i)  \partial_x u(t_n, x_i) - h^2 \frac{a(x_i) }{2} \partial^2_x u(t_n, x_i) + h^2 a(x_i)  \partial_x u_1(t_n, x_i) + O(h^3).\\
 \Leftrightarrow \quad 0 &= h \partial_t u_0(t_n, x_i) + h^2 \frac{1}{2} \partial^2_t u_0(t_n, x_i) + h^2 \partial_t u_1(t_n, x_i)\\
 &\quad + h a(x_i) \partial_x u(t_n, x_i) - h^2 \frac{a(x_i)}{2} \partial^2_x u(t_n, x_i) + h^2 a(x_i) \partial_x u_1(t_n, x_i) + O(h^3).
 \end{split}

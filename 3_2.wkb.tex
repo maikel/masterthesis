@@ -1,3 +1,5 @@
+%!TEX root=thesis.tex
+
 \subsection*{Für eine allgemeine ortsabhängige Geschwindigkeit $a$}
 
 Wir betrachten nun den Ansatz
@@ -5,7 +7,6 @@ Wir betrachten nun den Ansatz
 \[ v^n_k = e^{i \omega k} \Omega(n) \bigl( u_0(t_n, x_k) + h u_1(t_n, x_k) \bigr) + O(h^2). \]
 
 Es gilt
-
 \begin{align}
 \begin{split}
 v^{n+1}_k - v^n_k &= e^{i \omega k} \Omega(n+1) \bigl( u_0(t_{n+1}, x_k) + h u_1(t_{n+1}, x_k) \bigr)
@@ -18,9 +19,7 @@ v^{n+1}_k - v^n_k &= e^{i \omega k} \Omega(n+1) \bigl( u_0(t_{n+1}, x_k) + h u_1
 &\quad + h \Omega(n+1) \partial_t u_0(t_n, x_k) + h^2 \Omega(n+1) \bigl( \frac{1}{2} \partial^2_t u_0(t_n, x_k) + \partial_t u_1(t_n, x_k) \bigr) \Bigr)
 \end{split}
 \end{align}
-
 und
-
 \begin{align}
 \begin{split}
 a(x_k) \bigl( v^n_k - v^n_{k-1} \bigr)
@@ -35,9 +34,7 @@ a(x_k) \bigl( v^n_k - v^n_{k-1} \bigr)
 &\quad + h e^{-i \omega} \partial_x u_0(t_n, x_k) + h^2 e^{-i \omega} \bigl( \partial_x u_1(t_n, x_k) - \frac{1}{2} \partial^2_x u_0(t_n, x_k) \bigr) \Bigr).
 \end{split}
 \end{align}
-
 In Summe folgt
-
 \begin{align}
 \begin{split}
 &v^{n+1}_k - v^n_k + a(x_k) \bigl( v^n_k - v^n_{k-1} \bigr)\\
@@ -46,11 +43,52 @@ In Summe folgt
 &\quad + a(x_k) e^{i \omega k} \Omega(n) \Bigl( \left(1-e^{-i \omega}\right) \bigl( u_0(t_n, x_k) + h u_1(t_n, x_k) \bigr)\\
 &\quad + h e^{-i \omega} \partial_x u_0(t_n, x_k) + h^2 e^{-i \omega} \bigl( \partial_x u_1(t_n, x_k) - \frac{1}{2} \partial^2_x u_0(t_n, x_k) \bigr) \Bigr)\\
 \end{split}\\
+\label{eq:wkb:difflsg}
 \begin{split}
 &= e^{i \omega k} \Bigl(
 \bigl(\Omega(n+1) - \Omega(n) \bigr) u_0(t_n, x_k) + a(x_k) \Omega(n) \left(1-e^{-i \omega}\right) u_0(t_n, x_k)\\
 &\quad + h \bigl(\Omega(n+1) - \Omega(n) \bigr) u_1(t_n, x_k) + a(x_k) \Omega(n) \left(1-e^{-i \omega}\right) u_1(t_n, x_k) \bigr)\\
-&\quad + h \bigl( \Omega(n+1) \partial_t u_0(t_n, x_k) + e^{-i \omega} \partial_x u_0(t_n, x_k) \bigr)
+&\quad + h \bigl( \Omega(n+1) \partial_t u_0(t_n, x_k) + a(x_k) \Omega(n) e^{-i \omega} \partial_x u_0(t_n, x_k) \bigr)\\
+&\quad + h^2 \bigl( \Omega(n+1) \partial_t u_1(t_n, x_k) + a(x_k) \Omega(n) e^{-i \omega} \partial_x u_1(t_n, x_k)\\
+&\qquad + \frac{1}{2} \left( \Omega(n+1) \partial^2_t u_0(t_n, x_k) - a(x_k) \Omega(n) e^{-i \omega} \partial^2_x u_0(t_n, x_k) \right) \bigr) 
 \Bigr)
 \end{split}
 \end{align}
+und das heißt wir erhalten in führender Ordnung die Gleichung für alle $h > 0$, $n \in \N$ und $k \in \Z$
+\begin{align}
+\left( \Omega(n+1) - \left( 1 - a(x_k) \left(1-e^{-i \omega}\right) \right) \Omega(n) \right) u_0(t_n, x_k) = 0.
+\end{align}
+Hieraus folgt, dass 
+$\Omega(n+1) = \left( 1 - a(x_k) \left(1-e^{-i \omega}\right) \right) \Omega(n)$
+gelten muss, allerdings ist $\Omega$ nicht von $k$ abhängig und sobald es zwei Punkte $x,y \in \R$ mit $a(x) \neq a(y)$ gibt, folgt als einize sinnvolle Lösung $\Omega(n) = 0$.
+Das Problem lässt sich angehen, indem man statt allgemeiner $a$ wieder wie in den Betrachtungen vorher kleine Störungen um 1 betrachtet.
+D.\,h. wir setzen in die Gleichung \eqref{eq:wkb:difflsg} die Geschwindigkeit $a(x) = 1 + h b(x)$ ein.
+
+\subsection*{Für den Fall $a(x) = 1 + h b(x)$}
+{\small \begin{align}
+\begin{split}
+&v^{n+1}_k - v^n_k + (1 + h b(x_k)) \bigl( v^n_k - v^n_{k-1} \bigr)\\
+&= e^{i \omega k} \Bigl(
+\bigl(\Omega(n+1) - \Omega(n) \bigr) u_0(t_n, x_k) + (1 + h b(x_k)) \Omega(n) \left(1-e^{-i \omega}\right) u_0(t_n, x_k)\\
+&\quad + h \bigl(\Omega(n+1) - \Omega(n) \bigr) u_1(t_n, x_k) + (1 + h b(x_k)) \Omega(n) \left(1-e^{-i \omega}\right) u_1(t_n, x_k) \bigr)\\
+&\quad + h \bigl( \Omega(n+1) \partial_t u_0(t_n, x_k) + (1 + h b(x_k)) \Omega(n) e^{-i \omega} \partial_x u_0(t_n, x_k) \bigr)\\
+&\quad + h^2 \bigl( \Omega(n+1) \partial_t u_1(t_n, x_k) + (1 + h b(x_k)) \Omega(n) e^{-i \omega} \partial_x u_1(t_n, x_k)\\
+&\qquad + \frac{1}{2} \left( \Omega(n+1) \partial^2_t u_0(t_n, x_k) - (1 + h b(x_k)) \Omega(n) e^{-i \omega} \partial^2_x u_0(t_n, x_k) \right) \bigr)
+\Bigr) + O(h^3)
+\end{split}\\
+\begin{split}
+&= e^{i \omega k} \Bigl(
+\bigl(\Omega(n+1) - \Omega(n) \bigr) u_0(t_n, x_k) + \Omega(n) \left(1-e^{-i \omega}\right) u_0(t_n, x_k)\\
+&\quad + h \bigl(\Omega(n+1) - \Omega(n) \bigr) u_1(t_n, x_k) + \Omega(n) \left(1-e^{-i \omega}\right) u_1(t_n, x_k) \bigr)\\
+&\quad + h \bigl( \Omega(n+1) \partial_t u_0(t_n, x_k) + \Omega(n) e^{-i \omega} \partial_x u_0(t_n, x_k) + b(x_k) \Omega(n) \left(1-e^{-i \omega}\right) u_0(t_n, x_k) \bigr)\\
+&\quad + h^2 \bigl( \Omega(n+1) \partial_t u_1(t_n, x_k) + \Omega(n) e^{-i \omega} \partial_x u_1(t_n, x_k) + b(x_k) \Omega(n) e^{-i \omega} \partial_x u_0(t_n, x_k)\\
+&\qquad + \frac{1}{2} \left( \Omega(n+1) \partial^2_t u_0(t_n, x_k) - \Omega(n) e^{-i \omega} \partial^2_x u_0(t_n, x_k) \right)\\
+&\qquad + b(x_k) \Omega(n) \left(1-e^{-i \omega}\right) u_1(t_n, x_k) \bigr) 
+\Bigr) + O(h^3)
+\end{split}
+\end{align}}
+In erster Ordnung gilt also
+\begin{align}
+\left( \Omega(n+1) - \left( 1 - \left(1-e^{-i \omega}\right) \right) \Omega(n)  \right) u_0(t_n, x_k) = 0
+\end{align}
+und daher folgen wir $\Omega$

@@ -89,3 +89,12 @@
   ,xleftmargin=\parindent
   ,nolol=true
 }
+
+\newenvironment{note}{%
+\mdfsetup{%
+frametitle={Bemerkung},
+linewidth=1pt,
+backgroundcolor=gray!20,
+}%
+\begin{mdframed}
+}{\end{mdframed}}
