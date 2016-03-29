@@ -4,11 +4,10 @@ Die vorliegende Arbeit vertieft die Ideen der Multiskalenasymptotik von Finite-D
 In \cite{Junk2004} zeigen die Autoren unter anderem am Beispiel des Upwind-Verfahrens der linearen Transportgleichung mit konstanter Geschwindigkeit \eqref{eq:adv:scheme} wie man auf elgante Art mit Hilfe einer zusätzlichen langsamen Zeitskala die bakannte CFL-Stabilitätsbedingung $\lambda < 1$ verifiziert.
 
 Diese Arbeit hat sich zum Ziel gemacht, die dort präsentierten Ideen weiter zu verfolgen.
-Wir schauen uns hierfür ganz bewusst den instabilen Fall $\lambda > 1$ an.
-Aus der Natur des instabilen Verhaltens heraus können wir nun nicht mehr erwarten, mit Hilfe dieser Techniken ein asymptotisches Modell für alle Zeiten $t > 0$ zu kriegen, da es ein solches nicht geben kann.
+Wir schauen uns hierfür durch die gesamte Arbeit ganz bewusst den instabilen Fall $\lambda > 1$ an.
+Aufgrund der Natur der instabilen Eigenschaft können wir nun nicht mehr erwarten, mit Hilfe dieser Techniken ein asymptotisches Modell für alle Zeiten $t > 0$ zu kriegen, da es ein solches nicht geben kann.
 Viel mehr können wir nun hoffen dieses instabile Verhalten in den Gleichungen wiederzufinden und extrahieren diskrete Abschätzungen für das Wachstum von Fehlern in Abhängigkeit der Anfangsdaten.
 Um dies zu erreichen führen wir eine von der Gitterweite abhängige schnelle Zeitskala ein und gehen von einer strukturierten Störung der Anfangsdaten aus.
 In dieser Zeitskala erwarten dann auch keine Regulartät für unsere Ansatzfunktionen, was zu besonderer Vorsicht bei der Differentiation führt.
 Dies erfordert besonders hohe Konzentration beim Errechnen der Differenzenquotionten und führt leich zu Vorzeichenfehlern.
 Ebenso erschwert dies das Festlegen der Bedingungen, welche wir an die Regularität der Ansätze stellen müssen.
-Auch muss man die Grenzwert 

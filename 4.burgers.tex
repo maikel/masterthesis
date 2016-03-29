@@ -1,21 +1,26 @@
-Ich weiß noch gar nicht, ob nichtlineare Verfahren überhaupt so anzugehen sind.
-Wenn ich hier was schaffen, dann vermutlich nicht viel und kann nur einen Ausblick geben.
-Vielleicht komme ich ja noch das Gudonov Verfahren für die Burgersgleichung auseinander zu nehmen.
-Jedenfalls stelle ich mir vor, dass man da noch andere, schwächere Ergebnisse als im linearen Fall erwarten kann.
-
-
-\[ \partial_t u(t, x) + u(t,x) \partial_x u(t,x) = 0 \]
-
-\[ \partial_t u(t, x) + \partial_x \left(u^2(t,x) \right) = 0 \]
-
-\[ v^{n+1}_i = v^n_i - \lambda \bigl( g(v^n_i, v^n_{i+1}) - g(v^n_{i-1}, v^n_i) \bigr) \]
-
-\[
-g(v,w) = \frac{\bigl(u(v,w)\bigr)^2}{2}, \qquad u(v,w) = \begin{cases}
-v, & \text{wenn } v \geq w \text{ und } \frac{v+w}{2} > 0\\
-w, & \text{wenn } v \geq w \text{ und } \frac{v+w}{2} \leq 0\\
-v, & \text{wenn } v < w \text{ und } v > 0\\
-w, & \text{wenn } v < w \text{ und } w < 0\\
-0, & \text{wenn } v \leq 0 \leq w.
+Eine natürliche Fortsetzung dieser Arbeit ist die Untersuchung von diskreten Verfahren nichtlinearer  Differentialgleichungen wie die Burgersgleichung.
+Diese lautet
+\begin{align}
+\begin{split}
+\partial_t u(t,x) + \partial_x \left( \, u^2(t,x) \,\right) &= 0\\
+u(0,x) &= U(x).
+\end{split}
+\end{align}
+Für diese Gleichung betrachte man das Godunov Verfahren
+\begin{align}
+v^{n+1}_i &= v^n_i - \lambda \left( g(v^n_i, v^n_{i+1}) - g(v^n_{i-1}, v^n_i) \right)
+\end{align}
+mit
+\begin{align}
+g(u,v) = \frac{u^*}2 \text{ und } u^* =
+\begin{cases}
+u & \text{falls $u > v$ und $\frac {u+v}2 > 0$}\\
+v & \text{falls $u > v$ und $\frac {u+v}2 \leq 0$}\\
+u & \text{falls $u \leq v$ und $u > 0$}\\
+v & \text{falls $u \leq v$ und $V < 0$}\\
+0 & \text{sonst.}
 \end{cases}
-\]
+\end{align}
+Die Ansätze in dieser Arbeit funktionieren auf Grund der Linearität der Gleichungen.
+Aus dieser folgt nämlich, dass die Frequenz von oszillierenden Abbildungen invariant unter dem diskreten Differentialoperator bleiben. 
+Im nichtlinearen Fall muss ein anderer Ansatz gefunden werden, da dies hier mehr zutrifft.
