@@ -47,6 +47,8 @@ w_k(t, x) + (-1)^i \Omega(n+1) z_k(t, x) - \bigl( w_k(t, x) + (-1)^i \Omega(n) z
 \end{align} }
 
 Da diese Gleichung für alle Gitterkoordinaten $(n,i)$ gilt und die Funktion $F(t,x) = 0$ glatt ist, können wir unter der Annahme, dass $z_0 \neq 0$ gilt, Lemma \ref{lemma:transport:diskret:konvergenz_gitter} benutzen.
+\\
+
 \begin{satz}\label{satz:omega_n}
 Es gelte für alle $(n,i) \in \N \times \Z$ die Gleichung \eqref{eq:transport:osz:o1}. Dann gilt für fast alle $n \in \N$
 \[ \Omega(n) = (1 - 2 \lambda)^n. \]
@@ -113,6 +115,8 @@ also
 \partial_t w_0(t_n, x_i) + \partial_x w_0(t_n, x_i) = (-1)^{i+n} (1 + 2\eta)^n \bigl( (1 + 2 \eta) \partial_t z_0(t_n, x_i) + \partial_x z_0(t_n, x_i) \bigr).
 \end{align}
 Wir verwenden nun Lemma \ref{lemma:transport:diskret:konvergenz_gitter}, um zu zeigen, dass beide Seiten umanhängig von einander Null sein müssen.
+\\
+
 \begin{satz}\label{satz:alt:beidenull}
 Sei $\omega \in (0, 2 \pi)$ und $\Omega\colon \N \to \R$ unbeschränkt. 
 Es seien $F$ und $g$ Funktionen aus $\Cinf$. Für alle $h > 0$ und alle $n \in \N$ und $k \in \Z$ gelte außerdem
@@ -130,7 +134,7 @@ g(t,x) &= 0.
 \end{align*} 
 \end{satz}
 \begin{proof}
-Für das Lemma \ref{lemma:transport:diskret:konvergenz_gitter} setzen wir für $f$ die rechte Seite der Gleichung \eqref{eq:apx:beidenull} ein, also $f(n, i, t, x) = \cos(\omega k) \Omega(n) g(t_n, x_k)$.
+In das Lemma \ref{lemma:transport:diskret:konvergenz_gitter} setzen wir für $f$ die rechte Seite der Gleichung \eqref{eq:apx:beidenull} ein, also $f(n, i, t, x) = \cos(\omega k) \Omega(n) g(t_n, x_k)$.
 Dann ist $f$ für alle $n \in \N$ und $k \in \Z$ differenzierbar und die Voraussetzungen von Lemma \ref{lemma:transport:diskret:konvergenz_gitter} sind erfüllt.
 
 Es existiert also für alle $(t,x) \in \Rp \times \R$ und $n \in \N$ ein $k(n) \in \Z$, so dass die Ungleichung
