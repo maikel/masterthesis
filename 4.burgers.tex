@@ -1,26 +1,36 @@
-Eine natürliche Fortsetzung dieser Arbeit ist die Untersuchung von diskreten Verfahren nichtlinearer  Differentialgleichungen wie die Burgersgleichung.
+%!TEX root=thesis.tex
+
+Eine mögliche Fortsetzung dieser Arbeit ist die Untersuchung von diskreten Verfahren nichtlinearer  Differentialgleichungen wie die Burgersgleichung.
 Diese lautet
 \begin{align}
 \begin{split}
-\partial_t u(t,x) + \partial_x \left( \, u^2(t,x) \,\right) &= 0\\
+\partial_t u(t,x) + \partial_x \left( \, u^2(t,x) \,\right) &= 0 \qquad \forall (t,x) \in \Rp \times \R\\
 u(0,x) &= U(x).
 \end{split}
 \end{align}
 Für diese Gleichung betrachte man das Godunov Verfahren
 \begin{align}
-v^{n+1}_i &= v^n_i - \lambda \left( g(v^n_i, v^n_{i+1}) - g(v^n_{i-1}, v^n_i) \right)
+v^{n+1}_i &= v^n_i - \lambda \bigl( g(v^n_i, v^n_{i+1}) - g(v^n_{i-1}, v^n_i) \bigr)
 \end{align}
 mit
 \begin{align}
-g(u,v) = \frac{u^*}2 \text{ und } u^* =
+g(u,v) = \frac{\left(u^*\right)^2}2 \text{ und } u^* =
 \begin{cases}
 u & \text{falls $u > v$ und $\frac {u+v}2 > 0$}\\
 v & \text{falls $u > v$ und $\frac {u+v}2 \leq 0$}\\
 u & \text{falls $u \leq v$ und $u > 0$}\\
-v & \text{falls $u \leq v$ und $V < 0$}\\
+v & \text{falls $u \leq v$ und $v < 0$}\\
 0 & \text{sonst.}
 \end{cases}
 \end{align}
-Die Ansätze in dieser Arbeit funktionieren auf Grund der Linearität der Gleichungen.
-Aus dieser folgt nämlich, dass die Frequenz von oszillierenden Abbildungen invariant unter dem diskreten Differentialoperator bleiben. 
-Im nichtlinearen Fall muss ein anderer Ansatz gefunden werden, da dies hier mehr zutrifft.
+Ein wichtiges Prinzip dieser Arbeit manifestiert sich für den linearen Fall in der Superposition von oszillierenden Ansätzen.
+Die Sätze \ref{satz:alt:beidenull} und \ref{satz:glgregulaer} ermöglichen uns Multiskalenansätze der Form
+\[ u(k,n,x,t) = \sum_{l=1}^n e^{i \omega_l k} \Omega(n,x,t) u_l(x,t) \]
+besser zu verstehen, wenn wir die Lösungen der Ansätze für die einzelnen Summanden
+\[ u(k,n,x,t) = e^{i \omega_l k} \Omega(n,x,t) u_i(x,t) \qquad l = 1, \ldots, n\]
+kennen.
+Im nichtlinearen Fall ist dies so nicht mehr direkt übertragbar und die Ansätze überlagern sich.
+Hier muss folglich eine andere Herangehensweise gefunden werden.
+
+Eine weitere weniger herausfordernde Erweiterung dieser Arbeit wäre die Formulierung dieser Techniken für höhere Raum-Dimensionen.
+Diese Verallgemeinerung ist jedoch unkompliziert durchführbar.

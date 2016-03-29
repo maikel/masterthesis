@@ -5,7 +5,7 @@ Wir betrachten die Differentialgleichung der eindimensionalen Advektion
 \partial_t u(t, x) + \partial_x u(t, x) = 0, \quad u(0, x) = U(x).
 \end{align}
 Auf diese partielle Differentialgleichung wenden wir das Upwindverfahren mit dem Gitter $G_h(n,i) = (t_n, x_i) = h \cdot (\lambda n, i)$ an.
-Wenn wir also von Punkten $(t_n, x_i)$ in der Zeit und Raum sprechen, so sind diese eigentlich noch von Gitterweite $h$ abhängig. 
+Wenn wir also von Punkten $(t_n, x_i)$ in Zeit und Raum sprechen, so sind diese eigentlich noch von Gitterweite $h$ abhängig. 
 Die Gitterzellen sind nicht quadratisch, falls $\lambda \neq 1$ gilt und das Verfahren ist durch die Gleichung
 \begin{align}\label{eq:adv:scheme_rechnung}
 \frac {v^{n+1}_i - v^n_i} {\lambda h} + \frac {v^n_i - v^n_{i-1}} h = 0

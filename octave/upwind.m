@@ -11,6 +11,6 @@ function V = upwind(u0, lambda, N)
     V = zeros(N, I);
     V(1,:) = u0;
     for n = 1:N-1
-        V(n+1,:) = V(n,:) - lambda(:) .* (V(n,:) - shift(V(n, :), 1));
+        V(n+1,:) = V(n,:) - lambda(:).*(V(n,:) - shift(V(n, :), 1));
     end
 end
