@@ -8,7 +8,7 @@ Angenommen es gibt glatte Abbildungen $u_0, u_1 \in \Cinf$ mit
 v^n_i = u_0(t_n, x_i) + h u_1(t_n, x_i) + O(h^2).
 \end{split}
 \end{align}
-Wir setzen das in \eqref{eq:varadv:verfahren} ein und erhalten die Gleichung
+Wir setzen das in Gleichung \eqref{eq:varadv:verfahren} ein und erhalten die Gleichung
 \begin{align}
 \begin{split}
 v^{n+1}_i - v^n_i &= u_0(t_{n+1}, x_i) - u_0(t_n, x_i) + h \bigl( u_1(t_{n+1}, x_i) - u_1(t_n, x_i) \bigr)\\
@@ -84,9 +84,9 @@ welche nur für kurze Zeiten $t$ gelten kann.
 \subsection*{Kleine Störungen}
 
 Wir schreiben für $a$ nun $a(x) = 1 + h b(x)$ für eine beschränkte Abbildung $b(x) > 0$ in einer Umgebung $U$.
-D.\,.h. wir untersuchen, wie sich das Verfahren für den Fall $a  \sim 1$ für $h \to 0$ verhält.
+D.\,h. wir untersuchen, wie sich das Verfahren für den Fall $a  \sim 1$ für $h \to 0$ verhält.
 
-Wir schieben, wie schon im Fall kleiner Störungen der CFL Zahl im Fall der Transportgleichung mit konstater Geschwindigkeit im Unterkapitel \ref{sec:transport:kleineta}, die störenden Anteile eine Ordnung weiter.
+Dabei ``schieben'' wir wie schon im Fall kleiner Störungen der CFL Zahl in Kapitel \ref{sec:transport:kleineta} die ``störenden'' Anteile eine Ordnung weiter.
 Daher wählen wir unseren Ansatz ebenfalls so, dass wir eine Ordnung in $h$ mehr betrachten.
 Es seien also glatte Abbildungen $u_i \in \Cinf$, $i = 0,1,2$ mit
 \begin{align}
@@ -164,12 +164,42 @@ Dies liefert uns insgesamt das Gleichungssystem
 u_0(0,0,x) &= U(x)\\
 u_1(0,0,x) &= u_2(0,0,x) = 0.
 \end{align}
-Wegen der Gleichung \eqref{eq:3_1:u01} und \eqref{eq:3_1:u02} folgt f"ur alle $t$ und $\tau \in \R$
+Aus der Gleichung \eqref{eq:3_1:u01} folgt, dass es eine Abbildung $A(\tau,y)$ mit
 \begin{align}
-u_0(t, \tau, x) &= u_0(0, \tau, x-t)\\
-u_0(t, \tau, x) &= u_0(t, 0, \Phi(-\tau, x) ),
+u_0(t,\tau,x) &= A(\tau,x-t) \qquad \text{und}\\
+A(0,y) &= U(y)
 \end{align}
-f"ur den Fluss $\Phi \in C^\infty\left(\Rp \times \R \right)$ der Differentialgleichung $\dot x = b(x)$.
+gibt.
+Wegen der Gleichung \eqref{eq:3_1:u02} gilt f"ur $A$ nun zus"atzlich die Gleichung
+\begin{align}
+\partial_\tau A(\tau, y) + b(x) \partial_x A(\tau, y) &= 0
+\end{align}
+welche durch
+\begin{align}
+A(\tau, y) = U(\Phi(-\tau, y))
+\end{align}
+gel"ost wird, wobei $\Phi \in C^\infty\left(\Rp \times \R \right)$ der Fluss der Differentialgleichung $\dot x = b(x)$ ist.
+Insgesamt folgt damit
+\begin{align}
+u_0(t,\tau,x) = U(\Phi(-\tau, x- t)).
+\end{align}
+Die Gleichung \eqref{eq:3_1.regulaer:quellterm_2} ist der Gleichung in Kapitel \ref{sec:regulaer} sehr "ahnlich!
+Eine besondere Beobachtung ist nun, dass die Stabilit"at offenbar von $b(x)$ abh"angt.
+F"ur Umgebungen $U$, in denen die Gleichung
+\begin{align}
+\partial_s v(s,x) = \frac{b(x)}{2} \partial^2_x v_0(s,x)
+\end{align}
+l"osbar ist, k"onnen wir hier ganz analog zum Vorgehen in \cite{Junk2004} Stabilit"at zeigen.
+Unabh"angig von Stabilit"at l"asst sich \eqref{eq:3_1.regulaer:quellterm_2} auch als inhomogene Transportgleichung lesen.
+Die L"osung hierf"ur ist durch
+\begin{align}
+u_2(t, \tau, x) = \frac{t b(x)}{2} \partial^2_x U(\Phi(-\tau, x- t))
+\end{align}
+gegeben. F"ur kleine Zeiten $t > 0$ l"asst sich der Ansatz also zu
+\begin{align}
+v^n_i = U(\Phi(-h t_n, x_i- t_n)) + h^2 t_n \frac{b(x_i)}{2} \partial^2_x U(\Phi(-h t_n, x_i - t_n)) + O(h^3).
+\end{align}
+schreiben
 % Um den Quellterm in Gleichung \eqref{eq:3_1.regulaer:quellterm_2} zu eliminieren, führen wir eine zweite langsame Zeitvariable $\sigma = h^2 t$ ein, fordern
 % \begin{align}
 % \partial_\sigma u_0(t, \tau, \sigma, x) &= \frac{b(x)}{2} \partial^2_x u_0(t, \tau, \sigma, x) \qquad \text{und}\\

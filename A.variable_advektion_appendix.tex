@@ -52,6 +52,63 @@ Weiterhin gilt, dass für jede Lösung $v$ von \eqref{eq:varadv:pde} die Funktio
 Und damit auch $\partial^n_t v$ für jedes $n \in \N$.
 Denn es gilt $u_t = \partial_t (v_t) = \partial_t(- a v_x) = - a \partial_t v_x = -a \partial_x v_t = -a u_x$.
 
+\subsection{Rechnungen zum Exponentialansatz}
+
+Wir betrachten nun den Ansatz
+
+\[ v^n_k = e^{i \omega k} \Omega(n) \bigl( u_0(t_n, x_k) + h u_1(t_n, x_k) \bigr) + O(h^2). \]
+
+Es gilt
+\begin{align} \label{wkb:zeitdiff}
+\begin{split}
+v^{n+1}_k - v^n_k
+&= e^{i \omega k} \Omega(n+1) \bigl( u_0(t_{n+1}, x_k) + h u_1(t_{n+1}, x_k) \bigr)\\
+&\quad- e^{i \omega k} \Omega(n) \bigl( u_0(t_n, x_k) + h u_1(t_n, x_k) \bigr)\\
+&= e^{i \omega k} \Omega(n+1) \bigl( u_0(t_n + h, x_k) + h u_1(t_n + h, x_k) \bigr)\\
+&\quad - e^{i \omega k} \Omega(n) \bigl( u_0(t_n, x_k) + h u_1(t_n, x_k) \bigr)\\
+&= e^{i \omega k} \Bigl( \Omega(n+1) \bigl( u_0(t_n, x_k) + h \partial_t u_0(t_n, x_k) + h^2 \frac{1}{2} \partial^2_t u_0(t_n, x_k)\\
+&\quad + h u_1(t_n, x_k) + h^2 \partial_t u_1(t_n, x_k) \bigr) - \Omega(n) \bigl( u_0(t_n, x_k) + h u_1(t_n, x_k) \bigr) \Bigr)\\
+&= e^{i \omega k} \Bigl( \bigl(\Omega(n+1) - \Omega(n) \bigr) u_0(t_n, x_k) + h \bigl(\Omega(n+1) - \Omega(n) \bigr) u_1(t_n, x_k)\\
+&\quad + h \Omega(n+1) \partial_t u_0(t_n, x_k) + h^2 \Omega(n+1) \bigl( \frac{1}{2} \partial^2_t u_0(t_n, x_k)\\
+&\quad + \partial_t u_1(t_n, x_k) \bigr) \Bigr) + O(h^3)
+\end{split}
+\end{align}
+und
+\begin{align}
+\begin{split}\label{wkb:ortdiff}
+a(x_k) \bigl( v^n_k - v^n_{k-1} \bigr)
+&= a(x_k) \Bigl( e^{i \omega k} \Omega(n) \bigl( u_0(t_n, x_k) + h u_1(t_n, x_k) \bigr)\\
+&\quad - e^{i \omega (k-1)} \Omega(n) \bigl( u_0(t_n, x_{k-1}) + h u_1(t_n, x_{k-1}) \bigr) \Bigr)\\
+&= a(x_k) e^{i \omega k} \Omega(n) \Bigl( \bigl( u_0(t_n, x_k) + h u_1(t_n, x_k) \bigr)\\
+&\quad - e^{- i \omega} \bigl( u_0(t_n, x_k-h) + h u_1(t_n, x_k-h) \bigr) \Bigr)\\
+&= a(x_k) e^{i \omega k} \Omega(n) \Bigl( \bigl( u_0(t_n, x_k) + h u_1(t_n, x_k) \bigr)\\
+&\quad - e^{- i \omega} \bigl( u_0(t_n, x_k) - h \partial_x u_0(t_n, x_k) + h^2 \frac{1}{2} \partial^2_x u_0(t_n, x_k)\\
+&\quad + h u_1(t_n, x_k) - h^2 \partial_x u_1(t_n, x_k) \bigr) \Bigr) + O(h^3)\\
+&= a(x_k) e^{i \omega k} \Omega(n) \Bigl( \left(1-e^{-i \omega}\right) \bigl( u_0(t_n, x_k) + h u_1(t_n, x_k) \bigr)\\
+&\quad + h e^{-i \omega} \partial_x u_0(t_n, x_k) + h^2 e^{-i \omega} \bigl( \partial_x u_1(t_n, x_k)\\
+&\quad - \frac{1}{2} \partial^2_x u_0(t_n, x_k) \bigr) \Bigr) + O(h^3).
+\end{split}
+\end{align}
+In Summe folgt
+\begin{align}\label{eq:wkb:difflsg}
+\begin{split}
+&v^{n+1}_k - v^n_k + a(x_k) \bigl( v^n_k - v^n_{k-1} \bigr)\\
+&= e^{i \omega k} \Bigl( \bigl(\Omega(n+1) - \Omega(n) \bigr) u_0(t_n, x_k) + h \bigl(\Omega(n+1) - \Omega(n) \bigr) u_1(t_n, x_k)\\
+&\quad + h \Omega(n+1) \partial_t u_0(t_n, x_k) + h^2 \Omega(n+1) \bigl( \frac{1}{2} \partial^2_t u_0(t_n, x_k) + \partial_t u_1(t_n, x_k) \bigr) \Bigr)\\
+&\quad + a(x_k) e^{i \omega k} \Omega(n) \Bigl( \left(1-e^{-i \omega}\right) \bigl( u_0(t_n, x_k) + h u_1(t_n, x_k) \bigr)\\
+&\quad + h e^{-i \omega} \partial_x u_0(t_n, x_k) + h^2 e^{-i \omega} \bigl( \partial_x u_1(t_n, x_k) - \frac{1}{2} \partial^2_x u_0(t_n, x_k) \bigr) \Bigr)\\
+\end{split}\\
+\begin{split}
+&= e^{i \omega k} \Bigl(
+\bigl(\Omega(n+1) - \Omega(n) \bigr) u_0(t_n, x_k) + a(x_k) \Omega(n) \left(1-e^{-i \omega}\right) u_0(t_n, x_k)\\
+&\quad + h \bigl(\Omega(n+1) - \Omega(n) \bigr) u_1(t_n, x_k) + a(x_k) \Omega(n) \left(1-e^{-i \omega}\right) u_1(t_n, x_k) \bigr)\\
+&\quad + h \bigl( \Omega(n+1) \partial_t u_0(t_n, x_k) + a(x_k) \Omega(n) e^{-i \omega} \partial_x u_0(t_n, x_k) \bigr)\\
+&\quad + h^2 \bigl( \Omega(n+1) \partial_t u_1(t_n, x_k) + a(x_k) \Omega(n) e^{-i \omega} \partial_x u_1(t_n, x_k)\\
+&\qquad + \frac{1}{2} \left( \Omega(n+1) \partial^2_t u_0(t_n, x_k) - a(x_k) \Omega(n) e^{-i \omega} \partial^2_x u_0(t_n, x_k) \right) \bigr) 
+\Bigr)
+\end{split}
+\end{align}
+
 % \subsection{Rechnungen f"ur den Differenzenquotienten}
 
 % Wir betrachten das Gitter $G_h = (t_n, x_i) = h (n, i)$ und den Multiskalenansatz
