@@ -46,7 +46,8 @@ u_1(0,x) &= 0.
 Die Abbildung $u_0$ ist dann also eine Lösung der Differentialgleichung
 \eqref{eq:varadv:pde} und eine Lösung zu $u_1$ gibt uns den Fehler des Verfahren
 zur ersten Ordnung.
-Die Lösung des Anfangswertproblems für $u_0$ lautet 
+Im Anhang \ref{sec:analyt} haben wir die analytische L"osung
+des Anfangswertproblems für $u_0$ qualitativ untersucht und sie lautet
 \begin{align}
 \label{eq:varadv:reg:u0_loesung}
 u_0(t,x) = U( \phi(-t, x) ).
@@ -74,8 +75,8 @@ Für den Fall, dass $a(x) > 1$ in einer offenen Umgebung $U$ gilt, ist diese Gle
 In diesem Fall schreiben wir für $u_1$ die Lösung
 \begin{align}
 \begin{split}
-u_1(t,x) &= t \left( \frac{a(x)(1 - a(x) )}{2} \partial^2_x U( \phi_a(-t, x) ) - a(x) a'(x)  \partial_x U( \phi_a(-t, x) )\right)\\
-&= t a(x) a'(x) \left( \frac{1 - a(x) }{2} U''( \phi_a(-t, x) ) - a(x)  U'( \phi_a(-t, x) )\right),
+u_1(t,x) &= t \left( \frac{a(x)(1 - a(x) )}{2} \partial^2_x U( \phi(-t, x) ) - a(x) a'(x)  \partial_x U( \phi(-t, x) )\right)\\
+&= t a(x) a'(x) \left( \frac{1 - a(x) }{2} U''( \phi(-t, x) ) - a(x)  U'( \phi(-t, x) )\right),
 \end{split}
 \end{align}
 welche nur für kurze Zeiten $t$ gelten kann.
@@ -149,11 +150,12 @@ und fordern
 \begin{align}
 \partial_\tau u_k(t, \tau, x) + b(x) \partial_x u_k(t, \tau, x) &= 0 \qquad \text{für $k=0,1$.}
 \end{align}
-Damit folgt dann wegen $u_1(0, 0, x) = 0$ auch $u_1(t, \tau, x) = 0$ für alle $(t, x) \in \Rp \times \R$.
-Dies liefert uns insgesamt, wie im Anhang gezeigt, das Gleichungssystem
+Damit folgt dann wegen $u_1(0, 0, x) = 0$ auch $u_1(t, \tau, x) = 0$ für alle $(t, \tau, x) \in \Rp \times \R$.
+Dies liefert uns insgesamt das Gleichungssystem
 \begin{align}
-\begin{split}
+\label{eq:3_1:u01}
 \partial_t u_0(t, \tau, x) + \partial_x u_0(t, \tau, x) &= 0\\
+\label{eq:3_1:u02}
 \partial_\tau u_0(t, \tau, x) + b(x) \partial_x u_0(t, \tau, x) &= 0\\
 \partial_t u_1(t, \tau, x) + \partial_x u_1(t, \tau, x) &= 0\\
 \partial_\tau u_1(t, \tau, x) + b(x) \partial_x u_1(t, \tau, x) &= 0\\
@@ -161,10 +163,15 @@ Dies liefert uns insgesamt, wie im Anhang gezeigt, das Gleichungssystem
 \partial_t u_2(t, \tau, x) + \partial_x u_2(t, \tau, x) &= \frac{b(x)}{2} \partial^2_x u_0(t, \tau,x)\\
 u_0(0,0,x) &= U(x)\\
 u_1(0,0,x) &= u_2(0,0,x) = 0.
-\end{split}
 \end{align}
-Um den Quellterm in Gleichung \eqref{eq:3_1.regulaer:quellterm_2} zu eliminieren, führen wir eine zweite langsame Zeitvariable $\sigma = h^2 t$ ein, fordern
+Wegen der Gleichung \eqref{eq:3_1:u01} und \eqref{eq:3_1:u02} folgt f"ur alle $t$ und $\tau \in \R$
 \begin{align}
-\partial_\sigma u_0(t, \tau, \sigma, x) &= \frac{b(x)}{2} \partial^2_x u_0(t, \tau, \sigma, x) \qquad \text{und}\\
-u_0(0, 0, 0, x) &= 0.
+u_0(t, \tau, x) &= u_0(0, \tau, x-t)\\
+u_0(t, \tau, x) &= u_0(t, 0, \Phi(-\tau, x) ),
 \end{align}
+f"ur den Fluss $\Phi \in C^\infty\left(\Rp \times \R \right)$ der Differentialgleichung $\dot x = b(x)$.
+% Um den Quellterm in Gleichung \eqref{eq:3_1.regulaer:quellterm_2} zu eliminieren, führen wir eine zweite langsame Zeitvariable $\sigma = h^2 t$ ein, fordern
+% \begin{align}
+% \partial_\sigma u_0(t, \tau, \sigma, x) &= \frac{b(x)}{2} \partial^2_x u_0(t, \tau, \sigma, x) \qquad \text{und}\\
+% u_0(0, 0, 0, x) &= 0.
+% \end{align}

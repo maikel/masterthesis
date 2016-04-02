@@ -1,16 +1,70 @@
 %!TEX root=thesis.tex
 
-Wir betrachten das Gitter $G_h = (t_n, x_i) = h (n, i)$ und den Multiskalenansatz
+\section{Die lineare Transportgleichung mit variabler Geschwindigkeit}
+
+\label{sec:analyt}
+\subsection{Analytische Lösung}
+
+F"ur die Asymptotik ist es sinnvoll, die echte Lösung von \eqref{eq:varadv:pde} qualitativ zu kennen.
+Die Lösung lässt sich analytisch mithilfe der Methode der Charakteristiken bestimmen.
+Aus \eqref{eq:varadv:pde} folgt nämlich, dass jede Lösung $u$ dieser Gleichung konstant auf der Kurve $(\tau, x(\tau))$ ist, für die
+\begin{align} \label{eq:varadv:ode}
+\dot x(\tau) = a(x(\tau))
+\end{align} gilt.
+Sei nun $\phi\colon \R^2 \to \R$ der Fluss der Differentialgleichung \eqref{eq:varadv:ode}.
+Dann gilt für jedes $x_0 \in \R$ per defintionem, dass $\phi(\, \cdot \,,x_0)$ das Anfangswertproblem \begin{align}\label{eq:varadv:ivp} \dot x(\tau) = a(x(\tau)), \quad x(0) = x_0 \end{align} löst.
+Insbesondere gilt $\phi_{t+s} = \phi_t \circ \phi_s$ und $\phi_0 = \id$.
+F"ur jedes $x \in \R$ gibt es ein $x_0 \in \R$, so dass $u(t,x) = U(x_0)$ gilt.
+Wegen $x_0 = \phi(0,x_0)$ und $x = \phi(t, x_0)$ folgt damit \[ x_0 = \phi(0, x_0) = \phi(t - t, x_0) = \phi(-t, \phi(t, x_0)) = \phi(-t, x) \] und somit auch \begin{align}\label{eq:varadv:analytic_solution} u(t,x) = U(x_0) = U(\phi(-t, x)).\end{align}
+
+\begin{example}
+Für $a(x) = x$ folgt wegen des Anfangswertproblems $\dot x(\tau) = x, x(0) = x_0$, dass $u(t,x)$ konstant auf den Kurven der Form $x(\tau) = x_0 e^{\tau}$ ist.
+Der Fluss $\phi$ ist uns dann durch $\phi(t,x) = x e^t$ gegeben. Wegen \eqref{eq:varadv:analytic_solution} folgt dann 
 \begin{align}
-\begin{split}
-v^n_i = u_0(t_n, h t_n, x_i) + h u_1(t_n, h t_n, x_i) + h^2 u_2(t_n, h t_n, x_i) + O(h^3)
-\end{split}
+u(x,t) = U(\phi(-t,x)) = U(x e^{-t})
 \end{align}
-wobei $u_k(t, \tau, x)$ glatte Abbildungen seien.
-Dann gilt einerseits für $k = 0,1,2$
+als Lösung für \eqref{eq:varadv:pde}.
+\\
+\end{example}
+\begin{example} \label{ex:varadv:hat}
+Setze
 \begin{align}
-u_k(t_{n+1}, h t_{n+1}, x_i)
-&= u_k(t_n + h, h t_n + h^2,  x_i)\\
-&= u_k(t_n, h t_n, x_i) + h \partial_t u_k(t_n, h t_n, x_i) + h^2 \partial_\tau u_k(t_n, h t_n, x_i)\\
-&\quad + \frac{h^2}{2} \partial_t u_k(t_n, h t_n, x_i) + \underbrace{\frac{\left(h^2\right)^2}{2} \partial_\tau u_k(t_n, h t_n, x_i)}_{\in O(h^4)}
+a_\eps(x) = \begin{cases} 
+    1 + \eps (1 - \abs{x}) & \abs{x} \leq 1\\
+    1 & \text{ sonst.}
+\end{cases}
 \end{align}
+Dann ist $a$ absolut stetig und es gilt $a' \in L^\infty(\R)$.
+Folglich ist $a$ Lipschitz-stetig und $\eqref{eq:varadv:ode}$ besitzt einen eindeutigen Fluss, welcher sich stückweise zusammensetzt.
+\end{example}
+
+\subsection*{Inhomogener Spezialfall}
+
+Wenn wir bereits eine Lösung $v$ von \eqref{eq:varadv:pde} haben, so können wir die folgende partielle Differentialgleichung
+\begin{align}\label{eq:varadv:inhompde}
+u_t(t,x) + a(x) u_x(t,x) = v(t,x), \quad u(0,x) = 0
+\end{align}
+lösen, indem wir einfach $u(t,x) = t v(t,x)$ setzen. Denn es gilt dann
+\begin{align} u_t(t,x) = v(t,x) + t v_t(t,x) = v(t,x) - t a(x) v_x(t,x) \end{align}
+und wegen $t a(x) v_x(t,x) = a(x) (t v(t,x))_x = a(x) u_x(t,x)$ folgt damit \eqref{eq:varadv:inhompde}.
+
+Weiterhin gilt, dass für jede Lösung $v$ von \eqref{eq:varadv:pde} die Funktion $u(t,x) = v_t(t,x)$ ebenfalls eine Lösung von \eqref{eq:varadv:pde} ist.
+Und damit auch $\partial^n_t v$ für jedes $n \in \N$.
+Denn es gilt $u_t = \partial_t (v_t) = \partial_t(- a v_x) = - a \partial_t v_x = -a \partial_x v_t = -a u_x$.
+
+% \subsection{Rechnungen f"ur den Differenzenquotienten}
+
+% Wir betrachten das Gitter $G_h = (t_n, x_i) = h (n, i)$ und den Multiskalenansatz
+% \begin{align}
+% \begin{split}
+% v^n_i = U(t_n, h t_n, x_i) + h u_1(t_n, h t_n, x_i) + h^2 u_2(t_n, h t_n, x_i) + O(h^3)
+% \end{split}
+% \end{align}
+% wobei $u_k(t, \tau, x)$ glatte Abbildungen seien.
+% Dann gilt einerseits für $k = 0,1,2$
+% \begin{align}
+% u_k(t_{n+1}, h t_{n+1}, x_i)
+% &= u_k(t_n + h, h t_n + h^2,  x_i)\\
+% &= u_k(t_n, h t_n, x_i) + h \partial_t u_k(t_n, h t_n, x_i) + h^2 \partial_\tau u_k(t_n, h t_n, x_i)\\
+% &\quad + \frac{h^2}{2} \partial_t u_k(t_n, h t_n, x_i) + \underbrace{\frac{\left(h^2\right)^2}{2} \partial_\tau u_k(t_n, h t_n, x_i)}_{\in O(h^4)}
+% \end{align}

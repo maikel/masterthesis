@@ -3,7 +3,7 @@
 Zunächst präsentieren wir die Ergebnisse, welche die Autoren Junk und Yang aus \cite{Junk2004} für das Upwind-Schema entwickeln.
 Angenommen es gäbe Abbildungen $u_0, u_1 \in C^\infty\left( \Rp \times \R \right)$, so dass für alle $h > 0$, $n \in \N$ und $i \in \Z$
 \begin{align}\label{eq:transport:regulaer:ansatz}
-v^n_i = u_0(t_n,x_i) + h u_1(t_n,x_i) + o(h)
+v^n_i = u_0(t_n,x_i) + h u_1(t_n,x_i) + O(h^2)
 \end{align}
 gilt, $v^n_i$ die Gleichung \eqref{eq:adv:scheme} erfüllt und die Anfangsbedingungen
 \begin{align}\label{eq:transport:regulaer:anfangsbedingungen}
@@ -39,28 +39,41 @@ allerdings konvergiert die asymptotische Entwicklung nicht gleichmäßig in $t$,
 \end{align*}
 Das ist nach \cite{Junk2004} ein Zeichen dafür, dass der resultierende Ansatz
 \begin{align}\label{eq:transport:regulaer:ansatz:ergebnis}
-v^n_i = U(x-t) + h t \frac{1-\lambda}{2} \partial^2_x U(x-t) + o(h)
+v^n_i = U(x-t) + h t \frac{1-\lambda}{2} \partial^2_x U(x-t) + O(h^2)
 \end{align}
 das Langzeitverhalten des Verfahrens nicht gut widergibt und dieses Problem greifen die Autoren mit einer zusätzlichen \emph{langsamen} Zeitskala $\tau = h t$ an.
 Aus \eqref{eq:transport:regulaer:ansatz} wird
 \begin{align}\label{eq:transport:regulaer:tau:ansatz}
-v^n_i = u_0(t, \tau, x) + h u_1(t, \tau, x) + o(h)
+v^n_i &= u_0(t, \tau, x) + h u_1(t, \tau, x) + O(h^2)
 \end{align}
 und die Gleichungen \eqref{eq:transport:regulaer:oh} und \eqref{eq:transport:regulaer:oh2} ändern sich zu
 \begin{align}
-\begin{split}
 \label{eq:transport:regulaer:tau:gleichungen}
 \partial_t u_0(t,\tau,x) + \partial_x u_0(t,\tau,x) &= 0\\
-\partial_t u_1(t,\tau,x) + \partial_x u_1(t,\tau,x) &= \frac{1-\lambda}{2} \partial^2_x u_0(t,\tau,x) - \partial_\tau u_0(t,\tau,x).
-\end{split}
+\label{eq:transport:regulaer:tau:2}
+\partial_t u_1(t,\tau,x) + \partial_x u_1(t,\tau,x) &= \frac{1-\lambda}{2} \partial^2_x u_0(t,\tau,x) - \partial_\tau u_0(t,\tau,x)\\
+u_0(0, 0, x) &= U(x)\\
+u_1(0, 0, x) &= 0.
 \end{align}
-Durch die zusätzliche Zeitvariable $\tau$ haben wir einen weiteren Freiheitsgrad zur Verfügung und können
+Aus Gleichung \eqref{eq:transport:regulaer:tau:gleichungen} entnehmen wir die L"osung
+\begin{align}
+u_0(t, \tau, x) &= A(\tau, x-t)\\
+A(0, x) &= U(x)
+\end{align}
+f"ur ein noch weiter zu bestimmendes $A$.
+Durch die zusätzliche Zeitvariable $\tau$ haben wir einen weiteren Freiheitsgrad zur Verfügung und können in Gleichung \eqref{eq:transport:regulaer:tau:2} zus"atzlich
 \begin{align}\label{eq:transport:regulaer:waermeleit}
-\partial_\tau u_0(t,\tau,x) = \frac{1-\lambda}{2} \partial^2_x u_0(t,\tau,x)
+\partial_\tau u_0(t,\tau,x) &= \frac{1-\lambda}{2} \partial^2_x u_0(t,\tau,x)\\
+\Leftrightarrow \partial_\tau A(\tau, x-t) &= \frac{1-\lambda}{2} \partial^2_x A(\tau,x-t)
 \end{align}
-fordern. Dies ist die Wärmeleitungsgleichung, welche nur für $\lambda \leq 1$ lösbar ist.
-Sei $G_\tau$ der Glättungskern
-$$G_\tau(y) = \frac{1}{2 \pi (1-\lambda)\tau} \exp\left( - \frac{y^2}{2 (1 - \lambda) \tau} \right).$$
+fordern. Dies ist die Wärmeleitungsgleichung, welche nur für $\lambda \leq 1$ lösbar ist. Die Fundamentall"osung lautet
+\begin{align}
+A(\tau, x-t) = (U * G_\tau)(x-t)
+\end{align}
+wobei $G_\tau$ der Glättungskern
+\begin{align}
+G_\tau(y) = \frac{1}{\sqrt{2 \pi (1-\lambda)\tau}} \exp\left( - \frac{y^2}{2 (1 - \lambda) \tau} \right).
+\end{align} ist.
 Für $\lambda \leq 1$ lautet die Lösung des Anfangswertproblems \eqref{eq:transport:regulaer:tau:gleichungen} mit der Bedingung \eqref{eq:transport:regulaer:waermeleit}
 \begin{align}
 \begin{split}
@@ -70,5 +83,5 @@ u_1(t,\tau,x) &= 0
 \end{align}
 und die asymptotische Entwicklung von \eqref{eq:transport:regulaer:tau:ansatz} lautet hier
 \begin{align}\label{eq:transport:regulaer:tau:ergebnis}
-v^n_i = (U * G_\tau)(x_i - t_n) + o(h).
+v^n_i = (U * G_\tau)(x_i - t_n) + O(h^2).
 \end{align}

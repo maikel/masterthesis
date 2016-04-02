@@ -305,6 +305,7 @@ Auch dieses Ergebnis vergleichen wir nun mit unserer Referenzlösung in der Abbi
 Setzen wir unsere bisherigen Erkenntnisse nun wie in Anhang \ref{appendix:kleineta:rechnung} ein, so erhalten wir in Ordnung $O(h^3)$ schlussendlich die Gleichungen
 \begin{align}
 \partial_t w_2(t,x) + \partial_x w_2(t,x) &= - \frac{1}{2} \partial^2_t w_0(t,x)\\
+\label{eq:termelem}
 \begin{split}
 \partial_t z_2(t,\tau,x) + \partial_x z_2(t,\tau,x) &= 2 z_2(t,\tau,x) - \frac{1}{6} \bigl( \partial^3_x z_0(t,\tau,x) + \partial^3_t z_0(t, \tau, x) \bigr)\\
 &\quad + 2 z_0(t, \tau, x) - \frac{1}{2} \partial^2_t z_0(t, \tau, x)
@@ -343,8 +344,25 @@ In Summe ergeben diese Rechnungen
 \begin{split}
 &- \frac{1}{6} \bigl( \partial^3_x z_0 + \partial^3_t z_0 \bigr) + 2 z_0 - \frac{1}{2} \partial^2_t z_0\\
 &\quad = \bigl(-\frac{4}{3} z_0 + 2 \partial_x z_0 - \partial^2_x z_0\bigr) + 2 z_0 + \bigl(-2 z_0 + 2 \partial_x z_0 - \frac{1}{2} \partial^2_x z_0\bigr)\\
-&\quad = -\frac{4}{3} z_0 + 4 \partial_x z_0 - \frac{3}{2} \partial^2_x z_0
+&\quad = -\frac{4}{3} z_0 + 4 \partial_x z_0 - \frac{3}{2} \partial^2_x z_0.
 \end{split}
+\end{align}
+Setzt man dies wieder in Gleichung \eqref{eq:termelem} ein, so erhalten wir die Gleichung
+\begin{align}\label{eq:termelem2}
+\partial_t z_2(t,\tau,x) + \partial_x z_2(t,\tau,x) =
+\begin{split}&2 z_2(t,\tau,x) -\frac{4}{3} z_0(t,\tau,x) + 4 \partial_x z_0 (t,\tau,x)\\
+&\qquad - \frac{3}{2} \partial^2_x z_0(t,\tau,x).
+\end{split}
+\end{align}
+Wiederholende Muster sind ein typisches Ph"anomen bei der Mutltiskalenasymptotik.
+Das ist auch hier der Fall und wir k"onnten wie in Ordnung zuvor eine langsame Zeitvariable $\tau_2 = h^2 t$ einf"uhren, um die entsprechenden Terme in der Gleichung \eqref{eq:termelem2} zu eliminieren. 
+Hierauf verzichten wir jedoch an dieser Stelle, und benutzen hier lediglich, dass $z_0, \partial_x z_0$ und $\partial^2_x z_0$ selbst schon L"osungen der Gleichgung \eqref{eq:appendix:kleineta:oh} sind.
+Im Anhang haben wir solche Gleichungen allgemein unter dem Namen ``inhomogene Exponentialgleichung'' gel"ost.
+Die L"osung lautet
+\begin{align}\nonumber
+z_2(t,\tau,x) &= t \Bigl( -\frac{4}{3} z_0(0,\tau,x-t)
++ 4 \partial_x z_0 (0,\tau,x-t) - \frac{3}{2} \partial^2_x z_0 (0,\tau,x-t) \Bigr) e^{2t}\\
+&= t \Bigl( -\frac{4}{3} V(x-t) + 4 \partial_x V(x-t) - \frac{3}{2} \partial^2_x V(x-t) \Bigr) e^{2(t-\tau)}
 \end{align}
 % Man kann das gleiche Spiel wie in der letzten Ordnung, $O(h^2)$, wiederholen und eine langsame weitere Zeitvariable $\tau_2 = h^2 t$ einführen.
 % Fordert man nun, dass 
