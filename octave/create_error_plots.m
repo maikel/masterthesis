@@ -24,9 +24,7 @@ examples = {  [1e-1, 1e-2],
               [5e-2, 1e-3],
               [1e-2, 1e-3] };
 
-
 x0 = [-2, 2];
-
 
 for i = 1:length(examples)
     eta = examples{i}(1);

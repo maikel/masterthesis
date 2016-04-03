@@ -154,16 +154,17 @@ Das motiviert uns nun direkt in den Fall $a(x) = 1 + hb(x)$ überzugehen.
 Wir verwenden hier das Ergebnis aus Gleichung \eqref{eq:wkb:difflsg} aus dem Vorkapitel wieder und setzen $a(x) = 1 + hb(x)$ ein.
 Es gilt
 \begin{align}
-\begin{split}
+% \begin{split}
+\nonumber
 &v^{n+1}_k - v^n_k + \bigl(1 + hb(x_k)\bigr) \bigl( v^n_k - v^n_{k-1} \bigr)\\
-&= e^{i \omega k} \Bigl(
-\bigl(\Omega(n+1) - \Omega(n) \bigr) u_0(t_n, x_k) + \bigl(1 + hb(x_k)\bigr) \Omega(n) \left(1-e^{-i \omega}\right) u_0(t_n, x_k)\\
-&\quad + h \bigl( \bigl(\Omega(n+1) - \Omega(n) \bigr) u_1(t_n, x_k) + \bigl(1 + hb(x_k)\bigr) \Omega(n) \left(1-e^{-i \omega}\right) u_1(t_n, x_k) \bigr)\\
-&\quad + h \bigl( \Omega(n+1) \partial_t u_0(t_n, x_k) + \bigl(1 + hb(x_k)\bigr) \Omega(n) e^{-i \omega} \partial_x u_0(t_n, x_k) \bigr)\\
-&\quad + h^2 \bigl( \Omega(n+1) \partial_t u_1(t_n, x_k) + \bigl(1 + hb(x_k)\bigr) \Omega(n) e^{-i \omega} \partial_x u_1(t_n, x_k)\\
-&\qquad + \frac{1}{2} \left( \Omega(n+1) \partial^2_t u_0(t_n, x_k) - \bigl(1 + hb(x_k)\bigr) \Omega(n) e^{-i \omega} \partial^2_x u_0(t_n, x_k) \right) \bigr) 
-\Bigr)\\&\quad + O(h^3)
-\end{split}\\
+% &= e^{i \omega k} \Bigl(
+% \bigl(\Omega(n+1) - \Omega(n) \bigr) u_0(t_n, x_k) + \bigl(1 + hb(x_k)\bigr) \Omega(n) \left(1-e^{-i \omega}\right) u_0(t_n, x_k)\\
+% &\quad + h \bigl( \bigl(\Omega(n+1) - \Omega(n) \bigr) u_1(t_n, x_k) + \bigl(1 + hb(x_k)\bigr) \Omega(n) \left(1-e^{-i \omega}\right) u_1(t_n, x_k) \bigr)\\
+% &\quad + h \bigl( \Omega(n+1) \partial_t u_0(t_n, x_k) + \bigl(1 + hb(x_k)\bigr) \Omega(n) e^{-i \omega} \partial_x u_0(t_n, x_k) \bigr)\\
+% &\quad + h^2 \bigl( \Omega(n+1) \partial_t u_1(t_n, x_k) + \bigl(1 + hb(x_k)\bigr) \Omega(n) e^{-i \omega} \partial_x u_1(t_n, x_k)\\
+% &\qquad + \frac{1}{2} \left( \Omega(n+1) \partial^2_t u_0(t_n, x_k) - \bigl(1 + hb(x_k)\bigr) \Omega(n) e^{-i \omega} \partial^2_x u_0(t_n, x_k) \right) \bigr) 
+% \Bigr)\\&\quad + O(h^3)
+% \end{split}\\
 \begin{split}\label{eq:wkb:letzteglg}
 &= e^{i \omega k} \Bigl(
 \bigl(\Omega(n+1) - \Omega(n) \bigr) u_0(t_n, x_k) + \Omega(n) \left(1-e^{-i \omega}\right) u_0(t_n, x_k)\\
@@ -173,10 +174,10 @@ Es gilt
 &\quad + h^2 \bigl( \Omega(n+1) \partial_t u_1(t_n, x_k) + \Omega(n) e^{-i \omega} \partial_x u_1(t_n, x_k)\\
 &\qquad + \frac{1}{2} \left( \Omega(n+1) \partial^2_t u_0(t_n, x_k) - \Omega(n) e^{-i \omega} \partial^2_x u_0(t_n, x_k) \right) \bigr)\\
 &\qquad + b(x_k) \Omega(n) e^{-i \omega} \partial_x u_0(t_n, x_k) + b(x_k) \Omega(n) \left(1-e^{-i \omega}\right) u_1(t_n, x_k)
-\Bigr)\\&\quad + O(h^3)
+\Bigr)\\&\quad + O(h^3).
 \end{split}
 \end{align}
-In erster Ordnung gilt also
+In erster Ordnung von $h$ gilt also
 \begin{align}
 \left( \Omega(n+1) - e^{-i \omega} \Omega(n)  \right) u_0(t_n, x_k) = 0
 \end{align}
@@ -212,10 +213,19 @@ Aus der Gleichung \eqref{eq:wkb:oh11} folgern wir
 &= C^2 b^2(x) u_0(t,x) + C b(x) \partial_x u_0(t,x) + C \partial_x \Bigl( b(x) u_0(t,x) \Bigr) + \partial^2_x u_0(t,x)\\
 &= C^2 b^2(x) u_0(t,x) + C \partial_x b(x) u_0(t,x) + \partial^2_x u_0(t,x).
 \end{align*}
-Dies setzen wir in \eqref{eq:wkb:oh22} ein und erhalten
+Dies setzen wir in \eqref{eq:wkb:oh22} ein und erhalten die Gleichung
 \begin{align}
 \begin{split}\label{eq:wkb:oh222}
 \partial_t u_1(t, x) + \partial_x u_1(t, x) &= - C b(x) u_1(t, x) \\
-&\quad - b(x) \partial_x u_0(t, x) - \left( \frac{C^2}{2} b^2(x) - \frac{C}{2} \partial_x b(x) \right) u_0(t,x)
+&\quad - b(x) \partial_x u_0(t, x) - \left( \frac{C^2}{2} b^2(x) + \frac{C}{2} \partial_x b(x) \right) u_0(t,x).
 \end{split}
 \end{align}
+% Wir betrachten wieder den Multiskalenansatz $u(t,\tau,x)$ mit einer langsamen Zeitvariablen $\tau = h t$.
+% Wie schon gewohnt erhalten wir das Gleichungssystem
+% \begin{align}\label{eq:wkb:oh11}
+% \partial_t u_0(t, \tau, x) + \partial_x u_0(t, \tau, x)         &= - C b(x) u_0(t, \tau, x)\\
+% \partial_\tau u_0(t, \tau, x) + b(x) \partial_x u_0(t, \tau, x) &= - \left( \frac{C^2}{2} b^2(x) + \frac{C}{2} \partial_x b(x) \right) u_0(t, \tau, x)\\
+% \partial_t u_1(t, \tau, x) + \partial_x u_1(t, \tau, x)         &= - C b(x) u_1(t, \tau, x)\\
+% u_0(0,0,x) &= V(x)\\
+% u_1(0,0,x) &= 0.
+% \end{align}
