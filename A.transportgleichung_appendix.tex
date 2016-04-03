@@ -84,6 +84,19 @@ u(t,x) - u(0,x-t) &= \int_0^t D u(\tau, x + \tau - t) \dd \tau\\
 Wegen $u(0,x-t) = U(x-t)$ impliziert das hiermit für alle $(t, x) \in \Rp \times \R$
 \begin{align}\label{eq:transport:analytisch:exp:loesung}u(t,x) = U(x-t) e^{at}.\end{align}
 
+Betrachte man f"ur $a$ hingegen eine reelle Abbildung $a \in L^1(\R)$, so folgt f"ur die partielle Differentialgleichung
+\begin{align}\label{eq:transport:analytisch:exp:homogen:av}
+\partial_t u(t,x) + \partial_x u(t,x) = a(x) u(t,x), \quad u(0, x) = U(x).
+\end{align}
+ein ganz "ahnliches Ergebnis. Denn die gew"ohnliche Differentialgleichung
+\begin{align}\label{eq:transport:analytisch:exp:charode:av}
+D u\bigl(\varphi_t(\tau)\bigr) = a(x-t+ \tau) u(\varphi_t(\tau)), \qquad \text{mit $u\bigl(\varphi_t(0) \bigr) = U(x-t)$.}
+\end{align}
+l"asst sich mit der Methode der Trennung der Variablen l"osen. Die L"osung lautet $u(\varphi_t(\tau)) = U(x-t) e^{\int^\tau_0 a(x-t+s) ds}$ und somit folgt ganz analog
+\begin{align}
+u(t,x) = U(x-t) e^{\int_0^t a(x-t+s) ds}
+\end{align}
+
 \subsection*{Eine inhomogene Exponentialgleichung}
 
 Sei $a \in \R$ eine reelle Zahl und $F \in L^1\left( \Rp \times \R \right)$.
@@ -394,7 +407,7 @@ Mit \eqref{apx:diskret:lemma2} folgt ganz analog für die Differenz in $i$
 % \partial_t w_1(t_n, x_i) + \partial_x w_1(t_n, x_i) &= \frac{1 - \lambda}{2}  \partial^2_x w_0(t_n, x_i)\\
 % \partial_t z_1(t_n, x_i) + \frac{1}{2 \lambda - 1} \partial_x z_1(t_n, x_i) &= \frac{\lambda - 1}{2 (2 \lambda - 1)^2} \partial^2_x z_0(t_n, x_i)
 % \end{align*}
-
+\clearpage
 \subsection{Rechnung des Ansatzes für kleine Störungen der CFL Zahl}
 \label{appendix:kleineta:rechnung}
 % Unsere Ansatzfunktionen sind dieses mal durch

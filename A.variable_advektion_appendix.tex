@@ -3,7 +3,7 @@
 \section{Die lineare Transportgleichung mit variabler Geschwindigkeit}
 
 \label{sec:analyt}
-\subsection{Analytische Lösung}
+\subsection{Qualitative Lösung}
 
 F"ur die Asymptotik ist es sinnvoll, die echte Lösung von \eqref{eq:varadv:pde} qualitativ zu kennen.
 Die Lösung lässt sich analytisch mithilfe der Methode der Charakteristiken bestimmen.
@@ -59,7 +59,7 @@ Wir betrachten nun den Ansatz
 \[ v^n_k = e^{i \omega k} \Omega(n) \bigl( u_0(t_n, x_k) + h u_1(t_n, x_k) \bigr) + O(h^2). \]
 
 Es gilt
-\begin{align} \label{wkb:zeitdiff}
+\begin{align} 
 \begin{split}
 v^{n+1}_k - v^n_k
 &= e^{i \omega k} \Omega(n+1) \bigl( u_0(t_{n+1}, x_k) + h u_1(t_{n+1}, x_k) \bigr)\\
@@ -75,7 +75,7 @@ v^{n+1}_k - v^n_k
 \end{align}
 und
 \begin{align}
-\begin{split}\label{wkb:ortdiff}
+\begin{split}
 a(x_k) \bigl( v^n_k - v^n_{k-1} \bigr)
 &= a(x_k) \Bigl( e^{i \omega k} \Omega(n) \bigl( u_0(t_n, x_k) + h u_1(t_n, x_k) \bigr)\\
 &\quad - e^{i \omega (k-1)} \Omega(n) \bigl( u_0(t_n, x_{k-1}) + h u_1(t_n, x_{k-1}) \bigr) \Bigr)\\
@@ -90,7 +90,7 @@ a(x_k) \bigl( v^n_k - v^n_{k-1} \bigr)
 \end{split}
 \end{align}
 In Summe folgt
-\begin{align}\label{eq:wkb:difflsg}
+\begin{align}
 \begin{split}
 &v^{n+1}_k - v^n_k + a(x_k) \bigl( v^n_k - v^n_{k-1} \bigr)\\
 &= e^{i \omega k} \Bigl( \bigl(\Omega(n+1) - \Omega(n) \bigr) u_0(t_n, x_k) + h \bigl(\Omega(n+1) - \Omega(n) \bigr) u_1(t_n, x_k)\\
