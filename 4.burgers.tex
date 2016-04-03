@@ -1,14 +1,14 @@
 %!TEX root=thesis.tex
 
-Eine mögliche Fortsetzung dieser Arbeit ist die Untersuchung von diskreten Verfahren nichtlinearer  Differentialgleichungen wie die Burgersgleichung.
-Diese lautet
+Eine naheliegende Fortsetzung dieser Arbeit ist die Untersuchung diskreter Verfahren nichtlinearer Differentialgleichungen wie die Burgersgleichung.
+Diese lautet im eindimensionalen Fall
 \begin{align}
 \begin{split}
 \partial_t u(t,x) + \partial_x \left( \, u^2(t,x) \,\right) &= 0 \qquad \forall (t,x) \in \Rp \times \R\\
 u(0,x) &= U(x).
 \end{split}
 \end{align}
-Für diese Gleichung betrachte man das Godunov Verfahren
+Für diese Gleichung betrachte man das Godunov Verfahren (siehe auch \cite{leveque2002finite})
 \begin{align}
 v^{n+1}_i &= v^n_i - \lambda \bigl( g(v^n_i, v^n_{i+1}) - g(v^n_{i-1}, v^n_i) \bigr)
 \end{align}
@@ -23,17 +23,21 @@ v & \text{falls $u \leq v$ und $v < 0$}\\
 0 & \text{sonst.}
 \end{cases}
 \end{align}
-Ein wichtiges Prinzip dieser Arbeit manifestiert sich für den linearen Fall in der Superposition von oszillierenden Ansätzen.
-Die Sätze \ref{satz:alt:beidenull} und \ref{satz:glgregulaer} ermöglichen uns Multiskalenansätze der Form
+Die hier pr"asentierte Methodik wird jedoch nicht eins-zu-eins "ubertragbar sein.
+Ein wichtiges Prinzip dieser Arbeit manifestiert sich n"amlich in der Superposition von oszillierenden Ansätzen.
+Die Sätze \ref{satz:alt:beidenull} und \ref{satz:glgregulaer} ermöglichen es Multiskalenansätze der Form
 \[ u(k,n,x,t) = \sum_{l=1}^n e^{i \omega_l k} \Omega(n,x,t) u_l(x,t) \]
 besser zu verstehen, wenn wir die Lösungen der Ansätze für die einzelnen Summanden
 \begin{align}\label{burgers:1}
 u(k,n,x,t) = e^{i \omega_l k} \Omega(n,x,t) u_l(x,t) \qquad l = 1, \ldots, n
 \end{align}
 kennen.
-Im nichtlinearen Fall ist dies so nicht mehr direkt übertragbar.
+Im nichtlinearen Fall ist dies nicht mehr so.
 Startet man mit Ansatzfunktionen verschiedener Frequenzen, so können sich diese im nichtlinearen Fall überlagern und folglich beeinflussen.
-Hier muss also eine andere Herangehensweise gefunden werden.
+Es muss also eine andere Herangehensweise gefunden werden.
 
-Eine weitere weniger herausfordernde Erweiterung dieser Arbeit wäre die Formulierung dieser Techniken für höhere Raum-Dimensionen.
-Diese Verallgemeinerung ist jedoch weitaus unkomplizierter.
+Insgesamt sollte der mathematische Rahmen dieser Arbeit noch konkretisiert und funktionalanalytisch richtig eingeordnet werden.
+So sind zum Beispiel die Voraussetzungen des Lemmas \ref{lemma:transport:diskret:konvergenz_gitter} zu stark.
+Ich vermute, dass ein analoger Beweis mit Bedingungen an die Totalvariation der auftretenden Funktionen existiert.
+
+Eine weitere und weniger herausfordernde Erweiterung dieser Arbeit wäre die Formulierung für höhere Raum-Dimensionen.

@@ -1,18 +1,24 @@
 %!TEX root=thesis.tex
 
-Die vorliegende Arbeit vertieft die Ideen der Multiskalenasymptotik von Finite-Dif\-fe\-ren\-zen-Verfahren, welche von Michael Junk und Zhaoxia Yang in \cite{Junk2004} vorgestellt wurden. 
-In \cite{Junk2004} zeigen die Autoren unter anderem am Beispiel des Upwind-Ver\-fahrens für die lineare Transportgleichung mit konstanter Geschwindigkeit \eqref{eq:adv:scheme} wie man auf elgante Art und mit Hilfe einer zusätzlichen \emph{langsamen} Zeitskala die bekannte CFL-Sta\-bi\-li\-täts\-bedingung verifiziert.
+Die vorliegende Arbeit vertieft die Ideen der Multiskalenasymptotik f"ur Finite-Dif\-fe\-ren\-zen-Verfahren, welche von Michael Junk und Zhaoxia Yang in ihrer Publikation \cite{Junk2004} vorgestellt wurden.
+In dieser zeigen die Autoren unter anderem am Beispiel des Upwind-Ver\-fahrens für die lineare Transportgleichung mit konstanter Geschwindigkeit \eqref{eq:adv:scheme} wie man auf elgante Art und mit Hilfe einer zusätzlichen langsamen Zeitskala die bekannte CFL-Sta\-bi\-li\-täts\-bedingung verifiziert.
 
-Diese Arbeit hat sich zum Ziel gemacht, die dort präsentierten Ideen zu verfolgen.
+In dieser Arbeit haben wir es uns zum Ziel gemacht, die dort präsentierten Ideen zu verfolgen und f"ur das Beispiel der Transportgleichung zu verfeinern.
 Wir schauen uns hierfür ganz bewusst das Upwind-Verfahren für den instabilen Fall an.
-Das ``instabile Verhalten'' finden wir in den Gleichungen wieder.
-Aufgrund der Natur der Instabilität können wir nun nicht mehr erwarten, mit Hilfe dieser Techniken ein Modell zu bestimmen, dass für alle Zeiten $t > 0$ gleichm"a"sig konvergiert.
+Das ``instabile Verhalten'' finden wir in den Gleichungen wieder und
+aufgrund der Instabilität können wir nun nicht mehr erwarten, mit Hilfe dieser Techniken ein Modell zu bestimmen, dass für alle Zeiten $t > 0$ gleichm"a"sig konvergiert.
 Im besten Fall finden wir asymptotische "Uberg"ange, in denen die L"osung f"ur kompakte Zeitintervalle noch beschr"ankt bleibt.
-Ferner geben wir diskrete Abschätzungen für das Wachstum hochfreqeuenter Fehler in Abhängigkeit der Anfangsdaten an.
-
-Um dies zu erreichen führen wir eine von der Gitterweite abhängige \emph{schnelle} Zeitskala ein und gehen von einer hochfrequenten Störung der Anfangsdaten aus.
-In dieser Zeitskala erwarten wir ferner keine Regulartät für unsere Ansatzfunktionen.
+Ferner geben wir diskrete Abschätzungen für das Wachstum hochfreqeuenter Anfangsdaten an.
+Um dies zu erreichen führen wir eine von der Gitterweite abhängige schnelle Zeit- und Ortskala ein und gehen von einer hochfrequenten ``Störung'' der Anfangsdaten aus.
+In dieser Skala erwarten wir ferner keine Regulartät für unsere Ansatzfunktionen.
 
 In Kapitel 2 untersuchen wir die lineare Transportgleichung mit konstanter Geschwindigkeit und entwickeln erste Werkzeuge, um solche ``diskreten'' Ansätze zu behandeln.
+Dabei beweisen wir ein Lemma und zwei S"atze, die uns zusammen erlauben diskrete Verfahren und kontinuierliche Multiskalenanalyse miteinander zu verbinden.
+In Kapitel 3 betrachten wir dann die lineare Transportgleichung mit variabler Geschwindigkeit und untersuchen wie gut sich diese Methodik hier anwenden l"asst.
 
-In Kapitel 3 betrachten wir die lineare Transportgleichung mit variabler Geschwindigkeit und untersuchen das Zusammenspiel von lokalen und instabilen Bedingungen in Abwechslung mit stabilen aber diffusiven Effekten.
+Die Hoffnung ist dabei, dass wir einen Beitrag dazu leisten k"onnen, diese Techniken auch in komplizierteren Situationen in der Anwendung einzusetzen.
+Insgesamt ist diese Arbeit eher heuristisch und versucht die wesentlichen Aspekte der Multiskalenanalyse f"ur diskrete Verfahren herauszuarbeiten.
+So sind z.\,B. die Voraussetzungen oft einfach gehalten.
+
+\subsection*{Danksagung}
+
