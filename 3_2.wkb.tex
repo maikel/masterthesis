@@ -177,7 +177,7 @@ Es gilt
 \Bigr)\\&\quad + O(h^3).
 \end{split}
 \end{align}
-In erster Ordnung von $h$ gilt also
+In erster Ordnung gilt also
 \begin{align}
 \left( \Omega(n+1) - e^{-i \omega} \Omega(n)  \right) u_0(t_n, x_k) = 0
 \end{align}
@@ -220,12 +220,24 @@ Dies setzen wir in \eqref{eq:wkb:oh22} ein und erhalten die Gleichung
 &\quad - b(x) \partial_x u_0(t, x) - \left( \frac{C^2}{2} b^2(x) + \frac{C}{2} \partial_x b(x) \right) u_0(t,x).
 \end{split}
 \end{align}
-% Wir betrachten wieder den Multiskalenansatz $u(t,\tau,x)$ mit einer langsamen Zeitvariablen $\tau = h t$.
-% Wie schon gewohnt erhalten wir das Gleichungssystem
-% \begin{align}\label{eq:wkb:oh11}
-% \partial_t u_0(t, \tau, x) + \partial_x u_0(t, \tau, x)         &= - C b(x) u_0(t, \tau, x)\\
-% \partial_\tau u_0(t, \tau, x) + b(x) \partial_x u_0(t, \tau, x) &= - \left( \frac{C^2}{2} b^2(x) + \frac{C}{2} \partial_x b(x) \right) u_0(t, \tau, x)\\
-% \partial_t u_1(t, \tau, x) + \partial_x u_1(t, \tau, x)         &= - C b(x) u_1(t, \tau, x)\\
-% u_0(0,0,x) &= V(x)\\
-% u_1(0,0,x) &= 0.
-% \end{align}
+Die L"osungen zu diesen Differentialgleichungen lassen sich "ahnlich wie im Anhang bestimmen und sie lauten
+\begin{align}
+u_0(t,x) &= U(x-t) e^{- \Ree C \int^t_0 b(s) ds } \qquad \text{und}\\
+u_1(t,x) &= - t \Bigl( \underbrace{b(x) U'(x-t) + \frac{1}{2} \left( \Ree C^2 b^2(x) + \Ree C \partial_x b(x) \right) U(x-t)}_{=: \Delta_b U(x-t)} \Bigr) e^{ \Ree C \int^t_0 b(s) ds } 
+\end{align}
+Zusammenfassend ergibt das f"ur diesen Ansatz
+\begin{align}
+v^n_i = e^{i \omega (k - n)}e^{ \Ree C \int^t_0 b(s) ds } \bigl(  U(x-t) - h t \Delta_b U(x-t) \bigr) + O(h^2).
+\end{align}
+Dabei ist schon erstaunlich wie sehr sich diese L"osung von der L"osung \eqref{eq:3:reg:loesung} unterscheidet.
+
+Ferner w"are es auch m"oglich wieder einen Multiskalenansatz $u(t,\tau,x)$ mit einer langsamen Zeitvariablen $\tau = h t$ zu betrachten.
+Wie schon gewohnt erhalten wir das Gleichungssystem mit einer weiteren Gleichung f"ur die langsame Zeit $\tau$.
+\begin{align}\label{eq:wkb:oh11}
+\partial_t u_0(t, \tau, x) + \partial_x u_0(t, \tau, x)         &= - C b(x) u_0(t, \tau, x)\\
+\partial_\tau u_0(t, \tau, x) + b(x) \partial_x u_0(t, \tau, x) &= - \left( \frac{C^2}{2} b^2(x) + \frac{C}{2} \partial_x b(x) \right) u_0(t, \tau, x)\\
+\partial_t u_1(t, \tau, x) + \partial_x u_1(t, \tau, x)         &= - C b(x) u_1(t, \tau, x)\\
+u_0(0,0,x) &= V(x)\\
+u_1(0,0,x) &= 0.
+\end{align}
+Qualitativ sieht man, dass man die urspr"ungliche partielle Differentialgleichung \eqref{eq:varadv:pde} nun auch in der langsamen Zeitvariablen $\tau$ wieder findet -- wie es auch zu erwarten ist, da wir die Transportgeschwindigkeit auch nur asymptotisch klein in $h$ "andern.
