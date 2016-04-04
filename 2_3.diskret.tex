@@ -5,45 +5,45 @@ Genau genommen machen wir unsere Ansatzfunktionen zusätzlich von den diskreten 
 Es gilt zwar $n = \frac {t_n} {\lambda h}$ und $i = \frac {x_i}{h}$, jedoch soll unsere Annahme sein, dass der Ansatz unstetig in $n$ und $i$ ist.
 Möchte man jedoch für $h \to 0$ einen Punkt $(t,x)$ in der Raumzeit approximieren, so gilt immer $n,i \to \infty$ und dies impliziert Einschr"ankungen, welche wir ausnutzen werden.
 % Da unsere Gleichung linear ist, nehmen wir an, dass wir die Gitterfunktion als Summe einer Lösung und kleinen Oszillationen schreiben können.
-Unser Ansatz lautet dieses mal
+Unser Ansatz lautet dieses Mal
 \begin{align}\label{eq:transport:diskret:ansatz}
-v^n_i = u_0(n, i, t_n, x_i) + h u_1(n, i, t_n, x_i) + h^2 u_2(n, i, t_n, x_i) + o(h^2).
+v^n_i = u_0(n, i, t_n, x_i) + h u_1(n, i, t_n, x_i) + h^2 u_2(n, i, t_n, x_i) + O(h^3).
 \end{align}
-Zunächst fällt auf, dass wir im Gegensatz zum regulärem Ansatz hier Terme bis zur Ordnung $O(h^2)$ entwickeln.
-Durch die kurze Zeit- und Ortskala wirken Terme in einer Ordnung niedriger als zuvor.
+Zunächst fällt auf, dass wir im Gegensatz zum regulärem Ansatz hier Terme bis zur Ordnung $h^2$ entwickeln.
+Durch die schnelle Zeit- und Ortskala wirken Terme in einer Ordnung niedriger als zuvor.
 Daher werden Terme von $u_2$ Gleichungen in $O(h)$ beeinflussen und müssen betrachtet werden.
 Im Anhang \ref{appendix:diskret:summanden} haben wir die einzelnen Summanden von \eqref{eq:adv:scheme} ausgerechnet.
 Setzt man diese, \eqref{eq:transport:diskret:diff1} und \eqref{eq:transport:diskret:diff2}, nun in \eqref{eq:adv:scheme} ein, liefert uns das die Gleichungen
 \\
 
-\noindent \emph{in der Ordnung $O(1)$:}
+\noindent \emph{in der Ordnung $O(1)$}
 \begin{align}\label{eq:transport:diskret:o1}
 u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)
-+ \lambda \bigl(u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr) = 0
++ \lambda \bigl(u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr) = 0,
 \end{align}
 
-\noindent \emph{in der Ordnung $O(h)$:}
+\noindent \emph{in der Ordnung $O(h)$}
 \begin{align}\label{eq:transport:diskret:oh}
 \lambda \bigl( \partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i) \bigr) =
 \begin{split}
 &- \bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i, t_n, x_i) \bigr)\\
-&- \lambda \bigl(u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)
+&- \lambda \bigl(u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr),
 \end{split}
 \end{align}
 
-\noindent \emph{in der Ordnung $O(h^2)$:}
+\noindent \emph{in der Ordnung $O(h^2)$}
 % {\small
 \begin{align}\label{eq:transport:diskret:oh2}
 \lambda \bigl( \partial_t u_1(n+1, i, t_n, x_i) + \partial_x u_1(n, i-1, t_n, x_i) \bigr) =
 \begin{split}
 &\frac {\lambda}{2} \partial^2_x u_0(n, i-1, t_n, x_i) - \frac{\lambda^2}{2} \partial^2_t u_0(n+1, i, t_n, x_i)\\
 &- \bigl( u_2(n+1, i, t_n, x_i) - u_2(n, i, t_n, x_i) \bigr)\\
-&- \lambda \bigl(u_2(n, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr)
+&- \lambda \bigl(u_2(n, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr),
 \end{split}
 \end{align}
 
 % }
-\noindent \emph{in der Ordnung $O(h^3)$:}
+\noindent \emph{in der Ordnung $O(h^3)$}
 \begin{align}\label{eq:transport:diskret:oh3}
 \begin{split}
 \lambda \bigl(\partial_t u_2(n+1, i, t_n, x_i)\qquad\\
@@ -51,18 +51,18 @@ u_0(n+1, i, t_n, x_i) - u_0(n, i, t_n, x_i)
 \end{split}
 &= \begin{split}
 - \left(\frac {\lambda}{6} \partial^3_x u_0(n, i-1, t_n, x_i) + \frac{\lambda^3}{6} \partial^3_t u_0(n+1, i, t_n, x_i)\right)\\
-- \left(\frac {\lambda}{2} \partial^2_x u_1(n, i-1, t_n, x_i) + \frac{\lambda^2}{2} \partial^2_t u_1(n+1, i, t_n, x_i)\right)
+- \left(\frac {\lambda}{2} \partial^2_x u_1(n, i-1, t_n, x_i) + \frac{\lambda^2}{2} \partial^2_t u_1(n+1, i, t_n, x_i)\right),
 \end{split}
 \end{align}
 
 \vspace{0.4cm}
-\noindent \emph{Mit den Anfangsbedingungen:}
+\noindent \emph{und den Anfangsbedingungen}
 \begin{align}\label{eq:transport:diskret:anfangsbedinungen}
 u_0(0, i, 0, x_i) = U(x_i), \quad u_1(0, i, 0, x_i) = 0 \quad \text{und} \quad u_2(0, i, 0, x_i) = 0 \qquad \forall i \in \Z.
 \end{align}
 
 Diese Gleichungen gelten nun für alle $h > 0$ und alle $n, i \in \N$.
-Noch gelingt es uns nicht, aus diesen Bedinungen eine eindeutige Lösung für unsere Ansatzfunktionen $u_0, u_1$ und $u_2$ zu bestimmen.
+Noch gelingt es uns nicht, aus diesen Bedingungen eine eindeutige Lösung für unsere Ansatzfunktionen $u_0, u_1$ und $u_2$ zu bestimmen.
 Daher folgt im nächstem Kapitel ein konkreterer Ansatz.
 Trotzdem beweisen wir hier noch zwei Lemmata, um besser zu verstehen wie man von Bedingungen auf dem Gitter auf Bedingungen im Raum schließen kann.
 \\
@@ -78,7 +78,7 @@ existiert, dann gilt für alle $t \in \Rp$ und alle $n \in \N$
 \[ F(t) = f(n, t). \]
 \end{lemma}
 Der Beweis dieses Lemmas ist denkbar einfach. Die Existenz eines solchen $F$ ist wie eine Gleichmäßigkeitsbedingung über alle möglichen Gitter.
-Zu gegebenen $t \in \Rp$ wähle man sich einfach die richtige Gitterweite $h > 0$.
+Zu gegebenem $t \in \Rp$ wähle man sich einfach die richtige Gitterweite $h > 0$.
 \begin{proof}
 Sei $F\colon \Rp \to \R$ gegeben und sei $t \in \Rp$ beliebig.
 Wähle $h = \frac{t}{n}$, dann gilt $t^h_n = nh = n \frac{t}{n} = t$.
@@ -86,11 +86,11 @@ Da \eqref{eq:lemma:const1d:voraussetzung} für alle $h > 0$ gilt, folgt hiermit
 \[ F(t) = F(t^h_n) = f(n, t^h_n) = f(n, t). \qedhere \]
 \end{proof}
 
-Das Lemma~\ref{lemma:transport:diskret:konstant1} bedeutet, dass $f$, oder die Folge $f_n$, in solchen Fällen unabhängig von, bzw. konstant in $n \in \N$ ist.
+Das Lemma~\ref{lemma:transport:diskret:konstant1} bedeutet, dass $f$ oder die Folge $f_n$ in solchen Fällen unabhängig von bzw. konstant in $n \in \N$ ist.
 Wir wollen dies auf unseren Fall übertragen und beweisen nun das zweidimensionale Analogon, 
 \\
 
-\begin{lemma}[Punktweise Kovergenz in zwei Dimensionen]\label{lemma:transport:diskret:konvergenz_gitter}
+\begin{lemma}[Punktweise Konvergenz in zwei Dimensionen]\label{lemma:transport:diskret:konvergenz_gitter}
 Sei $f\colon (\N \times \Z) \times (\Rp \times \R) \to \R$ eine Abbildung, so dass $f(n,i,\pkt,\pkt)$ für alle $n \in \N$ und $i \in \Z$ differenzierbar ist.
 Sei weiter\, $G_h \subset \Rp \times \R$ ein äquidistantes Gitter mit\, $G_h(n,i) = (t^h_n, x^h_i) = h \cdot (\lambda n, i)$, für $n \in \N$.
 Wenn ein differenzierbares $F\colon \Rp \times \R \to \R$ für alle $h > 0$ und somit alle Gitter $G_h$ mit
@@ -99,7 +99,7 @@ F(t^h_n, x^h_i) = f(n, i, t^h_n, x^h_i) \qquad \text{für alle $(n,i) \in \N \ti
 \end{align}
 existiert, dann gilt für alle $(t, x) \in \Rp \times \R$, dass für alle $n \in \N$ ein $i(n) \in \Z$ existiert mit
 \begin{align}\label{eq:lemma:diag:aussage}
-\abs{F(t, x) - f(n, i(n), t, x)} \leq \frac {t}{\lambda n} \Bigl(\bigl\lvert \partial_x f(n, i(n), t, x) \bigr\rvert + \bigl\lvert \partial_x F(t, x) \bigr\rvert \Bigr)
+\abs{F(t, x) - f(n, i(n), t, x)} \leq \frac {t}{\lambda n} \Bigl(\bigl\lvert \partial_x f(n, i(n), t, x) \bigr\rvert + \bigl\lvert \partial_x F(t, x) \bigr\rvert \Bigr).
 \end{align}
 \end{lemma}
 \begin{proof}
@@ -122,6 +122,8 @@ Zusammen ergibt das
 \end{align*}
 }
 \end{proof}
-Sollte das Lemma \ref{lemma:transport:diskret:konvergenz_gitter} exakt sein, so zeigt uns das, dass wir gleichmäßige Schranken von $f(n, i, \pkt, \pkt)$ benötigen, um von Aussagen auf Gitterebene auf Aussagen über alle Raumzeitpunkte zu schließen.
-Selbst dann, wenn man das Lemma dahingehend abschwächt, dass man nur die gleichmäßige Stetigkeit in $n$ und $i$ braucht.
-Und diese Bedingung tretet schon ein, ohne dass wir die Sublinear-Growth Bedingung überhaupt benutzt haben.
+Das Lemma \ref{lemma:transport:diskret:konvergenz_gitter} fungiert wie eine Art Sublinear-Growth Bedingung (Achtung, das Lemma ist nur eine Implikation!).
+Wenn n"amlich $\partial_x f(n,i,t,x) \sim O(n)$ gilt, so gen"ugt uns das zumindest f"ur diesen Satz nicht, um Konvergenz f"ur alle Raumpunkte zu zeigen (.
+Im Rahmen dieser Masterarbeit reicht uns diese Variante des Satzes aus, jedoch ist dieses Lemma vermutlich ein sinnvoller Einstieg die Methodik mathematisch zu pr"azisieren.
+% Selbst dann, wenn man das Lemma dahingehend abschwächt, dass man nur die gleichmäßige Stetigkeit in $n$ und $i$ braucht.
+% Und diese Bedingung tretet schon ein, ohne dass wir die Sublinear-Growth Bedingung überhaupt benutzt haben.
