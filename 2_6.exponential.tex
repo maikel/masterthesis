@@ -2,11 +2,11 @@
 
 Bisher haben wir für die Störungen $z(t,x)$ immer nur eine feste Frequenz angenommen, nämlich alternierende Gittervorzeichen.
 Wir untersuchen nun, wie das Upwind-Verfahren auf andere hochfrequente, also von Gitterkoordinaten abhängige, Ansätze wirkt.
-Wir beschreiben unsere Oszillationen mithilfe der komplexen Exponentialfunktion und schreiben für die Ortsindizes von jetzt an $k$ statt $i$.
-Außerdem haben wir in unseren Ausführungen mithilfe der Sätze \ref{satz:glgregulaer} und \ref{satz:alt:beidenull} Werkzeuge geschaffen, die es uns erlauben sich in den nur auf Summanden einer Frequenz zu konzentrieren.
+Wir beschreiben unsere Oszillationen mit Hilfe der komplexen Exponentialfunktion und schreiben für die Ortsindizes von jetzt an $k$ statt $i$.
+Außerdem haben wir in unseren Ausführungen mit Hilfe der Sätze \ref{satz:glgregulaer} und \ref{satz:alt:beidenull} Werkzeuge geschaffen, die es uns erlauben sich auf einzelne Summanden einer Frequenz zu konzentrieren.
 Das erleichtert nicht nur das Rechnen und macht die zu betrachtenden Gleichungen kleiner, sondern erlaubt uns Summen der Form
 \begin{align}
-v^n_k &= \sum_{p} \Ree \left[ e^{i \omega_p k} \Omega(n) \left( z^p_0(t_n, x_k) + h z^p_1(t_n, x_k) \right) \right] + O(h^2), \quad \forall (t_n,x_k) \in G_h
+v^n_k &= \sum_{p} \Ree \left[ e^{i \omega_p k} \Omega_p(n) \left( z^p_0(t_n, x_k) + h z^p_1(t_n, x_k) \right) \right] + O(h^2), \quad \forall (t_n,x_k) \in G_h
 \end{align}
 besser zu verstehen.
 
@@ -37,15 +37,15 @@ und setzen dies in die Gleichung \eqref{eq:transport:diskret:oh} ein
 \end{align}
 
 Ferner erhalten wir auf analoge Weise mit Hilfe der Gleichung \eqref{eq:transport:diskret:oh2}
-{\small
-\begin{align}
-\partial_t u_1(n+1, i, t_n, x_i) + \partial_x u_1(n, i-1, t_n, x_i)
-= \begin{split}
-&\frac {1}{2} \partial^2_x u_0(n, i-1, t_n, x_i)\\
-&\qquad - \frac{\lambda}{2} \partial^2_t u_0(n+1, i, t_n, x_i)
-\end{split}
-\end{align}
-}
+% {\small
+% \begin{align}
+% \partial_t u_1(n+1, i, t_n, x_i) + \partial_x u_1(n, i-1, t_n, x_i)
+% = \begin{split}
+% &\frac {1}{2} \partial^2_x u_0(n, i-1, t_n, x_i)\\
+% &\qquad - \frac{\lambda}{2} \partial^2_t u_0(n+1, i, t_n, x_i)
+% \end{split}
+% \end{align}
+% }
 die folgende Gleichung
 \begin{align}
 \begin{split}
@@ -64,13 +64,13 @@ Dies ist äquivalent zu
 &= \partial^2_x z_0(t_n, x_k) \frac{1}{2} \frac{ (1 - \lambda + \lambda e^{-i \omega}) e^{-i \omega} - e^{- 2 i \omega} \lambda}{(1 - \lambda + \lambda e^{-i \omega})^2}\\
 &= \partial^2_x z_0(t_n, x_k) \frac{1}{2} \frac{ e^{-i \omega} (1- \lambda)}{(1 - \lambda + \lambda e^{-i \omega})^2}
 \end{align*}
-Beide Ergebnisse führen zusammen zu dem Gleichungssystem
+Beide Ergebnisse führen wir zu dem Gleichungssystem
 \begin{align}
 \partial_t z_0(t_n, x_k) + \frac{e^{- i \omega}}{1 - \lambda + \lambda e^{-i \omega}} \partial_x z_0(t_n, x_k) &= 0\\
 \partial_t z_1(t_n, x_k) + \frac{e^{- i \omega}}{1 - \lambda + \lambda e^{-i \omega}} \partial_x z_1(t_n, x_k)
-&= \partial^2_x z_0(t_n, x_k) \frac{1}{2} \underbrace{\frac{ e^{-i \omega} (1- \lambda)}{(1 - \lambda + \lambda e^{-i \omega})^2}}_{=: \Lambda},
+&= \partial^2_x z_0(t_n, x_k) \frac{1}{2} \underbrace{\frac{ e^{-i \omega} (1- \lambda)}{(1 - \lambda + \lambda e^{-i \omega})^2}}_{=: \Lambda}
 \end{align}
-woraus zunächst unabhängig vom Vorzeichen von $\Ree \Lambda$ die Lösungen
+zusammen, woraus zunächst unabhängig vom Vorzeichen von $\Ree \Lambda$ die Lösungen
 \begin{align}
 z_0(t,x) &= V(x - t)\\
 z_1(t,x) &= t \partial^2_x V(x - t) \cdot \frac 12 \Ree \Lambda

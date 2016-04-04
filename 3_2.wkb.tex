@@ -59,8 +59,8 @@ und das heißt wir erhalten in führender Ordnung die Gleichung für alle $h > 0
 Hieraus folgt, dass 
 $\Omega(n+1) = \left( 1 - a(x_k) \left(1-e^{-i \omega}\right) \right) \Omega(n)$
 gelten muss.
-Allerdings ist $\Omega$ nicht von $k$ abhängig und sobald es zwei Punkte $x,y \in \R$ mit $a(x) \neq a(y)$ gibt, folgt als einize sinnvolle Lösung $\Omega(n) = 0$.
-Das Problem bei diesem Ansatz ist, dass wir nun zwar eine ortsabhängige Geschwindigkeit $a$ betrachten, $\Omega$ jedoch nicht entsrepchend angepasst haben.
+Allerdings ist $\Omega$ nicht von $k$ abhängig und sobald es zwei Punkte $x,y \in \R$ mit $a(x) \neq a(y)$ gibt, folgt als einzige sinnvolle Lösung $\Omega(n) = 0$.
+Das Problem bei diesem Ansatz ist, dass wir nun zwar eine ortsabhängige Geschwindigkeit $a$ betrachten, $\Omega$ jedoch nicht entsprechend angepasst haben.
 
 \subsection*{Ortsabhängige Korrektur für $\Omega$}
 
@@ -75,7 +75,7 @@ Da die Gleichung \eqref{wkb:zeitdiff} nur eine Differenz in der Zeit beschreibt,
 \begin{split}
 v^{n+1}_k - v^n_k &= e^{i \omega k} \Bigl( \bigl(\Omega(n+1, x_k) - \Omega(n,x_k) \bigr) u_0(t_n, x_k)\\
 &+ h \bigl(\Omega(n+1,x_k) - \Omega(n,x_k) \bigr) u_1(t_n, x_k) + h \Omega(n+1, x_k) \partial_t u_0(t_n, x_k)\\
-&+ h^2 \Omega(n+1, x_k) \bigl( \frac{1}{2} \partial^2_t u_0(t_n, x_k) + \partial_t u_1(t_n, x_k) \bigr) \Bigr) + O(h^3)
+&+ h^2 \Omega(n+1, x_k) \bigl( \frac{1}{2} \partial^2_t u_0(t_n, x_k) + \partial_t u_1(t_n, x_k) \bigr) \Bigr) + O(h^3).
 \end{split}
 \end{align}
 Wegen der neuen Regularität von $\Omega$ in der Ortskoordinate $x$ müssen wir Gleichung \eqref{wkb:ortdiff} neu berechnen.
@@ -101,7 +101,7 @@ Es gilt
 a(x_k) e^{i \omega k} \Bigl( \Omega(n,x_k) (1-e^{-i\omega}) u_0(t_n, x_k)\\
 &\quad + h \Omega(n,x_k) (1 - e^{-i \omega}) u_1(t_n, x_k) + h e^{-i \omega} \bigl( \Omega(n,x_k) \partial_x u_0(t_n, x_k) + \partial_x \Omega(n,x_k)  u_0(t_n, x_k) \bigr)\\
 &\quad + h^2 e^{-i\omega}  \bigl( \left( \Omega(n,x_k) \partial_x u_1(t_n, x_k) + \partial_x \Omega(n,x_k) u_1(t_n,x_k) \right) - \partial_x \Omega(n,x_k) \partial_x u_0(t_n, x_k) \bigr)\\
-&\quad - h^2 \frac{1}{2} e^{-i\omega} \left( \Omega(n,x_k) \partial^2_x u_0(t_n, x_k) + \partial^2_x \Omega(n, x_k) u_0(t_n, x_k) \right)   \Bigr) + O(h^3)\\
+&\quad - h^2 \frac{1}{2} e^{-i\omega} \left( \Omega(n,x_k) \partial^2_x u_0(t_n, x_k) + \partial^2_x \Omega(n, x_k) u_0(t_n, x_k) \right)   \Bigr) + O(h^3).
 % &\quad - e^{- i \omega} \left( \Omega(n,x_k) - h \partial_x \Omega(n,x_k) + \frac {h^2}2 \partial^2_x \Omega(n,x_k) \right)\\
 % &\qquad \cdot \bigl( u_0(t_n, x_k) - h \partial_x u_0(t_n, x_k) + h^2 \frac{1}{2} \partial^2_x u_0(t_n, x_k)\\
 % &\quad + h u_1(t_n, x_k) - h^2 \partial_x u_1(t_n, x_k) \bigr) \Bigr)\\
@@ -139,7 +139,7 @@ Weil aus $h \to 0$ auch $n \to \infty$ folgt, impliziert das Konvergenzprobleme 
 Bisher haben wir an dieser Stelle das Lemma \ref{lemma:transport:diskret:konvergenz_gitter} angewandt um von diskreten Gleichungen auf kontinuierliche Differentialgleichungen zu schlie"sen.
 Lemma \ref{lemma:transport:diskret:konvergenz_gitter} macht in Gleichung \eqref{eq:lemma:diag:aussage} hier keine Aussage "uber die Konvergenz.
 Ferner kann man dies hier durch eine Art Sublinear-Growth Bedingung ``korrigieren''.
-Betrachte man $a(x) = 1 + O\left(\frac{1}{n} \right)$, zum Beispiel $a(x) = 1 + \frac{1}{n} b(x)$, so folgt $a'(x) = \frac{1}{n} b'(x)$ und somit
+Betrachte man ein $a_n(x) = 1 + O\left(\frac{1}{n} \right)$, zum Beispiel $a_n(x) = 1 + \frac{1}{n} b(x)$ f"ur ein beschr"anktes $b \in C^\infty(\R)$, so folgt $a'(x) = \frac{1}{n} b'(x)$ und somit
 \begin{align}\label{eq:wkb:ohpost2}
 \begin{split}
 &\partial_t u_0(t_n, x_k) + \frac{e^{-i \omega}}{1 - a(x_k) (1-e^{-i\omega})} \partial_x u_0(t_n, x_k) =\\

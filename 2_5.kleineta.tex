@@ -11,19 +11,21 @@ Daher betrachten wir nun die Koppelung $\eta = h$ und setzen $\lambda = 1 + h$ i
 
 \vspace{0.4cm}
 \noindent \emph{in der Ordnung $O(1)$:}
+{\small
 \begin{align}\label{eq:transport:kleineta:o1}
 u_0(n+1, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) = 0
-\end{align}\\
-
+\end{align}
+}
 \noindent \emph{in der Ordnung $O(h)$:}
+{\small
 \begin{align}\label{eq:transport:kleineta:oh}
 \partial_t u_0(n+1, i, t_n, x_i) + \partial_x u_0(n, i-1, t_n, x_i) =
 \begin{split}
 &- \bigl( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr)\\
 &- \bigl( u_1(n+1, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)
 \end{split}
-\end{align}\\
-
+\end{align}
+}
 \noindent \emph{in der Ordnung $O(h^2)$:}
 {\small
 \begin{align}\label{eq:transport:kleineta:oh2}
@@ -38,8 +40,7 @@ u_0(n+1, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) = 0
 &- \bigl( u_2(n+1, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr)
 \end{split}
 \end{align}
-}\\
-
+}
 \noindent \emph{in der Ordnung $O(h^3)$:}
 {\small
 \begin{align}\label{eq:transport:kleineta:oh3}
@@ -54,7 +55,7 @@ u_0(n+1, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) = 0
 &\frac{1}{2} \bigl( \partial^2_x u_1(n, i-1, t_n, x_i) - \partial^2_t u_1(n+1,i, t_n, x_i) \bigr)\\
 &- \bigl( u_2(n, i, t_n, x_i) - u_2(n, i-1, t_n, x_i) \bigr)
 \end{split}
-\end{align}\\
+\end{align}
 }
 
 \emph{mit den Anfangsbedingungen}
@@ -91,7 +92,7 @@ v^n_i = \begin{split}
 &\qquad + (-1)^{i+n} \bigl( z_0(t_n, x_i) + h z_1(t_n, x_i) + h^2 z_2(t_n, x_i) \bigr)
 \end{split}
 \end{align}
-und diskreten Ansatzfunktionen sind dieses mal durch
+gegeben. Die diskreten Ansatzfunktionen sind dieses Mal durch
 \begin{align}\label{eq:ke:ansatz} u_k(n, i, t, x) = w_k(t,x) + (-1)^{i+n} z_k(t, x) \qquad k = 0,1,2 \end{align}
 gegeben. Hieraus folgt zunächst für alle $k = 0,1,2$
 \begin{align}\label{eq:appendix:kleineta:bedingung}
@@ -107,21 +108,21 @@ Setzt man \eqref{eq:ke:ansatz} für $u_0$ ein, so gilt für die linke Seite fern
 &= \partial_t w_0(t_n,x_i) + (-1)^{i+n+1} \partial_t z_0(t_n,x_i)+ \partial_x w_0(t_n,x_i) + (-1)^{i+n-1} \partial_x z_0(t_n,x_i)\nonumber\\
 &= \partial_t w_0(t_n,x_i) + \partial_x w_0(t_n,x_i) - (-1)^{i+n} \bigl( \partial_t z_0(t_n,x_i) + \partial_x z_0(t_n,x_i) \bigr).
 \end{align}
-und für die rechte Seite erhalten wir
+Für die rechte Seite erhalten wir
 \begin{align}\label{eq:appendix:kleineta:oh:rechteseite}
 &- \bigl( u_0(n, i, t_n, x_i) - u_0(n, i-1, t_n, x_i) \bigr)\\
 &= -\Bigl( w_0(t_n, x_i) + (-1)^{i+n} z_0(t_n, x_i) - \bigl( w_0(t_n, x_i) + (-1)^{i+n-1} z_0(t_n, x_i) \bigr) \Bigr) \nonumber\\
-&= - (-1)^{i+n} 2 z_0(t_n,x_i) 
+&= - (-1)^{i+n} 2 z_0(t_n,x_i).
 \end{align}
 
-Genau wie im vorangegangen Kapitel \ref{sec:transport:osz} folgern wir hieraus je eine Bedingung für die Funktionen $w_0$ und $z_0$.
+Genau wie im vorangegangenem Kapitel \ref{sec:transport:osz} folgern wir hieraus je eine Bedingung für die Funktionen $w_0$ und $z_0$.
 Jedoch können wir nicht das Gleiche wie in Satz \ref{satz:alt:beidenull} machen, da es dort essentiell war, dass wir eine in $n$ unbeschränkte Funktion betrachten.
 Allerdings haben wir im Ansatz glatte Abbildungen $w_k, z_k \in \Cinf$ für $k = 0,1,2$ angenommen und wir können hier mit ihrer Regularität argumentieren.
 \\
 
 \begin{satz}\label{satz:glgregulaer}
 Sei $\omega \in (0, 2\pi)$ und $\Omega\colon \N \to \R$.
-Angenommen es gäbe außerdem zwei positiven Zahlen $\kappa, K > 0$ mit $\kappa \leq \abs{\Omega(n)} \leq K$ für alle $n \in \N$.
+Angenommen es gäbe außerdem zwei positive Zahlen $\kappa, K > 0$ mit $\kappa \leq \abs{\Omega(n)} \leq K$ für alle $n \in \N$.
 Es gelte für alle $h > 0$ und alle Gitterpunkte $(t_n, x_k) \in G_h$
 \begin{align}\label{satz:glgreg:vor}
 \begin{split}
@@ -142,9 +143,9 @@ F(t_n, x_k) &= e^{i \omega k} \Omega(n) f(t_n, x_k)\\
 &\text{und}\\
 F(t_n, x_{k+1}) &= e^{i \omega (k + 1)} \Omega(n) f(t_n, x_{k+1})\\
 &= e^{i \omega k} e^{i \omega} \Omega(n) f(t_n, x_{k+1})\\
-&= e^{i \omega k} e^{i \omega} \Omega(n) \bigl( f(t_n, x_k) + h \partial_x f(t_n, x_k) + o(h) \bigr)
+&= e^{i \omega k} e^{i \omega} \Omega(n) \bigl( f(t_n, x_k) + h \partial_x f(t_n, x_k) + o(h) \bigr).
 \end{align*}
-also gilt für alle $h > 0$ auch
+Folglich gilt für alle $h > 0$
 \begin{align}
 \begin{split}\nonumber
 \abs{F(t_n, x_k + h) - F(t_n, x_k)} &= \abs{F(t_n, x_{k+1}) - F(t_n, x_k)}\\
@@ -155,9 +156,9 @@ also gilt für alle $h > 0$ auch
 \end{split}\\ \label{satz:glgregulaer:bed}
 &= \kappa \cdot \underbrace{\abs{e^{i \omega} - 1}}_{\neq 0} \abs{f(t_n, x_k)} - hK \cdot \abs{\partial_x f(t_n, x_k)}.
 \end{align}
-Unser Gitter $G_h$ ist gerade so gemacht, dass es für alle $(t,x) \in \Rp \times \R$ und zu jeder Folge von Gitterweiten $(h^p)_{p \in \N}$ mit $h_p \to 0$ eine Folge von Gitterpunkten $(t^p, x^p) \in G_{h_p}$ und $(t^p, x^p) \to (t,x)$ gibt.
+Unser Gitter $G_h$ ist gerade so konstruiert, dass es für alle $(t,x) \in \Rp \times \R$ und zu jeder Folge von Gitterweiten $(h^p)_{p \in \N}$ mit $h_p \to 0$ eine Folge von Gitterpunkten $(t^p, x^p) \in G_{h_p}$ mit $(t^p, x^p) \to (t,x)$ gibt.
 Es gilt $\lim_{h_p \to 0} \abs{F(t^p, x^p + h_p) - F(t^p, x^p)} = 0$ für $h_p \to 0$, weil $F$ stetig ist.
-Es gilt weiterhin
+Au"serdem haben wir
 \[ \lim_{p \to \infty} \kappa \abs{e^{i \omega} - 1} \abs{f(t^p, x^p)} - h_pK \abs{\partial_x f(t^p, x^p)} = \kappa \abs{e^{i \omega} - 1} \abs{f(t, x)}. \]
 Die Voraussetzung $0 < \omega < 2 \pi$ impliziert nun $\abs{e^{i \omega} - 1} \neq 0$ und somit folgt aus der Stetigkeit von $f$ und der Ungleichung \eqref{satz:glgregulaer:bed} $f(t,x) = 0$, was zu zeigen war.
 \end{proof}
@@ -172,7 +173,7 @@ Die Voraussetzung $0 < \omega < 2 \pi$ impliziert nun $\abs{e^{i \omega} - 1} \n
 
 % In Satz \ref{satz:glgregulaer} ist nun hingegen wichtig, dass $\Omega(n)$ eine Art Sublinear-Growth-Bedingung erfüllt.
 % D.\,h. wir brauchen in Gleichung \eqref{satz:glgregulaer:bed}, dass $h \cdot \Omega\left( h^{-1} \right) \to 0$ für $h \to 0$ gilt. 
-Setzt man \eqref{eq:appendix:kleineta:oh:linkeseite} und \eqref{eq:appendix:kleineta:oh:rechteseite} nun gleich, so leitet man mithilfe des Satzes \ref{satz:glgregulaer} die beiden Anfangswertprobleme
+Setzt man die Gleichungen \eqref{eq:appendix:kleineta:oh:linkeseite} und \eqref{eq:appendix:kleineta:oh:rechteseite} nun gleich, so leitet man mit Hilfe des Satzes \ref{satz:glgregulaer} die beiden Anfangswertprobleme
 \begin{align}\label{eq:appendix:kleineta:oh}
 \partial_t w_0(t,x) + \partial_x w_0(t,x) &= 0 &w_0(0,x) &= U(x) \quad \text{und}\\
 \partial_t z_0(t,x) + \partial_x z_0(t,x) &= 2 z_0(t,x)  &z_0(0,x) &= V(x) 
@@ -205,7 +206,7 @@ Mit der Eigenschaft \eqref{eq:appendix:kleineta:bedingung} lautet sie
 &=
 \begin{split}
 &\frac{1}{2} \bigl( \partial^2_x u_0(n, i-1, t_n, x_i) - \partial^2_t u_0(n+1,i, t_n, x_i)\bigr)\\
-&- \bigl( u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr)\\
+&- \bigl( u_1(n, i, t_n, x_i) - u_1(n, i-1, t_n, x_i) \bigr).
 \end{split}
 \end{align}
 }
@@ -236,18 +237,20 @@ Und aus der kleinen Nebenrechnung in \eqref{eq:appendix:kleineta:korollar:h2} fo
 &= \frac{1}{2} \Bigl[ \partial^2_x w_0(t_n, x_i) + (-i)^{i+n-1} \partial^2_x z_0(t_n, x_i) - \bigl( \underbrace{\partial^2_t w_0(t_n, x_i)}_{= \partial^2_x w_0(t_n, x_i)} + (-i)^{i+n+1} \partial^2_t z_0(t_n, x_i) \bigr) \Bigr]\\
 &= \frac{1}{2} \Bigl[ (-i)^{i+n-1} \partial^2_x z_0(t_n, x_i) - (-i)^{i+n+1} \partial^2_t z_0(t_n, x_i) \Bigr]\\
 &= (-1)^{i+n} \frac{1}{2} \Bigl[ \underbrace{\partial^2_t z_0(t_n, x_i)}_{= 4 z_0(t_n,x_i) - 4 \partial_x z_0(t_n,x_i) + \partial^2_x z_0(t_n,x_i)} - \partial^2_x z_0(t_n, x_i) \Bigr]\\
-&= (-1)^{i+n} 2 \Bigl[ z_0(t_n,x_i) - \partial_x z_0(t_n,x_i) \Bigr]\\
+&= (-1)^{i+n} 2 \Bigl[ z_0(t_n,x_i) - \partial_x z_0(t_n,x_i) \Bigr].
 \end{split}
 \end{align}
 Setzen wir die vier Gleichungen \eqref{eq:ke:glg1} bis \eqref{eq:ke:glg4} zu der Gleichung \eqref{eq:ke:oh2} zusammen, so erhalten wir
 \begin{align*}
 &\partial_t w_1(t_n,x_i) + \partial_x w_1(t_n,x_i) - (-1)^{i+n} \bigl( \partial_t z_1(t_n,x_i) + \partial_x z_1(t_n,x_i) \bigr)\\
-&= (-1)^{i+n} \Bigl[ - 2 z_1(t_n,x_i) + 2 \left( 2 z_0(t_n,x_i) - \partial_x z_0(t_n,x_i) \right) \Bigr] 
+&= (-1)^{i+n} \Bigl[ - 2 z_1(t_n,x_i) + 2 \left( 2 z_0(t_n,x_i) - \partial_x z_0(t_n,x_i) \right) \Bigr].
 \end{align*}
-Und wir erhalten mit Satz \ref{satz:glgregulaer} die Anfangswertprobleme 
+Ferner kriegen wir mit Satz \ref{satz:glgregulaer} die Anfangswertprobleme
 \begin{align}\label{eq:appendix:kleineta:oh2}
-\partial_t w_1(t,x) + \partial_x w_1(t,x) &= 0 &w_1(0,x) &= 0 \quad \text{und}\\
-\partial_t z_1(t,x) + \partial_x z_1(t,x) &= 2 z_1(t,x) + 2 \bigl( \partial_x z_0(t,x) - 2z_0(t,x) \bigr)  &z_1(0,x) &= 0
+\partial_t w_1(t,x) + \partial_x w_1(t,x) &= 0\\
+\partial_t z_1(t,x) + \partial_x z_1(t,x) &= 2 z_1(t,x) + 2 \bigl( \partial_x z_0(t,x) - 2z_0(t,x) \bigr)\\
+w_1(0,x) &= 0 \quad \text{und}\\
+z_1(0,x) &= 0.
 \end{align}
 Folglich gilt schon mal $w_1 = 0$ und wir können für $z_0$ wieder eine langsame Zeitvariable, dieses mal $\tau = 2ht$, einführen.
 Unsere Ansatzfunktionen $u_k$ lautet nun für $k = 0, 1, 2$
@@ -265,7 +268,9 @@ auf und fordern zusätzlich
 \begin{align}\label{eq:ke:lang}
 \partial_\tau z_0(t,\tau,x) - \partial_x z_0(t, \tau, x) = -2z_0(t,\tau,x).
 \end{align}
-Aus der ersten Gleichung $\partial_t z_0(t,\tau,x) + \partial_x z_0(t,\tau,x) = 2 z_0(t,\tau,x)$, mit $z_0(0,0,x) = V(x)$ folgern wir
+Aus der ersten Gleichung
+\[ \partial_t z_0(t,\tau,x) + \partial_x z_0(t,\tau,x) = 2 z_0(t,\tau,x), \]
+mit $z_0(0,0,x) = V(x)$ folgern wir
 $z_0(t, \tau, x) = A(\tau, x - t) e^{2t}$ für eine Abbildung $A$ mit $A(0, x) = V(x)$ für alle $x \in \R$.
 Mit \eqref{eq:ke:lang} lässt sich A dann für alle $(t, \tau, x) \in \left(\Rp\right)^2 \times \R$ durch
 \[ A(\tau, x - t) = A(0, x - t + \tau) e^{- 2\tau} \]
@@ -273,10 +278,11 @@ bestimmen und es folgt für alle $(t, \tau, x) \in \Rp \times \R$
 \[ z_0(t, \tau, x) = V(x - t + \tau) e^{2 (t - \tau)}, \qquad z_1(t, \tau, x) = 0. \]
 
 
-Zumindest bis zur Ordnung $O(h^2)$ können wir unseren Ansatz nun schon konkretisieren und er ist bestimmt, durch
+Zumindest bis zur Ordnung $O(h^2)$ können wir unseren Ansatz nun schon konkretisieren. Er ist durch
 \begin{align}\label{eq:ke:loesung}
 v^n_i = U(x_i - t_n) + V(x_i - t_n + 2 h t_i) e^{2 (t_i - 2 h t_i)} + O(h^2).
 \end{align}
+bestimmt.
 
 \begin{figure}
 \centering
@@ -312,7 +318,7 @@ Setzen wir unsere bisherigen Erkenntnisse nun wie in Anhang \ref{appendix:kleine
 \end{split}
 \end{align}
 
-Damit halten wir schonmal die Lösung $w_2(t,x) = -\frac{t}{2} \partial^2_t w_0(t,x)$ fest und führen für $z_2$ ein paar Nebenrechnungen durch.
+Damit halten wir die Lösung $w_2(t,x) = -\frac{t}{2} \partial^2_t w_0(t,x)$ fest und führen für $z_2$ ein paar Nebenrechnungen durch.
 Es gilt
 \begin{align}
 \begin{split}
@@ -320,7 +326,7 @@ Es gilt
 &= \partial_t \bigl( 4 z_0 - 4 \partial_x z_0 + \partial^2_x z_0 \bigr)\\
 &= 4 ( 2z_0 - \partial_x z_0 ) - 4 \partial_x \bigl( 2z_0 - \partial_x z_0 \bigr) + \partial^2_x \bigl( 2 z_0 - \partial_x z_0 \bigr)\\
 &= 8z_0 - 4 \partial_x z_0 - 8 \partial_x z_0 + 4 \partial^2_x z_0 + 2 \partial^2_x z_0 - \partial^3_x z_0\\
-&= 8 z_0 - 12 \partial_x z_0 + 6 \partial^2_x z_0 - \partial^3_x z_0
+&= 8 z_0 - 12 \partial_x z_0 + 6 \partial^2_x z_0 - \partial^3_x z_0,
 \end{split}
 \end{align}
 also
@@ -329,7 +335,7 @@ also
 = -\frac{4}{3} z_0 + 2 \partial_x z_0 - \partial^2_x z_0.
 \end{align}
 Außerdem gilt
-\[ -\frac{1}{2} \partial^2_t z_0 = -2 z_0 + 2 \partial_x z_0 - \frac{1}{2} \partial^2_x z_0 \]
+\[ -\frac{1}{2} \partial^2_t z_0 = -2 z_0 + 2 \partial_x z_0 - \frac{1}{2} \partial^2_x z_0. \]
 % und das impliziert
 % \begin{align*}
 % 2 \bigl( \partial_\tau z_0 + \partial^2_\tau z_0 \bigr) + \partial^2_t z_0
@@ -354,7 +360,7 @@ Setzt man dies wieder in Gleichung \eqref{eq:termelem} ein, so erhalten wir die 
 &\qquad - \frac{3}{2} \partial^2_x z_0(t,\tau,x).
 \end{split}
 \end{align}
-Wiederholende Muster sind ein typisches Ph"anomen bei der Mutltiskalenasymptotik.
+Wiederholende Muster sind ein typisches Ph"anomen bei der Multiskalenasymptotik.
 Das ist auch hier der Fall und wir k"onnten wie in Ordnung zuvor eine langsame Zeitvariable $\tau_2 = h^2 t$ einf"uhren, um die entsprechenden Terme in der Gleichung \eqref{eq:termelem2} zu eliminieren. 
 Hierauf verzichten wir jedoch an dieser Stelle, und benutzen hier lediglich, dass $z_0, \partial_x z_0$ und $\partial^2_x z_0$ selbst schon L"osungen der Gleichgung \eqref{eq:appendix:kleineta:oh} sind.
 Im Anhang haben wir solche Gleichungen allgemein unter dem Namen ``inhomogene Exponentialgleichung'' gel"ost.
