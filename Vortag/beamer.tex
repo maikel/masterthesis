@@ -1,0 +1,59 @@
+\documentclass{beamer}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\u}[1]{u^{(#1)}}
+\newcommand{\tu}[1]{\tilde u^{(#1)}}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Rp}{\mathbb R^+_0}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Cinf}{C^{\infty}\left( \Rp \times \R \right)}
+\DeclareMathOperator{\id}{Id}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Ree}{Re}
+\DeclareMathOperator{\err}{err}
+\newcommand{\dd}{\,\mathrm d}
+\newcommand{\pkt}{\, \cdot \,}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+
+\usetheme{metropolis}           % Use metropolis theme
+\title{Multiskalenasymptotik diskreter Verfahren}
+\date{\today}
+\author{Maikel Nadolski}
+\institute{Freie Universität Berlin}
+\begin{document}
+  \maketitle
+  \section{Die Problemstellung}
+
+  \begin{frame}{Die PDE und das numerische Verfahren}
+    Wir betrachten die eindimensionale Transportgleichung mit konstanter 
+    Geschwindigkeit
+    \begin{align}\label{eq:pde}
+      \partial_t u(t,x) + a \cdot \partial_x u(t,x) &= 0\\
+      u(0,x) &= u_0(x) \quad \forall x \in \R
+    \end{align}
+    mit dem Gitter
+    $G^\lambda_h = \left\{ (ih, \lambda jh) \, \mid \, (i,j) \in \N^2 \right\}$
+    und das Upwind-Verfahren
+    \begin{align}
+      v^{n+1}_i &= v^n_i - \lambda ( v^n_i - v^n_{i-1} )\\
+      v^0_i &= u_0(x_i), \quad \forall (x_i, 0) \in G^\lambda_h
+    \end{align}
+  \end{frame}
+
+  \begin{frame}{Asymptotik am Upwindverfahren}
+    Wenn man in $h$ den asymptotischen Ansatz 
+    \begin{align}
+      v^n_i = u_0(t_n, x_i) + h u_1(t_n, x_i) + O(h^2)
+    \end{align}
+    macht und in \eqref{eq:pde} einsetzt, so erhält man für $u_0, u_1$ die Gleichungen
+  \end{frame}
+\end{document}
