@@ -34,26 +34,35 @@
   \section{Die Problemstellung}
 
   \begin{frame}{Die PDE und das numerische Verfahren}
-    Wir betrachten die eindimensionale Transportgleichung mit konstanter 
+    Wir möchten die eindimensionale Transportgleichung mit konstanter 
     Geschwindigkeit
     \begin{align}\label{eq:pde}
-      \partial_t u(t,x) + a \cdot \partial_x u(t,x) &= 0\\
-      u(0,x) &= u_0(x) \quad \forall x \in \R
+      \partial_t u(t,x) + \partial_x u(t,x) &= 0\\
+      u(0,x) &= U(x) \quad \forall x \in \R
     \end{align}
-    mit dem Gitter
-    $G^\lambda_h = \left\{ (ih, \lambda jh) \, \mid \, (i,j) \in \N^2 \right\}$
+    numerisch lösen und betrachten das Gitter
+    $G^\lambda_h = \left\{ (x_i, t_n) := (ih, n \lambda h) \in \Rp \times \R \, \mid \, (i,n) \in \Z \times \N \right\}$
     und das Upwind-Verfahren
-    \begin{align}
+    \begin{align}\label{eq:verfahren}
       v^{n+1}_i &= v^n_i - \lambda ( v^n_i - v^n_{i-1} )\\
-      v^0_i &= u_0(x_i), \quad \forall (x_i, 0) \in G^\lambda_h
+      v^0_i &= U(x_i), \quad \forall (x_i, 0) \in G^\lambda_h.
     \end{align}
   \end{frame}
 
   \begin{frame}{Asymptotik am Upwindverfahren}
-    Wenn man in $h$ den asymptotischen Ansatz 
+    Wenn man den asymptotischen Ansatz 
     \begin{align}
       v^n_i = u_0(t_n, x_i) + h u_1(t_n, x_i) + O(h^2)
     \end{align}
-    macht und in \eqref{eq:pde} einsetzt, so erhält man für $u_0, u_1$ die Gleichungen
+    macht und in \eqref{eq:verfahren} einsetzt, so erhält man für $u_0$ und $u_1$
+    das Gleichungssystem
+    \begin{align}
+      \partial_t u_0(t, x) + \partial_x u_0(t, x) &= 0\\
+      \partial_t u_1(t, x) + \partial_x u_1(t, x) &= \frac{1 - \lambda}{2} \partial^2_x u_0(t, x).
+    \end{align}
+  \end{frame}
+
+  \begin{frame}{Beispiel für $\lambda > 1$}
+
   \end{frame}
 \end{document}
